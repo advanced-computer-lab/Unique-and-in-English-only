@@ -1,6 +1,9 @@
 const express = require("express");
 const mongoose = require('mongoose');
-const bodyparser = require('body-parser');
+const bodyParser = require('body-parser');
+
+
+
 
 
 //Routers
@@ -24,7 +27,7 @@ mongoose.connect(dbUrl, { useNewUrlParser: true, useUnifiedTopology: true })
     .catch(err => console.log(err));
 
 
-app.use(bodyparser.urlencoded({ extended: true }));
+app.use(bodyParser.urlencoded({ extended: true }));
 
 app.listen(port, () => {
     console.log(`Listening to requests on port ${port}`);
@@ -32,6 +35,11 @@ app.listen(port, () => {
 
 app.use('/', router);
 app.use('/flight', flightRouter);
+
+// app.use(bodyParser.urlencoded())
+// app.use(bodyParser.urlencoded({
+//     extended: true
+// }));
 
 
 
