@@ -24,6 +24,7 @@ const addFlight = (req, res) => {
     );
     console.log(flight);
     flight.save().then(() => console.log("success")).catch((err) => console.log(err));
+    res.send("succes");
 
 }
 
@@ -55,12 +56,49 @@ const listAllFlights = (req, res) => {
 };
 
 const updateFLight = (req, res) => {
+    if(!req.body){
+        return res.status(400).send({message:"data to update can not be empty "});
+    }
+    const id = req.params.id;
+    Flight.findByIdAndUpdate(id,req.body,{useFindAndModify:false})
+    .then(data =>{
+        if(!data){
+        res.status(404).send({message:" update can not be empty "})
+        }else{
+        res.send(data);
+        }
+    }
+    
+        ).catch(err=>{
+            res.status(500).send({message:" update can not be done "});
+    
+        })
+    
 
 }
+const deleteFlight =(req,res)=>{
+    const id = req.params.id;
+    Flight.findByIdAndDelete(id)
+    .then(data =>{
+        if(!data){
+        res.status(404).send({message:" delete can not be done "})
+        }else{
+        res.send({message:"user was deleted succesfully"});
+        }
+    }
+    
+        ).catch(err=>{
+            res.status(500).send({message:" delete can not be done "+id});
+    
+        })
+    
+    }
 
 module.exports =
 {
     addFlight,
     getFlight,
-    listAllFlights
+    listAllFlights,
+    updateFLight,
+    deleteFlight
 }
