@@ -5,7 +5,7 @@ import { Component, useState,useEffect } from 'react';
 import axios from 'axios'
 //import userRouter from '../../../backEnd/routes/UserRoutes';
 
-function App() {
+function listFlights() {
     const [flight,setFlight]=useState([]);
 
   useEffect(() => {
@@ -18,6 +18,7 @@ function App() {
 
   },[]);
   DeleteClickHandler =(flightObj)=>{
+
     axios.post('"http://localhost:8000/flight/deleteFlight"', flightObj)
           .then(function (response) {
             console.log(response);
@@ -64,4 +65,4 @@ function App() {
   );
 }
 
-export default App;
+export default listFlights;
