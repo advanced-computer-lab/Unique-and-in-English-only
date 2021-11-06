@@ -1,23 +1,3 @@
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 const Flight = require("../Models/Flight");
 
 
@@ -51,7 +31,7 @@ const addFlight = (req, res) => {
 const getFlight = (req, res) => {
     const body = req.body;
     const reqKeys = Object.keys(body);
-    console.log(body);
+    removeEmptyAttributes(reqKeys, body);
 
     if (Object.keys(body).length === 0) {
         console.log("empty");
@@ -59,6 +39,7 @@ const getFlight = (req, res) => {
         res.end();
         return;
     }
+
 
     Flight.find(body).then((result) => {
         console.log(result);
@@ -76,43 +57,52 @@ const listAllFlights = (req, res) => {
 };
 
 const updateFLight = (req, res) => {
-    if(!req.body){
-        return res.status(400).send({message:"data to update can not be empty "});
+    if (!req.body) {
+        return res.status(400).send({ message: "data to update can not be empty " });
     }
     const id = req.params.id;
-    Flight.findByIdAndUpdate(id,req.body,{useFindAndModify:false})
-    .then(data =>{
-        if(!data){
-        res.status(404).send({message:" update can not be empty "})
-        }else{
-        res.send(data);
+    Flight.findByIdAndUpdate(id, req.body, { useFindAndModify: false })
+        .then(data => {
+            if (!data) {
+                res.status(404).send({ message: " update can not be empty " })
+            } else {
+                res.send(data);
+            }
         }
-    }
-    
-        ).catch(err=>{
-            res.status(500).send({message:" update can not be done "});
-    
+
+        ).catch(err => {
+            res.status(500).send({ message: " update can not be done " });
+
         })
-    
+
 
 }
-const deleteFlight =(req,res)=>{
+const deleteFlight = (req, res) => {
     const id = req.params.id;
     Flight.findByIdAndDelete(id)
-    .then(data =>{
-        if(!data){
-        res.status(404).send({message:" delete can not be done "})
-        }else{
-        res.send({message:"user was deleted succesfully"});
+        .then(data => {
+            if (!data) {
+                res.status(404).send({ message: " delete can not be done " })
+            } else {
+                res.send({ message: "user was deleted succesfully" });
+            }
         }
-    }
-    
-        ).catch(err=>{
-            res.status(500).send({message:" delete can not be done "+id});
-    
+
+        ).catch(err => {
+            res.status(500).send({ message: " delete can not be done " + id });
+
         })
-    
-    }
+
+}
+
+function removeEmptyAttributes(reqKeys, body) {
+    reqKeys.forEach(
+        function (attribute) {
+            if (body[attribute] == "")
+                delete body[attribute];
+        }
+    );
+}
 
 module.exports =
 {
