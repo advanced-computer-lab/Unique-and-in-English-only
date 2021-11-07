@@ -3,13 +3,15 @@ import './App.css';
 // import Home from './home';
 import { Component, useState,useEffect } from 'react';
 import axios from 'axios'
+import { confirm } from "react-confirm-box";
+
 //import userRouter from '../../../backEnd/routes/UserRoutes';
 
 function ListFlights() {
     const [flight,setFlight]=useState([]);
 
   useEffect(() => {
-    axios.get('http://localhost:8000/flight/listFlights').then(
+    axios.get('http://localhost:150/flight/listFlights').then(
       (result)=>{
         setFlight(result.data)
       
@@ -17,19 +19,26 @@ function ListFlights() {
       })
 
   },[]);
-  function DeleteClickHandler (flightObj){
+  const DeleteClickHandler = async (flightObj)=>{
     const id = flightObj._id;
-    axios.delete('http://localhost:8000/flight/deleteFlight/:'+id)
-          .then(function (response) {
-            console.log(response);
-          })
-          .catch(function (error) {
-            console.log(error);
-          });
-  }
+   const result = await confirm("Are you sure to delete this flight?");
+   if (result) {
+    axios.delete('http://localhost:150/flight/deleteFlight/'+id)
+    .then(function (response) {
+      console.log(response);
+    })
+    .catch(function (error) {
+      console.log(error);
+    });
+
+     console.log("You click yes!");
+     return;
+   }
+   console.log("You click No!");
+ };
   function UpdateClickHandler (flightObj){
     const id = flightObj._id;
-    axios.put('http://localhost:8000/flight/updateFlight/:'+id)
+    axios.put('http://localhost:150/flight/updateFlight/'+id)
           .then(function (response) {
             console.log(response);
           })
@@ -40,7 +49,7 @@ function ListFlights() {
   return (
     <div className="">
       <div className="content">
-          <h1>Employee Profile </h1>
+          <h1>Flights </h1>
 
           <br/>
           

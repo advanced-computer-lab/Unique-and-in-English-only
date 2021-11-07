@@ -1,5 +1,6 @@
 import axios from 'axios';
 import { useState } from 'react'
+import { confirm } from "react-confirm-box";
 
 
 function SearchFlight() {
@@ -20,9 +21,38 @@ function SearchFlight() {
       setValues(oldValues => ({ ...oldValues, [name]: value }));
     }
   }
+  const DeleteClickHandler = async (flightObj)=>{
+    const id = flightObj._id;
+   const result = await confirm("Are you sure to delete this flight?");
+   if (result) {
+    axios.delete('http://localhost:150/flight/deleteFlight/'+id)
+    .then(function (response) {
+      console.log(response);
+    })
+    .catch(function (error) {
+      console.log(error);
+    });
+
+     console.log("You click yes!");
+     return;
+   }
+   console.log("You click No!");
+ };
+    
+  
+  function UpdateClickHandler (flightObj){
+    const id = flightObj._id;
+    axios.put('http://localhost:150/flight/updateFlight/'+id)
+          .then(function (response) {
+            console.log(response);
+          })
+          .catch(function (error) {
+            console.log(error);
+          });
+  }
   const onSubmit = async (event) => {
     event.preventDefault();
-    const res = await axios.post('http://localhost:8000/flight/searchFlight', values, {
+    const res = await axios.post('http://localhost:150/flight/searchFlight', values, {
       headers: {
         // Overwrite Axios's automatically set Content-Type
         'Content-Type': 'application/json'

@@ -16,7 +16,7 @@ function CreateFlight(){
         }
     const onSubmit = async (event) => {
         event.preventDefault();
-        axios.post('http://localhost:8000/flight/createflight', values)
+        axios.post('http://localhost:150/flight/createflight', values)
         .then(function (response) {
             console.log(response);
         })
