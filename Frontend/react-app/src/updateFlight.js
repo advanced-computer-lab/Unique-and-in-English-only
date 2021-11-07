@@ -1,8 +1,7 @@
 import axios from 'axios';
+import { PromiseProvider } from 'mongoose';
 import {useState} from 'react'
-import PopUp from './popUp.js'
-function CreateFlight(){
-  const[buttonPopup,setButtonPopup]=useState(false);
+function UpdateFlight(props){
     const [values,setValues]= useState({FlightNumber: '',
         DepartureTime: '',
         ArrivalTime: '',
@@ -18,14 +17,13 @@ function CreateFlight(){
         }
     const onSubmit = async (event) => {
         event.preventDefault();
-        axios.post('http://localhost:150/flight/createflight', values)
+        axios.put('http://localhost:150/flight/updateFlight/'+props.match.params.id, values)
         .then(function (response) {
             console.log(response);
         })
         .catch(function (error) {
             console.log(error);
         });
-        setButtonPopup(true);
     }
   
   return (
@@ -47,12 +45,7 @@ function CreateFlight(){
     <input type="text" required id="ArrivalPort" value={values.ArrivalPort} onChange={set('ArrivalPort')}  ></input><br></br>
     <button type="button" onClick={(e)=>{onSubmit(e)}}>Create</button>
 </form>
-<PopUp trigger={buttonPopup} setTrigger={setButtonPopup}>
-  <h3>Flight created</h3>
-  
-
-</PopUp>
 </div>
   )
 }
-export default CreateFlight;
+export default UpdateFlight;

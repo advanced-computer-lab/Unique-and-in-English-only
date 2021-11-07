@@ -4,6 +4,8 @@ import './App.css';
 import { Component, useState,useEffect } from 'react';
 import axios from 'axios'
 import { confirm } from "react-confirm-box";
+import { Link } from "react-router-dom"; 
+
 
 //import userRouter from '../../../backEnd/routes/UserRoutes';
 
@@ -66,6 +68,7 @@ function ListFlights() {
               <p className="left-txt"> <b>Arrival Port:{f._id} </b></p>
               <button className="left-txt" onClick={(e)=>{DeleteClickHandler(f)}}>  <b>Delete</b></button>
               <button className="left-txt" onClick={(e)=>{UpdateClickHandler(f)}}>  <b>update</b></button>
+              <Link to={'/updateFlight/'+f._id} className="btn btn-primary">hello</Link>
 
             </div>
             
