@@ -60,6 +60,8 @@ const updateFLight = (req, res) => {
     if (!req.body) {
         return res.status(400).send({ message: "data to update can not be empty " });
     }
+    const reqKeys = Object.keys(req.body);
+    removeEmptyAttributes(reqKeys, req.body)
     const id = req.params.id;
     Flight.findByIdAndUpdate(id, req.body, { useFindAndModify: false })
         .then(data => {
