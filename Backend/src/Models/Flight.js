@@ -29,6 +29,12 @@ const flightSchema = new Schema({
     ArrivalPort: {
         type: String,
         required: true
+    },
+    ArrivalTerminal: {
+        type: String
+    },
+    DepartureTerminal: {
+        type: String
     }
 
 });
