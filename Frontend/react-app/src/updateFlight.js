@@ -6,7 +6,8 @@ import PopUp from './popUp.js'
 
 function UpdateFlight(props) {
   let { id } = useParams();
-  const [buttonPopup, setButtonPopup] = useState(false);
+  const [buttonSuccessPopup, setButtonSuccessPopup] = useState(false);
+  const [buttonFailurePopup, setButtonFailurePopup] = useState(false);
 
   const [values, setValues] = useState({
     FlightNumber: '',
@@ -28,11 +29,13 @@ function UpdateFlight(props) {
     axios.put('http://localhost:150/flight/updateFlight/' + id, values)
       .then(function (response) {
         console.log(response);
+        setButtonSuccessPopup(true);
       })
       .catch(function (error) {
         console.log(error);
+        setButtonFailurePopup(true)
       });
-      setButtonPopup(true);
+      
   }
 
   return (
@@ -54,10 +57,13 @@ function UpdateFlight(props) {
         <input type="text" required id="ArrivalPort" value={values.ArrivalPort} onChange={set('ArrivalPort')}  ></input><br></br>
         <button type="button" onClick={(e) => { onSubmit(e) }}>update</button>
       </form>
-      <PopUp trigger={buttonPopup} setTrigger={setButtonPopup}>
+      <PopUp trigger={buttonSuccessPopup} setTrigger={setButtonSuccessPopup}>
         <h3>Flight updated successfully</h3>
 
 
+      </PopUp>
+      <PopUp trigger={buttonFailurePopup} setTrigger={setButtonFailurePopup}>
+        <h3>error : flight was not updated</h3>
       </PopUp>
     </div>
   )

@@ -23,8 +23,14 @@ const addFlight = (req, res) => {
         }
     );
     console.log(flight);
-    flight.save().then(() => console.log("success")).catch((err) => console.log(err));
-    res.send("succes");
+    flight.save()
+    .then(() => {
+        console.log("success");
+        res.status(200).send("success");})
+    .catch((err) => {
+        console.log(err)
+        res.status(500).send("error")});
+    
 
 }
 
