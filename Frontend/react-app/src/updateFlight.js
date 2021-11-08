@@ -2,8 +2,13 @@ import axios from 'axios';
 import { PromiseProvider } from 'mongoose';
 import { useState } from 'react'
 import { useParams } from 'react-router-dom'
+import PopUp from './popUp.js'
+
 function UpdateFlight(props) {
   let { id } = useParams();
+  const [buttonSuccessPopup, setButtonSuccessPopup] = useState(false);
+  const [buttonFailurePopup, setButtonFailurePopup] = useState(false);
+
   const [values, setValues] = useState({
     FlightNumber: '',
     DepartureTime: '',
@@ -24,10 +29,13 @@ function UpdateFlight(props) {
     axios.put('http://localhost:150/flight/updateFlight/' + id, values)
       .then(function (response) {
         console.log(response);
+        setButtonSuccessPopup(true);
       })
       .catch(function (error) {
         console.log(error);
+        setButtonFailurePopup(true)
       });
+      
   }
 
   return (
@@ -50,6 +58,14 @@ function UpdateFlight(props) {
         <input type="text" required id="ArrivalPort" value={values.ArrivalPort} onChange={set('ArrivalPort')}  ></input><br></br>
         <button type="button" onClick={(e) => { onSubmit(e) }}>update</button>
       </form>
+      <PopUp trigger={buttonSuccessPopup} setTrigger={setButtonSuccessPopup}>
+        <h3>Flight updated successfully</h3>
+
+
+      </PopUp>
+      <PopUp trigger={buttonFailurePopup} setTrigger={setButtonFailurePopup}>
+        <h3>error : flight was not updated</h3>
+      </PopUp>
     </div>
   )
 }

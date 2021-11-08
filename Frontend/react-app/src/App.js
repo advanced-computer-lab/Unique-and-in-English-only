@@ -4,7 +4,7 @@ import Search from './searchFlights'
 import Home from './homePage';
 import List from './listFlights';
 import Update from './updateFlight';
-
+import NotFound from './NotFound';
 function App(){
   return(
     <Router>
@@ -24,6 +24,9 @@ function App(){
           </Route>
           < Route exact path="/listFlights">
             <List/>
+          </Route>
+          <Route path="*">
+           <NotFound/>
           </Route>
         </Switch>
       </div>

@@ -2,7 +2,8 @@ import axios from 'axios';
 import { useState } from 'react'
 import PopUp from './popUp.js'
 function CreateFlight() {
-  const [buttonPopup, setButtonPopup] = useState(false);
+  const [buttonSuccessPopup, setButtonSuccessPopup] = useState(false);
+  const [buttonFailurePopup, setButtonFailurePopup] = useState(false);
   const [values, setValues] = useState({
     FlightNumber: '',
     DepartureTime: '',
@@ -23,11 +24,13 @@ function CreateFlight() {
     axios.post('http://localhost:150/flight/createflight', values)
       .then(function (response) {
         console.log(response);
+        setButtonSuccessPopup(true);
       })
       .catch(function (error) {
         console.log(error);
+        setButtonFailurePopup(true)
       });
-    setButtonPopup(true);
+    
   }
 
   return (
@@ -35,25 +38,26 @@ function CreateFlight() {
       <a href="http://localhost:3000">back</a>
       <form>
         <label >Flight Number :</label><br></br>
-        <input type="text" required id="FlightNumber" value={values.FlightNumber} onChange={set('FlightNumber')}  ></input><br></br>
+        <input type="text" minLength="3" required id="FlightNumber" value={values.FlightNumber} onChange={set('FlightNumber')}  ></input><br></br>
         <label >Departure Time :</label><br></br>
-        <input type="text" required id="DepartureTime" value={values.DepartureTime} onChange={set('DepartureTime')}  ></input><br></br>
+        <input type="date" minLength="3" required id="DepartureTime" value={values.DepartureTime} onChange={set('DepartureTime')}  ></input><br></br>
         <label >Arrival Time :</label><br></br>
-        <input type="text" required id="ArrivalTime" value={values.ArrivalTime} onChange={set('ArrivalTime')} ></input><br></br>
+        <input type="date" minLength="3" required id="ArrivalTime" value={values.ArrivalTime} onChange={set('ArrivalTime')} ></input><br></br>
         <label >Economy Seats Number :</label><br></br>
-        <input type="text" required id="EconomySeatsNumber" value={values.EconomySeatsNumber} onChange={set('EconomySeatsNumber')} ></input><br></br>
+        <input type="number" minLength="1" required id="EconomySeatsNumber" value={values.EconomySeatsNumber} onChange={set('EconomySeatsNumber')} ></input><br></br>
         <label >Buisness Seats Number :</label><br></br>
-        <input type="text" required id="BuisnessSeatsNumber" value={values.BuisnessSeatsNumber} onChange={set('BuisnessSeatsNumber')}  ></input><br></br>
+        <input type="number" minLength="1" required id="BuisnessSeatsNumber" value={values.BuisnessSeatsNumber} onChange={set('BuisnessSeatsNumber')}  ></input><br></br>
         <label >Departure Port : </label><br></br>
-        <input type="text" required="true" id="DeparturePort" value={values.DeparturePort} onChange={set('DeparturePort')}  ></input><br></br>
+        <input type="text" minLength="1" required="true" id="DeparturePort" value={values.DeparturePort} onChange={set('DeparturePort')}  ></input><br></br>
         <label >Arrival Port : </label><br></br>
-        <input type="text" required id="ArrivalPort" value={values.ArrivalPort} onChange={set('ArrivalPort')}  ></input><br></br>
+        <input type="text" minLength="1" required id="ArrivalPort" value={values.ArrivalPort} onChange={set('ArrivalPort')}  ></input><br></br>
         <button type="button" onClick={(e) => { onSubmit(e) }}>Create</button>
       </form>
-      <PopUp trigger={buttonPopup} setTrigger={setButtonPopup}>
-        <h3>Flight created</h3>
-
-
+      <PopUp trigger={buttonSuccessPopup} setTrigger={setButtonSuccessPopup}>
+        <h3>Flight created Successfully</h3>
+      </PopUp>
+      <PopUp trigger={buttonFailurePopup} setTrigger={setButtonFailurePopup}>
+        <h3>error : flight was not created</h3>
       </PopUp>
     </div >
   )
