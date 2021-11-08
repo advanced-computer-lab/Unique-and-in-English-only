@@ -9,7 +9,9 @@ const addFlight = (req, res) => {
     const buisnessSeatsNumber = req.body.BuisnessSeatsNumber;
     const departurePort = req.body.DeparturePort;
     const arrivalPort = req.body.ArrivalPort;
-    console.log(req.body);
+    const arrivalTerminal = req.body.ArrivalTerminal;
+    const DepartureTerminal = req.body.DepartureTerminal;
+
 
     const flight = new Flight(
         {
@@ -19,18 +21,22 @@ const addFlight = (req, res) => {
             EconomySeatsNumber: economySeatsNumber,
             BuisnessSeatsNumber: buisnessSeatsNumber,
             DeparturePort: departurePort,
-            ArrivalPort: arrivalPort
+            ArrivalPort: arrivalPort,
+            ArrivalTerminal: arrivalTerminal,
+            DepartureTerminal: DepartureTerminal
         }
     );
     console.log(flight);
     flight.save()
-    .then(() => {
-        console.log("success");
-        res.status(200).send("success");})
-    .catch((err) => {
-        console.log(err)
-        res.status(500).send("error")});
-    
+        .then(() => {
+            console.log("success");
+            res.status(200).send("success");
+        })
+        .catch((err) => {
+            console.log(err)
+            res.status(500).send("error")
+        });
+
 
 }
 
