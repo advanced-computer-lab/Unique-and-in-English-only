@@ -66,6 +66,7 @@ function SearchFlight() {
 
     <div className="container">
       <div className="searchflight-form">
+        <a href="http://localhost:3000">back</a>
         <form>
           <label >Flight Number :</label><br></br>
           <input type="text" id="FlightNumber" value={values.FlightNumber} onChange={set('FlightNumber')}  ></input><br></br>

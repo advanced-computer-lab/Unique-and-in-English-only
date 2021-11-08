@@ -49,6 +49,8 @@ function ListFlights() {
   return (
     <div className="">
       <div className="content">
+        <a href="http://localhost:3000">back</a>
+
         <h1>Flights </h1>
 
         <br />

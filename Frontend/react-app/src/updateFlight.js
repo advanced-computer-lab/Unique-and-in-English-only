@@ -32,6 +32,7 @@ function UpdateFlight(props) {
 
   return (
     <div className="createflight-form">
+      <a href="http://localhost:3000">home</a>
       <form>
         <label >Flight Number :</label><br></br>
         <input type="text" required id="FlightNumber" value={values.FlightNumber} onChange={set('FlightNumber')}  ></input><br></br>

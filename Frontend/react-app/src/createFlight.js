@@ -32,6 +32,7 @@ function CreateFlight() {
 
   return (
     <div className="createflight-form">
+      <a href="http://localhost:3000">back</a>
       <form>
         <label >Flight Number :</label><br></br>
         <input type="text" required id="FlightNumber" value={values.FlightNumber} onChange={set('FlightNumber')}  ></input><br></br>
@@ -54,7 +55,7 @@ function CreateFlight() {
 
 
       </PopUp>
-    </div>
+    </div >
   )
 }
 export default CreateFlight;

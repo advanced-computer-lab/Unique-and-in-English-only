@@ -57,13 +57,14 @@ const listAllFlights = (req, res) => {
 };
 
 const updateFLight = (req, res) => {
-    if (!req.body) {
+    const body = req.body
+    if (!body) {
         return res.status(400).send({ message: "data to update can not be empty " });
     }
-    const reqKeys = Object.keys(req.body);
-    removeEmptyAttributes(reqKeys, req.body)
+    const reqKeys = Object.keys(body);
+    removeEmptyAttributes(reqKeys, body)
     const id = req.params.id;
-    Flight.findByIdAndUpdate(id, req.body, { useFindAndModify: false })
+    Flight.findByIdAndUpdate(id, body, { useFindAndModify: false })
         .then(data => {
             if (!data) {
                 res.status(404).send({ message: " update can not be empty " })
