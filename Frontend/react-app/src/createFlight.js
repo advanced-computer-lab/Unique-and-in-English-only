@@ -12,6 +12,9 @@ function CreateFlight() {
     BuisnessSeatsNumber: '',
     DeparturePort: '',
     ArrivalPort: '',
+    ArrivalTerminal:'',
+    DepartureTerminal:'',
+
   })
 
   const set = name => {
@@ -51,6 +54,10 @@ function CreateFlight() {
         <input type="text" minLength="1" required="true" id="DeparturePort" value={values.DeparturePort} onChange={set('DeparturePort')}  ></input><br></br>
         <label >Arrival Port : </label><br></br>
         <input type="text" minLength="1" required id="ArrivalPort" value={values.ArrivalPort} onChange={set('ArrivalPort')}  ></input><br></br>
+        <label >Departure Terminal : </label><br></br>
+        <input type="text" minLength="1" required="true" id="DepartureTerminal" value={values.DepartureTerminal} onChange={set('DepartureTerminal')}  ></input><br></br>
+        <label >Arrival Terminal : </label><br></br>
+        <input type="text" minLength="1" required id="ArrivalTerminal" value={values.ArrivalTerminal} onChange={set('ArrivalTerminal')}  ></input><br></br>
         <button type="button" onClick={(e) => { onSubmit(e) }}>Create</button>
       </form>
       <PopUp trigger={buttonSuccessPopup} setTrigger={setButtonSuccessPopup}>

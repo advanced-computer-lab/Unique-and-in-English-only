@@ -66,6 +66,8 @@ function ListFlights() {
             <p className="left-txt"> <b>Buisness Seats Number:{f.BuisnessSeatsNumber} </b></p>
             <p className="left-txt"> <b>Departure Port:{f.DeparturePort} </b></p>
             <p className="left-txt"> <b>Arrival Port:{f.ArrivalPort} </b></p>
+            <p className="left-txt"> <b>Departure Port:{f.DepartureTerminal} </b></p>
+            <p className="left-txt"> <b>Arrival Port:{f.ArrivalTerminal} </b></p>
             <button className="left-txt" onClick={(e) => { DeleteClickHandler(f) }}>  <b>Delete</b></button>
             <button className="left-txt" onClick={(e) => { UpdateClickHandler(f) }}>  <b>update</b></button>
 

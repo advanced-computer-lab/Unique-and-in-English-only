@@ -12,6 +12,8 @@ function SearchFlight() {
     BuisnessSeatsNumber: '',
     DeparturePort: '',
     ArrivalPort: '',
+    DepartureTerminal: '',
+    ArrivalTerminal: '',
   });
 
   const [flight, setFlight] = useState([]);
@@ -82,6 +84,10 @@ function SearchFlight() {
           <input type="text" id="DeparturePort" value={values.DeparturePort} onChange={set('DeparturePort')}  ></input><br></br>
           <label >Arrival Port : </label><br></br>
           <input type="text" id="ArrivalPort" value={values.ArrivalPort} onChange={set('ArrivalPort')}  ></input><br></br>
+          <label >Departure Terminal : </label><br></br>
+          <input type="text" id="DepartureTerminal" value={values.DepartureTerminal} onChange={set('DepartureTerminal')}  ></input><br></br>
+          <label >Arrival Port : </label><br></br>
+          <input type="text" id="ArrivalTerminal" value={values.ArrivalTerminal} onChange={set('ArrivalTerminal')}  ></input><br></br>
           <button type="button" onClick={(e) => { onSubmit(e) }}>search</button>
         </form>
       </div>
@@ -97,6 +103,8 @@ function SearchFlight() {
               <p className="left-txt"> <b>Buisness Seats Number:{f.BuisnessSeatsNumber} </b></p>
               <p className="left-txt"> <b>Departure Port:{f.DeparturePort} </b></p>
               <p className="left-txt"> <b>Arrival Port:{f.ArrivalPort} </b></p>
+              <p className="left-txt"> <b>Departure Terminal:{f.DepartureTerminal} </b></p>
+              <p className="left-txt"> <b>Arrival Terminal:{f.ArrivalTerminal} </b></p>
               <button className="left-txt" onClick={(e) => { DeleteClickHandler(f) }}>  <b>Delete</b></button>
               <button className="left-txt" onClick={(e) => { UpdateClickHandler(f) }}>  <b>update</b></button>
             </div>

@@ -17,6 +17,8 @@ function UpdateFlight(props) {
     BuisnessSeatsNumber: '',
     DeparturePort: '',
     ArrivalPort: '',
+    DepartureTerminal: '',
+    ArrivalTerminal: '',
   })
 
   const set = name => {
@@ -56,6 +58,10 @@ function UpdateFlight(props) {
         <input type="text" required id="DeparturePort" value={values.DeparturePort} onChange={set('DeparturePort')}  ></input><br></br>
         <label >Arrival Port : </label><br></br>
         <input type="text" required id="ArrivalPort" value={values.ArrivalPort} onChange={set('ArrivalPort')}  ></input><br></br>
+        <label >Departure Terminal : </label><br></br>
+        <input type="text" required id="DepartureTerminal" value={values.DepartureTerminal} onChange={set('DepartureTerminal')}  ></input><br></br>
+        <label >Arrival Terminal : </label><br></br>
+        <input type="text" required id="ArrivalTerminal" value={values.ArrivalTerminal} onChange={set('ArrivalTerminal')}  ></input><br></br>
         <button type="button" onClick={(e) => { onSubmit(e) }}>update</button>
       </form>
       <PopUp trigger={buttonSuccessPopup} setTrigger={setButtonSuccessPopup}>
