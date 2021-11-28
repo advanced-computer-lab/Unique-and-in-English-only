@@ -7,6 +7,7 @@ import Update from './updateFlight';
 import NotFound from './NotFound';
 import Footer from './Footer';
 import FlightDetails from './FlightDetails';
+import UserHome from "./userHome.js"
 
 function App(){
   return(
@@ -14,7 +15,7 @@ function App(){
       <div className="content">
         <Switch>
           <Route exact path="/">
-            <Home/>
+            <UserHome/>
             </Route>
           < Route exact path="/createFlight">
             <Create/>

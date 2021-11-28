@@ -52,7 +52,7 @@ const ResponsiveAppBar = () => {
 
 
   return (
-    <AppBar  style={{backgroundColor:'#bd8b13'}} position="static" >
+    <AppBar  style={{backgroundColor:'white'}} position="static" >
       <Container maxWidth="xl">
         <Toolbar disableGutters>
           <img src={logo} alt="logo"/>
@@ -112,7 +112,8 @@ const ResponsiveAppBar = () => {
           </Typography>
           <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
             {
-              <Button
+              <Button 
+               style={{color:'black',fontWeight: "bold",fontFamily:"Etihad Altis Medium",size: "larger"}}
                 
                 onClick={(e)=>{ BookClickHandler()}}
                 sx={{ my: 2, color: 'white', display: 'block' }}
@@ -124,7 +125,8 @@ const ResponsiveAppBar = () => {
          
             {
               <Button
-                
+              style={{color:'black',fontWeight: "bold",fontFamily:"Etihad Altis Medium",size: "larger"}}
+
                 onClick={handleCloseNavMenu}
                 sx={{ my: 2, color: 'white', display: 'block' }}
               >

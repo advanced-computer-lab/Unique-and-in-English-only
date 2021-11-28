@@ -1,19 +1,22 @@
 
 .main-footer {
     color: black;
-    background-color: #0000;
-    padding-top: 3em;
+    background-color: white;
     position: relative;
     bottom: 0;
     width: 100%;
-  
+    border-radius: 12 px;
+    box-shadow: 0 1px 5px rgba(0,0,0,25%);
+  padding: 20px;
   }
-  .row{
-    display: inline-flex;
+  .row1{
+    margin: 20px;
+    display: grid;
+    grid-template-columns:auto auto auto
     
   }
   .list-unstyled{
-    color: honeydew;
+    color: black;
   }
   .container{
     color: black;
