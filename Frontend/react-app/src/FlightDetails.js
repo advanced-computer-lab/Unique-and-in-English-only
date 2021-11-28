@@ -39,10 +39,10 @@ function FlightDetails(props) {
   }
 */
 const deleteHelper= async(flightObj) =>{
-  ListFlights.DeleteClickHandler(flightObj)
+  props.deleteHandler(flightObj)
 }
 const updateHelper= async(flightObj) =>{
-  ListFlights.UpdateClickHandler(flightObj)
+  props.updateHandler(flightObj)
 }
   return (
     <div className="main">
@@ -67,8 +67,8 @@ const updateHelper= async(flightObj) =>{
             </div>
       </div>  
       <div className="details-Buttons">
-        <button className="left-txt" /*onClick={(e) => { deleteHelper(props.f) }}*/>  <b>Delete</b></button>
-        <button className="left-txt" /*onClick={(e) => { updateHelper(props.f) }}*/>  <b>update</b></button></div> 
+        <button className="left-txt" onClick={(e) => { deleteHelper(props.f) }}>  <b>Delete</b></button>
+        <button className="left-txt" onClick={(e) => { updateHelper(props.f) }}>  <b>update</b></button></div> 
         
       <hr/>
     </div>
