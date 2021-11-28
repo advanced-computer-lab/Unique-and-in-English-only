@@ -6,7 +6,7 @@ import axios from 'axios'
 import { confirm } from "react-confirm-box";
 import { Link } from "react-router-dom";
 import FlightDetails from './FlightDetails';
-
+import "./listFlights.css";
 
 //import userRouter from '../../../backEnd/routes/UserRoutes';
 
@@ -50,20 +50,19 @@ function ListFlights() {
   return (
     <div className="">
       <div className="content">
-        <a href="http://localhost:3000">back</a>
-
-        <h1>Flights </h1>
-
-        <br />
-
-
+        
+     
+       <h1>Flights </h1>
+  <br></br>
+<div className="Grid">
+      
         {flight.map((f) =>
           <FlightDetails f={f} deleteHandler={DeleteClickHandler} updateHandler={UpdateClickHandler} />
         )}
 
       </div>
     </div>
-
+</div>
   );
 }
 

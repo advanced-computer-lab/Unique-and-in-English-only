@@ -1,27 +1,22 @@
 #row1{
     
-    color: #bd8b13;
+    
     margin-left: 20px;
     
   }
   #row2{
     
-    color: #bd8b13;
+    
     margin-left: 20px;
     
   }
   #row3{
     
-    color: #bd8b13;
+   
     margin-left: 20px;
     
   }
-h1{
-font-size: large;
-}
-h2{
-    font-size: large;
-}
+
 h3{
     font-size: large;
 }
@@ -32,13 +27,27 @@ h5{
     font-size: large;
 }
 .main{
-    margin-top: 10px;
+    margin: 10px;
     border-radius: 12 px;
     box-shadow: 0 1px 5px rgba(0,0,0,25%);
     
+    background-color:beige;
+    
 }
 .details-container{
-    background-color: white;
+    background-color:beige;
     display: list-item;
+    justify-content:space-around;
     
+    width: 100%;
+    
+}
+Button{
+    margin: 30px;
+
+}
+.details-Buttons{
+    justify-content:space-evenly;
+    display: flex;
+    background-color:beige;
 }

@@ -2,9 +2,9 @@ import Footer from "./Footer";
 const home = () =>{
     return(
         <div>
-        
+          <h1>Flight Site</h1>
             <nav className="navbar">
-                <h1>Flight Site</h1>
+                
                 <a href="/createFlight">Create Flight</a>
                 <br></br>
                 <a href="/searchFlight">Search FLight</a>

@@ -2,6 +2,9 @@ import React from "react";
 import "./FlightDetails.css";
 import axios from 'axios'
 import ListFlights from "./listFlights";
+import Button from '@mui/material/Button';
+
+
 
 function FlightDetails(props) {
   const ListFlights = require("./listFlights.js")
@@ -50,12 +53,12 @@ const updateHelper= async(flightObj) =>{
       <div className="details-container">
             <div className="details-row">
                 <div id="row1">
-                <h1>Flight Number: {props.f.FlightNumber}</h1>
+                <h2>Flight Number: {props.f.FlightNumber}</h2>
                 </div>
             </div>    
             <div className="details-row">
                 <div id="row2">
-                    <h2>From: {props.f.DeparturePort}</h2>
+                    <h3>From: {props.f.DeparturePort}</h3>
                     <h3>To: {props.f.ArrivalPort}</h3>
                 </div>           
             </div>
@@ -67,8 +70,8 @@ const updateHelper= async(flightObj) =>{
             </div>
       </div>  
       <div className="details-Buttons">
-        <button className="left-txt" onClick={(e) => { deleteHelper(props.f) }}>  <b>Delete</b></button>
-        <button className="left-txt" onClick={(e) => { updateHelper(props.f) }}>  <b>update</b></button></div> 
+        <Button type="button" variant="contained" style={{backgroundColor:'#bd8b13',width:'25%'}} onClick={(e) => { deleteHelper(props.f) }}>  <b>Delete</b></Button>
+        <Button type="button" variant="contained" style={{backgroundColor:'#bd8b13',width:'25%',float:"center"}} onClick={(e) => { updateHelper(props.f) }}>  <b>update</b></Button></div> 
         
       <hr/>
     </div>
