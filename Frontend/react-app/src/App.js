@@ -7,6 +7,7 @@ import Update from './updateFlight';
 import NotFound from './NotFound';
 import Footer from './Footer';
 import FlightDetails from './FlightDetails';
+
 function App(){
   return(
     <Router>

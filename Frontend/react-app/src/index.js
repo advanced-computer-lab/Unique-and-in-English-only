@@ -5,8 +5,7 @@ import App from './App';
 import reportWebVitals from './reportWebVitals';
 import List from "./listFlights";
 import Create from "./createFlight";
-
-
+import Card from "./Card";
 ReactDOM.render(
   <React.StrictMode>
     <App />
