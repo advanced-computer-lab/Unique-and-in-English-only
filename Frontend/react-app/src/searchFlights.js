@@ -103,7 +103,7 @@ function SearchFlight() {
         
         {
           flight.map((f) =>
-          <FlightDetails f={f} />
+          <FlightDetails f={f} deleteHandler={DeleteClickHandler} updateHandler={UpdateClickHandler} />
           )}
       </div>
       </div>
