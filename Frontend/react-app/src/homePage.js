@@ -1,9 +1,11 @@
 import Footer from "./Footer";
+import ResponsiveAppBar from "./ResponsiveAppBar";
 const home = () =>{
     return(
         <div>
-          <h1>Flight Site</h1>
+          
             <nav className="navbar">
+                <ResponsiveAppBar/>
                 
                 <a href="/createFlight">Create Flight</a>
                 <br></br>
