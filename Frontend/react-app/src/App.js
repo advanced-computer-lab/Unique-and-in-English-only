@@ -5,6 +5,8 @@ import Home from './homePage';
 import List from './listFlights';
 import Update from './updateFlight';
 import NotFound from './NotFound';
+import Footer from './Footer';
+import FlightDetails from './FlightDetails';
 function App(){
   return(
     <Router>
@@ -29,8 +31,13 @@ function App(){
            <NotFound/>
           </Route>
         </Switch>
+      </div> 
+      <div className="footer">
+        <Footer></Footer>
       </div>
-      </Router>
+    
+    </Router>
+
   );
 }
 export default App ;

@@ -1,0 +1,44 @@
+#row1{
+    
+    color: #bd8b13;
+    margin-left: 20px;
+    
+  }
+  #row2{
+    
+    color: #bd8b13;
+    margin-left: 20px;
+    
+  }
+  #row3{
+    
+    color: #bd8b13;
+    margin-left: 20px;
+    
+  }
+h1{
+font-size: large;
+}
+h2{
+    font-size: large;
+}
+h3{
+    font-size: large;
+}
+h4{
+    font-size: large;
+}
+h5{
+    font-size: large;
+}
+.main{
+    margin-top: 10px;
+    border-radius: 12 px;
+    box-shadow: 0 1px 5px rgba(0,0,0,25%);
+    
+}
+.details-container{
+    background-color: white;
+    display: list-item;
+    
+}

@@ -1,0 +1,22 @@
+
+.main-footer {
+    color: black;
+    background-color: #0000;
+    padding-top: 3em;
+    position: relative;
+    bottom: 0;
+    width: 100%;
+  
+  }
+  .row{
+    display: inline-flex;
+    
+  }
+  .list-unstyled{
+    color: honeydew;
+  }
+  .container{
+    color: black;
+    
+    
+  }
