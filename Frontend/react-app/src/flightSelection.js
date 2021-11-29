@@ -49,15 +49,15 @@ function FlightSelection() {
     window.location.href = `http://localhost:3000/updateFlight/${id}`
   }
 
-  return (
-    <div className="">
-      <div className="content">
-        
-     
-       <h1>Flights </h1>
-  <br></br>
+  if(flight.length>=1){
+    return (
+        <div className="">
+          <div className="content">
+            <h1>Flights </h1>
+        <br></br>
+  
 <div className="Grid">
-      
+        
         {flight.map((f) =>
           <FlightDetails f={f} deleteHandler={DeleteClickHandler} updateHandler={UpdateClickHandler} />
         )}
@@ -65,7 +65,15 @@ function FlightSelection() {
       </div>
     </div>
 </div>
-  );
+  );}
+  else{
+    return(
+    <div>
+      <h1>no flights matches your search criteria</h1>
+    </div>
+    )
+  }
+
 }
 
 function removeObjectFromArray(flight, flightObj) {

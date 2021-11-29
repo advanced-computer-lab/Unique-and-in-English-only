@@ -46,16 +46,15 @@ function ListFlights() {
     const id = flightObj._id;
     window.location.href = `http://localhost:3000/updateFlight/${id}`
   }
-
-  return (
-    <div className="">
-      <div className="content">
-        
-     
-       <h1>Flights </h1>
-  <br></br>
+  if(flight.length>0){
+    return (
+        <div className="">
+          <div className="content">
+            <h1>Flights </h1>
+        <br></br>
+  
 <div className="Grid">
-      
+        
         {flight.map((f) =>
           <FlightDetails f={f} deleteHandler={DeleteClickHandler} updateHandler={UpdateClickHandler} />
         )}
@@ -63,7 +62,14 @@ function ListFlights() {
       </div>
     </div>
 </div>
-  );
+  );}
+  else{
+    return(
+    <div>
+      <h1>no flights available </h1>
+    </div>
+    )
+  }
 }
 
 function removeObjectFromArray(flight, flightObj) {
