@@ -9,7 +9,9 @@ flightRouter.delete("/deleteFlight/:id", flightController.deleteFlight);
 flightRouter.put("/updateFlight/:id", flightController.updateFLight);
 flightRouter.post("/searchFlightPassenger", flightController.searchFlightPassenger);
 flightRouter.get("/showFlights", flightController.showFlights);
-
+flightRouter.post("/setFlightID/:id", flightController.setFlightId);
+flightRouter.get("/showReturnFlights", flightController.showReturnFlights);
+flightRouter.post("/setReturnFlightID/:id", flightController.setReturnFlightId);
 
 
 

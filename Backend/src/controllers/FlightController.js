@@ -167,19 +167,56 @@ function searchFlightPassenger(req, res) {
         DepartureTime: outboundDate,
 
     }
-
-    Flight.find(outgoingFlight).where(`${seats}`).gt(numPassengers).then((result) => {
-        // console.log(result);
-        sessions.searchResults=result;
-        console.log(sessions.searchResults);
-    }).catch(err => console.log(err));
+    returnFlight={
+        DeparturePort: arrivalPort,
+        ArrivalPort: departurePort,
+        DepartureTime: returnDate,
+    }
+    sessions.outgoingFlight=outgoingFlight;
+    sessions.seats=seats;
+    sessions.numPassengers=numPassengers;
+    sessions.returnFlight=returnFlight;
+    // Flight.find(outgoingFlight).where(`${seats}`).gt(numPassengers).then((result) => {
+    //     // console.log(result);
+    //     sessions.searchResults=result;
+    //     console.log(sessions.searchResults);
+    // }).catch(err => console.log(err));
 
 
 }
 
 const showFlights = (req, res) => {
-    res.send(sessions.searchResults);
+    seats=sessions.seats;
+    outgoingFlight=sessions.outgoingFlight;
+    numPassengers=sessions.numPassengers;
+    Flight.find(outgoingFlight).where(`${seats}`).gt(numPassengers).then((result) => {
+         console.log(result);
+        res.send(result);
+    }).catch(err => console.log(err));
 };
+const showReturnFlights = (req, res) => {
+    seats=sessions.seats;
+    returnFlight=sessions.returnFlight;
+    numPassengers=sessions.numPassengers;
+    Flight.find(returnFlight).where(`${seats}`).gt(numPassengers).then((result) => {
+        // console.log(result);
+        res.send(result);
+    }).catch(err => console.log(err));
+};
+const setFlightId = (req, res) => {
+     sessions.flightId = req.params.id;
+     const body = req.body;
+     sessions.outgoingFlightObject =body;
+
+
+}
+const setReturnFlightId = (req, res) => {
+    sessions.ReturnFlightId = req.params.id;
+    const body = req.body;
+    sessions.returnFlightObject =body;
+
+}
+
 
 module.exports =
 {
@@ -189,5 +226,8 @@ module.exports =
     updateFLight,
     deleteFlight,
     searchFlightPassenger,
-    showFlights
+    showFlights,
+    setFlightId,
+    showReturnFlights,
+    setReturnFlightId
 }

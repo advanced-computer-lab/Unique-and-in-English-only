@@ -8,8 +8,8 @@ import { Link } from "react-router-dom";
 import FlightDetails from './FlightDetails';
 import "./listFlights.css";
 import FlightSelectionCard from "./flightSelectionCard.js";
-import { useHistory } from "react-router-dom";
 import ResponsiveAppBar from "./ResponsiveAppBar";
+import { useHistory } from "react-router-dom";
 
 
 //import userRouter from '../../../backEnd/routes/UserRoutes';
@@ -17,7 +17,7 @@ import ResponsiveAppBar from "./ResponsiveAppBar";
 function FlightSelection() {
   const [flight, setFlight] = useState([]);
   useEffect(() => {
-    axios.get('http://localhost:150/flight/showFlights/').then(
+    axios.get('http://localhost:150/flight/showReturnFlights/').then(
       (result) => {
           console.log(result);
         setFlight(result.data);
@@ -53,12 +53,11 @@ function FlightSelection() {
     window.location.href = `http://localhost:3000/updateFlight/${id}`
   }
   const history = useHistory();
-
   const onSubmit = async (flightObj) => {
     const id = flightObj._id;
-    axios.post('http://localhost:150/flight/setFlightID/' + id,flightObj)
+    axios.post('http://localhost:150/flight/setReturnFlightID/' + id,flightObj)
       .then( 
-          history.push("/returnFlightSelection")
+          history.push("/OutgoingSeatSelection")
       
       )
       .catch(function (error) {
@@ -72,7 +71,8 @@ function FlightSelection() {
         <div className="">
           <ResponsiveAppBar/>
           <div className="content">
-            <h1 style={{marginTop:"100px"}} >Choose Outgoing Flight </h1>
+          
+            <h1 style={{marginTop:"100px"}} >Choose Return Flight </h1>
         <br></br>
   
 <div className="table">

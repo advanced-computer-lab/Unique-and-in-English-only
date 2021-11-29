@@ -9,6 +9,7 @@ import Footer from './Footer';
 import FlightDetails from './FlightDetails';
 import UserHome from "./userHome.js"
 import FlightSelection from"./flightSelection.js"
+import ReturnFlightSelection from "./ReturnFlightSelection"
 function App(){
   return(
     <Router>
@@ -31,6 +32,9 @@ function App(){
           </Route>
           < Route exact path="/flightSelection">
             <FlightSelection/>
+          </Route>
+          < Route exact path="/returnFlightSelection">
+            <ReturnFlightSelection/>
           </Route>
           <Route path="*">
            <NotFound/>
