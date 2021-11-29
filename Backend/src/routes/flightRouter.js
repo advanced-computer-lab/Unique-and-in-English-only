@@ -6,7 +6,10 @@ flightRouter.post("/createFlight", flightController.addFlight);
 flightRouter.post("/searchFlight", flightController.getFlight);
 flightRouter.get("/listFlights", flightController.listAllFlights);
 flightRouter.delete("/deleteFlight/:id", flightController.deleteFlight);
-flightRouter.put("/updateFlight/:id", flightController.updateFLight)
+flightRouter.put("/updateFlight/:id", flightController.updateFLight);
+flightRouter.post("/searchFlightPassenger", flightController.searchFlightPassenger);
+flightRouter.get("/showFlights", flightController.showFlights);
+
 
 
 

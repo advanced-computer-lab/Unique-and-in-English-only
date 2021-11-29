@@ -1,7 +1,7 @@
 .mainContainer{
     display: flex;
     flex-direction: column;
-    gap: 120px;
+   
     justify-content: space-around;
     height: 1000px;
 }

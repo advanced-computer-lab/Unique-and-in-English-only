@@ -6,6 +6,9 @@ import reportWebVitals from './reportWebVitals';
 import List from "./listFlights";
 import Create from "./createFlight";
 import Card from "./Card";
+import SearchFlightDiv from "./searchFlightDiv.js";
+
+
 ReactDOM.render(
   <React.StrictMode>
     <App />

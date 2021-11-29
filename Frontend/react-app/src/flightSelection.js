@@ -10,15 +10,17 @@ import "./listFlights.css";
 
 //import userRouter from '../../../backEnd/routes/UserRoutes';
 
-function ListFlights() {
+function FlightSelection() {
   const [flight, setFlight] = useState([]);
   useEffect(() => {
-    axios.get('http://localhost:150/flight/listFlights').then(
+    axios.get('http://localhost:150/flight/showFlights/').then(
       (result) => {
-        setFlight(result.data)
+          console.log(result);
+        setFlight(result.data);
 
-
-      })
+      });
+     
+    
 
   }, []);
  const DeleteClickHandler = async (flightObj) => {
@@ -89,4 +91,4 @@ function removeObjectFromArray(flight, flightObj) {
 </div>*/
 
 
-export default ListFlights 
+export default FlightSelection; 

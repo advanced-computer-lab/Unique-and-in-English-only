@@ -8,7 +8,7 @@ import NotFound from './NotFound';
 import Footer from './Footer';
 import FlightDetails from './FlightDetails';
 import UserHome from "./userHome.js"
-
+import FlightSelection from"./flightSelection.js"
 function App(){
   return(
     <Router>
@@ -28,6 +28,9 @@ function App(){
           </Route>
           < Route exact path="/listFlights">
             <List/>
+          </Route>
+          < Route exact path="/flightSelection">
+            <FlightSelection/>
           </Route>
           <Route path="*">
            <NotFound/>

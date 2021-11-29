@@ -52,7 +52,7 @@ const ResponsiveAppBar = () => {
 
 
   return (
-    <AppBar  style={{backgroundColor:'white'}} position="static" >
+    <AppBar  style={{backgroundColor:'white'}} position="fixed" top="0px" z-index="2" >
       <Container maxWidth="xl">
         <Toolbar disableGutters>
           <img src={logo} alt="logo"/>

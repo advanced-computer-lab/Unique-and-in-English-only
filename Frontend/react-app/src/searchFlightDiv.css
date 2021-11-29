@@ -1,0 +1,52 @@
+
+
+.searchFlight{
+    /* background-color: yellow; */
+    border-radius: 12px;
+    box-shadow: 0 1px 5px rgba(0,0,0,25%);
+   
+    margin :40px;
+    width: 90%;
+    height: fit-content;
+    display: flex;
+    flex-wrap: wrap;
+    padding-top:20px;
+}
+
+.searchFlight .searchFlightElem{
+    /* background-color: turquoise; */
+    /* border: 2px solid black; */
+    width:400px;
+    height: 100px;
+    margin-right: 2px;
+}
+
+input .outboundDate{
+    padding: 10px;
+}
+
+input .returnDate{
+    padding: 10px;
+}
+
+.searchFlight .date{
+    width:200px;
+}
+
+.passengers{
+    display: flex;
+}
+
+#confirmButton_searchFlight{
+    display: flex;
+    justify-content: center;
+}
+
+#confirmButton_searchFlight Button{
+   background-color:#bc8b13;
+   height: 30px;
+   width: 100px;
+   margin-top: 30px;
+   margin-left: -30px;
+
+}

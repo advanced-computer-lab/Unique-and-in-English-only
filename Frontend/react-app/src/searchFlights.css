@@ -14,7 +14,7 @@ display: flex;
     margin: 20px;
     
 }
-label{
+.searchflight-form label{
     font-family: "Etihad Altis Medium",'arial',sans-serif;
     font-size: 20px;
     color: #be8b14;
@@ -24,16 +24,35 @@ h1{
     font-family: "Etihad Altis Medium",'arial',sans-serif;
     color: #be8b14;
 }
-Input{
+.searchflight-form Input{
     width: 100%;
     font-size: larger;
     
 }
-Button{
+.searchflight-form Button{
     margin: 20px;
     font-family: "Etihad Altis Medium",'arial',sans-serif;
     background-color: #be8b14;
     width:70%;
+}
+.createflight-form label{
+    font-family: "Etihad Altis Medium",'arial',sans-serif;
+    font-size: 20px;
+    color: #be8b14;
+    margin-top:25px ;
+
+
+}
+.createflight-form Button{
+    margin: 20px;
+    font-family: "Etihad Altis Medium",'arial',sans-serif;
+    background-color: #be8b14;
+    width:70%;
+}
+.createflight-form Input{
+    width: 100%;
+    font-size: larger;
+    
 }
 #flightsDisplay{
     display: flex;
