@@ -5,11 +5,12 @@ import App from './App';
 import reportWebVitals from './reportWebVitals';
 import List from "./listFlights";
 import Create from "./createFlight";
+import SearchFlightDiv from "./searchFlightDiv.js";
 
 
 ReactDOM.render(
   <React.StrictMode>
-    <App />
+    <SearchFlightDiv />
   </React.StrictMode>,
   document.getElementById('root')
 );

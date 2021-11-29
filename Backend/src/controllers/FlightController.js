@@ -12,6 +12,16 @@ const addFlight = (req, res) => {
     const arrivalTerminal = req.body.ArrivalTerminal;
     const DepartureTerminal = req.body.DepartureTerminal;
 
+    const buisnessSeats = new Array();
+    const economySeats = new Array();
+    for (var index = 0; index < buisnessSeatsNumber; index++) {
+        buisnessSeats.push(false);
+    }
+
+    for (var index = 0; index < economySeatsNumber; index++) {
+        economySeats.push(false);
+    }
+
 
     const flight = new Flight(
         {
@@ -23,7 +33,9 @@ const addFlight = (req, res) => {
             DeparturePort: departurePort,
             ArrivalPort: arrivalPort,
             ArrivalTerminal: arrivalTerminal,
-            DepartureTerminal: DepartureTerminal
+            DepartureTerminal: DepartureTerminal,
+            BuisnessSeats: buisnessSeats,
+            EconomySeats: economySeats
         }
     );
     console.log(flight);
@@ -119,11 +131,57 @@ function removeEmptyAttributes(reqKeys, body) {
     );
 }
 
+
+function searchFlightPassenger(req, res) {
+    const flight = req.body;
+    console.log(flight);
+
+    const adults = flight.adults;
+    const children = flight.children;
+
+    if (flight.adults < 1) {
+        //Error
+        return;
+    }
+    if (flight.children == '') {
+        children = 0
+
+    }
+    const numPassengers = adults + children;
+    console.log(numPassengers + 2);
+    const outboundDate = new Date(flight.outboundDate);
+    const returnDate = flight.returnDate;
+    const departurePort = flight.flyingFrom.airportName;
+    const arrivalPort = flight.flyingTo.airportName;
+    const cabin = flight.cabin;
+    const seats = "EconomySeatsNumber";
+
+    if (cabin == "Buisness") {
+        seats = "BuisnessSeatsNumber";
+    }
+
+    console.log(outboundDate);
+    outgoingFlight = {
+        DeparturePort: departurePort,
+        ArrivalPort: arrivalPort,
+        DepartureTime: outboundDate,
+
+    }
+
+    Flight.find(outgoingFlight).where(`${seats}`).gt(numPassengers).then((result) => {
+        // console.log(result);
+        res.send(result);
+    }).catch(err => console.log(err));
+
+
+}
+
 module.exports =
 {
     addFlight,
     getFlight,
     listAllFlights,
     updateFLight,
-    deleteFlight
+    deleteFlight,
+    searchFlightPassenger
 }

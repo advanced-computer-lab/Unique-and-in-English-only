@@ -5,19 +5,23 @@ import { Component, useState, useEffect } from 'react';
 import axios from 'axios'
 import { confirm } from "react-confirm-box";
 import { Link } from "react-router-dom";
+import FlightDiv from "./FlightDiv.js";
+
+
+
 
 
 //import userRouter from '../../../backEnd/routes/UserRoutes';
 
 function ListFlights() {
-  const [flight, setFlight] = useState([]);
+  const [flights, setFlight] = useState([]);
   useEffect(() => {
     axios.get('http://localhost:150/flight/listFlights').then(
       (result) => {
         setFlight(result.data)
 
 
-      })
+      }).catch(err => console.log(err))
 
   }, []);
   const DeleteClickHandler = async (flightObj) => {
@@ -27,7 +31,7 @@ function ListFlights() {
       axios.delete('http://localhost:150/flight/deleteFlight/' + id)
         .then(function (response) {
           console.log(response);
-          const newFlights = removeObjectFromArray(flight, flightObj);
+          const newFlights = removeObjectFromArray(flights, flightObj);
           setFlight(newFlights);
         })
         .catch(function (error) {
@@ -56,24 +60,10 @@ function ListFlights() {
         <br />
 
 
-        {flight.map((f) =>
-          <div className="row" key={f._id}>
-
-            <p className="left-txt"> <b>Flight Number:{f.FlightNumber} </b> </p>
-            <p className="left-txt"> <b>Departure Time:{f.DepartureTime} </b></p>
-            <p className="left-txt"> <b>Arrival Time:{f.ArrivalTime} </b></p>
-            <p className="left-txt"> <b>Economy Seats Number:{f.EconomySeatsNumber} </b></p>
-            <p className="left-txt"> <b>Buisness Seats Number:{f.BuisnessSeatsNumber} </b></p>
-            <p className="left-txt"> <b>Departure Port:{f.DeparturePort} </b></p>
-            <p className="left-txt"> <b>Arrival Port:{f.ArrivalPort} </b></p>
-            <p className="left-txt"> <b>Departure Port:{f.DepartureTerminal} </b></p>
-            <p className="left-txt"> <b>Arrival Port:{f.ArrivalTerminal} </b></p>
-            <button className="left-txt" onClick={(e) => { DeleteClickHandler(f) }}>  <b>Delete</b></button>
-            <button className="left-txt" onClick={(e) => { UpdateClickHandler(f) }}>  <b>update</b></button>
-
-          </div>
-
-        )}
+        {flights.map((f) =>
+          <FlightDiv flight={f} />
+        )
+        }
 
       </div>
     </div>
@@ -81,10 +71,11 @@ function ListFlights() {
   );
 }
 
+
 function removeObjectFromArray(flight, flightObj) {
 
   return flight.filter(function (ele) {
-    return ele != flightObj;
+    return ele !== flightObj;
   });
 
 

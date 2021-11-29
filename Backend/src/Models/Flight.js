@@ -35,9 +35,17 @@ const flightSchema = new Schema({
     },
     DepartureTerminal: {
         type: String
+    },
+    BuisnessSeats: {
+        type: Array
+    },
+    EconomySeats: {
+        type: Array
     }
 
 });
+
+
 
 
 const Flight = mongoose.model('Flight', flightSchema);
