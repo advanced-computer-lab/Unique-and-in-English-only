@@ -148,7 +148,6 @@ function searchFlightPassenger(req, res) {
 
     }
     const numPassengers = adults + children;
-    console.log(numPassengers + 2);
     const outboundDate = new Date(flight.outboundDate);
     const returnDate = flight.returnDate;
     const departurePort = flight.flyingFrom.airportName;

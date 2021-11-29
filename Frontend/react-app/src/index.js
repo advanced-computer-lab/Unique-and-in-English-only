@@ -10,7 +10,7 @@ import SearchFlightDiv from "./searchFlightDiv.js";
 
 ReactDOM.render(
   <React.StrictMode>
-    <SearchFlightDiv />
+    <App />
   </React.StrictMode>,
   document.getElementById('root')
 );
