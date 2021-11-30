@@ -14,7 +14,7 @@ import TicketDetails from "./ticketDetails.js";
 function TicketsView() {
   const [flight, setFlight] = useState([]);
   useEffect(() => {
-    axios.get('http://localhost:150/flight/listFlights').then(
+    axios.get('http://localhost:150/flight/listReservations').then(
       (result) => {
         setFlight(result.data)
 
@@ -26,7 +26,7 @@ function TicketsView() {
     const id = flightObj._id;
     const result = await confirm("Are you sure to delete this flight?");
     if (result) {
-      axios.delete('http://localhost:150/flight/deleteFlight/' + id)
+      axios.post('http://localhost:150/flight/deleteFlight/' + id,flightObj)
         .then(function (response) {
           console.log(response);
           const newFlights = removeObjectFromArray(flight, flightObj);
@@ -54,7 +54,7 @@ function TicketsView() {
             <h1>My Tickets </h1>
         <br></br>
   
-<div className="Grid">
+<div className="table">
         
         {flight.map((f) =>
           <TicketDetails f={f} deleteHandler={DeleteClickHandler}  />

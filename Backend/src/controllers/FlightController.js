@@ -1,5 +1,6 @@
 const Flight = require("../Models/Flight");
 const sessions = require('express-session');
+const User = require("../models/User");
 
 const addFlight = (req, res) => {
     const flightNumber = req.body.FlightNumber;
@@ -231,7 +232,46 @@ const getReturnFlight=(req,res)=>{
     res.send(sessions.returnFlightObject)
 }
 
+const listReservations = (req, res) => {
+    const body = req.body;
+    User.findById(sessions.userId).then((result) => {
+        console.log(result);
+        sessions.tickets=result.Tickets;
+        res.send(result.Tickets);
+    })
+};
+const deleteTicket = (req, res) => {
+    const deletedTicket = req.body
+    if (!deletedTicket) {
+        return res.status(400).send({ message: "data to update can not be empty " });
+    }
+   const newTickets=removeObjectFromArray(sessions.tickets,deleteTicket);
+   sessions.tickets=newTickets;
+    const id = sessions.userId;
+    const bunchOfTickets ={Tickets:newTickets};
+    Flight.findByIdAndUpdate(id, bunchOfTickets, { useFindAndModify: false })
+        .then(data => { 
+            if (!data) {
+                res.status(404).send({ message: " update can not be empty " })
+            } else {
+                res.send(data);
+            }
+        }
 
+        ).catch(err => {
+            res.status(500).send({ message: " update can not be done " });
+
+        })
+
+
+        function removeObjectFromArray(flight, flightObj) {
+
+            return flight.filter(function (ele) {
+              return ele != flightObj;
+            });
+        }
+
+}
 
 module.exports =
 {
@@ -247,5 +287,7 @@ module.exports =
     setReturnFlightId,
     getFlightById,
     getOutgoingFlight,
-    getReturnFlight
+    getReturnFlight,
+    listReservations,
+    deleteTicket
 }
