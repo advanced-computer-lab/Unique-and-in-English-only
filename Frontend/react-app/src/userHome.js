@@ -3,18 +3,15 @@ import ResponsiveAppBar from "./ResponsiveAppBar";
 import Card from "./Card";
 import "./userHome.css";
 import FlightSearch from "./searchFlightDiv.js";
-const userHome = () =>{
-    return(<div>
- <nav className="navbar">
-                <ResponsiveAppBar/>
-            </nav>
+const userHome = () => {
+    return (
         <div className="mainContainer" >
-          
-           <FlightSearch/>
-            <Card/>
+
+            <FlightSearch />
+            <Card />
 
         </div>
-           </div>
+
     )
 }
 export default userHome;

@@ -1,5 +1,12 @@
 .seat{
-    width:100px !important;
-    height: 100px !important
+    width:80px !important;
+    height: 100px !important;
+    border-radius:12px !important;
+}
+
+.seatSelection{
+    margin-left: auto;
+    margin-right: auto;
+    width: 400px;
 }
 

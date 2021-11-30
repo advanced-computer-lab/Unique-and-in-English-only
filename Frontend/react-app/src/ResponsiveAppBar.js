@@ -11,18 +11,18 @@ import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
 import Tooltip from '@mui/material/Tooltip';
 import MenuItem from '@mui/material/MenuItem';
-import { makeStyles} from '@material-ui/core';
-import logo  from "./images/Logo.jpg"
-const useStyles=makeStyles((theme)=>({
-  appBar:{
+import { makeStyles } from '@material-ui/core';
+import logo from "./images/Logo.jpg"
+const useStyles = makeStyles((theme) => ({
+  appBar: {
     backgroundColor: '#bd8b13'
   }
 }));
 
-const pages = ['Book','Help'];
+const pages = ['Book', 'Help'];
 const settings = ['Profile', 'Account', 'Logout'];
 function BookClickHandler() {
-  
+
   window.location.href = `/searchFlight`
 }
 
@@ -47,15 +47,15 @@ const ResponsiveAppBar = () => {
   const classes = useStyles();
   const style = {
 
-    background : '#bd8b13'
-};
+    background: '#bd8b13'
+  };
 
 
   return (
-    <AppBar  style={{backgroundColor:'white'}} position="fixed" top="0px" z-index="2" >
+    <AppBar style={{ backgroundColor: 'white' }} position="fixed" top="0px" z-index="2" >
       <Container maxWidth="xl">
         <Toolbar disableGutters>
-          <img src={logo} alt="logo"/>
+          <img src={logo} alt="logo" />
           {/* <Typography
             variant="h6"
             noWrap
@@ -112,20 +112,20 @@ const ResponsiveAppBar = () => {
           </Typography>
           <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
             {
-              <Button 
-               style={{color:'black',fontWeight: "bold",fontFamily:"Etihad Altis Medium",size: "larger"}}
-                
-                onClick={(e)=>{ BookClickHandler()}}
+              <Button
+                style={{ color: 'black', fontWeight: "bold", fontFamily: "Etihad Altis Medium", size: "larger" }}
+
+                onClick={(e) => { BookClickHandler() }}
                 sx={{ my: 2, color: 'white', display: 'block' }}
               >
                 Book
               </Button>
             }
-          
-         
+
+
             {
               <Button
-              style={{color:'black',fontWeight: "bold",fontFamily:"Etihad Altis Medium",size: "larger"}}
+                style={{ color: 'black', fontWeight: "bold", fontFamily: "Etihad Altis Medium", size: "larger" }}
 
                 onClick={handleCloseNavMenu}
                 sx={{ my: 2, color: 'white', display: 'block' }}
@@ -133,12 +133,12 @@ const ResponsiveAppBar = () => {
                 Help
               </Button>
             }
-           </Box>
+          </Box>
 
           <Box sx={{ flexGrow: 0 }}>
             <Tooltip title="Open settings">
               <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                <Avatar  />
+                <Avatar />
               </IconButton>
             </Tooltip>
             <Menu
