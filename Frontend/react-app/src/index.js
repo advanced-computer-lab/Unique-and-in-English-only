@@ -6,11 +6,11 @@ import reportWebVitals from './reportWebVitals';
 import List from "./listFlights";
 import Create from "./createFlight";
 import SearchFlightDiv from "./searchFlightDiv.js";
-
+import SeatSelection from "./SeatSelection";
 
 ReactDOM.render(
   <React.StrictMode>
-    <App />
+    <SeatSelection />
   </React.StrictMode>,
   document.getElementById('root')
 );

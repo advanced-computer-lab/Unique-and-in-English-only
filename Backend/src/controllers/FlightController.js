@@ -15,10 +15,12 @@ const addFlight = (req, res) => {
     const buisnessSeats = new Array();
     const economySeats = new Array();
     for (var index = 0; index < buisnessSeatsNumber; index++) {
-        buisnessSeats.push(false);
+        const seat = { isSelected: false, number: index + 1, id: index + 1 }
+        buisnessSeats.push(seat);
     }
 
     for (var index = 0; index < economySeatsNumber; index++) {
+        const seat = { isSelected: false }
         economySeats.push(false);
     }
 
