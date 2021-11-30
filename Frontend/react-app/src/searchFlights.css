@@ -73,3 +73,7 @@ p{font-family: "Etihad Altis Medium",'arial',sans-serif;
 .createflight-form{
     margin:30px ;
 }
+.form-errors{
+    color: red;
+    
+}

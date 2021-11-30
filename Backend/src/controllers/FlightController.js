@@ -71,6 +71,14 @@ const getFlight = (req, res) => {
     }).catch(err => console.log(err));
 
 }
+const getFlightById = (req, res) => {
+    const id = req.params.id;
+    Flight.findById(id).then((result) => {
+        console.log(result);
+        res.send(result);
+    }).catch(err => console.log(err));
+
+}
 
 const listAllFlights = (req, res) => {
     const body = req.body;
@@ -229,5 +237,6 @@ module.exports =
     showFlights,
     setFlightId,
     showReturnFlights,
-    setReturnFlightId
+    setReturnFlightId,
+    getFlightById
 }
