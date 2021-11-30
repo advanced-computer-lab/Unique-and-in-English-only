@@ -7,6 +7,7 @@ import Update from './updateFlight';
 import NotFound from './NotFound';
 import Footer from './Footer';
 import FlightDetails from './FlightDetails';
+import UpdateUser from './updateUser';
 
 function App(){
   return(
@@ -22,12 +23,16 @@ function App(){
           < Route exact path="/searchFlight">
             <Search/>
           </Route>
-          < Route  path="/updateFlight/:id" >
+          < Route  exact path="/updateFlight/:id" >
             <Update/>
           </Route>
           < Route exact path="/listFlights">
             <List/>
           </Route>
+          <Route  exact path="/updateUser">
+            <UpdateUser/>
+            </Route>
+
           <Route path="*">
            <NotFound/>
           </Route>

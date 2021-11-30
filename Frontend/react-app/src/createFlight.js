@@ -4,6 +4,11 @@ import PopUp from './popUp.js'
 import "./searchFlights.css";
 import Input from '@mui/material/Input';
 import Button from '@mui/material/Button';
+import * as React from 'react';
+import Stack from '@mui/material/Stack';
+import Snackbar from '@mui/material/Snackbar';
+import MuiAlert from '@mui/material/Alert';
+
 function CreateFlight() {
   const [buttonSuccessPopup, setButtonSuccessPopup] = useState(false);
   const [buttonFailurePopup, setButtonFailurePopup] = useState(false);
@@ -19,22 +24,62 @@ function CreateFlight() {
     DepartureTerminal:'',
 
   })
+  
+  
+
+  const Alert = React.forwardRef(function Alert(props, ref) {
+    return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
+  });
+  const [open1, setOpen1] = React.useState(false);
+
+  const handleClick1 = () => {
+    setOpen1(true);
+  };
+
+  const handleClose1 = (event, reason) => {
+    if (reason === 'clickaway') {
+      return;
+    }
+
+    setOpen1(false);
+  };
+  const [open2, setOpen2] = React.useState(false);
+
+  const handleClick2 = () => {
+    setOpen2(true);
+  };
+
+  const handleClose2 = (event, reason) => {
+    if (reason === 'clickaway') {
+      return;
+    }
+
+    setOpen2(false);
+  };
+
 
   const set = name => {
     return ({ target: { value } }) => {
       setValues(oldValues => ({ ...oldValues, [name]: value }));
     }
   }
+
+
+  
   const onSubmit = async (event) => {
     event.preventDefault();
+   
     axios.post('http://localhost:150/flight/createflight', values)
-      .then(function (response) {
+      .then( function (response) {
         console.log(response);
-        setButtonSuccessPopup(true);
+        //setButtonSuccessPopup(true);
+        handleClick1();
+        
       })
       .catch(function (error) {
         console.log(error);
-        setButtonFailurePopup(true)
+        //setButtonFailurePopup(true)
+        handleClick2();
       });
     
   }
@@ -64,12 +109,29 @@ function CreateFlight() {
         <br></br>
         <Button type="button" variant="contained" style={{backgroundColor:'#bd8b13',width:'20%'}} onClick={(e) => { onSubmit(e) }}>Create</Button>
       </form>
-      <PopUp trigger={buttonSuccessPopup} setTrigger={setButtonSuccessPopup}>
+      {/* <PopUp trigger={buttonSuccessPopup} setTrigger={setButtonSuccessPopup}>
         <h3>Flight created Successfully</h3>
       </PopUp>
       <PopUp trigger={buttonFailurePopup} setTrigger={setButtonFailurePopup}>
         <h3>error : flight was not created</h3>
-      </PopUp>
+      </PopUp> */}
+      <Stack spacing={2} sx={{ width: '100%' }}>
+      
+      <Snackbar open={open1} autoHideDuration={6000} onClose={handleClose1}>
+        <Alert onClose={handleClose1} severity="success" sx={{ width: '100%' }}>
+          The flight is created!
+        </Alert>
+      </Snackbar>
+      </Stack>
+      <Stack spacing={2} sx={{ width: '100%' }}>
+      
+      <Snackbar open={open2} autoHideDuration={6000} onClose={handleClose2}>
+        <Alert onClose={handleClose2} severity="error" sx={{ width: '100%' }}>
+          There is an error!
+        </Alert>
+      </Snackbar>
+      </Stack>
+
     </div >
   )
 }

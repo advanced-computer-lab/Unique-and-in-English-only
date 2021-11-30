@@ -1,4 +1,5 @@
 const Flight = require("../Models/Flight");
+const nodemailer=require('nodemailer');
 
 
 const addFlight = (req, res) => {
@@ -36,7 +37,30 @@ const addFlight = (req, res) => {
             console.log(err)
             res.status(500).send("error")
         });
-
+        const output =`<p> your flight number is : ${flightNumber}`;
+        const transporter =nodemailer.createTransport(
+            {
+                service:"hotmail",
+                auth:{
+                    user:"aclacl_14787@outlook.com",
+                    pass:"nodemailer@14787"
+                }
+            }
+        );
+        const options={
+            from:"aclacl_14787@outlook.com",
+            to:"mohamedelshaarawy87@gmail.com",
+            subject:"Node mailer test",
+            text:"woooow",
+            html:output
+        }
+        transporter.sendMail(options, function(err,info){
+            if(err){
+                console.log(err);
+                return;
+            }
+            console.log(info.response);
+        })
 
 }
 
