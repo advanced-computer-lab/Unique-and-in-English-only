@@ -5,12 +5,13 @@ import App from './App';
 import reportWebVitals from './reportWebVitals';
 import List from "./listFlights";
 import Create from "./createFlight";
+import Card from "./Card";
 import SearchFlightDiv from "./searchFlightDiv.js";
 import SeatSelection from "./SeatSelection";
 
 ReactDOM.render(
   <React.StrictMode>
-    <SeatSelection />
+    <App />
   </React.StrictMode>,
   document.getElementById('root')
 );

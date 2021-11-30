@@ -6,9 +6,9 @@ import Button from '@mui/material/Button';
 import PersonIcon from '@mui/icons-material/Person';
 import InputAdornment from '@mui/material/InputAdornment';
 import ChildCareIcon from '@mui/icons-material/ChildCare';
-import { useState } from 'react';
+import { useState,ReactDOM } from 'react';
 import axios from 'axios';
-
+import { useHistory } from "react-router-dom";
 
 const airports = [
     { airportName: "LAX", city: "Los Angeles" },
@@ -43,10 +43,15 @@ function SearchFlightDiv() {
 
     const [flyingFrom, setFlyingFrom] = useState(null);
     const [flyingTo, setFlyingTo] = useState(null);
-
+    const history = useHistory();
     const confirmSearch = async (event) => {
 
-
+        const element =(
+            <div>
+              <h1>Hello, world!</h1>
+              <h2>It is {new Date().toLocaleTimeString()}.</h2>
+            </div>
+          );
         const flight = {};
         flight['flyingFrom'] = flyingFrom;
         flight['flyingTo'] = flyingTo;
@@ -59,13 +64,13 @@ function SearchFlightDiv() {
         event.preventDefault();
         console.log(flight);
         axios.post('http://localhost:150/flight/searchFlightPassenger', flight)
-            .then(function (response) {
-                console.log(response);
-            })
+            .then(
+                 history.push("/flightSelection")
+            )
             .catch(function (error) {
                 console.log(error);
             });
-
+            
 
     }
 

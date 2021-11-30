@@ -1,5 +1,5 @@
 const Flight = require("../Models/Flight");
-
+const sessions = require('express-session');
 
 const addFlight = (req, res) => {
     const flightNumber = req.body.FlightNumber;
@@ -91,7 +91,7 @@ const updateFLight = (req, res) => {
     removeEmptyAttributes(reqKeys, body)
     const id = req.params.id;
     Flight.findByIdAndUpdate(id, body, { useFindAndModify: false })
-        .then(data => {
+        .then(data => { 
             if (!data) {
                 res.status(404).send({ message: " update can not be empty " })
             } else {
@@ -151,7 +151,7 @@ function searchFlightPassenger(req, res) {
     }
     const numPassengers = adults + children;
     const outboundDate = new Date(flight.outboundDate);
-    const returnDate = flight.returnDate;
+    const returnDate = new Date(flight.returnDate);
     const departurePort = flight.flyingFrom.airportName;
     const arrivalPort = flight.flyingTo.airportName;
     const cabin = flight.cabin;
@@ -168,14 +168,56 @@ function searchFlightPassenger(req, res) {
         DepartureTime: outboundDate,
 
     }
-
-    Flight.find(outgoingFlight).where(`${seats}`).gt(numPassengers).then((result) => {
-        // console.log(result);
-        res.send(result);
-    }).catch(err => console.log(err));
+    returnFlight={
+        DeparturePort: arrivalPort,
+        ArrivalPort: departurePort,
+        DepartureTime: returnDate,
+    }
+    sessions.outgoingFlight=outgoingFlight;
+    sessions.seats=seats;
+    sessions.numPassengers=numPassengers;
+    sessions.returnFlight=returnFlight;
+    // Flight.find(outgoingFlight).where(`${seats}`).gt(numPassengers).then((result) => {
+    //     // console.log(result);
+    //     sessions.searchResults=result;
+    //     console.log(sessions.searchResults);
+    // }).catch(err => console.log(err));
 
 
 }
+
+const showFlights = (req, res) => {
+    seats=sessions.seats;
+    outgoingFlight=sessions.outgoingFlight;
+    numPassengers=sessions.numPassengers;
+    Flight.find(outgoingFlight).where(`${seats}`).gt(numPassengers).then((result) => {
+         console.log(result);
+        res.send(result);
+    }).catch(err => console.log(err));
+};
+const showReturnFlights = (req, res) => {
+    seats=sessions.seats;
+    returnFlight=sessions.returnFlight;
+    numPassengers=sessions.numPassengers;
+    Flight.find(returnFlight).where(`${seats}`).gt(numPassengers).then((result) => {
+        // console.log(result);
+        res.send(result);
+    }).catch(err => console.log(err));
+};
+const setFlightId = (req, res) => {
+     sessions.flightId = req.params.id;
+     const body = req.body;
+     sessions.outgoingFlightObject =body;
+
+
+}
+const setReturnFlightId = (req, res) => {
+    sessions.ReturnFlightId = req.params.id;
+    const body = req.body;
+    sessions.returnFlightObject =body;
+
+}
+
 
 module.exports =
 {
@@ -184,5 +226,9 @@ module.exports =
     listAllFlights,
     updateFLight,
     deleteFlight,
-    searchFlightPassenger
+    searchFlightPassenger,
+    showFlights,
+    setFlightId,
+    showReturnFlights,
+    setReturnFlightId
 }

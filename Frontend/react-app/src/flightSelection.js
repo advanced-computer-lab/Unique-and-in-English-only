@@ -7,18 +7,24 @@ import { confirm } from "react-confirm-box";
 import { Link } from "react-router-dom";
 import FlightDetails from './FlightDetails';
 import "./listFlights.css";
+import FlightSelectionCard from "./flightSelectionCard.js";
+import { useHistory } from "react-router-dom";
+import ResponsiveAppBar from "./ResponsiveAppBar";
+
 
 //import userRouter from '../../../backEnd/routes/UserRoutes';
 
-function ListFlights() {
+function FlightSelection() {
   const [flight, setFlight] = useState([]);
   useEffect(() => {
-    axios.get('http://localhost:150/flight/listFlights').then(
+    axios.get('http://localhost:150/flight/showFlights/').then(
       (result) => {
-        setFlight(result.data)
+          console.log(result);
+        setFlight(result.data);
 
-
-      })
+      });
+     
+    
 
   }, []);
  const DeleteClickHandler = async (flightObj) => {
@@ -46,17 +52,33 @@ function ListFlights() {
     const id = flightObj._id;
     window.location.href = `http://localhost:3000/updateFlight/${id}`
   }
-  if(flight.length>0){
+  const history = useHistory();
+
+  const onSubmit = async (flightObj) => {
+    const id = flightObj._id;
+    axios.post('http://localhost:150/flight/setFlightID/' + id,flightObj)
+      .then( 
+          history.push("/returnFlightSelection")
+      
+      )
+      .catch(function (error) {
+        console.log(error);
+        
+      });
+      
+  }
+  if(flight.length>=1){
     return (
         <div className="">
+          <ResponsiveAppBar/>
           <div className="content">
-            <h1>Flights </h1>
+            <h1 style={{marginTop:"100px"}} >Choose Outgoing Flight </h1>
         <br></br>
   
-<div className="Grid">
+<div className="table">
         
         {flight.map((f) =>
-          <FlightDetails f={f} deleteHandler={DeleteClickHandler} updateHandler={UpdateClickHandler} />
+          <FlightSelectionCard f={f} submitHandler={onSubmit}  />
         )}
 
       </div>
@@ -66,10 +88,11 @@ function ListFlights() {
   else{
     return(
     <div>
-      <h1>no flights available </h1>
+      <h1>no flights matches your search criteria</h1>
     </div>
     )
   }
+
 }
 
 function removeObjectFromArray(flight, flightObj) {
@@ -95,4 +118,4 @@ function removeObjectFromArray(flight, flightObj) {
 </div>*/
 
 
-export default ListFlights 
+export default FlightSelection; 

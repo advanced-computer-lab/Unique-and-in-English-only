@@ -4,8 +4,8 @@
     /* background-color: yellow; */
     border-radius: 12px;
     box-shadow: 0 1px 5px rgba(0,0,0,25%);
-    position: fixed;
-    
+   
+    margin :40px;
     width: 90%;
     height: fit-content;
     display: flex;
