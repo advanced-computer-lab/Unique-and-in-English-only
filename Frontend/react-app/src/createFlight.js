@@ -75,18 +75,7 @@ function CreateFlight() {
   const onSubmit = async (event) => {
     event.preventDefault();
    
-    axios.post('http://localhost:150/flight/createflight', values)
-      .then( function (response) {
-        console.log(response);
-        //setButtonSuccessPopup(true);
-        handleClick1();
-        
-      })
-      .catch(function (error) {
-        console.log(error);
-        //setButtonFailurePopup(true)
-        handleClick2();
-      });
+   
     
     
     var flag1=true
@@ -144,11 +133,13 @@ function CreateFlight() {
       axios.post('http://localhost:150/flight/createflight', values)
         .then(function (response) {
           console.log(response);
-          setButtonSuccessPopup(true);
+          //setButtonSuccessPopup(true);
+          handleClick1();
         })
         .catch(function (error) {
           console.log(error);
-          setButtonFailurePopup(true)
+          //setButtonFailurePopup(true)
+          handleClick2();
         });
     }
   }
