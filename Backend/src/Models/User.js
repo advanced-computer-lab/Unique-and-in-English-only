@@ -3,11 +3,20 @@ const { stringify } = require('querystring');
 const Schema = mongoose.Schema;
 
 const userSchema = new Schema({
-    Name: {
+    FirstName: {
+        type: String,
+        required: true,
+    },
+     LastName: {
         type: String,
         required: true,
     },
     Email: {
+        type: String,
+        required: true,
+        unique: true,
+    },
+    PassportNumber: {
         type: String,
         required: true,
         unique: true,
@@ -20,6 +29,9 @@ const userSchema = new Schema({
     Password: {
         type: String,
         required: true,
+    },
+    Tickets:{
+        type: Array
     }
 }, { timestamps: true });
 

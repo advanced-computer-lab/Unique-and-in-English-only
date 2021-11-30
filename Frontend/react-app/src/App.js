@@ -9,13 +9,17 @@ import Footer from './Footer';
 import FlightDetails from './FlightDetails';
 import UpdateUser from './updateUser';
 
+import UserHome from "./userHome.js"
+import FlightSelection from"./flightSelection.js"
+import ReturnFlightSelection from "./ReturnFlightSelection"
+import SummaryPage from './summaryPage';
 function App(){
   return(
     <Router>
       <div className="content">
         <Switch>
           <Route exact path="/">
-            <Home/>
+            <UserHome/>
             </Route>
           < Route exact path="/createFlight">
             <Create/>
@@ -29,10 +33,18 @@ function App(){
           < Route exact path="/listFlights">
             <List/>
           </Route>
+          < Route exact path="/flightSelection">
+            <FlightSelection/>
+          </Route>
+          < Route exact path="/returnFlightSelection">
+            <ReturnFlightSelection/>
+          </Route>
+          < Route exact path="/summaryPage">
+            <SummaryPage/>
+          </Route>
           <Route  exact path="/updateUser">
             <UpdateUser/>
             </Route>
-
           <Route path="*">
            <NotFound/>
           </Route>

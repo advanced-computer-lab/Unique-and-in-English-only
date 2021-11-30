@@ -1,6 +1,8 @@
 const Flight = require("../Models/Flight");
 const nodemailer=require('nodemailer');
 
+const sessions = require('express-session');
+const User = require("../models/User");
 
 const addFlight = (req, res) => {
     const flightNumber = req.body.FlightNumber;
@@ -13,6 +15,16 @@ const addFlight = (req, res) => {
     const arrivalTerminal = req.body.ArrivalTerminal;
     const DepartureTerminal = req.body.DepartureTerminal;
 
+    const buisnessSeats = new Array();
+    const economySeats = new Array();
+    for (var index = 0; index < buisnessSeatsNumber; index++) {
+        buisnessSeats.push(false);
+    }
+
+    for (var index = 0; index < economySeatsNumber; index++) {
+        economySeats.push(false);
+    }
+
 
     const flight = new Flight(
         {
@@ -24,7 +36,9 @@ const addFlight = (req, res) => {
             DeparturePort: departurePort,
             ArrivalPort: arrivalPort,
             ArrivalTerminal: arrivalTerminal,
-            DepartureTerminal: DepartureTerminal
+            DepartureTerminal: DepartureTerminal,
+            BuisnessSeats: buisnessSeats,
+            EconomySeats: economySeats
         }
     );
     console.log(flight);
@@ -78,6 +92,14 @@ const getFlight = (req, res) => {
 
 
     Flight.find(body).then((result) => {
+        console.log(result);
+        res.send(result);
+    }).catch(err => console.log(err));
+
+}
+const getFlightById = (req, res) => {
+    const id = req.params.id;
+    Flight.findById(id).then((result) => {
         console.log(result);
         res.send(result);
     }).catch(err => console.log(err));
@@ -143,11 +165,154 @@ function removeEmptyAttributes(reqKeys, body) {
     );
 }
 
+
+function searchFlightPassenger(req, res) {
+    const flight = req.body;
+    console.log(flight);
+
+    const adults = flight.adults;
+    const children = flight.children;
+
+    if (flight.adults < 1) {
+        //Error
+        return;
+    }
+    if (flight.children == '') {
+        children = 0
+
+    }
+    const numPassengers = adults + children;
+    console.log(numPassengers + 2);
+    const outboundDate = new Date(flight.outboundDate);
+    const returnDate = new Date(flight.returnDate);
+    const departurePort = flight.flyingFrom.airportName;
+    const arrivalPort = flight.flyingTo.airportName;
+    const cabin = flight.cabin;
+    const seats = "EconomySeatsNumber";
+
+    if (cabin == "Buisness") {
+        seats = "BuisnessSeatsNumber";
+    }
+
+    console.log(outboundDate);
+    outgoingFlight = {
+        DeparturePort: departurePort,
+        ArrivalPort: arrivalPort,
+        DepartureTime: outboundDate,
+
+    }
+    returnFlight={
+        DeparturePort: arrivalPort,
+        ArrivalPort: departurePort,
+        DepartureTime: returnDate,
+    }
+    sessions.outgoingFlight=outgoingFlight;
+    sessions.seats=seats;
+    sessions.numPassengers=numPassengers;
+    sessions.returnFlight=returnFlight;
+    // Flight.find(outgoingFlight).where(`${seats}`).gt(numPassengers).then((result) => {
+    //     // console.log(result);
+    //     sessions.searchResults=result;
+    //     console.log(sessions.searchResults);
+    // }).catch(err => console.log(err));
+
+
+}
+
+const showFlights = (req, res) => {
+    seats=sessions.seats;
+    outgoingFlight=sessions.outgoingFlight;
+    numPassengers=sessions.numPassengers;
+    Flight.find(outgoingFlight).where(`${seats}`).gt(numPassengers).then((result) => {
+         console.log(result);
+        res.send(result);
+    }).catch(err => console.log(err));
+};
+const showReturnFlights = (req, res) => {
+    seats=sessions.seats;
+    returnFlight=sessions.returnFlight;
+    numPassengers=sessions.numPassengers;
+    Flight.find(returnFlight).where(`${seats}`).gt(numPassengers).then((result) => {
+        // console.log(result);
+        res.send(result);
+    }).catch(err => console.log(err));
+};
+const setFlightId = (req, res) => {
+     sessions.flightId = req.params.id;
+     const body = req.body;
+     sessions.outgoingFlightObject =body;
+
+
+}
+const setReturnFlightId = (req, res) => {
+    sessions.ReturnFlightId = req.params.id;
+    const body = req.body;
+    sessions.returnFlightObject =body;
+
+}
+const getOutgoingFlight=(req,res)=>{
+    res.send(sessions.outgoingFlightObject)
+}
+const getReturnFlight=(req,res)=>{
+    res.send(sessions.returnFlightObject)
+}
+
+const listReservations = (req, res) => {
+    const body = req.body;
+    User.findById(sessions.userId).then((result) => {
+        console.log(result);
+        sessions.tickets=result.Tickets;
+        res.send(result.Tickets);
+    })
+};
+const deleteTicket = (req, res) => {
+    const deletedTicket = req.body
+    if (!deletedTicket) {
+        return res.status(400).send({ message: "data to update can not be empty " });
+    }
+   const newTickets=removeObjectFromArray(sessions.tickets,deleteTicket);
+   sessions.tickets=newTickets;
+    const id = sessions.userId;
+    const bunchOfTickets ={Tickets:newTickets};
+    Flight.findByIdAndUpdate(id, bunchOfTickets, { useFindAndModify: false })
+        .then(data => { 
+            if (!data) {
+                res.status(404).send({ message: " update can not be empty " })
+            } else {
+                res.send(data);
+            }
+        }
+
+        ).catch(err => {
+            res.status(500).send({ message: " update can not be done " });
+
+        })
+
+
+        function removeObjectFromArray(flight, flightObj) {
+
+            return flight.filter(function (ele) {
+              return ele != flightObj;
+            });
+        }
+
+}
+
 module.exports =
 {
     addFlight,
     getFlight,
     listAllFlights,
     updateFLight,
-    deleteFlight
+    deleteFlight,
+    searchFlightPassenger,
+    showFlights,
+    setFlightId,
+    showReturnFlights,
+    setReturnFlightId,
+    getFlightById,
+    getOutgoingFlight,
+    getReturnFlight,
+    listReservations,
+    deleteTicket
 }

@@ -1,0 +1,7 @@
+.mainContainer{
+    display: flex;
+    flex-direction: column;
+   
+    justify-content: space-around;
+    height: 1000px;
+}

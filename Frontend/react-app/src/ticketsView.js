@@ -7,13 +7,14 @@ import { confirm } from "react-confirm-box";
 import { Link } from "react-router-dom";
 import FlightDetails from './FlightDetails';
 import "./listFlights.css";
+import TicketDetails from "./ticketDetails.js";
 
 //import userRouter from '../../../backEnd/routes/UserRoutes';
 
-function ListFlights() {
+function TicketsView() {
   const [flight, setFlight] = useState([]);
   useEffect(() => {
-    axios.get('http://localhost:150/flight/listFlights').then(
+    axios.get('http://localhost:150/flight/listReservations').then(
       (result) => {
         setFlight(result.data)
 
@@ -25,7 +26,7 @@ function ListFlights() {
     const id = flightObj._id;
     const result = await confirm("Are you sure to delete this flight?");
     if (result) {
-      axios.delete('http://localhost:150/flight/deleteFlight/' + id)
+      axios.post('http://localhost:150/flight/deleteFlight/' + id,flightObj)
         .then(function (response) {
           console.log(response);
           const newFlights = removeObjectFromArray(flight, flightObj);
@@ -50,13 +51,13 @@ function ListFlights() {
     return (
         <div className="">
           <div className="content">
-            <h1>Flights </h1>
+            <h1>My Tickets </h1>
         <br></br>
   
-<div className="Grid">
+<div className="table">
         
         {flight.map((f) =>
-          <FlightDetails f={f} deleteHandler={DeleteClickHandler} updateHandler={UpdateClickHandler} />
+          <TicketDetails f={f} deleteHandler={DeleteClickHandler}  />
         )}
 
       </div>
@@ -80,19 +81,7 @@ function removeObjectFromArray(flight, flightObj) {
 
 
 }
-/*<div className="row" key={f._id}>
-<p className="left-txt"> <b>Flight Number:{f.FlightNumber} </b> </p>
-<p className="left-txt"> <b>Departure Time:{f.DepartureTime} </b></p>
-<p className="left-txt"> <b>Arrival Time:{f.ArrivalTime} </b></p>
-<p className="left-txt"> <b>Economy Seats Number:{f.EconomySeatsNumber} </b></p>
-<p className="left-txt"> <b>Buisness Seats Number:{f.BuisnessSeatsNumber} </b></p>
-<p className="left-txt"> <b>Departure Port:{f.DeparturePort} </b></p>
-<p className="left-txt"> <b>Arrival Port:{f.ArrivalPort} </b></p>
-<p className="left-txt"> <b>Departure Port:{f.DepartureTerminal} </b></p>
-<p className="left-txt"> <b>Arrival Port:{f.ArrivalTerminal} </b></p>
-<button className="left-txt" onClick={(e) => { DeleteClickHandler(f) }}>  <b>Delete</b></button>
-<button className="left-txt" onClick={(e) => { UpdateClickHandler(f) }}>  <b>update</b></button>
-</div>*/
 
 
-export default ListFlights 
+
+export default TicketsView; 
