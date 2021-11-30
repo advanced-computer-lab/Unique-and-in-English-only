@@ -13,6 +13,7 @@ flightRouter.post("/setFlightID/:id", flightController.setFlightId);
 flightRouter.get("/showReturnFlights", flightController.showReturnFlights);
 flightRouter.post("/setReturnFlightID/:id", flightController.setReturnFlightId);
 flightRouter.get("/getFlightById/:id",flightController.getFlightById)
-
+flightRouter.get("/getOutgoingFlight",flightController.getOutgoingFlight)
+flightRouter.get("/getReturnFlight",flightController.getReturnFlight)
 
 module.exports = flightRouter;

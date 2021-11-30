@@ -10,6 +10,7 @@ import FlightDetails from './FlightDetails';
 import UserHome from "./userHome.js"
 import FlightSelection from"./flightSelection.js"
 import ReturnFlightSelection from "./ReturnFlightSelection"
+import SummaryPage from './summaryPage';
 function App(){
   return(
     <Router>
@@ -35,6 +36,9 @@ function App(){
           </Route>
           < Route exact path="/returnFlightSelection">
             <ReturnFlightSelection/>
+          </Route>
+          < Route exact path="/summaryPage">
+            <SummaryPage/>
           </Route>
           <Route path="*">
            <NotFound/>

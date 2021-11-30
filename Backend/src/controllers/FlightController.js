@@ -224,6 +224,13 @@ const setReturnFlightId = (req, res) => {
     sessions.returnFlightObject =body;
 
 }
+const getOutgoingFlight=(req,res)=>{
+    res.send(sessions.outgoingFlightObject)
+}
+const getReturnFlight=(req,res)=>{
+    res.send(sessions.returnFlightObject)
+}
+
 
 
 module.exports =
@@ -238,5 +245,7 @@ module.exports =
     setFlightId,
     showReturnFlights,
     setReturnFlightId,
-    getFlightById
+    getFlightById,
+    getOutgoingFlight,
+    getReturnFlight
 }
