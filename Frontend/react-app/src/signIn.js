@@ -33,7 +33,7 @@ const useStyles=makeStyles({
      display:'block',
      
    }
-})////
+})
 
 export default function SignIn () {
     const classes=useStyles()
@@ -112,7 +112,7 @@ export default function SignIn () {
           color="primary"
           />
         }
-        label="Remember Me."
+        label="Remember Me"
         />
          <Button
          type="submit"
@@ -132,16 +132,6 @@ export default function SignIn () {
  
          </form>
           </Paper>
-
-          
-
-         
-
-
-
-
-
-
         </Grid>
  
        
