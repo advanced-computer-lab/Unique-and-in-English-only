@@ -9,8 +9,9 @@ import { useEffect } from "react";
 
 function SummaryPage(props) {
     const history = useHistory();
-    const [flagOutGoing, setFlagOutGoing] = useState(false)
-    const [flagReturn, setFlagReturn] = useState(false)
+    const [flagOutGoing, setFlagOutGoing] = useState(false);
+    const [cabin, setCabin] = useState("");
+    const [flagReturn, setFlagReturn] = useState(false);
     const [outgoingFlight, setOutgoingFlight] = useState({
         FlightNumber: "",
         DepartureTime: '',
@@ -57,6 +58,14 @@ function SummaryPage(props) {
             .catch(function (error) {
 
             });
+        axios.get('http://localhost:150/flight/getCabin')
+            .then(function (response) {
+                setCabin(response.data);
+
+            })
+            .catch(function (error) {
+
+            });
         axios.get('http://localhost:150/flight/getSelectedOutgoingSeats')
             .then(function (response) {
                 setOutgoingSeats(response.data)
@@ -83,7 +92,7 @@ function SummaryPage(props) {
 
     const onSubmit = (e) => {
         //   history.push("")
-        const ticketObj = { outgoingFlight, returnFlight, outgoingSeats, returnSeats, confirmationNum: "ungiuhaf68n" }
+        const ticketObj = { outgoingFlight, returnFlight, outgoingSeats, returnSeats, confirmationNum: "ungiuhaf68n", cabin }
         axios.post('http://localhost:150/flight/confirmTicket', ticketObj)
             .then(function (response) {
                 setOutgoingSeats(response.data)

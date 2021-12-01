@@ -264,6 +264,10 @@ const setReturnFlightId = (req, res) => {
 const getOutgoingFlight = (req, res) => {
     res.send(sessions.outgoingFlightSelected)
 }
+
+const getCabin = (req, res) => {
+    res.send(sessions.cabin)
+}
 const getReturnFlight = (req, res) => {
     res.send(sessions.returnFlightSelected)
 }
@@ -459,5 +463,6 @@ module.exports =
     listReservations,
     deleteTicket,
     updateUser,
-    getUserById
+    getUserById,
+    getCabin
 }
