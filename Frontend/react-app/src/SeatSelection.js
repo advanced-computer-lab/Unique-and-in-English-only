@@ -170,8 +170,10 @@ function SeatSelection(props) {
 
             if (flightType == "Outgoing")
                 history.push("ReturnSeatSelection");
-            else if (flightType == "Return")
-                history.push("FlightSummary");
+            else if (flightType == "Return"){
+                history.push("summaryPage");
+                
+            }
         }
 
         )

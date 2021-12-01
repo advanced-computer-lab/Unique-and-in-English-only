@@ -13,6 +13,7 @@ import ReturnFlightSelection from "./ReturnFlightSelection";
 import ResponsiveAppBar from "./ResponsiveAppBar";
 import OutgoingSeatSelection from "./OutgoinSeatSelection";
 import ReturnSeatSelection from "./ReturnSeatSelection";
+import SummaryPage from './summaryPage';
 function App() {
   return (
 
@@ -28,6 +29,9 @@ function App() {
         </Route>
         < Route exact path="/createFlight">
           <Create />
+        </Route>
+        < Route exact path="/summaryPage">
+          <SummaryPage />
         </Route>
         < Route exact path="/searchFlight">
           <Search />

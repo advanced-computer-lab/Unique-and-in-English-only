@@ -1,5 +1,6 @@
 const Flight = require("../Models/Flight");
 const sessions = require('express-session');
+const { mongo } = require("mongoose");
 
 const addFlight = (req, res) => {
     const flightNumber = req.body.FlightNumber;
@@ -21,7 +22,7 @@ const addFlight = (req, res) => {
 
     for (var index = 0; index < economySeatsNumber; index++) {
         const seat = { isSelected: false, number: index + 1, id: index + 1 }
-        economySeats.push(false);
+        economySeats.push(seat);
     }
 
 
@@ -251,6 +252,57 @@ const setSelectedReturnSeats = (req, res) => {
     sessions.selectedReturnSeats = req.body;
     res.send();
 }
+const getSelectedOutgoingSeats = (req, res) => {
+    
+    res.send(sessions.selectedOutgoingSeats);
+}
+
+const getSelectedReturnSeats = (req, res) => {
+    
+    res.send(sessions.selectedReturnSeats);
+}
+const confirmTicket = (req, res) => {
+    sessions.ticket = req.body;
+    const ticket=req.body;
+    const outgoingFlight =ticket.outgoingFlight
+    const returnFlight =ticket.returnFlight
+
+    reserveSeatsinFlight(outgoingFlight,ticket.outgoingSeats,sessions.cabin)
+    reserveSeatsinFlight(returnFlight,ticket.returnSeats,sessions.cabin)
+
+    
+    Flight.findByIdAndUpdate(outgoingFlight._id, outgoingFlight)
+    .then((result) => {
+        res.send(result);
+        console.log("updated")
+    }).catch(err => console.log(err));
+    
+    Flight.findByIdAndUpdate(returnFlight._id,returnFlight)
+    .then((result) => {
+        res.send(result);
+        console.log("updated")
+    }).catch(err => console.log(err));
+}
+function reserveSeatsinFlight(flight,seatsSelected,cabin){
+    var seats = [];
+    if(cabin=="Buisness")
+    {
+        seats=flight.BuisnessSeats;
+    }
+    else{
+        seats=flight.EconomySeats;
+    }
+
+    for (var i = 0; i < seats.length; i++) {
+        for (var j = 0; j < seatsSelected.length; i++) {
+            if(seats[i].number==seatsSelected[j].number){
+                seats[i].isReserved = true;
+            }
+        };
+    };
+    
+
+}
 
 
 
@@ -271,5 +323,8 @@ module.exports =
     getReturnFlight,
     getReservationDetails,
     setSelectedOutgoingSeats,
-    setSelectedReturnSeats
+    setSelectedReturnSeats,
+    getSelectedOutgoingSeats,
+    getSelectedReturnSeats,
+    confirmTicket
 }

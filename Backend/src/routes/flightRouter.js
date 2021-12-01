@@ -18,6 +18,9 @@ flightRouter.get("/getReturnFlight", flightController.getReturnFlight);
 flightRouter.get("/getReservationDetails", flightController.getReservationDetails);
 flightRouter.post("/setSelectedOutgoingSeats", flightController.setSelectedOutgoingSeats);
 flightRouter.post("/setSelectedReturnSeats", flightController.setSelectedReturnSeats);
+flightRouter.get("/getSelectedOutgoingSeats", flightController.getSelectedOutgoingSeats);
+flightRouter.get("/getSelectedReturnSeats", flightController.getSelectedReturnSeats);
+flightRouter.get("/confirmTicket", flightController.confirmTicket);
 
 
 module.exports = flightRouter;
