@@ -8,16 +8,45 @@ import Button from '@mui/material/Button';
 
 
 function UpdateUser(props) {
-    let { id } = useParams();
+    
     const [buttonSuccessPopup, setButtonSuccessPopup] = useState(false);
     const [buttonFailurePopup, setButtonFailurePopup] = useState(false);
+    const [flag,setFlag] =useState(true)
+    var startValues={
+    FirstName:'',
+    LastName:'',
+    PassportNumber:'',
+    Email:''
+    }
+
+    if(flag){
+      axios.get('http://localhost:150/flight/getUserById')
+      .then(function (response) {
+      
+        startValues=response.data
+        
+        setValues({
+        FirstName:startValues.FirstName,
+        LastName:startValues.LastName,
+        PassportNumber:startValues.PassportNumber,
+        Email:startValues.Email
+
+        })
+          setFlag(false)
+      })
+      .catch(function (error) {
+        console.log(error);
+        setFlag(false)
+      });
+}
   
     const [values, setValues] = useState({
-     FirstName:"",
-     LastName:"",
-     PassportNumber:"",
-     Email:""
+     FirstName:startValues.FirstName,
+     LastName:startValues.LastName,
+     PassportNumber:startValues.LastName,
+     Email:startValues.Email
     })
+
   
     const set = name => {
       return ({ target: { value } }) => {
