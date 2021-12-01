@@ -20,7 +20,7 @@ flightRouter.post("/setSelectedOutgoingSeats", flightController.setSelectedOutgo
 flightRouter.post("/setSelectedReturnSeats", flightController.setSelectedReturnSeats);
 flightRouter.get("/getSelectedOutgoingSeats", flightController.getSelectedOutgoingSeats);
 flightRouter.get("/getSelectedReturnSeats", flightController.getSelectedReturnSeats);
-flightRouter.get("/confirmTicket", flightController.confirmTicket);
+flightRouter.post("/confirmTicket", flightController.confirmTicket);
 
 
 module.exports = flightRouter;

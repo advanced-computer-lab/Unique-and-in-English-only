@@ -1,6 +1,7 @@
 const Flight = require("../Models/Flight");
 const sessions = require('express-session');
 const { mongo } = require("mongoose");
+const User = require("../Models/User");
 
 const addFlight = (req, res) => {
     const flightNumber = req.body.FlightNumber;
@@ -253,54 +254,67 @@ const setSelectedReturnSeats = (req, res) => {
     res.send();
 }
 const getSelectedOutgoingSeats = (req, res) => {
-    
+
     res.send(sessions.selectedOutgoingSeats);
 }
 
 const getSelectedReturnSeats = (req, res) => {
-    
+
     res.send(sessions.selectedReturnSeats);
 }
 const confirmTicket = (req, res) => {
     sessions.ticket = req.body;
-    const ticket=req.body;
-    const outgoingFlight =ticket.outgoingFlight
-    const returnFlight =ticket.returnFlight
+    const ticket = req.body;
+    const outgoingFlight = ticket.outgoingFlight;
+    const returnFlight = ticket.returnFlight
+    console.log(ticket);
+    reserveSeatsinFlight(outgoingFlight, ticket.outgoingSeats, sessions.cabin)
+    reserveSeatsinFlight(returnFlight, ticket.returnSeats, sessions.cabin)
 
-    reserveSeatsinFlight(outgoingFlight,ticket.outgoingSeats,sessions.cabin)
-    reserveSeatsinFlight(returnFlight,ticket.returnSeats,sessions.cabin)
 
-    
     Flight.findByIdAndUpdate(outgoingFlight._id, outgoingFlight)
-    .then((result) => {
-        res.send(result);
-        console.log("updated")
-    }).catch(err => console.log(err));
-    
-    Flight.findByIdAndUpdate(returnFlight._id,returnFlight)
-    .then((result) => {
-        res.send(result);
-        console.log("updated")
-    }).catch(err => console.log(err));
+        .then((result) => {
+            console.log("updated")
+        }).catch(err => console.log(err));
+
+    Flight.findByIdAndUpdate(returnFlight._id, returnFlight)
+        .then((result) => {
+            console.log("updated")
+        }).catch(err => console.log(err));
+
+
+    const user = User.findById("61a7b98407c1ba4ac335808f").then((result) => {
+        result.tickets.push(ticket);
+        result.save().then((res) => {
+            res.send("");
+        });
+    });
+
+
+
+
 }
-function reserveSeatsinFlight(flight,seatsSelected,cabin){
+function reserveSeatsinFlight(flight, seatsSelected, cabin) {
     var seats = [];
-    if(cabin=="Buisness")
-    {
-        seats=flight.BuisnessSeats;
+    if (cabin == "Buisness") {
+        seats = flight.BuisnessSeats;
     }
-    else{
-        seats=flight.EconomySeats;
+    else {
+        seats = flight.EconomySeats;
     }
+
+    console.log("seats");
+    console.log(seatsSelected);
+
 
     for (var i = 0; i < seats.length; i++) {
-        for (var j = 0; j < seatsSelected.length; i++) {
-            if(seats[i].number==seatsSelected[j].number){
+        for (var j = 0; j < seatsSelected.length; j++) {
+            if (seats[i].number == seatsSelected[j].number) {
                 seats[i].isReserved = true;
             }
         };
     };
-    
+
 
 }
 
