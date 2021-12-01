@@ -14,6 +14,7 @@ import ResponsiveAppBar from "./ResponsiveAppBar";
 import OutgoingSeatSelection from "./OutgoinSeatSelection";
 import ReturnSeatSelection from "./ReturnSeatSelection";
 import SummaryPage from './summaryPage';
+import SignIn from './signIn';
 function App() {
   return (
 
@@ -54,6 +55,10 @@ function App() {
         < Route exact path="/returnFlightSelection">
           <ReturnFlightSelection />
         </Route>
+        < Route exact path="/SignIn">
+          <SignIn />
+        </Route>
+
         <Route path="*">
           <NotFound />
         </Route>
