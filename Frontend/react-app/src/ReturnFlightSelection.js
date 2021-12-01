@@ -27,6 +27,7 @@ function FlightSelection() {
 
 
   }, []);
+<<<<<<< HEAD
   const DeleteClickHandler = async (flightObj) => {
     const id = flightObj._id;
     const result = await confirm("Are you sure to delete this flight?");
@@ -52,6 +53,9 @@ function FlightSelection() {
     const id = flightObj._id;
     window.location.href = `http://localhost:3000/updateFlight/${id}`
   }
+=======
+ 
+>>>>>>> shaarawy
   const history = useHistory();
   const onSubmit = async (flightObj) => {
     const id = flightObj._id;

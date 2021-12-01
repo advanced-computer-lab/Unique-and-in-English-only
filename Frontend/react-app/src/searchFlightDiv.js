@@ -89,7 +89,7 @@ function SearchFlightDiv() {
                     defaultValue={{ airportName: "LAX", city: "Los Angeles" }}
                     onChange={(_, newVal) => {
                         setFlyingFrom(newVal);
-                        console.log(newVal);
+                       
                     }}
                     // inputValue={inputFlyingFrom}
                     // onInputChange={(_, newInputValue) => {
@@ -111,7 +111,7 @@ function SearchFlightDiv() {
                     defaultValue={{ airportName: "CAI", city: "Cairo" }}
                     onChange={(_, newVal) => {
                         setFlyingTo(newVal);
-                        console.log(newVal);
+                        
                     }}
                     isOptionEqualToValue={(option, value) => {
                         if (option.airportName === value.airportName)

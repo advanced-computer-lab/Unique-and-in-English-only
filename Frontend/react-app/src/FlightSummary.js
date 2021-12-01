@@ -9,7 +9,7 @@ import Button from '@mui/material/Button';
 function FlightSummary(props) {
   
   return (
-    <div className="main">
+    <div className="mainContainer">
       
       <div className="details-container">
             <div className="details-row">

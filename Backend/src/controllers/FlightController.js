@@ -1,4 +1,6 @@
 const Flight = require("../Models/Flight");
+const nodemailer = require('nodemailer');
+
 const sessions = require('express-session');
 const { mongo } = require("mongoose");
 const User = require("../Models/User");
@@ -50,7 +52,30 @@ const addFlight = (req, res) => {
             console.log(err)
             res.status(500).send("error")
         });
-
+    const output = `<p> your flight number is : ${flightNumber}`;
+    const transporter = nodemailer.createTransport(
+        {
+            service: "hotmail",
+            auth: {
+                user: "aclacl_14787@outlook.com",
+                pass: "nodemailer@14787"
+            }
+        }
+    );
+    const options = {
+        from: "aclacl_14787@outlook.com",
+        to: "mohamedelshaarawy87@gmail.com",
+        subject: "Node mailer test",
+        text: "woooow",
+        html: output
+    }
+    transporter.sendMail(options, function (err, info) {
+        if (err) {
+            console.log(err);
+            return;
+        }
+        console.log(info.response);
+    })
 
 }
 
@@ -74,6 +99,15 @@ const getFlight = (req, res) => {
 const getFlightById = (req, res) => {
     const id = req.params.id;
     Flight.findById(id).then((result) => {
+        res.send(result);
+    }).catch(err => console.log(err));
+
+}
+
+const getUserById = (req, res) => {
+
+    Flight.findById(sessions.userId).then((result) => {
+        console.log(result);
         res.send(result);
     }).catch(err => console.log(err));
 
@@ -140,15 +174,17 @@ function removeEmptyAttributes(reqKeys, body) {
 
 function searchFlightPassenger(req, res) {
     const flight = req.body;
+    if (!flight)
+        return;
 
-    const adults = flight.adults;
-    var children = flight.children;
+    const adults = parseInt(flight.adults);
+    var children = parseInt(flight.children);
 
-    if (flight.adults < 1) {
+    if (adults < 1) {
         //Error
         return;
     }
-    if (flight.children == '') {
+    if (!children) {
         children = 0
 
     }
@@ -193,9 +229,13 @@ function searchFlightPassenger(req, res) {
 
 const showFlights = (req, res) => {
     seats = sessions.seats;
-    outgoingFlightSearch = sessions.outgoingFlightSearch;
+    outgoingFlight = sessions.outgoingFlight;
     numPassengers = sessions.numPassengers;
-    Flight.find(outgoingFlightSearch).where(`${seats}`).gt(numPassengers).then((result) => {
+    console.log(outgoingFlight);
+    if (!outgoingFlight)
+        return;
+    Flight.find(outgoingFlight).where(`${seats}`).gt(numPassengers).then((result) => {
+        console.log(result);
         res.send(result);
     }).catch(err => console.log(err));
 };
@@ -318,7 +358,70 @@ function reserveSeatsinFlight(flight, seatsSelected, cabin) {
 
 }
 
+const listReservations = (req, res) => {
+    const body = req.body;
+    User.findById(sessions.userId).then((result) => {
+        console.log(result);
+        sessions.tickets = result.Tickets;
+        res.send(result.Tickets);
+    })
+};
+const deleteTicket = (req, res) => {
+    const deletedTicket = req.body
+    if (!deletedTicket) {
+        return res.status(400).send({ message: "data to update can not be empty " });
+    }
+    const newTickets = removeObjectFromArray(sessions.tickets, deleteTicket);
+    sessions.tickets = newTickets;
+    const id = sessions.userId;
+    const bunchOfTickets = { Tickets: newTickets };
+    Flight.findByIdAndUpdate(id, bunchOfTickets, { useFindAndModify: false })
+        .then(data => {
+            if (!data) {
+                res.status(404).send({ message: " update can not be empty " })
+            } else {
+                res.send(data);
+            }
+        }
 
+        ).catch(err => {
+            res.status(500).send({ message: " update can not be done " });
+
+        })
+
+
+    function removeObjectFromArray(flight, flightObj) {
+
+        return flight.filter(function (ele) {
+            return ele != flightObj;
+        });
+    }
+
+}
+
+const updateUser = (req, res) => {
+    const body = req.body
+    if (!body) {
+        return res.status(400).send({ message: "data to update can not be empty " });
+    }
+    const reqKeys = Object.keys(body);
+    removeEmptyAttributes(reqKeys, body)
+    const id = req.params.id;
+    Flight.findByIdAndUpdate(sessions.userId, body, { useFindAndModify: false })
+        .then(data => {
+            if (!data) {
+                res.status(404).send({ message: " update can not be empty " })
+            } else {
+                res.send(data);
+            }
+        }
+        ).catch(err => {
+            res.status(500).send({ message: " update can not be done " });
+
+        })
+
+
+}
 
 module.exports =
 {
@@ -340,5 +443,9 @@ module.exports =
     setSelectedReturnSeats,
     getSelectedOutgoingSeats,
     getSelectedReturnSeats,
-    confirmTicket
+    confirmTicket,
+    listReservations,
+    deleteTicket,
+    updateUser,
+    getUserById
 }

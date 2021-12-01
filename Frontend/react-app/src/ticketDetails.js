@@ -5,7 +5,7 @@ import Button from '@mui/material/Button';
 
 
 
-function FlightDetails(props) {
+function TicketDetails(props) {
   
 const deleteHelper= async(flightObj) =>{
   props.deleteHandler(flightObj)
@@ -37,4 +37,4 @@ const deleteHelper= async(flightObj) =>{
   );
 }
 
-export default FlightDetails;
+export default TicketDetails;
