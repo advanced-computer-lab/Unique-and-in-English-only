@@ -5,11 +5,15 @@ import Home from './homePage';
 import List from './listFlights';
 import Update from './updateFlight';
 import NotFound from './NotFound';
+import SignIn from './signIn';
 function App(){
   return(
     <Router>
       <div className="content">
         <Switch>
+        <Route exact path="/signIn">
+            <SignIn/>
+            </Route>
           <Route exact path="/">
             <Home/>
             </Route>
