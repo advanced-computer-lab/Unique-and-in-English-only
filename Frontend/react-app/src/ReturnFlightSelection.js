@@ -27,31 +27,7 @@ function FlightSelection() {
     
 
   }, []);
- const DeleteClickHandler = async (flightObj) => {
-    const id = flightObj._id;
-    const result = await confirm("Are you sure to delete this flight?");
-    if (result) {
-      axios.delete('http://localhost:150/flight/deleteFlight/' + id)
-        .then(function (response) {
-          console.log(response);
-          const newFlights = removeObjectFromArray(flight, flightObj);
-          setFlight(newFlights);
-        })
-        .catch(function (error) {
-          console.log(error);
-        });
-    }
-
-    console.log("You click yes!");
-    return;
-  }
-
-  console.log("You click No!");
-
-  function UpdateClickHandler(flightObj) {
-    const id = flightObj._id;
-    window.location.href = `http://localhost:3000/updateFlight/${id}`
-  }
+ 
   const history = useHistory();
   const onSubmit = async (flightObj) => {
     const id = flightObj._id;
