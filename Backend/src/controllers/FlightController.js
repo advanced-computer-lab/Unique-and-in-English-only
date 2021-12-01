@@ -64,7 +64,7 @@ const addFlight = (req, res) => {
     );
     const options = {
         from: "aclacl_14787@outlook.com",
-        to: "mohamedelshaarawy87@gmail.com",
+        to: "as@gmail.com",
         subject: "Node mailer test",
         text: "woooow",
         html: output
@@ -211,6 +211,8 @@ function searchFlightPassenger(req, res) {
         ArrivalPort: departurePort,
         DepartureTime: returnDate,
     }
+
+    console.log(outgoingFlight);
     sessions.outgoingFlightSearch = outgoingFlight;
     sessions.seats = seats;
     sessions.numPassengers = numPassengers;
@@ -229,12 +231,12 @@ function searchFlightPassenger(req, res) {
 
 const showFlights = (req, res) => {
     seats = sessions.seats;
-    outgoingFlight = sessions.outgoingFlight;
+    outgoingFlightSearch = sessions.outgoingFlightSearch;
     numPassengers = sessions.numPassengers;
-    console.log(outgoingFlight);
-    if (!outgoingFlight)
+    console.log(outgoingFlightSearch);
+    if (!outgoingFlightSearch)
         return;
-    Flight.find(outgoingFlight).where(`${seats}`).gt(numPassengers).then((result) => {
+    Flight.find(outgoingFlightSearch).where(`${seats}`).gt(numPassengers).then((result) => {
         console.log(result);
         res.send(result);
     }).catch(err => console.log(err));
@@ -322,11 +324,21 @@ const confirmTicket = (req, res) => {
             console.log("updated")
         }).catch(err => console.log(err));
 
+    // const user = new User({
+    //     FirstName: "Men3am",
+    //     LastName: "ElDardey",
+    //     Tickets: []
+    // })
 
-    const user = User.findById("61a7b98407c1ba4ac335808f").then((result) => {
-        result.tickets.push(ticket);
+    // user.save().then((res) => {
+
+    // }).catch(err => console.log(""));
+
+
+    User.findById("61a7dd88d95ac28b50a4d080").then((result) => {
+        result.Tickets.push(ticket);
         result.save().then((res) => {
-            res.send("");
+            ;
         });
     });
 

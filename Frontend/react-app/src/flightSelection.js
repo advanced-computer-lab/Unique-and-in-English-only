@@ -25,15 +25,9 @@ function FlightSelection() {
 
       });
 
-<<<<<<< HEAD
 
 
   }, []);
-=======
-  }, []);
-
-  const history = useHistory();
->>>>>>> shaarawy
 
   const onSubmit = async (flightObj) => {
     const id = flightObj._id;

@@ -5,6 +5,7 @@ import FlightSummary from './FlightSummary.js';
 import ReturnSeatSelection from './ReturnSeatSelection';
 import { useHistory } from "react-router-dom";
 import Button from '@mui/material/Button';
+import { useEffect } from "react";
 
 function SummaryPage(props) {
     const history = useHistory();
@@ -39,43 +40,46 @@ function SummaryPage(props) {
     const [outgoingSeats, setOutgoingSeats] = useState([]);
     const [returnSeats, setReturnSeats] = useState([]);
 
+    useEffect(() => {
+        axios.get('http://localhost:150/flight/getOutgoingFlight')
+            .then(function (response) {
+                setOutgoingFlight(response.data)
 
-    axios.get('http://localhost:150/flight/getOutgoingFlight')
-        .then(function (response) {
-            setOutgoingFlight(response.data)
-        })
-        .catch(function (error) {
+            })
+            .catch(function (error) {
 
-        });
-    axios.get('http://localhost:150/flight/getReturnFlight')
-        .then(function (response) {
-            setReturnFlight(response.data)
+            });
+        axios.get('http://localhost:150/flight/getReturnFlight')
+            .then(function (response) {
+                setReturnFlight(response.data)
 
-        })
-        .catch(function (error) {
+            })
+            .catch(function (error) {
 
-        });
-    axios.get('http://localhost:150/flight/getSelectedOutgoingSeats')
-        .then(function (response) {
-            setOutgoingSeats(response.data)
-            console.log(response)
-            if (response.data != '')
-                setFlagOutGoing(true)
-        })
-        .catch(function (error) {
-            console.log(error)
-        });
-    axios.get('http://localhost:150/flight/getSelectedReturnSeats')
-        .then(function (response) {
+            });
+        axios.get('http://localhost:150/flight/getSelectedOutgoingSeats')
+            .then(function (response) {
+                setOutgoingSeats(response.data)
+                console.log(response)
+                if (response.data != '')
+                    setFlagOutGoing(true)
+            })
+            .catch(function (error) {
+                console.log(error)
+            });
+        axios.get('http://localhost:150/flight/getSelectedReturnSeats')
+            .then(function (response) {
 
-            setReturnSeats(response.data)
-            console.log(response)
-            if (response.data != '')
-                setFlagReturn(true)
-        })
-        .catch(function (error) {
-            console.log(error)
-        });
+                setReturnSeats(response.data)
+                console.log(response)
+                if (response.data != '')
+                    setFlagReturn(true)
+            })
+            .catch(function (error) {
+                console.log(error)
+            });
+    }, [])
+
 
     const onSubmit = (e) => {
         //   history.push("")
