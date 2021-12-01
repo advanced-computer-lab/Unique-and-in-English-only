@@ -106,6 +106,15 @@ const getFlightById = (req, res) => {
 
 }
 
+const getUserById = (req, res) => {
+    
+    Flight.findById(sessions.userId).then((result) => {
+        console.log(result);
+        res.send(result);
+    }).catch(err => console.log(err));
+
+}
+
 const listAllFlights = (req, res) => {
     const body = req.body;
     Flight.find().then((result) => {
@@ -298,6 +307,30 @@ const deleteTicket = (req, res) => {
 
 }
 
+const updateUser = (req, res) => {
+    const body = req.body
+    if (!body) {
+        return res.status(400).send({ message: "data to update can not be empty " });
+    }
+    const reqKeys = Object.keys(body);
+    removeEmptyAttributes(reqKeys, body)
+    const id = req.params.id;
+    Flight.findByIdAndUpdate(sessions.userId, body, { useFindAndModify: false })
+        .then(data => { 
+            if (!data) {
+                res.status(404).send({ message: " update can not be empty " })
+            } else {
+                res.send(data);
+            }
+        }
+        ).catch(err => {
+            res.status(500).send({ message: " update can not be done " });
+
+        })
+
+
+}
+
 module.exports =
 {
     addFlight,
@@ -314,5 +347,7 @@ module.exports =
     getOutgoingFlight,
     getReturnFlight,
     listReservations,
-    deleteTicket
+    deleteTicket,
+    updateUser,
+    getUserById
 }
