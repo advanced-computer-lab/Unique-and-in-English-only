@@ -11,6 +11,8 @@ import UserHome from "./userHome.js";
 import FlightSelection from "./flightSelection.js";
 import ReturnFlightSelection from "./ReturnFlightSelection";
 import ResponsiveAppBar from "./ResponsiveAppBar";
+import OutgoingSeatSelection from "./OutgoinSeatSelection";
+import ReturnSeatSelection from "./ReturnSeatSelection";
 function App() {
   return (
 
@@ -38,6 +40,12 @@ function App() {
         </Route>
         < Route exact path="/flightSelection">
           <FlightSelection />
+        </Route>
+        < Route exact path="/OutgoingSeatSelection">
+          <OutgoingSeatSelection />
+        </Route>
+        < Route exact path="/ReturnSeatSelection">
+          <ReturnSeatSelection />
         </Route>
         < Route exact path="/returnFlightSelection">
           <ReturnFlightSelection />

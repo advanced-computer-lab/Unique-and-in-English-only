@@ -6,7 +6,7 @@ import Button from '@mui/material/Button';
 import PersonIcon from '@mui/icons-material/Person';
 import InputAdornment from '@mui/material/InputAdornment';
 import ChildCareIcon from '@mui/icons-material/ChildCare';
-import { useState,ReactDOM } from 'react';
+import { useState, ReactDOM } from 'react';
 import axios from 'axios';
 import { useHistory } from "react-router-dom";
 
@@ -37,7 +37,7 @@ function SearchFlightDiv() {
         returnDate: '',
         adults: '',
         children: '',
-        cabin: ''
+        cabin: 'Buisness'
 
     });
 
@@ -46,12 +46,12 @@ function SearchFlightDiv() {
     const history = useHistory();
     const confirmSearch = async (event) => {
 
-        const element =(
+        const element = (
             <div>
-              <h1>Hello, world!</h1>
-              <h2>It is {new Date().toLocaleTimeString()}.</h2>
+                <h1>Hello, world!</h1>
+                <h2>It is {new Date().toLocaleTimeString()}.</h2>
             </div>
-          );
+        );
         const flight = {};
         flight['flyingFrom'] = flyingFrom;
         flight['flyingTo'] = flyingTo;
@@ -65,12 +65,12 @@ function SearchFlightDiv() {
         console.log(flight);
         axios.post('http://localhost:150/flight/searchFlightPassenger', flight)
             .then(
-                 history.push("/flightSelection")
+                history.push("/flightSelection")
             )
             .catch(function (error) {
                 console.log(error);
             });
-            
+
 
     }
 
@@ -132,6 +132,7 @@ function SearchFlightDiv() {
                 <Autocomplete
                     id="cabin-box"
                     options={cabinOptions}
+                    // value={values.cabin}
                     getOptionLabel={option => option.class}
                     renderInput={(params) => <TextField {...params} value={values.cabin} onChange={set('cabin')} label="Cabin" />}
                 />

@@ -20,7 +20,7 @@ const addFlight = (req, res) => {
     }
 
     for (var index = 0; index < economySeatsNumber; index++) {
-        const seat = { isSelected: false }
+        const seat = { isSelected: false, number: index + 1, id: index + 1 }
         economySeats.push(false);
     }
 
@@ -40,10 +40,8 @@ const addFlight = (req, res) => {
             EconomySeats: economySeats
         }
     );
-    console.log(flight);
     flight.save()
         .then(() => {
-            console.log("success");
             res.status(200).send("success");
         })
         .catch((err) => {
@@ -60,7 +58,6 @@ const getFlight = (req, res) => {
     removeEmptyAttributes(reqKeys, body);
 
     if (Object.keys(body).length === 0) {
-        console.log("empty");
         res.send("");
         res.end();
         return;
@@ -68,7 +65,6 @@ const getFlight = (req, res) => {
 
 
     Flight.find(body).then((result) => {
-        console.log(result);
         res.send(result);
     }).catch(err => console.log(err));
 
@@ -76,7 +72,6 @@ const getFlight = (req, res) => {
 const getFlightById = (req, res) => {
     const id = req.params.id;
     Flight.findById(id).then((result) => {
-        console.log(result);
         res.send(result);
     }).catch(err => console.log(err));
 
@@ -85,7 +80,6 @@ const getFlightById = (req, res) => {
 const listAllFlights = (req, res) => {
     const body = req.body;
     Flight.find().then((result) => {
-        console.log(result);
         res.send(result);
     })
 };
@@ -99,7 +93,7 @@ const updateFLight = (req, res) => {
     removeEmptyAttributes(reqKeys, body)
     const id = req.params.id;
     Flight.findByIdAndUpdate(id, body, { useFindAndModify: false })
-        .then(data => { 
+        .then(data => {
             if (!data) {
                 res.status(404).send({ message: " update can not be empty " })
             } else {
@@ -144,10 +138,9 @@ function removeEmptyAttributes(reqKeys, body) {
 
 function searchFlightPassenger(req, res) {
     const flight = req.body;
-    console.log(flight);
 
     const adults = flight.adults;
-    const children = flight.children;
+    var children = flight.children;
 
     if (flight.adults < 1) {
         //Error
@@ -163,28 +156,30 @@ function searchFlightPassenger(req, res) {
     const departurePort = flight.flyingFrom.airportName;
     const arrivalPort = flight.flyingTo.airportName;
     const cabin = flight.cabin;
-    const seats = "EconomySeatsNumber";
+    var seats = "EconomySeatsNumber";
 
     if (cabin == "Buisness") {
         seats = "BuisnessSeatsNumber";
     }
 
-    console.log(outboundDate);
     outgoingFlight = {
         DeparturePort: departurePort,
         ArrivalPort: arrivalPort,
         DepartureTime: outboundDate,
 
     }
-    returnFlight={
+    returnFlight = {
         DeparturePort: arrivalPort,
         ArrivalPort: departurePort,
         DepartureTime: returnDate,
     }
-    sessions.outgoingFlight=outgoingFlight;
-    sessions.seats=seats;
-    sessions.numPassengers=numPassengers;
-    sessions.returnFlight=returnFlight;
+    sessions.outgoingFlightSearch = outgoingFlight;
+    sessions.seats = seats;
+    sessions.numPassengers = numPassengers;
+    sessions.returnFlightSearch = returnFlight;
+    sessions.cabin = cabin;
+    sessions.adults = adults;
+    sessions.children = children;
     // Flight.find(outgoingFlight).where(`${seats}`).gt(numPassengers).then((result) => {
     //     // console.log(result);
     //     sessions.searchResults=result;
@@ -195,41 +190,66 @@ function searchFlightPassenger(req, res) {
 }
 
 const showFlights = (req, res) => {
-    seats=sessions.seats;
-    outgoingFlight=sessions.outgoingFlight;
-    numPassengers=sessions.numPassengers;
-    Flight.find(outgoingFlight).where(`${seats}`).gt(numPassengers).then((result) => {
-         console.log(result);
+    seats = sessions.seats;
+    outgoingFlightSearch = sessions.outgoingFlightSearch;
+    numPassengers = sessions.numPassengers;
+    Flight.find(outgoingFlightSearch).where(`${seats}`).gt(numPassengers).then((result) => {
         res.send(result);
     }).catch(err => console.log(err));
 };
+
 const showReturnFlights = (req, res) => {
-    seats=sessions.seats;
-    returnFlight=sessions.returnFlight;
-    numPassengers=sessions.numPassengers;
-    Flight.find(returnFlight).where(`${seats}`).gt(numPassengers).then((result) => {
-        // console.log(result);
+    seats = sessions.seats;
+    returnFlightSearch = sessions.returnFlightSearch;
+    numPassengers = sessions.numPassengers;
+    Flight.find(returnFlightSearch).where(`${seats}`).gt(numPassengers).then((result) => {
         res.send(result);
     }).catch(err => console.log(err));
 };
 const setFlightId = (req, res) => {
-     sessions.flightId = req.params.id;
-     const body = req.body;
-     sessions.outgoingFlightObject =body;
+    const body = req.body;
+    sessions.outgoingFlightSelected = body;
 
 
 }
 const setReturnFlightId = (req, res) => {
-    sessions.ReturnFlightId = req.params.id;
     const body = req.body;
-    sessions.returnFlightObject =body;
+    sessions.returnFlightSelected = body;
 
 }
-const getOutgoingFlight=(req,res)=>{
-    res.send(sessions.outgoingFlightObject)
+const getOutgoingFlight = (req, res) => {
+    res.send(sessions.outgoingFlightSelected)
 }
-const getReturnFlight=(req,res)=>{
-    res.send(sessions.returnFlightObject)
+const getReturnFlight = (req, res) => {
+    res.send(sessions.returnFlightSelected)
+}
+
+const getReservationDetails = (req, res) => {
+
+    const reservationsDetails = {};
+    reservationsDetails.outgoingFlightSelected = sessions.outgoingFlightSelected;
+    reservationsDetails.returnFlightSelected = sessions.returnFlightSelected;
+    reservationsDetails.children = sessions.children;
+    reservationsDetails.adults = sessions.adults;
+    reservationsDetails.cabin = sessions.cabin;
+
+    console.log("reservationsDetails");
+
+    console.log(reservationsDetails);
+
+
+    res.send(reservationsDetails)
+
+}
+
+const setSelectedOutgoingSeats = (req, res) => {
+    sessions.selectedOutgoingSeats = req.body;
+    res.send();
+}
+
+const setSelectedReturnSeats = (req, res) => {
+    sessions.selectedReturnSeats = req.body;
+    res.send();
 }
 
 
@@ -248,5 +268,8 @@ module.exports =
     setReturnFlightId,
     getFlightById,
     getOutgoingFlight,
-    getReturnFlight
+    getReturnFlight,
+    getReservationDetails,
+    setSelectedOutgoingSeats,
+    setSelectedReturnSeats
 }

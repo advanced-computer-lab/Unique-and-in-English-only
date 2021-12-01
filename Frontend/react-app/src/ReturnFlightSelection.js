@@ -19,15 +19,15 @@ function FlightSelection() {
   useEffect(() => {
     axios.get('http://localhost:150/flight/showReturnFlights/').then(
       (result) => {
-          console.log(result);
+        console.log(result);
         setFlight(result.data);
 
       });
-     
-    
+
+
 
   }, []);
- const DeleteClickHandler = async (flightObj) => {
+  const DeleteClickHandler = async (flightObj) => {
     const id = flightObj._id;
     const result = await confirm("Are you sure to delete this flight?");
     if (result) {
@@ -55,41 +55,42 @@ function FlightSelection() {
   const history = useHistory();
   const onSubmit = async (flightObj) => {
     const id = flightObj._id;
-    axios.post('http://localhost:150/flight/setReturnFlightID/' + id,flightObj)
-      .then( 
-          history.push("/OutgoingSeatSelection")
-      
+    axios.post('http://localhost:150/flight/setReturnFlightID/' + id, flightObj)
+      .then(
+        history.push("/OutgoingSeatSelection")
+
       )
       .catch(function (error) {
         console.log(error);
-        
-      });
-      
-  }
-  if(flight.length>=1){
-    return (
-        <div className="">
-          <ResponsiveAppBar/>
-          <div className="content">
-          
-            <h1 style={{marginTop:"100px"}} >Choose Return Flight </h1>
-        <br></br>
-  
-<div className="table">
-        
-        {flight.map((f) =>
-          <FlightSelectionCard f={f} submitHandler={onSubmit}  />
-        )}
 
+      });
+
+  }
+  if (flight.length >= 1) {
+    return (
+      <div className="">
+        <ResponsiveAppBar />
+        <div className="content">
+
+          <h1 style={{ marginTop: "100px" }} >Choose Return Flight </h1>
+          <br></br>
+
+          <div className="table">
+
+            {flight.map((f) =>
+              <FlightSelectionCard f={f} submitHandler={onSubmit} />
+            )}
+
+          </div>
+        </div>
       </div>
-    </div>
-</div>
-  );}
-  else{
-    return(
-    <div>
-      <h1>no flights matches your search criteria</h1>
-    </div>
+    );
+  }
+  else {
+    return (
+      <div>
+        <h1>no flights matches your search criteria</h1>
+      </div>
     )
   }
 
