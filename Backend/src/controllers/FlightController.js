@@ -177,21 +177,22 @@ function removeEmptyAttributes(reqKeys, body) {
 
 function searchFlightPassenger(req, res) {
     const flight = req.body;
-    console.log(flight);
+    if(!flight)
+    return;
 
-    const adults = flight.adults;
-    const children = flight.children;
+    const adults = parseInt(flight.adults);
+    var children = parseInt(flight.children);
 
-    if (flight.adults < 1) {
+    if (adults < 1) {
         //Error
         return;
     }
-    if (flight.children == '') {
+    if (!children ) {
         children = 0
 
     }
     const numPassengers = adults + children;
-    console.log(numPassengers + 2);
+    console.log(numPassengers);
     const outboundDate = new Date(flight.outboundDate);
     const returnDate = new Date(flight.returnDate);
     const departurePort = flight.flyingFrom.airportName;
@@ -232,6 +233,9 @@ const showFlights = (req, res) => {
     seats=sessions.seats;
     outgoingFlight=sessions.outgoingFlight;
     numPassengers=sessions.numPassengers;
+    console.log(outgoingFlight);
+    if(!outgoingFlight)
+      return;
     Flight.find(outgoingFlight).where(`${seats}`).gt(numPassengers).then((result) => {
          console.log(result);
         res.send(result);
