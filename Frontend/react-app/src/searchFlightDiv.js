@@ -9,6 +9,12 @@ import ChildCareIcon from '@mui/icons-material/ChildCare';
 import { useState, ReactDOM } from 'react';
 import axios from 'axios';
 import { useHistory } from "react-router-dom";
+import Select from '@mui/material/Select';
+import MenuItem from '@mui/material/MenuItem';
+import InputLabel from '@mui/material/InputLabel';
+
+
+
 
 const airports = [
     { airportName: "LAX", city: "Los Angeles" },
@@ -62,7 +68,6 @@ function SearchFlightDiv() {
             flight[key] = values[key];
         }
         event.preventDefault();
-        console.log(flight);
         axios.post('http://localhost:150/flight/searchFlightPassenger', flight)
             .then(
                 history.push("/flightSelection")
@@ -117,25 +122,42 @@ function SearchFlightDiv() {
                 />
 
             </div>
-            <div className="outbound date searchFlightElem">
-                <label >Outbound date </label>
-                <br />
-                <input id="outboundDate" value={values.outboundDate} onChange={set('outboundDate')} type="date" />
-            </div>
-            <div className="return date searchFlightElem">
-                <label >Return date </label>
-                <br />
-                <input id="returnDate" value={values.returnDate} onChange={set('returnDate')} type="date" />
+
+            <div className="date searchFlightElem">
+                <div className="outbound  ">
+                    <label >Outbound date </label>
+                    <br />
+                    <input id="outboundDate" value={values.outboundDate} onChange={set('outboundDate')} type="date" />
+                </div>
+                <div className="return ">
+                    <label >Return date </label>
+                    <br />
+                    <input id="returnDate" value={values.returnDate} onChange={set('returnDate')} type="date" />
+
+                </div>
 
             </div>
             <div className="cabin searchFlightElem">
-                <Autocomplete
+                {/* <Autocomplete
                     id="cabin-box"
                     options={cabinOptions}
                     // value={values.cabin}
                     getOptionLabel={option => option.class}
                     renderInput={(params) => <TextField {...params} value={values.cabin} onChange={set('cabin')} label="Cabin" />}
-                />
+                /> */}
+                <InputLabel id="cabin-select-label">Cabin</InputLabel>
+                <Select
+                    labelId="cabin-select-label"
+                    id="demo-simple-select"
+                    value={values.cabin}
+                    label="Cabin"
+                    onChange={set('cabin')}
+                    fullWidth
+                >
+                    <MenuItem value={"Buisness"}>Buisness</MenuItem>
+                    <MenuItem value={"Economy"}>Economy</MenuItem>
+                </Select>
+
             </div>
             <div className="passengers searchFlightElem">
                 <div className="adults">
