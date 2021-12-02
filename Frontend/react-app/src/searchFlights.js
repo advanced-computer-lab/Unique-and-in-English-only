@@ -246,7 +246,6 @@ function SearchFlight() {
          placeholder="Enter Departure Port"
          color="primary"
          style={{width:'200' }}
-        required 
         value={values.DeparturePort} 
         onChange={set('DeparturePort')}
          />
@@ -262,7 +261,6 @@ function SearchFlight() {
          placeholder="Enter Arrival Port"
          color="primary"
          style={{width:'200' }}
-        required 
         value={values.ArrivalPort} 
         onChange={set('ArrivalPort')}
          />
@@ -290,7 +288,7 @@ function SearchFlight() {
          id="ArrivalTerminal"
          variant="standard"
          label="Arrival Terminal"
-         placeholder="Enter arrival Terminal"
+         placeholder="Enter Arrival Terminal"
          color="primary"
          style={{width:'200' }}
         value={values.ArrivalTerminal} 
@@ -305,7 +303,7 @@ function SearchFlight() {
          id="BusinessPrice"
          variant="standard"
          label="BusinessPrice"
-         placeholder="Enter arrival Terminal"
+         placeholder="Enter Business Price"
          color="primary"
          style={{width:'200' }}
         value={values.BusinessPrice} 

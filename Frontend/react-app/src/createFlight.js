@@ -395,7 +395,7 @@ export default function CreateFlight() {
          id="ArrivalTerminal"
          variant="standard"
          label="Arrival Terminal"
-         placeholder="Enter arrival Terminal"
+         placeholder="Enter Arrival Terminal"
          required 
          color="primary"
          style={{width:'200' }}
@@ -412,7 +412,7 @@ export default function CreateFlight() {
          id="BusinessPrice"
          variant="standard"
          label="BusinessPrice"
-         placeholder="Enter arrival Terminal"
+         placeholder="Enter Business Price"
          required 
          color="primary"
          style={{width:'200' }}
