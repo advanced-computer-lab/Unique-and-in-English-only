@@ -15,6 +15,7 @@ import OutgoingSeatSelection from "./OutgoinSeatSelection";
 import ReturnSeatSelection from "./ReturnSeatSelection";
 import SummaryPage from './summaryPage';
 import SignIn from './signIn';
+import ViewTickets from './ticketsView'
 function App() {
   return (
 
@@ -57,6 +58,9 @@ function App() {
         </Route>
         < Route exact path="/SignIn">
           <SignIn />
+        </Route>
+        < Route exact path="/viewTickets">
+          <ViewTickets />
         </Route>
 
         <Route path="*">

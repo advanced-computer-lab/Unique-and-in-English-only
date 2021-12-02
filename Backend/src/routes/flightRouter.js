@@ -22,7 +22,6 @@ flightRouter.get("/getFlightById/:id", flightController.getFlightById)
 flightRouter.get("/getOutgoingFlight", flightController.getOutgoingFlight)
 flightRouter.get("/getReturnFlight", flightController.getReturnFlight)
 flightRouter.get("/listReservations", flightController.listReservations)
-flightRouter.post("/deleteTicket/:id", flightController.deleteFlight);
 flightRouter.put("/updateUser", flightController.updateUser);
-
+flightRouter.post("/ticketDeletion",flightController.deleteTicket);
 module.exports = flightRouter;
