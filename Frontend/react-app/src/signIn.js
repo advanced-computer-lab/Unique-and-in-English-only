@@ -104,7 +104,7 @@ export default function SignIn () {
           color="primary"
           />
         }
-        label="Remember Me."
+        label="Remember Me"
         />
          <Button
          type="submit"
