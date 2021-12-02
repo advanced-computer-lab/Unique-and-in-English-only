@@ -6,6 +6,45 @@ import PopUp from './popUp.js'
 import "./searchFlights.css";
 import Input from '@mui/material/Input';
 import Button from '@mui/material/Button';
+import * as React from 'react';
+import Stack from '@mui/material/Stack';
+import Snackbar from '@mui/material/Snackbar';
+import MuiAlert from '@mui/material/Alert';
+import Container from '@mui/material/Container';
+import Paper from '@mui/material/Paper';
+import Grid from '@mui/material/Grid';
+import { makeStyles } from '@mui/styles';
+import { Avatar, createMuiTheme,FormControlLabel,ThemeProvider } from '@mui/material';
+import AirplaneTicketOutlinedIcon from '@mui/icons-material/AirplaneTicketOutlined';
+import TextField from '@mui/material/TextField';
+import Box from '@mui/material/Box';
+
+const theme=createMuiTheme({
+  palette:{
+   primary:{
+     main:'#be8b14'
+    },
+    secondary:{
+      main:'#000000'
+  }
+}
+})
+
+const paperStyle={padding:20, height:'1300px',width:600,margin:"150px auto",minheight: '1300px'}
+
+
+const useStyles=makeStyles({
+  airplane:{
+    '&svg':{
+      fontSize:30
+    },
+
+    h2:{
+      backgroundColor:'#be8b14'
+    }
+    
+  }
+})
 
 
 function UpdateFlight(props) {
@@ -29,15 +68,20 @@ function UpdateFlight(props) {
    }  
    return year+'-'+month+'-'+day 
   }
-  var startValues={FlightNumber: '',
-    DepartureTime: '',
-    ArrivalTime: '',
-    EconomySeatsNumber: '',
-    BuisnessSeatsNumber: '',
-    DeparturePort: '',
-    ArrivalPort: '',
-    DepartureTerminal: '',
-    ArrivalTerminal: '',}
+  var startValues={
+  FlightNumber: '',
+  DepartureTime: '',
+  ArrivalTime: '',
+  EconomySeatsNumber: '',
+  BuisnessSeatsNumber: '',
+  DeparturePort: '',
+  ArrivalPort: '',
+  ArrivalTerminal:'',
+  DepartureTerminal:'',
+  BusinessPrice:'',
+  EconomyPrice:'',
+  BaggageAllowance:'',
+  TripDuration:''}
     
     if(flag){
           axios.get('http://localhost:150/flight/getFlightById/' + id)
@@ -57,7 +101,12 @@ function UpdateFlight(props) {
               DeparturePort: startValues.DeparturePort,
               ArrivalPort: startValues.ArrivalPort,
               DepartureTerminal: startValues.DepartureTerminal,
-              ArrivalTerminal: startValues.ArrivalTerminal,})
+              ArrivalTerminal: startValues.ArrivalTerminal,
+              BusinessPrice:startValues.BusinessPrice,
+              EconomyPrice:startValues.EconomyPrice,
+             BaggageAllowance:startValues.BaggageAllowance,
+             TripDuration:startValues.TripDuration,
+              })
               setFlag(false)
           })
           .catch(function (error) {
@@ -65,16 +114,22 @@ function UpdateFlight(props) {
             setFlag(false)
           });
     }
-    
+
+  const classes = useStyles();
   const [buttonSuccessPopup, setButtonSuccessPopup] = useState(false);
   const [buttonFailurePopup, setButtonFailurePopup] = useState(false);
-
   
-
   const [depTimeValidate, setdepTimeValidate] = useState("");
+  const [depTimeValidateFlag, setdepTimeValidateFlag] = useState(false);
+
   const [arrTimeValidate, setarrTimeValidate] = useState("");
+  const [arrTimeValidateFlag, setarrTimeValidateFlag] = useState(false);
+
   const [economySeatsValidate, seteconomySeatsValidate] = useState("");
+  const [economySeatsValidateFlag, seteconomySeatsValidateFlag] = useState(false);
+
   const [businessSeatsValidate, setbusinessSeatsValidate] = useState("");
+  const [businessSeatsValidateFlag, setbusinessSeatsValidateFlag] = useState(false);
 
   const [values, setValues] = useState({
     FlightNumber: startValues.FlightNumber,
@@ -86,6 +141,11 @@ function UpdateFlight(props) {
     ArrivalPort: startValues.ArrivalPort,
     DepartureTerminal: startValues.DepartureTerminal,
     ArrivalTerminal: startValues.ArrivalTerminal,
+    DepartureTerminal:startValues.DepartureTerminal,
+    BusinessPrice:startValues.BusinessPrice,
+    EconomyPrice:startValues.EconomyPrice,
+    BaggageAllowance:startValues.BaggageAllowance,
+    TripDuration:startValues.TripDuration,
   })
 
   const set = name => {
@@ -156,45 +216,294 @@ function UpdateFlight(props) {
   }
   
   return (
-    <div className="createflight-form">
-      <h1>update Flight</h1>
-      <form>
-        <label >Flight Number :</label><br></br>
-        <Input  type="text" minLength="3"  id="FlightNumber" value={values.FlightNumber} onChange={set('FlightNumber')}  ></Input><br></br>
-        <label >Departure Time :</label><br></br>
-        <p></p>
-        <Input  type="date" minLength="3"  id="DepartureTime" value={values.DepartureTime} onChange={set('DepartureTime')}  ></Input><br></br>
-        <p className="form-errors">{depTimeValidate}</p>
-        <label >Arrival Time :</label><br></br>
-        <Input  type="date" minLength="3"  id="ArrivalTime" value={values.ArrivalTime} onChange={set('ArrivalTime')} ></Input><br></br>
-        <p className="form-errors">{arrTimeValidate}</p>
-        <label >Economy Seats Number :</label><br></br>
-        <Input  type="number" minLength="1"  id="EconomySeatsNumber" value={values.EconomySeatsNumber} onChange={set('EconomySeatsNumber')} ></Input><br></br>
-        <p className="form-errors">{economySeatsValidate}</p>
-        <label >Buisness Seats Number :</label><br></br>
-        <Input  type="number" minLength="1" id="BuisnessSeatsNumber" value={values.BuisnessSeatsNumber} onChange={set('BuisnessSeatsNumber') }  ></Input><br></br>
-        <p className="form-errors">{businessSeatsValidate}</p>
-        <label >Departure Port : </label><br></br>
-        <Input  type="text" minLength="1"  id="DeparturePort" value={values.DeparturePort} onChange={set('DeparturePort')}  ></Input><br></br>
-        <p></p>
-        <label >Arrival Port : </label><br></br>
-        <Input  type="text" minLength="1"  id="ArrivalPort" value={values.ArrivalPort} onChange={set('ArrivalPort')}  ></Input><br></br>
-        <p></p>
-        <label >Departure Terminal : </label><br></br>
-        <Input  type="text" minLength="1"  id="DepartureTerminal" value={values.DepartureTerminal} onChange={set('DepartureTerminal')}  ></Input><br></br>
-        <p></p>
-        <label >Arrival Terminal : </label><br></br>
-        <Input  type="text" minLength="1"  id="ArrivalTerminal" value={values.ArrivalTerminal} onChange={set('ArrivalTerminal')}  ></Input><br></br>
-        <br></br>
-        <Button type="button" variant="contained" style={{backgroundColor:'#bd8b13',width:'20%'}} onClick={(e) => { onSubmit(e) }}>Update</Button>
-      </form>
-      <PopUp trigger={buttonSuccessPopup} setTrigger={setButtonSuccessPopup}>
+
+    <ThemeProvider theme={theme}>
+    <Container>
+      
+        <Grid>
+        <Paper elevation={10} style={paperStyle}>
+        <Grid align="center" >
+            <AirplaneTicketOutlinedIcon  color="primary" style={{fontSize:"100"}}/>
+            </Grid>
+            <Box component="form" sx={{'& .MuiTextField-root': { m: 1, width: '25ch' },}}>
+            <form noValidate autoComplete='off' >
+
+            <Grid container spacing={2}>
+
+              <Grid item xs={6}>
+        <h2 style={{color:"#be8b14"}}>Flight Number:</h2>
+         <TextField
+         
+         label="Flight Number"
+         variant="standard"
+         placeholder="Enter Flight Number"
+         required 
+         color="primary"
+         style={{width:'200' }}
+         minLength="3"
+         id="FlightNumber"
+         value={values.FlightNumber} onChange={set('FlightNumber')} 
+         
+         />
+         </Grid>
+
+         <Grid item xs={6} align="center">
+
+          <h2 style={{color:"#be8b14"}}>Trip Duration:</h2>
+          <TextField
+          type="text"
+          id="ArrivalTerminal"
+          variant="standard"
+          label="Arrival Terminal"
+          placeholder="Enter arrival Terminal"
+          required 
+          color="primary"
+          style={{width:'200' }}
+          required 
+          value={values.TripDuration} 
+          onChange={set('TripDuration')}
+          />
+        </Grid>
+
+        
+         
+         
+
+         <Grid item xs={6}  >
+        <h2 style={{color:"#be8b14"}}>Arrival Time:</h2>
+         <TextField
+         type="date"
+         id="ArrivalTime"
+         variant="standard"
+         required 
+         color="primary"
+         style={{width:'200' }}
+        required 
+        value={values.ArrivalTime} onChange={set('ArrivalTime')}
+        helperText={arrTimeValidate}
+        error={arrTimeValidateFlag}
+         />
+         </Grid>
+
+         <Grid item xs={6} align="center"> 
+         <h2 style={{color:"#be8b14"}}>Departure Time:</h2>
+         
+         <TextField 
+         type="date"
+         id="DepartureTime"
+         variant="standard"
+         required 
+         color="primary"
+         style={{width:'200' }}
+        required
+        value={values.DepartureTime} onChange={set('DepartureTime')}
+        helperText={depTimeValidate}
+        error={depTimeValidateFlag}
+         />
+         </Grid>
+
+         
+         
+         <Grid item xs={6}>
+        <h2 style={{color:"#be8b14"}}>Business Seats:</h2>
+         <TextField
+         type="number"
+         id="BuisnessSeatsNumber"
+         label="Number of Business Seats"
+         variant="standard"
+         required 
+         color="primary"
+         style={{width:'200' }}
+        required 
+        alue={values.BuisnessSeatsNumber} 
+        onChange={set('BuisnessSeatsNumber') }
+        helperText={businessSeatsValidate}
+        error={businessSeatsValidateFlag}
+         />
+        </Grid>
+
+        <Grid item xs={6} align="center">
+        <h2 style={{color:"#be8b14"}}>Economy Seats:</h2>
+         <TextField
+         type="number"
+         id="EconomySeatsNumber"
+         variant="standard"
+         required 
+         color="primary"
+         style={{width:'200' }}
+        required 
+        label="Number of Economy Seats"
+        value={values.EconomySeatsNumber}
+        onChange={set('EconomySeatsNumber')}
+        helperText={economySeatsValidate}
+        error={economySeatsValidateFlag}
+         />
+         </Grid>
+
+
+        <Grid item xs={6} >
+        <h2 style={{color:"#be8b14"}}>Departure Port:</h2>
+         <TextField
+         type="text"
+         id="DeparturePort"
+         variant="standard"
+         label="Departure Port"
+         placeholder="Enter Departure Port"
+         required 
+         color="primary"
+         style={{width:'200' }}
+        required 
+        value={values.DeparturePort} 
+        onChange={set('DeparturePort')}
+         />
+         </Grid>
+
+         <Grid item xs={6} align="center">
+        <h2 style={{color:"#be8b14"}}>Arrival Port:</h2>
+         <TextField
+         type="text"
+         id="ArrivalPort"
+         variant="standard"
+         label="Arrival Port"
+         placeholder="Enter Arrival Port"
+         required 
+         color="primary"
+         style={{width:'200' }}
+        required 
+        value={values.ArrivalPort} 
+        onChange={set('ArrivalPort')}
+         />
+         </Grid>
+
+         <Grid item xs={6} >
+        <h2 style={{color:"#be8b14"}}>Departure Terminal:</h2>
+         <TextField
+         type="text"
+         id="DepartureTerminal"
+         variant="standard"
+         label="Departure Terminal"
+         placeholder="Enter Departure Terminal"
+         required 
+         color="primary"
+         style={{width:'200' }}
+        required 
+        value={values.DepartureTerminal} 
+        onChange={set('DepartureTerminal')}
+         />
+         </Grid>
+
+         <Grid item xs={6} align="center">
+        <h2 style={{color:"#be8b14"}}>Arrival Terminal:</h2>
+         <TextField
+         type="text"
+         id="ArrivalTerminal"
+         variant="standard"
+         label="Arrival Terminal"
+         placeholder="Enter arrival Terminal"
+         required 
+         color="primary"
+         style={{width:'200' }}
+        required 
+        value={values.ArrivalTerminal} 
+        onChange={set('ArrivalTerminal')}
+         />
+         </Grid>
+
+         <Grid item xs={6} >
+        <h2 style={{color:"#be8b14"}}>Business Price:</h2>
+         <TextField
+         type="text"
+         id="BusinessPrice"
+         variant="standard"
+         label="BusinessPrice"
+         placeholder="Enter arrival Terminal"
+         required 
+         color="primary"
+         style={{width:'200' }}
+        required 
+        value={values.BusinessPrice} 
+        onChange={set('BusinessPrice')}
+         />
+         </Grid>
+
+         <Grid item xs={6} align="center">
+        <h2 style={{color:"#be8b14"}}>Economy Price:</h2>
+         <TextField
+         type="text"
+         id="EconomyPrice"
+         variant="standard"
+         label="Economy Price"
+         placeholder="Enter Economy Price"
+         required 
+         color="primary"
+         style={{width:'200' }}
+        required 
+        value={values.EconomyPrice} 
+        onChange={set('EconomyPrice')}
+         />
+         </Grid>
+
+         <Grid item xs={6} >
+        <h2 style={{color:"#be8b14"}}>Baggage Allowance:</h2>
+         <TextField
+         type="text"
+         id="BaggageAllowance"
+         variant="standard"
+         label="Baggage Allowance"
+         placeholder="Enter Baggage Allowance"
+         required 
+         color="primary"
+         style={{width:'200' }}
+        required 
+        value={values.BaggageAllowance} 
+        onChange={set('BaggageAllowance')}
+         />
+         </Grid>
+
+         
+       
+
+         
+         
+         
+        
+        
+         </Grid>
+         <br/>
+        <br/>
+        <br/>
+        <br/>
+         <Button margin="5" type="button" variant="contained" style={{backgroundColor:'#bd8b13',width:'100%',display:'block'}} onClick={(e) => { onSubmit(e) }}>Create</Button>
+         <PopUp trigger={buttonSuccessPopup} setTrigger={setButtonSuccessPopup}>
         <h3>Flight updated Successfully</h3>
       </PopUp>
       <PopUp trigger={buttonFailurePopup} setTrigger={setButtonFailurePopup}>
         <h3>error : flight was not updated</h3>
       </PopUp>
-    </div >
+        
+
+        
+
+         </form>
+         </Box>
+
+
+          </Paper>
+         
+        </Grid>
+        </Container>
+      </ThemeProvider>
+
+
+
+
+
+
+
+
+
+    
+     
   )
 }
 export default UpdateFlight;
