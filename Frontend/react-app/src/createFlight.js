@@ -248,10 +248,10 @@ export default function CreateFlight() {
           <h2 style={{color:"#be8b14"}}>Trip Duration:</h2>
           <TextField
           type="text"
-          id="ArrivalTerminal"
+          id="TripDuration"
           variant="standard"
-          label="Arrival Terminal"
-          placeholder="Enter arrival Terminal"
+          label="Trip Duration"
+          placeholder="Enter Trip Duration"
           required 
           color="primary"
           style={{width:'200' }}
