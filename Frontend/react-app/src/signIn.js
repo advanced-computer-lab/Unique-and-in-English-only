@@ -33,7 +33,7 @@ const useStyles=makeStyles({
      display:'block',
      
    }
-})////
+})
 
 export default function SignIn () {
     const classes=useStyles()
@@ -62,15 +62,7 @@ export default function SignIn () {
       }
     }
     return (
-      
-     
-
-        
-
-
-
-
-<ThemeProvider theme={theme}>
+    <ThemeProvider theme={theme}>
        
        <Container>
  
@@ -88,7 +80,7 @@ export default function SignIn () {
          label="Username"
          variant="outlined"
          placeholder="Enter Username"
-         required 
+         required S
          error={usernameError}
          style={{width:'380px',margin:"8px 0"}}
          />
@@ -132,26 +124,8 @@ export default function SignIn () {
  
          </form>
           </Paper>
-
-          
-
-         
-
-
-
-
-
-
-        </Grid>
- 
-       
- 
-      
- 
-      
- 
-        
-       </Container>
+          </Grid>
+          </Container>
        </ThemeProvider>
 
      

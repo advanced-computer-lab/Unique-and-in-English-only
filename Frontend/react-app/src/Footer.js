@@ -41,7 +41,7 @@ function Footer() {
         <div className="row">
           <p className="col-sm">
             &copy;{new Date().getFullYear()} Unique Airways | All rights reserved |
-            Terms Of Service | Privacy
+            <Link href="#" underline="hover"> Terms of Service</Link> | <Link href="#" underline="hover">Privacy Policy</Link>
           </p>
         </div>
       </div>

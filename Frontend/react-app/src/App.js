@@ -15,8 +15,13 @@ import OutgoingSeatSelection from "./OutgoinSeatSelection";
 import ReturnSeatSelection from "./ReturnSeatSelection";
 import SummaryPage from './summaryPage';
 import SignIn from './signIn';
+import {useEffect} from 'react';
 function App() {
+  useEffect(() => {
+    document.title = "Unique Airlines"
+  }, [])
   return (
+   
 
     <Router>
       <nav className="navbarcontainer">
