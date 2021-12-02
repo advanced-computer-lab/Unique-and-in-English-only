@@ -107,7 +107,7 @@ const getFlightById = (req, res) => {
 const getUserById = (req, res) => {
 
     Flight.findById(sessions.userId).then((result) => {
-        console.log(result);
+        
         res.send(result);
     }).catch(err => console.log(err));
 
@@ -212,7 +212,7 @@ function searchFlightPassenger(req, res) {
         DepartureTime: returnDate,
     }
 
-    console.log(outgoingFlight);
+    
     sessions.outgoingFlightSearch = outgoingFlight;
     sessions.seats = seats;
     sessions.numPassengers = numPassengers;
@@ -226,6 +226,15 @@ function searchFlightPassenger(req, res) {
     //     console.log(sessions.searchResults);
     // }).catch(err => console.log(err));
 
+    //  const user = new User({
+    //     FirstName: "Men3am",
+    //     LastName: "ElDardey",
+    //     Tickets: []
+    // })
+
+    // user.save().then((res) => {
+
+    // }).catch(err => console.log(""));
 
 }
 
@@ -233,7 +242,6 @@ const showFlights = (req, res) => {
     seats = sessions.seats;
     outgoingFlightSearch = sessions.outgoingFlightSearch;
     numPassengers = sessions.numPassengers;
-    console.log(outgoingFlightSearch);
     if (!outgoingFlightSearch)
         return;
     Flight.find(outgoingFlightSearch).where(`${seats}`).gt(numPassengers).then((result) => {
@@ -277,10 +285,7 @@ const getReservationDetails = (req, res) => {
     reservationsDetails.adults = sessions.adults;
     reservationsDetails.cabin = sessions.cabin;
 
-    console.log("reservationsDetails");
-
-    console.log(reservationsDetails);
-
+  
 
     res.send(reservationsDetails)
 
@@ -309,7 +314,7 @@ const confirmTicket = (req, res) => {
     const ticket = req.body;
     const outgoingFlight = ticket.outgoingFlight;
     const returnFlight = ticket.returnFlight
-    console.log(ticket);
+   
     reserveSeatsinFlight(outgoingFlight, ticket.outgoingSeats, sessions.cabin)
     reserveSeatsinFlight(returnFlight, ticket.returnSeats, sessions.cabin)
 
@@ -335,7 +340,7 @@ const confirmTicket = (req, res) => {
     // }).catch(err => console.log(""));
 
 
-    User.findById("61a7dd88d95ac28b50a4d080").then((result) => {
+    User.findById("61a7e41644e96c67df866cdd").then((result) => {
         result.Tickets.push(ticket);
         result.save().then((res) => {
             ;
@@ -355,8 +360,7 @@ function reserveSeatsinFlight(flight, seatsSelected, cabin) {
         seats = flight.EconomySeats;
     }
 
-    console.log("seats");
-    console.log(seatsSelected);
+ 
 
 
     for (var i = 0; i < seats.length; i++) {
@@ -372,8 +376,8 @@ function reserveSeatsinFlight(flight, seatsSelected, cabin) {
 
 const listReservations = (req, res) => {
     const body = req.body;
-    User.findById(sessions.userId).then((result) => {
-        console.log(result);
+    User.findById("61a7e41644e96c67df866cdd").then((result) => {
+       
         sessions.tickets = result.Tickets;
         res.send(result.Tickets);
     })
@@ -383,11 +387,12 @@ const deleteTicket = (req, res) => {
     if (!deletedTicket) {
         return res.status(400).send({ message: "data to update can not be empty " });
     }
-    const newTickets = removeObjectFromArray(sessions.tickets, deleteTicket);
+   
+    const newTickets = removeObjectFromArray(sessions.tickets, deletedTicket);
+    console.log(newTickets);
     sessions.tickets = newTickets;
-    const id = sessions.userId;
     const bunchOfTickets = { Tickets: newTickets };
-    Flight.findByIdAndUpdate(id, bunchOfTickets, { useFindAndModify: false })
+    User.findByIdAndUpdate("61a7e41644e96c67df866cdd", bunchOfTickets, { useFindAndModify: false })
         .then(data => {
             if (!data) {
                 res.status(404).send({ message: " update can not be empty " })
@@ -405,11 +410,20 @@ const deleteTicket = (req, res) => {
     function removeObjectFromArray(flight, flightObj) {
 
         return flight.filter(function (ele) {
-            return ele != flightObj;
+            return ele.outgoingFlight._id != flightObj.outgoingFlight._id | ele.returnFlight._id!= flightObj.returnFlight._id|!checkSeats(ele.outgoingSeats,flightObj.outgoingSeats)|!checkSeats(ele.returnSeats,flightObj.returnSeats);
         });
     }
 
 }
+ function checkSeats (seats1,seats2){
+  for(let i=0;i<seats1.length;i++){
+      if(seats1[i].number!=seats2[i].number)
+      return false
+  }
+  return true
+    
+
+ }
 
 const updateUser = (req, res) => {
     const body = req.body

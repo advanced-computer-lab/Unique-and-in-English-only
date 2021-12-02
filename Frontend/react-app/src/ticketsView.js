@@ -23,10 +23,10 @@ function TicketsView() {
 
   }, []);
  const DeleteClickHandler = async (flightObj) => {
-    const id = flightObj._id;
+    
     const result = await confirm("Are you sure to delete this flight?");
     if (result) {
-      axios.post('http://localhost:150/flight/deleteFlight/' + id,flightObj)
+      axios.post('http://localhost:150/flight/ticketDeletion',flightObj)
         .then(function (response) {
           console.log(response);
           const newFlights = removeObjectFromArray(flight, flightObj);
@@ -50,8 +50,9 @@ function TicketsView() {
   if(flight.length>0){
     return (
         <div className="">
+          <h1 style={{ marginTop: 70 }}>My Tickets </h1>
           <div className="content">
-            <h1>My Tickets </h1>
+            
         <br></br>
   
 <div className="table">
