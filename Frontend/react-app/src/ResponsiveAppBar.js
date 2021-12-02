@@ -110,11 +110,10 @@ const ResponsiveAppBar = () => {
           >
             LOGO
           </Typography>
-          <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
+          <Box sx={{flexGrow: 1, display: { xs: 'none', md: 'flex' }}}>
             {
               <Button
                 style={{ color: 'black', fontWeight: "bold", fontFamily: "Etihad Altis Medium", size: "larger" }}
-
                 onClick={(e) => { BookClickHandler() }}
                 sx={{ my: 2, color: 'white', display: 'block' }}
               >

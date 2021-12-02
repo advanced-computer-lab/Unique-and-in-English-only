@@ -8,8 +8,9 @@
     "express": "^4.17.1",
     "express-session": "^1.17.2",
     "mongoose": "^6.0.12",
-    "react-seatmap": "^0.1.2",
     "nodemailer": "^6.7.2",
-    "parser": "^0.1.4"
+    "nodemon": "^2.0.15",
+    "parser": "^0.1.4",
+    "react-seatmap": "^0.1.2"
   }
 }
