@@ -16,6 +16,13 @@ import { Avatar, createMuiTheme,FormControlLabel,ThemeProvider } from '@mui/mate
 import AirplaneTicketOutlinedIcon from '@mui/icons-material/AirplaneTicketOutlined';
 import TextField from '@mui/material/TextField';
 import Box from '@mui/material/Box';
+import { useParams } from "react-router-dom";
+import { PromiseProvider } from 'mongoose';
+
+
+
+
+
 
 
 const theme=createMuiTheme({
@@ -321,7 +328,7 @@ export default function CreateFlight() {
          color="primary"
          style={{width:'200' }}
         required 
-        label="Number of Economey Seats"
+        label="Number of Economy Seats"
         value={values.EconomySeatsNumber}
         onChange={set('EconomySeatsNumber')}
         helperText={economySeatsValidate}
@@ -404,7 +411,7 @@ export default function CreateFlight() {
          type="text"
          id="BusinessPrice"
          variant="standard"
-         label="Arrival Terminal"
+         label="BusinessPrice"
          placeholder="Enter arrival Terminal"
          required 
          color="primary"
@@ -419,10 +426,10 @@ export default function CreateFlight() {
         <h2 style={{color:"#be8b14"}}>Economy Price:</h2>
          <TextField
          type="text"
-         id="ArrivalTerminal"
+         id="EconomyPrice"
          variant="standard"
-         label="Arrival Terminal"
-         placeholder="Enter arrival Terminal"
+         label="Economy Price"
+         placeholder="Enter Economy Price"
          required 
          color="primary"
          style={{width:'200' }}
@@ -436,10 +443,10 @@ export default function CreateFlight() {
         <h2 style={{color:"#be8b14"}}>Baggage Allowance:</h2>
          <TextField
          type="text"
-         id="ArrivalTerminal"
+         id="BaggageAllowance"
          variant="standard"
-         label="Arrival Terminal"
-         placeholder="Enter arrival Terminal"
+         label="Baggage Allowance"
+         placeholder="Enter Baggage Allowance"
          required 
          color="primary"
          style={{width:'200' }}

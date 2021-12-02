@@ -8,6 +8,7 @@ import { Link } from "react-router-dom";
 import FlightDetails from './FlightDetails';
 import "./listFlights.css";
 
+import Container from '@mui/material/Container';
 //import userRouter from '../../../backEnd/routes/UserRoutes';
 
 function ListFlights() {
@@ -48,20 +49,15 @@ function ListFlights() {
   }
   if(flight.length>0){
     return (
-        <div className="">
-          <div className="content">
-            <h1>Flights </h1>
-        <br></br>
-  
-<div className="Grid">
+       <Container style={{margin:"150px 0"}}>
+          
         
         {flight.map((f) =>
           <FlightDetails f={f} deleteHandler={DeleteClickHandler} updateHandler={UpdateClickHandler} />
         )}
 
-      </div>
-    </div>
-</div>
+      
+</Container>
   );}
   else{
     return(
