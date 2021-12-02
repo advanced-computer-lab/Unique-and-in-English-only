@@ -30,7 +30,7 @@ const theme=createMuiTheme({
 
 
 
-const paperStyle={padding:20, height:'500px',width:'600px',margin:"20px auto",minheight: '500px',minwidth:'1000px'}
+const paperStyle={padding:20, height:'440px',width:'600px',margin:"20px auto",minheight: '500px',minwidth:'1000px'}
 
 
 const airports = [
