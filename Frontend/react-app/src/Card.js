@@ -14,7 +14,7 @@ export default function CardTab() {
   return (
       <div className ="tabContainer">
            <Card sx={{ maxWidth: 400 }}>
-      <CardActionArea absolute href="https:/www.google.com">
+      <CardActionArea href="/searchflight">
         <CardMedia
           component="img"
           height="400"
@@ -32,7 +32,7 @@ export default function CardTab() {
       </CardActionArea>
     </Card>
     <Card sx={{ maxWidth: 400 }}>
-      <CardActionArea>
+      <CardActionArea href="/searchflight">
         <CardMedia
           component="img"
           height="400"
@@ -49,7 +49,7 @@ export default function CardTab() {
         </CardContent>
       </CardActionArea>
     </Card> <Card sx={{ maxWidth: 400 }}>
-      <CardActionArea>
+      <CardActionArea href="/searchflight">
         <CardMedia
           component="img"
           height="400"

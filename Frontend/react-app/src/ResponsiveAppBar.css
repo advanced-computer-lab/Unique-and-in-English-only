@@ -3,3 +3,23 @@
     position: fixed ;
     top: 0px;
 }
+
+.navBarMenuItem{
+    float: right;
+}
+
+#dropdown-basic::after{
+    display: none !important; 
+ }
+
+ .caret {
+    display: none !important;
+  }
+  
+  .navbar .dropdown-menu:after{
+    display:none !important;
+   }
+  
+   .dropdown-toggle.noCaret:after {
+    display: none !important;
+  
