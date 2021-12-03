@@ -57,7 +57,6 @@ const ResponsiveAppBar = () => {
   };
 
   const goToPage = (pageName) => {
-    // console.log("a7a")
     history.push(`/${pageName}`);
   }
 
