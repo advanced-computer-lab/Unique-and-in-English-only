@@ -30,7 +30,7 @@ const theme=createMuiTheme({
 
 
 
-const paperStyle={padding:20, height:'440px',width:'600px',margin:"20px auto",minheight: '500px',minwidth:'1000px'}
+const paperStyle={padding:20, height:'400px',width:'800px',margin:"20px auto",minheight: '500px',minwidth:'1000px'}
 
 
 const airports = [
@@ -101,10 +101,10 @@ function SearchFlightDiv() {
     <Container>
         
     <Grid align="center">
-        <Paper elevation={10} style={paperStyle}>
+        <Paper elevation={24} rounded style={paperStyle}>
         <Grid container spacing={1}>
             <Grid item xs={6}>
-                <h2 style={{color:"#be8b14"}}>From:</h2>
+                <h4 style={{color:"#be8b14"}}>From:</h4>
             <Autocomplete
                     id="flying-from-box"
                     options={airports}
@@ -128,7 +128,7 @@ function SearchFlightDiv() {
             />
          </Grid>
          <Grid item xs={6}>
-                <h2 style={{color:"#be8b14"}}>To:</h2>
+                <h4 style={{color:"#be8b14"}}>To:</h4>
                 <Autocomplete
                     id="flying-to-box"
                     options={airports}
@@ -147,11 +147,11 @@ function SearchFlightDiv() {
                 />
          </Grid>
          <Grid item xs={4}>
-                <h2 style={{color:"#be8b14"}}>Outbound Date:</h2>
+                <h4 style={{color:"#be8b14"}}>Outbound Date:</h4>
                 <TextField id="outboundDate" value={values.outboundDate} onChange={set('outboundDate')} type="date" variant="standard"> </TextField>
          </Grid>
          <Grid item xs={4}>
-         <h2 style={{color:"#be8b14"}}>Outbound Date:</h2>
+         <h4 style={{color:"#be8b14"}}>Return Date:</h4>
                 <TextField id="returnDate" value={values.returnDate} onChange={set('returnDate')} type="date" variant="standard"> </TextField>
          
          </Grid>
@@ -163,7 +163,7 @@ function SearchFlightDiv() {
                     getOptionLabel={option => option.class}
                     renderInput={(params) => <TextField {...params} value={values.cabin} onChange={set('cabin')} label="Cabin" />}
                 /> */}
-                <h2 style={{color:"#be8b14"}}>Cabin:</h2>
+                <h4 style={{color:"#be8b14"}}>Cabin:</h4>
                 <Select
                 color="primary"
                     labelId="cabin-select-label"
@@ -181,7 +181,7 @@ function SearchFlightDiv() {
          </Grid>
 
          <Grid item xs={6}>
-         <h2 style={{color:"#be8b14"}}>Adults:</h2>
+         <h4 style={{color:"#be8b14"}}>Adults:</h4>
          <TextField 
             label="adults"
             variant="standard"
@@ -198,7 +198,7 @@ function SearchFlightDiv() {
          </Grid>
 
          <Grid item xs={6}>
-         <h2 style={{color:"#be8b14"}}>Children:</h2>
+         <h4 style={{color:"#be8b14"}}>Children:</h4>
          <TextField label="children"
          variant="standard"
                         value={values.children}
@@ -214,7 +214,7 @@ function SearchFlightDiv() {
          </Grid>
          <Grid item xs={12}>
              <br/>
-         <Button style={{backgroundColor:'#bd8b13',width:'100%',display:'block'}} onClick={confirmSearch} variant="contained">Search</Button>
+         <Button style={{backgroundColor:'#bd8b13',width:'50%',display:'block'}} onClick={confirmSearch} variant="contained">Search</Button>
              </Grid>
 
 

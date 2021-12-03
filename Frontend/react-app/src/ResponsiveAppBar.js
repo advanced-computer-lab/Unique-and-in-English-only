@@ -144,8 +144,8 @@ const ResponsiveAppBar = () => {
                 Help
               </Button>
             }
-            <Dropdown cssClass='e-caret-hide' container="body">
-              <Dropdown.Toggle variant="success" id="dropdown-basic">
+            <Dropdown cssClass='e-caret-hide' container="body" >
+              <Dropdown.Toggle variant="success" id="dropdown-basic" size="sm" style={{}}>
                 Flight
               </Dropdown.Toggle>
 
