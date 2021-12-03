@@ -12,7 +12,12 @@ import Button from '@mui/material/Button';
 import Tooltip from '@mui/material/Tooltip';
 import MenuItem from '@mui/material/MenuItem';
 import { makeStyles } from '@material-ui/core';
-import logo from "./images/Logo.jpg"
+import logo from "./images/Logo.jpg";
+import { Dropdown } from 'react-bootstrap';
+import 'bootstrap/dist/css/bootstrap.min.css';
+import { useHistory } from 'react-router-dom'
+
+
 const useStyles = makeStyles((theme) => ({
   appBar: {
     backgroundColor: '#bd8b13'
@@ -23,13 +28,14 @@ const pages = ['Book', 'Help'];
 const settings = ['Profile', 'Account', 'Logout'];
 function BookClickHandler() {
 
-  window.location.href = `/searchFlight`
+  // window.location.href = `/searchFlight`
+  ;
 }
 
 const ResponsiveAppBar = () => {
   const [anchorElNav, setAnchorElNav] = React.useState(null);
   const [anchorElUser, setAnchorElUser] = React.useState(null);
-
+  const history = useHistory();
   const handleOpenNavMenu = (event) => {
     setAnchorElNav(event.currentTarget);
   };
@@ -50,6 +56,10 @@ const ResponsiveAppBar = () => {
     background: '#bd8b13'
   };
 
+  const goToPage = (pageName) => {
+    // console.log("a7a")
+    history.push(`/${pageName}`);
+  }
 
   return (
     <AppBar style={{ backgroundColor: 'white' }} position="fixed" top="0px" z-index="2" >
@@ -95,11 +105,13 @@ const ResponsiveAppBar = () => {
                 display: { xs: 'block', md: 'none' },
               }}
             >
-              {pages.map((page) => (
-                <MenuItem key={page} onClick={handleCloseNavMenu}>
-                  <Typography textAlign="center">{page}</Typography>
-                </MenuItem>
-              ))}
+              <div className="navBarMenuItemContainer">
+                {pages.map((page) => (
+                  <MenuItem key={page} onClick={handleCloseNavMenu} >
+                    <Typography textAlign="center">{page}</Typography>
+                  </MenuItem>
+                ))}
+              </div>
             </Menu>
           </Box>
           <Typography
@@ -110,7 +122,7 @@ const ResponsiveAppBar = () => {
           >
             LOGO
           </Typography>
-          <Box sx={{flexGrow: 1, display: { xs: 'none', md: 'flex' }}}>
+          <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }} ml="60%">
             {
               <Button
                 style={{ color: 'black', fontWeight: "bold", fontFamily: "Etihad Altis Medium", size: "larger" }}
@@ -132,6 +144,18 @@ const ResponsiveAppBar = () => {
                 Help
               </Button>
             }
+            <Dropdown cssClass='e-caret-hide' container="body">
+              <Dropdown.Toggle variant="success" id="dropdown-basic">
+                Flight
+              </Dropdown.Toggle>
+
+              <Dropdown.Menu>
+                <Dropdown.Item onClick={() => { goToPage("listFlights") }}>List flights</Dropdown.Item>
+                <Dropdown.Item onClick={() => { goToPage("createFlight") }}>Create flight</Dropdown.Item>
+                <Dropdown.Item onClick={() => { goToPage("searchFlight") }}>Search Flight</Dropdown.Item>
+              </Dropdown.Menu>
+            </Dropdown>
+
           </Box>
 
           <Box sx={{ flexGrow: 0 }}>
@@ -165,7 +189,7 @@ const ResponsiveAppBar = () => {
           </Box>
         </Toolbar>
       </Container>
-    </AppBar>
+    </AppBar >
   );
 };
 export default ResponsiveAppBar;
