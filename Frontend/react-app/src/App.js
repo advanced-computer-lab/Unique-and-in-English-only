@@ -15,14 +15,16 @@ import OutgoingSeatSelection from "./OutgoinSeatSelection";
 import ReturnSeatSelection from "./ReturnSeatSelection";
 import SummaryPage from './summaryPage';
 import SignIn from './signIn';
-import {useEffect} from 'react';
-import ViewTickets from './ticketsView'
+import { useEffect } from 'react';
+import ViewTickets from './ticketsView';
+import UpdateUser from './updateUser';
+
 function App() {
   useEffect(() => {
     document.title = "Unique Airlines"
   }, [])
   return (
-   
+
 
     <Router>
       <nav className="navbarcontainer">
@@ -67,7 +69,9 @@ function App() {
         < Route exact path="/viewTickets">
           <ViewTickets />
         </Route>
-
+        < Route exact path="/updateUser">
+          <UpdateUser />
+        </Route>
         <Route path="*">
           <NotFound />
         </Route>

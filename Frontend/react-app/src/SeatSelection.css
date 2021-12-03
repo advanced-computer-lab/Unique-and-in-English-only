@@ -1,5 +1,5 @@
 .seat{
-    width:40px !important;
+    width:30px !important;
     height: 40px !important;
     border-radius:12px !important;
 }
@@ -7,7 +7,20 @@
 .seatSelection{
     margin-left: auto;
     margin-right: auto;
-    width: 500px;
+    width: fit-content;
     height: fit-content;
+    margin-bottom:50px;
+    margin-top: 50px;
 }
 
+.submitSeatsButton{
+    margin-top: 20px !important;
+    margin: 0 auto !important;
+}
+
+.centerButton{
+    width: fit-content;
+    margin: 0 auto !important;
+    margin-top: 10px;
+
+}

@@ -88,6 +88,9 @@ function SeatSelection(props) {
         var row = new Array();
         for (let index = 0; index < 4 && flightSeatsClone.length > 0; index++) {
             row.push(flightSeatsClone.splice(0, 1)[0]);
+            if (index % 2 == 1)
+                row.push(null);
+            ;
 
         }
         seats.push(row)
@@ -112,9 +115,7 @@ function SeatSelection(props) {
             counter++;
             //<<<<
 
-            if (j % 2 == 1)
-                // row.push(null);
-                ;
+
 
         }
 
@@ -170,9 +171,9 @@ function SeatSelection(props) {
 
             if (flightType == "Outgoing")
                 history.push("ReturnSeatSelection");
-            else if (flightType == "Return"){
+            else if (flightType == "Return") {
                 history.push("summaryPage");
-                
+
             }
         }
 
@@ -187,17 +188,24 @@ function SeatSelection(props) {
 
     return (
 
-        <div className="seatSelection">
+        <div>
+            <div className="seatSelection">
 
-            <SeatPicker
-                addSeatCallback={addSeatCallback}
-                removeSeatCallback={removeSeatCallback}
-                rows={seats}
-                maxReservableSeats={maxReservableSeats}
-                selectedByDefault
-                loading={false}
-            />
-            <Button onClick={submitHandler}> Select  </Button>
+                <SeatPicker
+                    addSeatCallback={addSeatCallback}
+                    removeSeatCallback={removeSeatCallback}
+                    rows={seats}
+                    maxReservableSeats={maxReservableSeats}
+                    selectedByDefault
+                    loading={false}
+                />
+
+
+            </div >
+
+            <div className="centerButton">
+                <Button className="submitSeatsButton" onClick={submitHandler} variant="contained" color="primary" > Select  </Button>
+            </div>
         </div>
     )
 
