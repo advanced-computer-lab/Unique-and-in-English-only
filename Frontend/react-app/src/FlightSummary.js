@@ -14,7 +14,8 @@ function FlightSummary(props) {
       <div className="details-container">
         <div className="details-row">
           <div id="row1">
-            <h2>Flight Number: {props.f.FlightNumber}</h2>
+            <hr/>
+            <h3>Flight Number: {props.f.FlightNumber}</h3>
           </div>
         </div>
         <div className="details-row">
@@ -26,15 +27,15 @@ function FlightSummary(props) {
         <div className="details-row">
           <div id="row3">
             <h4>Departure Time: {props.f.DepartureTime}</h4>
-            <h5>Arrival Time: {props.f.ArrivalTime}</h5>
+            <h4>Arrival Time: {props.f.ArrivalTime}</h4>
           </div>
           <div id="row3">
             <h4>Departure Port: {props.f.DeparturePort}</h4>
-            <h5>Arrival Port: {props.f.ArrivalPort}</h5>
+            <h4>Arrival Port: {props.f.ArrivalPort}</h4>
+           
           </div>
         </div>
       </div>
-      <hr />
     </div>
   );
 }

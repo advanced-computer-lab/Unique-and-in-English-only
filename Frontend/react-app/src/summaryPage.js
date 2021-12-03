@@ -6,8 +6,26 @@ import ReturnSeatSelection from './ReturnSeatSelection';
 import { useHistory } from "react-router-dom";
 import Button from '@mui/material/Button';
 import { useEffect } from "react";
+import Container from '@mui/material/Container';
+import Paper from '@mui/material/Paper';
+import Grid from '@mui/material/Grid';
+import SummarizeOutlinedIcon from '@mui/icons-material/SummarizeOutlined';
+import { Avatar, createMuiTheme,FormControlLabel,ThemeProvider } from '@mui/material';
+
+const theme=createMuiTheme({
+    palette:{
+     primary:{
+       main:'#be8b14'
+      },
+      secondary:{
+        main:'#000000'
+    }
+  }
+  })
 
 function SummaryPage(props) {
+    const paperStyle={padding:20, height:'800px',width:900,margin:"150px auto",minheight: '1300px'}
+
     const history = useHistory();
     const [flagOutGoing, setFlagOutGoing] = useState(false)
     const [flagReturn, setFlagReturn] = useState(false)
@@ -99,50 +117,70 @@ function SummaryPage(props) {
     if (flagReturn && flagOutGoing) {
         console.log(true)
         return (
-            <div className="summary-main">
-                <div className="outgoingFlight">
-                    <h1 style={{ marginLeft: 20 }}>outgoing flight :</h1>
-                    <FlightSummary f={outgoingFlight} ></FlightSummary>
-                    <h2 style={{ marginLeft: 20 }}>booked seats: </h2>
-                    {outgoingSeats.map((s) =>
-                        <p style={{ marginLeft: 40 }}>{s.number}</p>
-                    )}
-                </div>
-                <hr />
-                <div className="returnFlight">
-                    <h1 style={{ marginLeft: 20 }} >Return flight :</h1>
-                    <FlightSummary f={returnFlight} ></FlightSummary>
-                    <h2 style={{ marginLeft: 20 }} >booked seats: </h2>
-                    {returnSeats.map((s) =>
-                        <p style={{ marginLeft: 40 }}>{s.number}</p>
-                    )}
-                </div>
 
-                <div>
-                    <Button type="button" variant="contained" style={{ backgroundColor: '#bd8b13', width: '20%' }} onClick={(e) => { onSubmit(e) }}>Confirm</Button>
-                </div>
-            </div>
+            <ThemeProvider theme={theme}>
+           <Grid align="center">
+               <Paper elevation={10} style={paperStyle}>
+                   <Grid>
+                   <SummarizeOutlinedIcon  color="primary" style={{fontSize:"100"}}/>
+                   </Grid>
+                   <br/>
+                    <Grid container>
+                   <Grid item xs={6} align="left">
+                   <h2 style={{color:"#be8b14"}}>Outgoing Flight:-</h2>
+                   <FlightSummary f={outgoingFlight} ></FlightSummary>
+                   {outgoingSeats.map((s) =>
+                        <h4 display="inline">Booked seats: {s.number}</h4>
+                    )}
+                   <hr/>
+                   </Grid>
+                   <Grid item xs={6} align="left">
+                   <h2 style={{color:"#be8b14"}}>Return Flight:-</h2>
+                   <FlightSummary f={returnFlight} ></FlightSummary>
+                   {returnSeats.map((s) =>
+                        <h4 display="inline">Booked seats: {s.number}</h4>
+                    )}
+                   <hr/>
+                   
+                   </Grid>
+                   <Grid item xs={12}>
+                   <Button type="button" variant="contained" style={{ backgroundColor: '#bd8b13', width: '30%' }} onClick={(e) => { onSubmit(e) }}>Confirm</Button>
+                   </Grid>
+                   </Grid>
+               </Paper>
+           </Grid>
+           </ThemeProvider>
+            
         )
     }
     else {
         console.log(false)
         return (
-            <div className="summary-main">
-                <div className="outgoingFlight">
-                    <h1 style={{ marginLeft: 20 }}>outgoing flight :</h1>
-                    <FlightSummary f={outgoingFlight} ></FlightSummary>
-                    <h2 style={{ marginLeft: 20 }}>booked seats: </h2>
-
-                </div>
-                <hr />
-                <div className="returnFlight">
-                    <h1 style={{ marginLeft: 20 }} >Return flight :</h1>
-                    <FlightSummary f={returnFlight} ></FlightSummary>
-                    <h2 style={{ marginLeft: 20 }} >booked seats: </h2>
-
-                </div>
-
-            </div>
+            <ThemeProvider theme={theme}>
+           <Grid align="center">
+               <Paper elevation={10} style={paperStyle}>
+                   <Grid>
+                   <SummarizeOutlinedIcon  color="primary" style={{fontSize:"100"}}/>
+                   </Grid>
+                   <br/>
+                    <Grid container>
+                   <Grid item xs={6} align="left">
+                   <h2 style={{color:"#be8b14"}}>Outgoing Flight:-</h2>
+                   
+                   <FlightSummary f={outgoingFlight} ></FlightSummary>
+                   <h4>Booked seats:</h4>
+                   <hr/>
+                   </Grid>
+                   <Grid item xs={6} align="left">
+                   <h2 style={{color:"#be8b14"}}>Return Flight:-</h2>
+                   <FlightSummary f={returnFlight} ></FlightSummary>
+                   <h4>Booked seats:</h4>
+                   <hr/>
+                   </Grid>
+                   </Grid>
+               </Paper>
+           </Grid>
+           </ThemeProvider>
         )
     }
 }

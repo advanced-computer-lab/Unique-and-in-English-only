@@ -54,7 +54,7 @@ const updateHelper= async(flightObj) =>{
       <h3>From: {props.f.DeparturePort}</h3>
       <h3>To: {props.f.ArrivalPort}</h3>
       <h4>Departure Time: {props.f.DepartureTime}</h4>
-      <h5>Arrival Time: {props.f.ArrivalTime}</h5>
+      <h4>Arrival Time: {props.f.ArrivalTime}</h4>
       <Button id="btn" type="button" variant="contained" style={{backgroundColor:'#bd8b13',width:'45%',float:"left"}} onClick={(e) => { deleteHelper(props.f) }}>  <b>Delete</b></Button>
       <Button  type="button" variant="contained" style={{backgroundColor:'#bd8b13',width:'45%',float:"right"}} onClick={(e) => { updateHelper(props.f) }}>  <b>update</b></Button>
       </Paper>

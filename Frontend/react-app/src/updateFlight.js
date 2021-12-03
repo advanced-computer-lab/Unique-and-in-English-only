@@ -20,6 +20,7 @@ import TextField from '@mui/material/TextField';
 import Box from '@mui/material/Box';
 import InputAdornment from '@mui/material/InputAdornment';
 import EditIcon from '@mui/icons-material/Edit';
+import EditOutlinedIcon from '@mui/icons-material/EditOutlined';
 
 const theme = createMuiTheme({
   palette: {
@@ -401,11 +402,11 @@ function UpdateFlight(props) {
 
     <ThemeProvider theme={theme}>
     <Container>
-      
+    
         <Grid>
         <Paper elevation={10} style={paperStyle}>
         <Grid align="center" >
-            <EditIcon  color="primary" style={{fontSize:"100"}}/>
+            <EditOutlinedIcon  color="primary" style={{fontSize:"100"}}/>
             </Grid>
             <Box component="form" sx={{'& .MuiTextField-root': { m: 1, width: '25ch' },}}>
             <form noValidate autoComplete='off' >
