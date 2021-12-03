@@ -120,36 +120,33 @@ function SearchFlight() {
   if (flight.length >= 1) {
     return (
       <ThemeProvider theme={theme}>
-        <div>
-          <h1 style={{ margin: "20px" }}>    Search Flights</h1>
-          <div className="container1">
-            <div className="results">
-              <h1 align="center">Search Results</h1>
-              <div align="center">
-                <ScreenSearchDesktopOutlinedIcon color="primary" style={{ fontSize: "150" }} />
+        
+        <Grid style={{margin:'120px auto'}} align="center" >
+          <Grid  >
+          
+            <Grid>
+              
+              
+                <ScreenSearchDesktopOutlinedIcon color="primary" style={{ fontSize: "200" }} />
+                <h1 align="center">Search Results</h1>
+            </Grid>
+             
+           
+             
 
-              </div>
-
-              <div id="flightsDisplay">
 
 
-
-
+            <Grid  item xs={6}  width="600px">
                 {
                   flight.map((f) =>
                     <FlightDetails f={f} deleteHandler={DeleteClickHandler} updateHandler={UpdateClickHandler} />
                   )}
 
-              </div>
-              <div align="center">
-                <h2>
-                  <a href="/searchFlight">Search for other flights</a>
-                </h2>
-              </div>
-
-            </div>
-          </div>
-        </div>
+              </Grid>
+                </Grid>
+            </Grid>
+         
+        
       </ThemeProvider>
     )
   }

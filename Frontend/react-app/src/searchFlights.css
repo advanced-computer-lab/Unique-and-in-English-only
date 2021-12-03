@@ -56,7 +56,8 @@ h1{
 }
 #flightsDisplay{
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
+    
 }
 .results{
     background-color: rgb(255, 255, 255);

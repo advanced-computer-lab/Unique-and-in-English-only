@@ -173,6 +173,7 @@ export default function CreateFlight() {
     var flag3=true
     var flag4=true
     var flag5=true
+    var flag6=true
 
    setflightNumberValidateFlag(false)
    settripDurationValidateFlag(false)
@@ -238,7 +239,11 @@ export default function CreateFlight() {
       setarrTimeValidateFlag(true)
 
   }
-    if(values.EconomySeatsNumber<=0){
+
+  
+ 
+
+    if(values.EconomySeatsNumber<0){
       seteconomySeatsValidate("Number of seats must be positive")
       seteconomySeatsValidateFlag(true)
       flag3=false
@@ -247,7 +252,7 @@ export default function CreateFlight() {
       flag3=true
       seteconomySeatsValidate("")
     }
-    if(values.BuisnessSeatsNumber<=0){
+    if(values.BuisnessSeatsNumber<0){
       setbusinessSeatsValidate("Number of seats must be positive")
       flag4=false
       setbusinessSeatsValidateFlag(true)
@@ -326,10 +331,16 @@ export default function CreateFlight() {
       flag5=false
     }
 
+    if(values.EconomySeatsNumber==0&&values.BuisnessSeatsNumber==0){
+      seteconomySeatsValidate("Choose atleast 1 Economy or Business seat")
+        seteconomySeatsValidateFlag(true)
+        setbusinessSeatsValidate("Choose atleast 1 Economy or Business seat")
+        setbusinessSeatsValidateFlag(true)
+        flag6=false
+    }
 
 
-
-    if(flag1&&flag2&&flag3&&flag4&&flag5){
+    if(flag1&&flag2&&flag3&&flag4&&flag5&&flag6){
       event.preventDefault();
       axios.post('http://localhost:150/flight/createflight', values)
         .then(function (response) {
