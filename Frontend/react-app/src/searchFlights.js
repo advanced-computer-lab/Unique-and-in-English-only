@@ -119,33 +119,21 @@ function SearchFlight() {
   }
   if (flight.length >= 1) {
     return (
+      
       <ThemeProvider theme={theme}>
-        
         <Grid style={{margin:'120px auto'}} align="center" >
-          <Grid  >
-          
             <Grid>
-              
-              
                 <ScreenSearchDesktopOutlinedIcon color="primary" style={{ fontSize: "200" }} />
-                <h1 align="center">Search Results</h1>
             </Grid>
-             
-           
-             
-
-
-
-            <Grid  item xs={6}  width="600px">
+           <Grid  item xs={12}  align="left">
                 {
                   flight.map((f) =>
                     <FlightDetails f={f} deleteHandler={DeleteClickHandler} updateHandler={UpdateClickHandler} />
                   )}
 
               </Grid>
-                </Grid>
-            </Grid>
-         
+              </Grid>
+        
         
       </ThemeProvider>
     )

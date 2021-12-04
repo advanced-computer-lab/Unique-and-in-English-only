@@ -7,6 +7,7 @@ import { confirm } from "react-confirm-box";
 import { Link } from "react-router-dom";
 import FlightDetails from './FlightDetails';
 import "./listFlights.css";
+import Grid from '@mui/material/Grid';
 
 import Container from '@mui/material/Container';
 //import userRouter from '../../../backEnd/routes/UserRoutes';
@@ -51,10 +52,13 @@ function ListFlights() {
     return (
        <Container style={{margin:"150px 0"}}>
           
-        
+        <Grid container>
+          <Grid item xs={12}>
         {flight.map((f) =>
           <FlightDetails f={f} deleteHandler={DeleteClickHandler} updateHandler={UpdateClickHandler} />
         )}
+        </Grid>
+        </Grid>
 
       
 </Container>

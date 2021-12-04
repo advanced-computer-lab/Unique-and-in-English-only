@@ -9,7 +9,7 @@ function Footer() {
         <div className="row1">
           {/* Column1 */}
           <div className="col">
-            <h2>Unique Airways</h2>
+            <h2>UNIQUE AIRLINES</h2>
             <h3 className="list-unstyled">
               <li>342-420-6969</li>
               <li>Cairo,Egypt</li>
@@ -18,7 +18,7 @@ function Footer() {
           </div>
           {/* Column2 */}
           <div className="col">
-            <h4>USEFUL LINKS</h4>
+            <h2>UNIQUE LINKS</h2>
             <ui className="list-unstyled">
             <li>  <Link href="#" underline="hover">Baggage</Link></li>
               <li> <Link href="#" underline="hover">Payment options</Link></li>
@@ -28,7 +28,7 @@ function Footer() {
           </div>
           {/* Column3 */}
           <div className="col">
-            <h4>ABOUT UNIQUE AVIATION GROUP</h4>
+            <h2>UNIQUE AVIATION GROUP</h2>
             <ui className="list-unstyled">
              <li>  <Link href="#" underline="hover">Unique Guest</Link></li>
               <li> <Link href="#" underline="hover">Unique Cargo</Link></li>

@@ -16,7 +16,9 @@ import ReturnSeatSelection from "./ReturnSeatSelection";
 import SummaryPage from './summaryPage';
 import SignIn from './signIn';
 import {useEffect} from 'react';
-import ViewTickets from './ticketsView'
+import ViewTickets from './ticketsView';
+import {Link} from 'react-router-dom';
+import {useHistory} from "react-router-dom";
 function App() {
   useEffect(() => {
     document.title = "Unique Airlines"
@@ -28,6 +30,7 @@ function App() {
       <nav className="navbarcontainer">
         <ResponsiveAppBar />
       </nav>
+
 
       {/* <div className="mainContainer"> */}
       <Switch>
