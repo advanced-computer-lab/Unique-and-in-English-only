@@ -126,7 +126,7 @@ export default function CreateFlight() {
     return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
   });
   const [open1, setOpen1] = React.useState(false);
-  const paperStyle={padding:20, height:'1500px',width:600,margin:"150px auto",minheight: '1300px'}
+  const paperStyle={padding:20, height:'1300px',width:600,margin:"150px auto",minheight: '1300px'}
   const avatarStyle={backgroundColor:'#be8b14'}
   const handleClick1 = () => {
     setOpen1(true);
@@ -641,7 +641,7 @@ export default function CreateFlight() {
         <br/>
         <br/>
         <Grid align="right">
-         <Button margin="5" type="button" variant="contained" style={{backgroundColor:'#bd8b13',width:'50%',display:'block'}} onClick={(e) => { onSubmit(e) }}>Create</Button>
+         <Button margin="0" type="button"  variant="contained" style={{backgroundColor:'#bd8b13',width:'30%',height:"35%"}} onClick={(e) => { onSubmit(e) }}>Create</Button>
 </Grid>
         
 

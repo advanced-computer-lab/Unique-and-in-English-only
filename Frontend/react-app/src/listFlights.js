@@ -8,9 +8,22 @@ import { Link } from "react-router-dom";
 import FlightDetails from './FlightDetails';
 import "./listFlights.css";
 import Grid from '@mui/material/Grid';
-
+import { Avatar, createMuiTheme, FormControlLabel, ThemeProvider } from '@mui/material';
+import ScreenSearchDesktopOutlinedIcon from '@mui/icons-material/ScreenSearchDesktopOutlined';
 import Container from '@mui/material/Container';
+import ListAltOutlinedIcon from '@mui/icons-material/ListAltOutlined';
 //import userRouter from '../../../backEnd/routes/UserRoutes';
+
+const theme = createMuiTheme({
+  palette: {
+    primary: {
+      main: '#be8b14'
+    },
+    secondary: {
+      main: '#000000'
+    }
+  }
+})
 
 function ListFlights() {
   const [flight, setFlight] = useState([]);
@@ -50,18 +63,22 @@ function ListFlights() {
   }
   if(flight.length>0){
     return (
-       <Container style={{margin:"150px 0"}}>
-          
-        
-          <Grid item xs={12} align="left">
-        {flight.map((f) =>
-          <FlightDetails f={f} deleteHandler={DeleteClickHandler} updateHandler={UpdateClickHandler} />
-        )}
-        </Grid>
-      
+      <ThemeProvider theme={theme}>
+      <Grid style={{margin:'120px auto'}} align="center" >
+          <Grid>
+              <ListAltOutlinedIcon color="primary" style={{ fontSize: "200" }} />
+          </Grid>
+         <Grid  item xs={12}  align="left">
+              {
+                flight.map((f) =>
+                  <FlightDetails f={f} deleteHandler={DeleteClickHandler} updateHandler={UpdateClickHandler} />
+                )}
 
+            </Grid>
+            </Grid>
       
-</Container>
+      
+    </ThemeProvider>
   );}
   else{
     return(
