@@ -19,13 +19,25 @@ import {useEffect} from 'react';
 import ViewTickets from './ticketsView';
 import {Link} from 'react-router-dom';
 import {useHistory} from "react-router-dom";
+import { Avatar, createMuiTheme, FormControlLabel, ThemeProvider } from '@mui/material';
+
+const theme = createMuiTheme({
+  palette: {
+    primary: {
+      main: '#be8b14'
+    },
+    secondary: {
+      main: '#000000'
+    }
+  }
+})
 function App() {
   useEffect(() => {
     document.title = "Unique Airlines"
   }, [])
   return (
    
-
+    <ThemeProvider theme={theme}>
     <Router>
       <nav className="navbarcontainer">
         <ResponsiveAppBar />
@@ -79,7 +91,7 @@ function App() {
       <Footer></Footer>
 
     </Router>
-
+    </ThemeProvider>
   );
 }
 export default App;

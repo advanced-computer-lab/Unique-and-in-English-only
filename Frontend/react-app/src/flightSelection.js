@@ -10,6 +10,9 @@ import "./listFlights.css";
 import FlightSelectionCard from "./flightSelectionCard.js";
 import { useHistory } from "react-router-dom";
 import ResponsiveAppBar from "./ResponsiveAppBar";
+import BlockOutlinedIcon from '@mui/icons-material/BlockOutlined';
+import Grid from '@mui/material/Grid';
+
 
 
 //import userRouter from '../../../backEnd/routes/UserRoutes';
@@ -62,9 +65,13 @@ function FlightSelection() {
   }
   else {
     return (
-      <div className="mainContainer">
-        <h1>no flights matches your search criteria</h1>
-      </div>
+      <Grid style={{margin:'120px auto'}} align="center" >
+        <BlockOutlinedIcon color="primary" style={{ fontSize: "300" }} />
+        <br/>
+        <br/>
+        <br/>
+        <h1>No flights match your search criteria</h1>
+      </Grid>
     )
   }
 
