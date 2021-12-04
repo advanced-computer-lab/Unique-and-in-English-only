@@ -18,6 +18,8 @@ import * as React from 'react';
 import Stack from '@mui/material/Stack';
 import Snackbar from '@mui/material/Snackbar';
 import MuiAlert from '@mui/material/Alert';
+import {useHistory} from "react-router-dom";
+import { Link } from "react-router-dom"
 
 
 const paperStyle = { padding: 20, height: '1300px', width: 600, margin: "150px auto", minheight: '1300px' }
@@ -32,6 +34,7 @@ const theme = createMuiTheme({
   }
 })
 function SearchFlight() {
+  let history=useHistory();
   const [values, setValues] = useState({
     FlightNumber: '',
     DepartureTime: '',
@@ -133,7 +136,11 @@ function SearchFlight() {
 
               </Grid>
               </Grid>
-        
+              <Grid align="center">
+                <h3>
+              <Link to onClick={()=>{setFlight('')}}>Search for other flights</Link>
+              </h3>
+              </Grid>
         
       </ThemeProvider>
     )
