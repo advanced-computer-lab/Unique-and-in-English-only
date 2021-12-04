@@ -640,8 +640,9 @@ export default function CreateFlight() {
         <br/>
         <br/>
         <br/>
-         <Button margin="5" type="button" variant="contained" style={{backgroundColor:'#bd8b13',width:'100%',display:'block'}} onClick={(e) => { onSubmit(e) }}>Create</Button>
-
+        <Grid align="right">
+         <Button margin="5" type="button" variant="contained" style={{backgroundColor:'#bd8b13',width:'50%',display:'block'}} onClick={(e) => { onSubmit(e) }}>Create</Button>
+</Grid>
         
 
         

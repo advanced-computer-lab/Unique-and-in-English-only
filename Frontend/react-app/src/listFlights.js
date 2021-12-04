@@ -52,13 +52,13 @@ function ListFlights() {
     return (
        <Container style={{margin:"150px 0"}}>
           
-        <Grid container>
-          <Grid item xs={12}>
+        
+          <Grid item xs={12} align="left">
         {flight.map((f) =>
           <FlightDetails f={f} deleteHandler={DeleteClickHandler} updateHandler={UpdateClickHandler} />
         )}
         </Grid>
-        </Grid>
+      
 
       
 </Container>

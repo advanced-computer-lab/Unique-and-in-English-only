@@ -30,7 +30,7 @@ const theme=createMuiTheme({
 
 
 
-const paperStyle={padding:20, height:'300px',width:'1000px',margin:"20px auto",minheight: '500px',minwidth:'1000px'}
+const paperStyle={padding:20, height:'300px',width:'1200px',margin:"25px 0"}
 
 
 const airports = [
@@ -101,7 +101,7 @@ function SearchFlightDiv() {
     <Container>
         
     <Grid align="center">
-        <Paper elevation={24} rounded style={paperStyle}>
+        <Paper elevation={3} rounded style={paperStyle}>
         <Grid container spacing={1}>
             <Grid item xs={3}>
                 <h5>From</h5>

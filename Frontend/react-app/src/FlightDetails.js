@@ -36,7 +36,7 @@ const useStyles=makeStyles({
 })
 
 function FlightDetails(props) {
-  const paperStyle={padding:20, height:'300px',width:'500px',margin:"10px auto",minheight: '400px'}
+  const paperStyle={padding:20, height:'300px',width:'800px',margin:"10px auto",minheight: '400px'}
 
 const deleteHelper= async(flightObj) =>{
   props.deleteHandler(flightObj)
@@ -55,8 +55,8 @@ const updateHelper= async(flightObj) =>{
       <h3>To: {props.f.ArrivalPort}</h3>
       <h4>Departure Time: {props.f.DepartureTime}</h4>
       <h4>Arrival Time: {props.f.ArrivalTime}</h4>
-      <Button id="btn" type="button" variant="contained" style={{backgroundColor:'#bd8b13',width:'45%',float:"left"}} onClick={(e) => { deleteHelper(props.f) }}>  <b>Delete</b></Button>
-      <Button  type="button" variant="contained" style={{backgroundColor:'#bd8b13',width:'45%',float:"right"}} onClick={(e) => { updateHelper(props.f) }}>  <b>update</b></Button>
+      <Button id="btn" type="button" variant="contained"  style={{backgroundColor:'#bd8b13',width:'15%',float:"right",height:"15%",margin:"10px 10px"}} onClick={(e) => { deleteHelper(props.f) }}>  <b>Delete</b></Button>
+      <Button  type="button" variant="contained" style={{backgroundColor:'#bd8b13',width:'15%',float:"right",margin:"10px auto",height:"15%"}} onClick={(e) => { updateHelper(props.f) }}>  <b>update</b></Button>
       </Paper>
     </Grid>
     <Grid>
