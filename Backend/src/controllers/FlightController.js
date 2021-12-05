@@ -204,10 +204,10 @@ function searchFlightPassenger(req, res) {
     const departurePort = flight.flyingFrom.airportName;
     const arrivalPort = flight.flyingTo.airportName;
     const cabin = flight.cabin;
-    var seats = "EconomySeatsNumber";
+    var seats = "AvailableEconomySeatsNumber";
 
     if (cabin == "Buisness") {
-        seats = "BuisnessSeatsNumber";
+        seats = "AvailableBuisnessSeatsNumber";
     }
 
     outgoingFlight = {
@@ -341,7 +341,16 @@ const confirmTicket = (req, res) => {
 
     reserveSeatsinFlight(outgoingFlight, ticket.outgoingSeats, ticket.cabin)
     reserveSeatsinFlight(returnFlight, ticket.returnSeats, ticket.cabin)
+    if(sessions.cabin=='Buisness'){
+        outgoingFlight.AvailableBuisnessSeatsNumber-=ticket.returnSeats.length;
+        returnFlight.AvailableBuisnessSeatsNumber-=ticket.returnSeats.length;
 
+    }else{
+        outgoingFlight.AvailableEconomySeatsNumber-=ticket.returnSeats.length;
+        returnFlight.AvailableEconomySeatsNumber-=ticket.returnSeats.length;
+
+    }
+     
 
     Flight.findByIdAndUpdate(outgoingFlight._id, outgoingFlight)
         .then((result) => {
@@ -428,7 +437,15 @@ const deleteTicket = (req, res) => {
     const returnFlight = deletedTicket.returnFlight;
     unreserveSeatsinFlight(outgoingFlight, outgoingSeats, cabin);
     unreserveSeatsinFlight(returnFlight, returnSeats, cabin);
+    if(cabin=='Buisness'){
+        outgoingFlight.AvailableBuisnessSeatsNumber+=ticket.returnSeats.length;
+        returnFlight.AvailableBuisnessSeatsNumber+=ticket.returnSeats.length;
 
+    }else{
+        outgoingFlight.AvailableEconomySeatsNumber+=ticket.returnSeats.length;
+        returnFlight.AvailableEconomySeatsNumber+=ticket.returnSeats.length;
+
+    }
     console.log("jngfdljnjklngdfjln ");
     console.log(outgoingSeats);
     console.log(outgoingFlight);
