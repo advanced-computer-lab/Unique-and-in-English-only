@@ -1,9 +1,40 @@
 import axios from 'axios';
 import { useState } from 'react'
 import { confirm } from "react-confirm-box";
+import FlightDetails from './FlightDetails';
+import "./searchFlights.css";
+import Input from '@mui/material/Input';
+import Button from '@mui/material/Button';
+import TextField from '@mui/material/TextField';
+import Grid from '@mui/material/Grid';
+import Paper from '@mui/material/Paper';
+import { Avatar, createMuiTheme, FormControlLabel, ThemeProvider } from '@mui/material';
+import AirplaneTicketOutlinedIcon from '@mui/icons-material/AirplaneTicketOutlined';
+import Box from '@mui/material/Box';
+import Container from '@mui/material/Container';
+import SearchOutlinedIcon from '@mui/icons-material/SearchOutlined';
+import ScreenSearchDesktopOutlinedIcon from '@mui/icons-material/ScreenSearchDesktopOutlined';
+import * as React from 'react';
+import Stack from '@mui/material/Stack';
+import Snackbar from '@mui/material/Snackbar';
+import MuiAlert from '@mui/material/Alert';
+import {useHistory} from "react-router-dom";
+import { Link } from "react-router-dom"
 
 
+const paperStyle = { padding: 20, height: '1300px', width: 600, margin: "150px auto", minheight: '1300px' }
+const theme = createMuiTheme({
+  palette: {
+    primary: {
+      main: '#be8b14'
+    },
+    secondary: {
+      main: '#000000'
+    }
+  }
+})
 function SearchFlight() {
+  let history=useHistory();
   const [values, setValues] = useState({
     FlightNumber: '',
     DepartureTime: '',
@@ -12,11 +43,34 @@ function SearchFlight() {
     BuisnessSeatsNumber: '',
     DeparturePort: '',
     ArrivalPort: '',
-    DepartureTerminal: '',
     ArrivalTerminal: '',
+    DepartureTerminal: '',
+    BusinessPrice: '',
+    EconomyPrice: '',
+    BaggageAllowance: '',
+    TripDuration: ''
   });
 
   const [flight, setFlight] = useState([]);
+  const [openSnack, setOpenSnack] = React.useState(false);
+
+  const Alert = React.forwardRef(function Alert(props, ref) {
+
+    return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
+  });
+
+  const handleClickSnackbar = () => {
+    setOpenSnack(true);
+  };
+
+  const handleCloseSnackbar = (event, reason) => {
+    if (reason === 'clickaway') {
+      return;
+    }
+
+    setOpenSnack(false);
+  };
+
 
   const set = name => {
     return ({ target: { value } }) => {
@@ -57,61 +111,295 @@ function SearchFlight() {
       }
     })
       .then(function (result) {
+        if (result.data.length == 0) {
+          handleClickSnackbar();
+        }
         setFlight(result.data);
       })
       .catch(function (error) {
         console.log(error);
       });
   }
+  if (flight.length >= 1) {
+    return (
+      
+      <ThemeProvider theme={theme}>
+        <Grid style={{margin:'120px auto'}} align="center" >
+            <Grid>
+                <ScreenSearchDesktopOutlinedIcon color="primary" style={{ fontSize: "200" }} />
+            </Grid>
+           <Grid  item xs={12}  align="left">
+                {
+                  flight.map((f) =>
+                    <FlightDetails f={f} deleteHandler={DeleteClickHandler} updateHandler={UpdateClickHandler} />
+                  )}
 
-  return (
+              </Grid>
+              </Grid>
+              <Grid align="center">
+                <h3>
+              <Link to onClick={()=>{setFlight('')}}>Search for other flights</Link>
+              </h3>
+              </Grid>
+        
+      </ThemeProvider>
+    )
+  }
+  else {
+    return (
 
-    <div className="container">
-      <div className="searchflight-form">
-        <a href="http://localhost:3000">back</a>
-        <form>
-          <label >Flight Number :</label><br></br>
-          <input type="text" id="FlightNumber" value={values.FlightNumber} onChange={set('FlightNumber')}  ></input><br></br>
-          <label >Departure Time :</label><br></br>
-          <input type="text" id="DepartureTime" value={values.DepartureTime} onChange={set('DepartureTime')}  ></input><br></br>
-          <label >Arrival Time :</label><br></br>
-          <input type="text" id="ArrivalTime" value={values.ArrivalTime} onChange={set('ArrivalTime')} ></input><br></br>
-          <label >Economy Seats Number :</label><br></br>
-          <input type="text" id="EconomySeatsNumber" value={values.EconomySeatsNumber} onChange={set('EconomySeatsNumber')} ></input><br></br>
-          <label >Buisness Seats Number :</label><br></br>
-          <input type="text" id="BuisnessSeatsNumber" value={values.BuisnessSeatsNumber} onChange={set('BuisnessSeatsNumber')}  ></input><br></br>
-          <label >Departure Port : </label><br></br>
-          <input type="text" id="DeparturePort" value={values.DeparturePort} onChange={set('DeparturePort')}  ></input><br></br>
-          <label >Arrival Port : </label><br></br>
-          <input type="text" id="ArrivalPort" value={values.ArrivalPort} onChange={set('ArrivalPort')}  ></input><br></br>
-          <label >Departure Terminal : </label><br></br>
-          <input type="text" id="DepartureTerminal" value={values.DepartureTerminal} onChange={set('DepartureTerminal')}  ></input><br></br>
-          <label >Arrival Port : </label><br></br>
-          <input type="text" id="ArrivalTerminal" value={values.ArrivalTerminal} onChange={set('ArrivalTerminal')}  ></input><br></br>
-          <button type="button" onClick={(e) => { onSubmit(e) }}>search</button>
-        </form>
-      </div>
+      <ThemeProvider theme={theme}>
+        <Container>
 
-      <div id="flightsDisplay">
-        {
-          flight.map((f) =>
-            <div className="row" key={f._id}>
-              <p className="left-txt"> <b>Flight Number:{f.FlightNumber} </b> </p>
-              <p className="left-txt"> <b>Departure Time:{f.DepartureTime} </b></p>
-              <p className="left-txt"> <b>Arrival Time:{f.ArrivalTime} </b></p>
-              <p className="left-txt"> <b>Economy Seats Number:{f.EconomySeatsNumber} </b></p>
-              <p className="left-txt"> <b>Buisness Seats Number:{f.BuisnessSeatsNumber} </b></p>
-              <p className="left-txt"> <b>Departure Port:{f.DeparturePort} </b></p>
-              <p className="left-txt"> <b>Arrival Port:{f.ArrivalPort} </b></p>
-              <p className="left-txt"> <b>Departure Terminal:{f.DepartureTerminal} </b></p>
-              <p className="left-txt"> <b>Arrival Terminal:{f.ArrivalTerminal} </b></p>
-              <button className="left-txt" onClick={(e) => { DeleteClickHandler(f) }}>  <b>Delete</b></button>
-              <button className="left-txt" onClick={(e) => { UpdateClickHandler(f) }}>  <b>update</b></button>
-            </div>
-          )}
-      </div>
-    </div>
-  )
+          <Grid>
+            <Paper elevation={10} style={paperStyle}>
+              <Grid align="center" >
+                <SearchOutlinedIcon color="primary" style={{ fontSize: "150" }} />
+              </Grid>
+              <Box component="form" sx={{ '& .MuiTextField-root': { m: 1, width: '25ch' }, }}>
+                <form noValidate autoComplete='off' >
+
+                  <Grid container spacing={2}>
+
+                    <Grid item xs={6}>
+                      <h2 style={{ color: "#be8b14" }}>Flight Number:</h2>
+                      <TextField
+
+                        label="Flight Number"
+                        variant="standard"
+                        placeholder="Enter Flight Number"
+                        color="primary"
+                        style={{ width: '200' }}
+                        minLength="3"
+                        id="FlightNumber"
+                        value={values.FlightNumber} onChange={set('FlightNumber')}
+
+                      />
+                    </Grid>
+
+                    <Grid item xs={6} align="center">
+
+                      <h2 style={{ color: "#be8b14" }}>Trip Duration:</h2>
+                      <TextField
+                        type="text"
+                        id="ArrivalTerminal"
+                        variant="standard"
+                        label="Trip Duration"
+                        placeholder="Enter Trip Duration"
+                        color="primary"
+                        style={{ width: '200' }}
+                        value={values.TripDuration}
+                        onChange={set('TripDuration')}
+                      />
+                    </Grid>
+
+
+
+
+
+                    <Grid item xs={6}  >
+                      <h2 style={{ color: "#be8b14" }}>Arrival Time:</h2>
+                      <TextField
+                        type="date"
+                        id="ArrivalTime"
+                        variant="standard"
+                        color="primary"
+                        style={{ width: '200' }}
+                        required
+                        value={values.ArrivalTime} onChange={set('ArrivalTime')}
+                      />
+                    </Grid>
+
+                    <Grid item xs={6} align="center">
+                      <h2 style={{ color: "#be8b14" }}>Departure Time:</h2>
+
+                      <TextField
+                        type="date"
+                        id="DepartureTime"
+                        variant="standard"
+                        color="primary"
+                        style={{ width: '200' }}
+                        required
+                        value={values.DepartureTime} onChange={set('DepartureTime')}
+                      />
+                    </Grid>
+
+
+
+                    <Grid item xs={6}>
+                      <h2 style={{ color: "#be8b14" }}>Business Seats:</h2>
+                      <TextField
+                        type="number"
+                        id="BuisnessSeatsNumber"
+                        label="Number of Business Seats"
+                        variant="standard"
+                        color="primary"
+                        style={{ width: '200' }}
+                        alue={values.BuisnessSeatsNumber}
+                        onChange={set('BuisnessSeatsNumber')}
+                      />
+                    </Grid>
+
+                    <Grid item xs={6} align="center">
+                      <h2 style={{ color: "#be8b14" }}>Economy Seats:</h2>
+                      <TextField
+                        type="number"
+                        id="EconomySeatsNumber"
+                        variant="standard"
+                        color="primary"
+                        style={{ width: '200' }}
+                        label="Number of Economy Seats"
+                        value={values.EconomySeatsNumber}
+                        onChange={set('EconomySeatsNumber')}
+                      />
+                    </Grid>
+
+
+                    <Grid item xs={6} >
+                      <h2 style={{ color: "#be8b14" }}>Departure Port:</h2>
+                      <TextField
+                        type="text"
+                        id="DeparturePort"
+                        variant="standard"
+                        label="Departure Port"
+                        placeholder="Enter Departure Port"
+                        color="primary"
+                        style={{ width: '200' }}
+                        value={values.DeparturePort}
+                        onChange={set('DeparturePort')}
+                      />
+                    </Grid>
+
+                    <Grid item xs={6} align="center">
+                      <h2 style={{ color: "#be8b14" }}>Arrival Port:</h2>
+                      <TextField
+                        type="text"
+                        id="ArrivalPort"
+                        variant="standard"
+                        label="Arrival Port"
+                        placeholder="Enter Arrival Port"
+                        color="primary"
+                        style={{ width: '200' }}
+                        value={values.ArrivalPort}
+                        onChange={set('ArrivalPort')}
+                      />
+                    </Grid>
+
+                    <Grid item xs={6} >
+                      <h2 style={{ color: "#be8b14" }}>Departure Terminal:</h2>
+                      <TextField
+                        type="text"
+                        id="DepartureTerminal"
+                        variant="standard"
+                        label="Departure Terminal"
+                        placeholder="Enter Departure Terminal"
+                        color="primary"
+                        style={{ width: '200' }}
+                        value={values.DepartureTerminal}
+                        onChange={set('DepartureTerminal')}
+                      />
+                    </Grid>
+
+                    <Grid item xs={6} align="center">
+                      <h2 style={{ color: "#be8b14" }}>Arrival Terminal:</h2>
+                      <TextField
+                        type="text"
+                        id="ArrivalTerminal"
+                        variant="standard"
+                        label="Arrival Terminal"
+                        placeholder="Enter Arrival Terminal"
+                        color="primary"
+                        style={{ width: '200' }}
+                        value={values.ArrivalTerminal}
+                        onChange={set('ArrivalTerminal')}
+                      />
+                    </Grid>
+
+                    <Grid item xs={6} >
+                      <h2 style={{ color: "#be8b14" }}>Business Price:</h2>
+                      <TextField
+                        type="text"
+                        id="BusinessPrice"
+                        variant="standard"
+                        label="BusinessPrice"
+                        placeholder="Enter Business Price"
+                        color="primary"
+                        style={{ width: '200' }}
+                        value={values.BusinessPrice}
+                        onChange={set('BusinessPrice')}
+                      />
+                    </Grid>
+
+                    <Grid item xs={6} align="center">
+                      <h2 style={{ color: "#be8b14" }}>Economy Price:</h2>
+                      <TextField
+                        type="text"
+                        id="EconomyPrice"
+                        variant="standard"
+                        label="Economy Price"
+                        placeholder="Enter Economy Price"
+                        color="primary"
+                        style={{ width: '200' }}
+                        value={values.EconomyPrice}
+                        onChange={set('EconomyPrice')}
+                      />
+                    </Grid>
+
+                    <Grid item xs={6} >
+                      <h2 style={{ color: "#be8b14" }}>Baggage Allowance:</h2>
+                      <TextField
+                        type="text"
+                        id="BaggageAllowance"
+                        variant="standard"
+                        label="Baggage Allowance"
+                        placeholder="Enter Baggage Allowance"
+                        color="primary"
+                        style={{ width: '200' }}
+                        value={values.BaggageAllowance}
+                        onChange={set('BaggageAllowance')}
+                      />
+                    </Grid>
+
+
+
+
+
+
+
+
+
+                  </Grid>
+                  <br />
+                  <br />
+                  <br />
+                  <br />
+                  <Button margin="5" type="button" variant="contained" style={{ backgroundColor: '#bd8b13', width: '100%', display: 'block' }} onClick={(e) => { onSubmit(e) }}>SEARCH</Button>
+
+
+
+
+
+                </form>
+              </Box>
+
+
+            </Paper>
+
+          </Grid>
+          <Stack spacing={2} sx={{ width: '100%' }}>
+
+            <Snackbar open={openSnack} autoHideDuration={6000} onClose={handleCloseSnackbar}>
+              <Alert onClose={handleCloseSnackbar} severity="error" sx={{ width: '100%' }}>
+                No flights were found!
+               </Alert>
+            </Snackbar>
+          </Stack>
+
+        </Container>
+      </ThemeProvider>
+
+    )
+  }
 }
 
 function removeObjectFromArray(flight, flightObj) {

@@ -4,13 +4,14 @@
     /* background-color: yellow; */
     border-radius: 12px;
     box-shadow: 0 1px 5px rgba(0,0,0,25%);
-    position: fixed;
-    
+   
+    margin :40px;
     width: 90%;
     height: fit-content;
     display: flex;
     flex-wrap: wrap;
-    padding-top:20px;
+    padding:25px;
+
 }
 
 .searchFlight .searchFlightElem{
@@ -21,6 +22,7 @@
     margin-right: 2px;
 }
 
+
 input .outboundDate{
     padding: 10px;
 }
@@ -30,11 +32,13 @@ input .returnDate{
 }
 
 .searchFlight .date{
-    width:200px;
+    /* width:200px; */
+    display: flex;
 }
 
 .passengers{
     display: flex;
+    padding-top: 23px;
 }
 
 #confirmButton_searchFlight{

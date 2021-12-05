@@ -1,0 +1,80 @@
+@import url(//db.onlinewebfonts.com/c/5408bb34dd24dc91cfe75db85a76c1bc?family=Etihad+Altis+Medium);
+@font-face {font-family: "Etihad Altis Medium"; src: url("//db.onlinewebfonts.com/t/5408bb34dd24dc91cfe75db85a76c1bc.eot"); src: url("//db.onlinewebfonts.com/t/5408bb34dd24dc91cfe75db85a76c1bc.eot?#iefix") format("embedded-opentype"), url("//db.onlinewebfonts.com/t/5408bb34dd24dc91cfe75db85a76c1bc.woff2") format("woff2"), url("//db.onlinewebfonts.com/t/5408bb34dd24dc91cfe75db85a76c1bc.woff") format("woff"), url("//db.onlinewebfonts.com/t/5408bb34dd24dc91cfe75db85a76c1bc.ttf") format("truetype"), url("//db.onlinewebfonts.com/t/5408bb34dd24dc91cfe75db85a76c1bc.svg#Etihad Altis Medium") format("svg"); }
+.container1{
+    
+width: 100%;    
+display: flex;
+  
+}
+
+.searchflight-form{
+    display: flex;
+    justify-content: space-evenly;
+    flex-direction: column;
+    margin: 20px;
+    
+}
+.searchflight-form label{
+    font-family: "Etihad Altis Medium",'arial',sans-serif;
+    font-size: 20px;
+    color: #be8b14;
+    margin-top:25px ;
+}
+h1{
+    font-family: "Etihad Altis Medium",'arial',sans-serif;
+    color: #be8b14;
+}
+.searchflight-form Input{
+    width: 100%;
+    font-size: larger;
+    
+}
+.searchflight-form Button{
+    margin: 20px;
+    font-family: "Etihad Altis Medium",'arial',sans-serif;
+    background-color: #be8b14;
+    width:70%;
+}
+.createflight-form label{
+    font-family: "Etihad Altis Medium",'arial',sans-serif;
+    font-size: 20px;
+    color: #be8b14;
+    margin-top:25px ;
+
+
+}
+.createflight-form Button{
+    margin: 20px;
+    font-family: "Etihad Altis Medium",'arial',sans-serif;
+    background-color: #be8b14;
+    width:70%;
+}
+.createflight-form Input{
+    width: 100%;
+    font-size: larger;
+    
+}
+#flightsDisplay{
+    display: flex;
+    flex-direction: column;
+    
+}
+.results{
+    background-color: rgb(255, 255, 255);
+    width: 80%;
+}
+.row {
+    margin: 30px;
+    border-right: black solid 1px ;
+    padding-right: 15px;
+}
+p{font-family: "Etihad Altis Medium",'arial',sans-serif;
+
+}
+.createflight-form{
+    margin:30px ;
+}
+.form-errors{
+    color: red;
+    
+}

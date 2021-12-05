@@ -2,6 +2,8 @@ const express = require("express");
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
 var cors = require('cors');
+const cookieParser = require("cookie-parser");
+const sessions = require('express-session');
 
 
 
@@ -21,7 +23,13 @@ require('dotenv').config();
 
 const app = express();
 const port = process.env.PORT || "8000";
+app.use(sessions({
+    secret: "thisismysecrctekeyfhrgfgrfrty84fwir767",
+    saveUninitialized:true,
 
+    resave: false 
+}));
+app.use(cookieParser());
 
 mongoose.connect(dbUrl, { useNewUrlParser: true, useUnifiedTopology: true })
     .then(result => console.log("MongoDB is now connected"))

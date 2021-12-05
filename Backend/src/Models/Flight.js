@@ -22,6 +22,14 @@ const flightSchema = new Schema({
         type: Number,
         required: true
     },
+    AvailableEconomySeatsNumber: {
+        type: Number,
+        required: true
+    },
+    AvailableBuisnessSeatsNumber: {
+        type: Number,
+        required: true
+    },
     DeparturePort: {
         type: String,
         required: true
@@ -41,6 +49,18 @@ const flightSchema = new Schema({
     },
     EconomySeats: {
         type: Array
+    },
+    EconomyPrice:{
+        type:Number
+    },
+    BusinessPrice:{
+        type:Number
+    },
+    TripDuration: {
+        type:Number,
+    },
+    BaggageAllowance: {
+        type:Number,
     }
 
 });

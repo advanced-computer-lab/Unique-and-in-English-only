@@ -6,8 +6,31 @@ import Button from '@mui/material/Button';
 import PersonIcon from '@mui/icons-material/Person';
 import InputAdornment from '@mui/material/InputAdornment';
 import ChildCareIcon from '@mui/icons-material/ChildCare';
-import { useState } from 'react';
+import { useState, ReactDOM } from 'react';
 import axios from 'axios';
+import { useHistory } from "react-router-dom";
+import Select from '@mui/material/Select';
+import MenuItem from '@mui/material/MenuItem';
+import InputLabel from '@mui/material/InputLabel';
+import { Container } from "@mui/material";
+import Paper from '@mui/material/Paper';
+import Grid from '@mui/material/Grid';
+import { Avatar, createMuiTheme,FormControlLabel,ThemeProvider } from '@mui/material';
+
+const theme=createMuiTheme({
+    palette:{
+     primary:{
+       main:'#be8b14'
+      },
+      secondary:{
+        main:'#000000'
+    }
+  }
+  })
+
+
+
+const paperStyle={padding:20, height:'300px',width:'1200px',margin:"25px 0"}
 
 
 const airports = [
@@ -37,16 +60,21 @@ function SearchFlightDiv() {
         returnDate: '',
         adults: '',
         children: '',
-        cabin: ''
+        cabin: 'Buisness'
 
     });
 
     const [flyingFrom, setFlyingFrom] = useState(null);
     const [flyingTo, setFlyingTo] = useState(null);
-
+    const history = useHistory();
     const confirmSearch = async (event) => {
 
-
+        const element = (
+            <div>
+                <h1>Hello, world!</h1>
+                <h2>It is {new Date().toLocaleTimeString()}.</h2>
+            </div>
+        );
         const flight = {};
         flight['flyingFrom'] = flyingFrom;
         flight['flyingTo'] = flyingTo;
@@ -57,11 +85,10 @@ function SearchFlightDiv() {
             flight[key] = values[key];
         }
         event.preventDefault();
-        console.log(flight);
         axios.post('http://localhost:150/flight/searchFlightPassenger', flight)
-            .then(function (response) {
-                console.log(response);
-            })
+            .then(
+                history.push("/flightSelection")
+            )
             .catch(function (error) {
                 console.log(error);
             });
@@ -70,16 +97,23 @@ function SearchFlightDiv() {
     }
 
     return (
-        <div className="searchFlight" >
-            <div className="flying_from searchFlightElem">
-                <Autocomplete
+        <ThemeProvider theme={theme}>
+    <Container>
+        
+    <Grid align="center">
+        <Paper elevation={3} rounded style={paperStyle}>
+        <Grid container spacing={1}>
+            <Grid item xs={3}>
+                <h5>From</h5>
+            <Autocomplete
+            variant="standard"
                     id="flying-from-box"
                     options={airports}
                     value={flyingFrom}
                     defaultValue={{ airportName: "LAX", city: "Los Angeles" }}
                     onChange={(_, newVal) => {
                         setFlyingFrom(newVal);
-                        console.log(newVal);
+                       
                     }}
                     // inputValue={inputFlyingFrom}
                     // onInputChange={(_, newInputValue) => {
@@ -91,9 +125,11 @@ function SearchFlightDiv() {
                     }}
                     getOptionLabel={(option) => option.airportName + " " + option.city}
                     renderInput={(params) => <TextField {...params} label="Flying From" />}
-                />
-            </div>
-            <div className="flying_to searchFlightElem">
+         
+            />
+         </Grid>
+         <Grid item xs={3}>
+         <h5>To</h5>
                 <Autocomplete
                     id="flying-to-box"
                     options={airports}
@@ -101,7 +137,7 @@ function SearchFlightDiv() {
                     defaultValue={{ airportName: "CAI", city: "Cairo" }}
                     onChange={(_, newVal) => {
                         setFlyingTo(newVal);
-                        console.log(newVal);
+                        
                     }}
                     isOptionEqualToValue={(option, value) => {
                         if (option.airportName === value.airportName)
@@ -110,33 +146,27 @@ function SearchFlightDiv() {
                     getOptionLabel={(option) => option.airportName + " " + option.city}
                     renderInput={(params) => <TextField {...params} value={values.flyingTo} onChange={set('flyingTo')} label="Flying to" />}
                 />
+         </Grid>
+         <Grid item xs={3}>
+             <h5>Outbound Date</h5>
+                
+                <TextField id="outboundDate" value={values.outboundDate} onChange={set('outboundDate')} type="date" variant="standard"> </TextField>
+         </Grid>
+         <Grid item xs={3}>
+         <h5>Return Date</h5>
+                <TextField id="returnDate" value={values.returnDate} onChange={set('returnDate')} type="date" variant="standard"> </TextField>
+         
+         </Grid>
+         
 
-            </div>
-            <div className="outbound date searchFlightElem">
-                <label >Outbound date </label>
-                <br />
-                <input id="outboundDate" value={values.outboundDate} onChange={set('outboundDate')} type="date" />
-            </div>
-            <div className="return date searchFlightElem">
-                <label >Return date </label>
-                <br />
-                <input id="returnDate" value={values.returnDate} onChange={set('returnDate')} type="date" />
-
-            </div>
-            <div className="cabin searchFlightElem">
-                <Autocomplete
-                    id="cabin-box"
-                    options={cabinOptions}
-                    getOptionLabel={option => option.class}
-                    renderInput={(params) => <TextField {...params} value={values.cabin} onChange={set('cabin')} label="Cabin" />}
-                />
-            </div>
-            <div className="passengers searchFlightElem">
-                <div className="adults">
-                    <TextField label="adults"
-                        value={values.adults}
-                        onChange={set('adults')}
-                        InputProps={{
+         <Grid item xs={4}>
+         <h5>Adults</h5>
+         <TextField 
+            label="adults"
+            variant="standard"
+            value={values.adults}
+            onChange={set('adults')}
+            InputProps={{
                             startAdornment: (
                                 <InputAdornment position="start">
                                     <PersonIcon />
@@ -144,9 +174,12 @@ function SearchFlightDiv() {
                             ),
                         }}
                     />
-                </div>
-                <div className="children">
-                    <TextField label="children"
+         </Grid>
+
+         <Grid item xs={4}>
+         <h5>Children</h5>
+         <TextField label="children"
+         variant="standard"
                         value={values.children}
                         onChange={set('children')}
                         InputProps={{
@@ -157,15 +190,47 @@ function SearchFlightDiv() {
                             ),
                         }}
                     />
-                </div>
+         </Grid>
+         <Grid item xs={4}>
+         {/* <Autocomplete
+                    id="cabin-box"
+                    options={cabinOptions}
+                    // value={values.cabin}
+                    getOptionLabel={option => option.class}
+                    renderInput={(params) => <TextField {...params} value={values.cabin} onChange={set('cabin')} label="Cabin" />}
+                /> */}
+                <h5>Cabin</h5>
+                
+                <Select
+                color="primary"
+                    labelId="cabin-select-label"
+                    id="demo-simple-select"
+                    value={values.cabin}
+                    label="Cabin"
+                    onChange={set('cabin')}
+                    fullWidth
+                    variant="standard"
+                >
+                    <MenuItem value={"Buisness"}>Buisness</MenuItem>
+                    <MenuItem value={"Economy"}>Economy</MenuItem>
+                </Select>
+         
+         </Grid>
+         <Grid item xs={12} align="right">
+             <br/>
+         <Button style={{backgroundColor:'#bd8b13',width:'30%',display:'block',height:'60%'}} onClick={confirmSearch} variant="contained">Search</Button>
+             </Grid>
 
-            </div>
 
-            <div id="confirmButton_searchFlight" className="searchFlightElem">
-                <Button onClick={confirmSearch} variant="contained">Search</Button>
-            </div>
 
-        </div>
+
+
+                </Grid>
+                </Paper>
+                </Grid>
+                
+        </Container>
+        </ThemeProvider>
     )
 }
 
