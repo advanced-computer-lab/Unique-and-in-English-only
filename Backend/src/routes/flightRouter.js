@@ -25,5 +25,6 @@ flightRouter.get("/getAdults", flightController.getAdults);
 flightRouter.get("/getChildren", flightController.getChildren);
 flightRouter.get("/listReservations", flightController.listReservations);
 flightRouter.put("/updateUser", flightController.updateUser);
+flightRouter.get("/getCabin", flightController.getCabin);
 flightRouter.post("/ticketDeletion", flightController.deleteTicket);
 module.exports = flightRouter;

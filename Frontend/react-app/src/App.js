@@ -31,6 +31,8 @@ const theme = createMuiTheme({
     }
   }
 })
+import UpdateUser from './updateUser';
+
 function App() {
   useEffect(() => {
     document.title = "Unique Airlines"
@@ -42,12 +44,12 @@ function App() {
   }
   return (
 
+
     <ThemeProvider theme={theme}>
       <Router>
         <nav className="navbarcontainer">
           <ResponsiveAppBar />
         </nav>
-
 
         {/* <div className="mainContainer"> */}
         <Switch>
@@ -87,7 +89,9 @@ function App() {
           < Route exact path="/viewTickets">
             <ViewTickets />
           </Route>
-
+          < Route exact path="/updateUser">
+            <UpdateUser />
+          </Route>
           <Route path="*">
             <NotFound />
           </Route>
@@ -96,7 +100,8 @@ function App() {
         <Footer></Footer>
 
       </Router>
-    </ThemeProvider>
+
+    </ThemeProvider >
   );
 }
 export default App;

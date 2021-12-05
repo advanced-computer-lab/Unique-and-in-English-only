@@ -176,7 +176,7 @@ function SeatSelection(props) {
 
     const addSeatCallback = ({ row, number, id }, addCb) => {
         console.log(`Added seat ${number}, row ${row}, id ${id}`)
-        const newTooltip = `price ${flight.price} $`
+        const newTooltip = `price ${flight.price} usd`
         selectedSeats.push({ number });
         console.log(selectedSeats);
         addCb(row, number, id, newTooltip)

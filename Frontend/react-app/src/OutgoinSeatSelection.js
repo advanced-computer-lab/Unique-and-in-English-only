@@ -30,7 +30,7 @@ function OutgoingSeatSelection() {
 
     return (
         <div className="mainContainer">
-            <h1>Select Outgoing flight seats</h1>
+            <h1 className="centerText">Select Outgoing flight seats</h1>
             <SeatSelection reservationDetails={reservationDetails} flightType="Outgoing" />
         </div>
     )
