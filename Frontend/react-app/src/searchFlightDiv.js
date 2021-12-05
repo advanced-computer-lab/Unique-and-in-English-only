@@ -111,8 +111,7 @@ function SearchFlightDiv() {
         cabin: 'Buisness'
 
     });
-
-    if(children)
+    
 
     const [flyingFrom, setFlyingFrom] = useState(null);
     const [flyingTo, setFlyingTo] = useState(null);
