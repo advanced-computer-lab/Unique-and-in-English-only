@@ -10,7 +10,6 @@ import { useHistory } from "react-router-dom";
 function formatDate(date) {
   const d = new Date(date);
   return d.toLocaleDateString("en-US");
-
 }
 
 function flightSelectionCard(props) {

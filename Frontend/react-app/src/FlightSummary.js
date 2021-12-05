@@ -7,7 +7,6 @@ import Button from '@mui/material/Button';
 function formatDate(date) {
   const d = new Date(date);
   return d.toLocaleDateString("en-US");
-
 }
 
 function FlightSummary(props) {
@@ -34,7 +33,7 @@ function FlightSummary(props) {
             <h4>Arrival Time: {formatDate(props.f.ArrivalTime)}</h4>
           </div>
           <div id="row3">
-            <h4>Price: {(props.f.price * props.adults) + (props.f.price * props.f. }</h4>
+            <h4>Price: {(props.f.price * props.adults) + (props.f.price * props.f.children)}</h4>
             <h4>Arrival Port: {props.f.ArrivalPort}</h4>
           </div>
         </div>

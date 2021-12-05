@@ -54,18 +54,19 @@ const useStyles = makeStyles({
 
 function UpdateFlight(props) {
   let { id } = useParams();
-  const [flag, setFlag] = useState(true)
+  const [flag, setFlag] = useState(true);
+
   const formatDate = (d) => {
-    var month = ""
-    var day = ""
-    var year = ""
-    year = d.getFullYear()
-    month = d.getMonth()
-    day = d.getDate()
-    var l1 = month.toString().length
-    var l2 = day.toString().length
+    var month = "";
+    var day = "";
+    var year = "";
+    year = d.getFullYear();
+    month = d.getMonth() + 1;
+    day = d.getDate();
+    var l1 = month.toString().length;
+    var l2 = day.toString().length;
     if (l1 < 2) {
-      month = '0' + month
+      month = '0' + month;
     }
 
     if (l2 < 2) {
@@ -137,7 +138,7 @@ function UpdateFlight(props) {
 
   const [depTimeValidate, setdepTimeValidate] = useState("");
   const [depTimeValidateFlag, setdepTimeValidateFlag] = useState(false);
-  
+
   const [businessSeatsValidate, setbusinessSeatsValidate] = useState("");
   const [businessSeatsValidateFlag, setbusinessSeatsValidateFlag] = useState(false);
 
@@ -152,13 +153,13 @@ function UpdateFlight(props) {
 
   const [depTerminalValidate, setdepTerminalValidate] = useState("");
   const [depTerminalValidateFlag, setdepTerminalValidateFlag] = useState(false);
-  
+
   const [arrTerminalValidate, setarrTerminalValidate] = useState("");
   const [arrTerminalValidateFlag, setarrTerminalValidateFlag] = useState(false);
 
   const [businessPriceValidate, setbusinessPriceValidate] = useState("");
   const [businessPriceValidateFlag, setbusinessPriceValidateFlag] = useState(false);
-  
+
   const [economyPriceValidate, seteconomyPriceValidate] = useState("");
   const [economyPriceValidateFlag, seteconomyPriceValidateFlag] = useState(false);
 
@@ -210,7 +211,7 @@ function UpdateFlight(props) {
     TripDuration: startValues.TripDuration,
   })
   const Alert = React.forwardRef(function Alert(props, ref) {
-    
+
     return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
   });
   const set = name => {
@@ -219,15 +220,15 @@ function UpdateFlight(props) {
     }
   }
   const onSubmit = async (event) => {
-    var flag1=true
-    var flag2=true
-    var flag3=true
-    var flag4=true
-    var flag5=true
-    var flag6=true
+    var flag1 = true
+    var flag2 = true
+    var flag3 = true
+    var flag4 = true
+    var flag5 = true
+    var flag6 = true
 
-   setflightNumberValidateFlag(false)
-   settripDurationValidateFlag(false)
+    setflightNumberValidateFlag(false)
+    settripDurationValidateFlag(false)
     setdepTimeValidateFlag(false)
     setarrTimeValidateFlag(false)
     seteconomySeatsValidateFlag(false)
@@ -251,137 +252,137 @@ function UpdateFlight(props) {
     setbaggageAllowanceValidate('')
 
     var today = new Date();
-    today.setHours(0,0,0,0)
-    if(values.ArrivalTime!=''){
+    today.setHours(0, 0, 0, 0)
+    if (values.ArrivalTime != '') {
       var arrDate = new Date(values.ArrivalTime)
-      
+
     }
-    if(values.DepartureTime!=''){
+    if (values.DepartureTime != '') {
       var depDate = new Date(values.DepartureTime)
     }
-    if(values.DepartureTime!='' && values.ArrivalTime!=''){
-    if(depDate.getTime()<today.getTime()){
-      setdepTimeValidate("Departure date has already passed")
+    if (values.DepartureTime != '' && values.ArrivalTime != '') {
+      if (depDate.getTime() < today.getTime()) {
+        setdepTimeValidate("Departure date has already passed")
+        setdepTimeValidateFlag(true)
+        flag1 = false
+        console.log("7sl")
+      }
+      else {
+        flag1 = true
+        setdepTimeValidate("")
+      }
+      if (arrDate.getTime() < depDate.getTime()) {
+        console.log("hhh")
+        setarrTimeValidate("Arrival date can`t be before departure date")
+        setarrTimeValidateFlag(true)
+        flag2 = false
+      }
+      else {
+        flag2 = true
+        setarrTimeValidate("")
+      }
+    } else {
+      setdepTimeValidate("Departure date can't be empty")
       setdepTimeValidateFlag(true)
-      flag1=false
-      console.log("7sl")
-    }
-    else{
-      flag1=true
-      setdepTimeValidate("")
-    }
-    if(arrDate.getTime()<depDate.getTime()){
-      console.log("hhh")
-      setarrTimeValidate("Arrival date can`t be before departure date")
-      setarrTimeValidateFlag(true)
-      flag2=false
-    }
-    else{
-      flag2=true
-      setarrTimeValidate("")
-    }
-  }else{
-    setdepTimeValidate("Departure date can't be empty")
-    setdepTimeValidateFlag(true)
-    setarrTimeValidate("Arrival date can't be empty")
+      setarrTimeValidate("Arrival date can't be empty")
       setarrTimeValidateFlag(true)
 
-  }
-    if(values.EconomySeatsNumber<=0){
+    }
+    if (values.EconomySeatsNumber <= 0) {
       seteconomySeatsValidate("Number of seats must be positive")
       seteconomySeatsValidateFlag(true)
-      flag3=false
+      flag3 = false
     }
-    else{
-      flag3=true
+    else {
+      flag3 = true
       seteconomySeatsValidate("")
     }
-    if(values.BuisnessSeatsNumber<=0){
+    if (values.BuisnessSeatsNumber <= 0) {
       setbusinessSeatsValidate("Number of seats must be positive")
-      flag4=false
+      flag4 = false
       setbusinessSeatsValidateFlag(true)
     }
-    else{
-      flag4=true
+    else {
+      flag4 = true
       setbusinessSeatsValidate("")
     }
     console.log(economySeatsValidate)
 
-    if(values.FlightNumber.length<3){
+    if (values.FlightNumber.length < 3) {
       setflightNumberValidate("Flight Number must be atleast 3 characters long")
       setflightNumberValidateFlag(true)
-      flag5=false
+      flag5 = false
     }
 
-    if(values.TripDuration<=0){
+    if (values.TripDuration <= 0) {
       settripDurationValidate("Trip Duration must be positive")
       settripDurationValidateFlag(true)
-      flag5=false
+      flag5 = false
     }
 
-    
-    if(!values.ArrivalPort.charAt(0).match(/[a-z]/i)
-    || !values.ArrivalPort.charAt(1).match(/[a-z]/i)|| !values.ArrivalPort.charAt(2).match(/[a-z]/i)){
+
+    if (!values.ArrivalPort.charAt(0).match(/[a-z]/i)
+      || !values.ArrivalPort.charAt(1).match(/[a-z]/i) || !values.ArrivalPort.charAt(2).match(/[a-z]/i)) {
       setarrPortValidate("Arrival Port must contain letters only")
       setarrPortValidateFlag(true)
-      flag5=false
+      flag5 = false
     }
-    if(values.ArrivalPort.length!=3 ){
+    if (values.ArrivalPort.length != 3) {
       setarrPortValidate("Arrival Port must be 3 letters long")
       setarrPortValidateFlag(true)
-      flag5=false
+      flag5 = false
     }
 
-    if(!values.DeparturePort.charAt(0).match(/[a-z]/i)
-    || !values.DeparturePort.charAt(1).match(/[a-z]/i)|| !values.DeparturePort.charAt(2).match(/[a-z]/i)){
+    if (!values.DeparturePort.charAt(0).match(/[a-z]/i)
+      || !values.DeparturePort.charAt(1).match(/[a-z]/i) || !values.DeparturePort.charAt(2).match(/[a-z]/i)) {
       setdepPortValidate("Departure Port must contain letters only ")
       setdepPortValidateFlag(true)
-      flag5=false
+      flag5 = false
     }
 
-    if(values.DeparturePort.length!=3){
+    if (values.DeparturePort.length != 3) {
       setdepPortValidate("Departure Port must be 3 letters long")
       setdepPortValidateFlag(true)
-      flag5=false
+      flag5 = false
     }
 
-    if(values.DepartureTerminal<=0){
+    if (values.DepartureTerminal <= 0) {
       setdepTerminalValidate("Departure Terminal must be positive")
       setdepTerminalValidateFlag(true)
-      flag5=false
+      flag5 = false
     }
 
-    if(values.ArrivalTerminal<=0){
+    if (values.ArrivalTerminal <= 0) {
       setarrTerminalValidate("Arrival Terminal must be positive")
       setarrTerminalValidateFlag(true)
-      flag5=false
+      flag5 = false
     }
 
-    if(values.BusinessPrice<=0){
+    if (values.BusinessPrice <= 0) {
       setbusinessPriceValidate("Business Price must be positive")
       setbusinessPriceValidateFlag(true)
-      flag5=false
+      flag5 = false
     }
 
-    if(values.EconomyPrice<=0){
+    if (values.EconomyPrice <= 0) {
       seteconomyPriceValidate("Economy Price must be positive")
       seteconomyPriceValidateFlag(true)
-      flag5=false
+      flag5 = false
     }
 
-    if(values.BaggageAllowance<=0){
+    if (values.BaggageAllowance <= 0) {
       setbaggageAllowanceValidate("Baggae Allowance must be positive")
       setbaggageAllowanceValidateFlag(true)
-      flag5=false
+      flag5 = false
     }
-    if(values.EconomySeatsNumber==0&&values.BuisnessSeatsNumber==0){
+    if (values.EconomySeatsNumber == 0 && values.BuisnessSeatsNumber == 0) {
       seteconomySeatsValidate("Choose atleast 1 Economy or Business seat")
-        seteconomySeatsValidateFlag(true)
-        setbusinessSeatsValidate("Choose atleast 1 Economy or Business seat")
-        setbusinessSeatsValidateFlag(true)
-        flag6=false
+      seteconomySeatsValidateFlag(true)
+      setbusinessSeatsValidate("Choose atleast 1 Economy or Business seat")
+      setbusinessSeatsValidateFlag(true)
+      flag6 = false
     }
-    if (flag1 && flag2 && flag3 && flag4 && flag5&&flag6) {
+    if (flag1 && flag2 && flag3 && flag4 && flag5 && flag6) {
       event.preventDefault();
       axios.put('http://localhost:150/flight/updateFlight/' + id, values)
         .then(function (response) {
@@ -393,290 +394,290 @@ function UpdateFlight(props) {
           console.log(error);
           setButtonFailurePopup(true)
         });
-    }else{
-    setOpen2(true)
+    } else {
+      setOpen2(true)
     }
   }
 
   return (
 
     <ThemeProvider theme={theme}>
-    <Container>
-    
+      <Container>
+
         <Grid>
-        <Paper elevation={10} style={paperStyle}>
-        <Grid align="center" >
-            <EditOutlinedIcon  color="primary" style={{fontSize:"100"}}/>
+          <Paper elevation={10} style={paperStyle}>
+            <Grid align="center" >
+              <EditOutlinedIcon color="primary" style={{ fontSize: "100" }} />
             </Grid>
-            <Box component="form" sx={{'& .MuiTextField-root': { m: 1, width: '25ch' },}}>
-            <form noValidate autoComplete='off' >
+            <Box component="form" sx={{ '& .MuiTextField-root': { m: 1, width: '25ch' }, }}>
+              <form noValidate autoComplete='off' >
 
-            <Grid container spacing={2}>
+                <Grid container spacing={2}>
 
-              <Grid item xs={6}>
-        <h2 style={{color:"#be8b14"}}>Flight Number:</h2>
-         <TextField
-         
-         label="Flight Number"
-         variant="standard"
-         placeholder="Enter Flight Number"
-         required 
-         color="primary"
-         style={{width:'200' }}
-         minLength="3"
-         id="FlightNumber"
-         value={values.FlightNumber} onChange={set('FlightNumber')} 
-         helperText={flightNumberValidate}
-        error={flightNumberValidateFlag}
-         
-         />
-         </Grid>
+                  <Grid item xs={6}>
+                    <h2 style={{ color: "#be8b14" }}>Flight Number:</h2>
+                    <TextField
 
-         <Grid item xs={6} align="center">
+                      label="Flight Number"
+                      variant="standard"
+                      placeholder="Enter Flight Number"
+                      required
+                      color="primary"
+                      style={{ width: '200' }}
+                      minLength="3"
+                      id="FlightNumber"
+                      value={values.FlightNumber} onChange={set('FlightNumber')}
+                      helperText={flightNumberValidate}
+                      error={flightNumberValidateFlag}
 
-          <h2 style={{color:"#be8b14"}}>Trip Duration:</h2>
-          <TextField
-          InputProps={{
-            endAdornment: <InputAdornment  position="end">mins</InputAdornment>,
-          }}
-          type="text"
-          id="TripDuration"
-          variant="standard"
-          label="Trip Duration"
-          placeholder="Enter Trip Duration"
-          required 
-          color="primary"
-          style={{width:'200' }}
-          required 
-          value={values.TripDuration} 
-          onChange={set('TripDuration')}
-          helperText={tripDurationValidate}
-        error={tripDurationValidateFlag}
-          />
-        </Grid>
+                    />
+                  </Grid>
 
-        
-         
-         
+                  <Grid item xs={6} align="center">
 
-         <Grid item xs={6}  >
-        <h2 style={{color:"#be8b14"}}>Arrival Date:</h2>
-         <TextField
-         type="date"
-         id="ArrivalTime"
-         variant="standard"
-         required 
-         color="primary"
-         style={{width:'200' }}
-        required 
-        value={values.ArrivalTime} onChange={set('ArrivalTime')}
-        helperText={arrTimeValidate}
-        error={arrTimeValidateFlag}
-        
-         />
-         </Grid>
-
-         <Grid item xs={6} align="center"> 
-         <h2 style={{color:"#be8b14"}}>Departure Date:</h2>
-         
-         <TextField 
-         type="date"
-         id="DepartureTime"
-         variant="standard"
-         required 
-         color="primary"
-         style={{width:'200' }}
-        required
-        value={values.DepartureTime} onChange={set('DepartureTime')}
-        helperText={depTimeValidate}
-        error={depTimeValidateFlag}
-         />
-         </Grid>
-
-         
-         
-         <Grid item xs={6}>
-        <h2 style={{color:"#be8b14"}}>Business Seats:</h2>
-         <TextField
-         type="number"
-         id="BuisnessSeatsNumber"
-         label="Number of Business Seats"
-         variant="standard"
-         required 
-         color="primary"
-         style={{width:'200' }}
-        required 
-        alue={values.BuisnessSeatsNumber} 
-        onChange={set('BuisnessSeatsNumber') }
-        helperText={businessSeatsValidate}
-        error={businessSeatsValidateFlag}
-         />
-        </Grid>
-
-        <Grid item xs={6} align="center">
-        <h2 style={{color:"#be8b14"}}>Economy Seats:</h2>
-         <TextField
-         type="number"
-         id="EconomySeatsNumber"
-         variant="standard"
-         required 
-         color="primary"
-         style={{width:'200' }}
-        required 
-        label="Number of Economy Seats"
-        value={values.EconomySeatsNumber}
-        onChange={set('EconomySeatsNumber')}
-        helperText={economySeatsValidate}
-        error={economySeatsValidateFlag}
-         />
-         </Grid>
+                    <h2 style={{ color: "#be8b14" }}>Trip Duration:</h2>
+                    <TextField
+                      InputProps={{
+                        endAdornment: <InputAdornment position="end">mins</InputAdornment>,
+                      }}
+                      type="text"
+                      id="TripDuration"
+                      variant="standard"
+                      label="Trip Duration"
+                      placeholder="Enter Trip Duration"
+                      required
+                      color="primary"
+                      style={{ width: '200' }}
+                      required
+                      value={values.TripDuration}
+                      onChange={set('TripDuration')}
+                      helperText={tripDurationValidate}
+                      error={tripDurationValidateFlag}
+                    />
+                  </Grid>
 
 
-        <Grid item xs={6} >
-        <h2 style={{color:"#be8b14"}}>Departure Port:</h2>
-         <TextField
-         type="text"
-         id="DeparturePort"
-         variant="standard"
-         label="Departure Port"
-         placeholder="Enter Departure Port"
-         required 
-         color="primary"
-         style={{width:'200' }}
-        required 
-        value={values.DeparturePort} 
-        onChange={set('DeparturePort')}
-        helperText={depPortValidate}
-        error={depPortValidateFlag}
-         />
-         </Grid>
 
-         <Grid item xs={6} align="center">
-        <h2 style={{color:"#be8b14"}}>Arrival Port:</h2>
-         <TextField
-         type="text"
-         id="ArrivalPort"
-         variant="standard"
-         label="Arrival Port"
-         placeholder="Enter Arrival Port"
-         required 
-         color="primary"
-         style={{width:'200' }}
-        required 
-        value={values.ArrivalPort} 
-        onChange={set('ArrivalPort')}
-        helperText={arrPortValidate}
-        error={arrPortValidateFlag}
-         />
-         </Grid>
 
-         <Grid item xs={6} >
-        <h2 style={{color:"#be8b14"}}>Departure Terminal:</h2>
-         <TextField
-         type="text"
-         id="DepartureTerminal"
-         variant="standard"
-         label="Departure Terminal"
-         placeholder="Enter Departure Terminal"
-         required 
-         color="primary"
-         style={{width:'200' }}
-        required 
-        value={values.DepartureTerminal} 
-        onChange={set('DepartureTerminal')}
-        helperText={depTerminalValidate}
-        error={depTerminalValidateFlag}
-         />
-         </Grid>
 
-         <Grid item xs={6} align="center">
-        <h2 style={{color:"#be8b14"}}>Arrival Terminal:</h2>
-         <TextField
-         type="text"
-         id="ArrivalTerminal"
-         variant="standard"
-         label="Arrival Terminal"
-         placeholder="Enter Arrival Terminal"
-         required 
-         color="primary"
-         style={{width:'200' }}
-        required 
-        value={values.ArrivalTerminal} 
-        onChange={set('ArrivalTerminal')}
-        helperText={arrTerminalValidate}
-        error={arrTerminalValidateFlag}
-         />
-         </Grid>
+                  <Grid item xs={6}  >
+                    <h2 style={{ color: "#be8b14" }}>Arrival Date:</h2>
+                    <TextField
+                      type="date"
+                      id="ArrivalTime"
+                      variant="standard"
+                      required
+                      color="primary"
+                      style={{ width: '200' }}
+                      required
+                      value={values.ArrivalTime} onChange={set('ArrivalTime')}
+                      helperText={arrTimeValidate}
+                      error={arrTimeValidateFlag}
 
-         <Grid item xs={6} >
-        <h2 style={{color:"#be8b14"}}>Business Price:</h2>
-         <TextField
-         type="text"
-         id="BusinessPrice"
-         variant="standard"
-         label="BusinessPrice"
-         placeholder="Enter Business Price"
-         required 
-         color="primary"
-         style={{width:'200' }}
-        required 
-        value={values.BusinessPrice} 
-        onChange={set('BusinessPrice')}
-        helperText={businessPriceValidate}
-        error={businessPriceValidateFlag}
-         />
-         </Grid>
+                    />
+                  </Grid>
 
-         <Grid item xs={6} align="center">
-        <h2 style={{color:"#be8b14"}}>Economy Price:</h2>
-         <TextField
-         type="text"
-         id="EconomyPrice"
-         variant="standard"
-         label="Economy Price"
-         placeholder="Enter Economy Price"
-         required 
-         color="primary"
-         style={{width:'200' }}
-        required 
-        value={values.EconomyPrice} 
-        onChange={set('EconomyPrice')}
-        helperText={economyPriceValidate}
-        error={economyPriceValidateFlag}
-         />
-         </Grid>
+                  <Grid item xs={6} align="center">
+                    <h2 style={{ color: "#be8b14" }}>Departure Date:</h2>
 
-         <Grid item xs={6} >
-        <h2 style={{color:"#be8b14"}}>Baggage Allowance:</h2>
-         <TextField
-         InputProps={{
-          endAdornment: <InputAdornment position="end">kg</InputAdornment>,
-        }}
-         type="text"
-         id="BaggageAllowance"
-         variant="standard"
-         label="Baggage Allowance"
-         placeholder="Enter Baggage Allowance"
-         required 
-         color="primary"
-         style={{width:'200' }}
-        required 
-        value={values.BaggageAllowance} 
-        onChange={set('BaggageAllowance')}
-        helperText={baggageAllowanceValidate}
-        error={baggageAllowanceValidateFlag}
-         />
-         </Grid>
+                    <TextField
+                      type="date"
+                      id="DepartureTime"
+                      variant="standard"
+                      required
+                      color="primary"
+                      style={{ width: '200' }}
+                      required
+                      value={values.DepartureTime} onChange={set('DepartureTime')}
+                      helperText={depTimeValidate}
+                      error={depTimeValidateFlag}
+                    />
+                  </Grid>
 
-         
-       
 
-         
-         
-         
-        
-        
-         </Grid>
+
+                  <Grid item xs={6}>
+                    <h2 style={{ color: "#be8b14" }}>Business Seats:</h2>
+                    <TextField
+                      type="number"
+                      id="BuisnessSeatsNumber"
+                      label="Number of Business Seats"
+                      variant="standard"
+                      required
+                      color="primary"
+                      style={{ width: '200' }}
+                      required
+                      alue={values.BuisnessSeatsNumber}
+                      onChange={set('BuisnessSeatsNumber')}
+                      helperText={businessSeatsValidate}
+                      error={businessSeatsValidateFlag}
+                    />
+                  </Grid>
+
+                  <Grid item xs={6} align="center">
+                    <h2 style={{ color: "#be8b14" }}>Economy Seats:</h2>
+                    <TextField
+                      type="number"
+                      id="EconomySeatsNumber"
+                      variant="standard"
+                      required
+                      color="primary"
+                      style={{ width: '200' }}
+                      required
+                      label="Number of Economy Seats"
+                      value={values.EconomySeatsNumber}
+                      onChange={set('EconomySeatsNumber')}
+                      helperText={economySeatsValidate}
+                      error={economySeatsValidateFlag}
+                    />
+                  </Grid>
+
+
+                  <Grid item xs={6} >
+                    <h2 style={{ color: "#be8b14" }}>Departure Port:</h2>
+                    <TextField
+                      type="text"
+                      id="DeparturePort"
+                      variant="standard"
+                      label="Departure Port"
+                      placeholder="Enter Departure Port"
+                      required
+                      color="primary"
+                      style={{ width: '200' }}
+                      required
+                      value={values.DeparturePort}
+                      onChange={set('DeparturePort')}
+                      helperText={depPortValidate}
+                      error={depPortValidateFlag}
+                    />
+                  </Grid>
+
+                  <Grid item xs={6} align="center">
+                    <h2 style={{ color: "#be8b14" }}>Arrival Port:</h2>
+                    <TextField
+                      type="text"
+                      id="ArrivalPort"
+                      variant="standard"
+                      label="Arrival Port"
+                      placeholder="Enter Arrival Port"
+                      required
+                      color="primary"
+                      style={{ width: '200' }}
+                      required
+                      value={values.ArrivalPort}
+                      onChange={set('ArrivalPort')}
+                      helperText={arrPortValidate}
+                      error={arrPortValidateFlag}
+                    />
+                  </Grid>
+
+                  <Grid item xs={6} >
+                    <h2 style={{ color: "#be8b14" }}>Departure Terminal:</h2>
+                    <TextField
+                      type="text"
+                      id="DepartureTerminal"
+                      variant="standard"
+                      label="Departure Terminal"
+                      placeholder="Enter Departure Terminal"
+                      required
+                      color="primary"
+                      style={{ width: '200' }}
+                      required
+                      value={values.DepartureTerminal}
+                      onChange={set('DepartureTerminal')}
+                      helperText={depTerminalValidate}
+                      error={depTerminalValidateFlag}
+                    />
+                  </Grid>
+
+                  <Grid item xs={6} align="center">
+                    <h2 style={{ color: "#be8b14" }}>Arrival Terminal:</h2>
+                    <TextField
+                      type="text"
+                      id="ArrivalTerminal"
+                      variant="standard"
+                      label="Arrival Terminal"
+                      placeholder="Enter Arrival Terminal"
+                      required
+                      color="primary"
+                      style={{ width: '200' }}
+                      required
+                      value={values.ArrivalTerminal}
+                      onChange={set('ArrivalTerminal')}
+                      helperText={arrTerminalValidate}
+                      error={arrTerminalValidateFlag}
+                    />
+                  </Grid>
+
+                  <Grid item xs={6} >
+                    <h2 style={{ color: "#be8b14" }}>Business Price:</h2>
+                    <TextField
+                      type="text"
+                      id="BusinessPrice"
+                      variant="standard"
+                      label="BusinessPrice"
+                      placeholder="Enter Business Price"
+                      required
+                      color="primary"
+                      style={{ width: '200' }}
+                      required
+                      value={values.BusinessPrice}
+                      onChange={set('BusinessPrice')}
+                      helperText={businessPriceValidate}
+                      error={businessPriceValidateFlag}
+                    />
+                  </Grid>
+
+                  <Grid item xs={6} align="center">
+                    <h2 style={{ color: "#be8b14" }}>Economy Price:</h2>
+                    <TextField
+                      type="text"
+                      id="EconomyPrice"
+                      variant="standard"
+                      label="Economy Price"
+                      placeholder="Enter Economy Price"
+                      required
+                      color="primary"
+                      style={{ width: '200' }}
+                      required
+                      value={values.EconomyPrice}
+                      onChange={set('EconomyPrice')}
+                      helperText={economyPriceValidate}
+                      error={economyPriceValidateFlag}
+                    />
+                  </Grid>
+
+                  <Grid item xs={6} >
+                    <h2 style={{ color: "#be8b14" }}>Baggage Allowance:</h2>
+                    <TextField
+                      InputProps={{
+                        endAdornment: <InputAdornment position="end">kg</InputAdornment>,
+                      }}
+                      type="text"
+                      id="BaggageAllowance"
+                      variant="standard"
+                      label="Baggage Allowance"
+                      placeholder="Enter Baggage Allowance"
+                      required
+                      color="primary"
+                      style={{ width: '200' }}
+                      required
+                      value={values.BaggageAllowance}
+                      onChange={set('BaggageAllowance')}
+                      helperText={baggageAllowanceValidate}
+                      error={baggageAllowanceValidateFlag}
+                    />
+                  </Grid>
+
+
+
+
+
+
+
+
+
+                </Grid>
                 <br />
                 <br />
                 <br />
@@ -701,21 +702,21 @@ function UpdateFlight(props) {
         </Grid>
 
         <Stack spacing={2} sx={{ width: '100%' }}>
-      
-      <Snackbar open={open1} autoHideDuration={6000} onClose={handleClose1}>
-        <Alert onClose={handleClose1} severity="success" sx={{ width: '100%' }}>
-          Flight updated successfully!
+
+          <Snackbar open={open1} autoHideDuration={6000} onClose={handleClose1}>
+            <Alert onClose={handleClose1} severity="success" sx={{ width: '100%' }}>
+              Flight updated successfully!
         </Alert>
-      </Snackbar>
-      </Stack>
-      <Stack spacing={2} sx={{ width: '100%' }}>
-      
-      <Snackbar open={open2} autoHideDuration={6000} onClose={handleClose2}>
-        <Alert onClose={handleClose2} severity="error" sx={{ width: '100%' }}>
-          Flight not updated!
+          </Snackbar>
+        </Stack>
+        <Stack spacing={2} sx={{ width: '100%' }}>
+
+          <Snackbar open={open2} autoHideDuration={6000} onClose={handleClose2}>
+            <Alert onClose={handleClose2} severity="error" sx={{ width: '100%' }}>
+              Flight not updated!
         </Alert>
-      </Snackbar>
-      </Stack>
+          </Snackbar>
+        </Stack>
       </Container>
     </ThemeProvider>
 
