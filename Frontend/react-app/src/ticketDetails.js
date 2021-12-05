@@ -67,7 +67,7 @@ const deleteHelper= async(flightObj) =>{
           <p>Departure Date:{props.f.returnFlight.DepartureTime+' '} , Arrival Date:{props.f.returnFlight.ArrivalTime}</p>
           <p>Chosen Cabin:{props.f.cabin+' '} , Chosen Seats:{looper(props.f.returnSeats)} </p>
           <p>Confirmation Number:{props.f.confirmationNum}</p>
-          <p>Total Price:{props.f.TotalPrice} </p>
+          <p>Total Price:{props.f.TicketTotalPrice} </p>
       </div>
       <div className="">
           <Button type="button" variant="contained" style={{backgroundColor:'#bd8b13',width:'25%',float:"Right"}} onClick={(e) =>{deleteHelper(props.f)}}>Cancel</Button>

@@ -196,7 +196,7 @@ function SummaryPage(props) {
 
     const onSubmit = (e) => {
         //   history.push("")
-        const ticketObj = { outgoingFlight, returnFlight, outgoingSeats, returnSeats, confirmationNum: "ungiuhaf68n", cabin, TicketTotalPrice: totalPrice }
+        const ticketObj = { outgoingFlight, returnFlight, outgoingSeats, returnSeats, confirmationNum: "ungiuhaf68n", cabin, TicketTotalPrice: outgoingPrice+returnPrice }
         axios.post('http://localhost:150/flight/confirmTicket', ticketObj)
             .then(function (response) {
                 setOutgoingSeats(response.data)
