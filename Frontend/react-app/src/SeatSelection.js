@@ -117,6 +117,9 @@ function SeatSelection(props) {
         var row = new Array();
         for (let index = 0; index < 4 && flightSeatsClone.length > 0; index++) {
             row.push(flightSeatsClone.splice(0, 1)[0]);
+            if (index % 2 == 1) {
+                row.push(null);
+            }
 
         }
         seats.push(row)
