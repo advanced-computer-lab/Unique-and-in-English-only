@@ -128,6 +128,14 @@ const ResponsiveAppBar = () => {
                         {
                             <Button
                                 style={{ color: 'black', fontWeight: "bold", fontFamily: "Etihad Altis Medium", size: "larger" }}
+                                onClick={(e) => { goToPage('viewTickets') }}
+                                sx={{ my: 2, color: 'white', display: 'block' }}
+                            >
+                                viewTickets
+              </Button>
+                        } {
+                            <Button
+                                style={{ color: 'black', fontWeight: "bold", fontFamily: "Etihad Altis Medium", size: "larger" }}
                                 onClick={(e) => { goToPage('') }}
                                 sx={{ my: 2, color: 'white', display: 'block' }}
                             >
@@ -177,12 +185,12 @@ const ResponsiveAppBar = () => {
                     </Box>
 
                     <Box sx={{ flexGrow: 0 }}>
-                        {/* <Tooltip title="Open settings">
+                        <Tooltip title="Open settings">
                             <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
                                 <Avatar />
                             </IconButton>
-                        </Tooltip> */}
-                        {/* <Menu
+                        </Tooltip>
+                        <Menu
                             sx={{ mt: '45px' }}
                             id="menu-appbar"
                             anchorEl={anchorElUser}
@@ -197,8 +205,8 @@ const ResponsiveAppBar = () => {
                             }}
                             open={Boolean(anchorElUser)}
                             onClose={handleCloseUserMenu}
-                        > */}
-                        {/* {
+                        >
+                            {
                                 <div>
                                     <MenuItem key="Edit Profile" onClick={() => { goToPage(`updateUser`) }}>
                                         <Typography textAlign="center">Edit Profile</Typography>
@@ -211,8 +219,8 @@ const ResponsiveAppBar = () => {
                                     </MenuItem>
 
                                 </div>
-                            } */}
-                        {/* </Menu> */}
+                            }
+                        </Menu>
                     </Box>
                 </Toolbar>
             </Container>

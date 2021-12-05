@@ -21,6 +21,7 @@ import { Link } from 'react-router-dom';
 import { useHistory } from "react-router-dom";
 import { Avatar, createMuiTheme, FormControlLabel, ThemeProvider } from '@mui/material';
 import UpdateUser from './updateUser';
+import ResponsiveAppBarGuest from './ResponsiveAppBarGuest'
 
 const theme = createMuiTheme({
   palette: {
