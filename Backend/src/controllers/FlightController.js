@@ -94,7 +94,7 @@ const getFlightById = (req, res) => {
 
 const getUserById = (req, res) => {
 
-    User.findById("61a8eabcb718e01f2523d953").then((result) => {
+    User.findById("61a7e41644e96c67df866cdd").then((result) => {
 
         res.send(result);
     }).catch(err => console.log(err));
@@ -270,11 +270,11 @@ const getReturnFlight = (req, res) => {
 }
 
 const getChildren = (req, res) => {
-    res.send(200, sessions.children);
+    res.send({children: sessions.children});
 }
 
 const getAdults = (req, res) => {
-    res.send(200, sessions.adults);
+    res.send({adults:sessions.adults});
 }
 
 const getReservationDetails = (req, res) => {
@@ -351,7 +351,7 @@ const confirmTicket = (req, res) => {
     // }).catch(err => console.log(""));
 
 
-    User.findById("61a8eabcb718e01f2523d953").then((result) => {
+    User.findById("61a7e41644e96c67df866cdd").then((result) => {
         result.Tickets.push(ticket);
         result.save().then((res) => {
             ;
@@ -396,7 +396,7 @@ function changeSeatsReservationinFlight(flight, seatsSelected, cabin, changeTo) 
 
 const listReservations = (req, res) => {
     const body = req.body;
-    User.findById("61a8eabcb718e01f2523d953").then((result) => {
+    User.findById("61a7e41644e96c67df866cdd").then((result) => {
 
         sessions.tickets = result.Tickets;
         res.send(result.Tickets);
@@ -416,12 +416,12 @@ const deleteTicket = (req, res) => {
     unreserveSeatsinFlight(outgoingFlight, outgoingSeats, cabin);
     unreserveSeatsinFlight(returnFlight, returnSeats, cabin);
     if(cabin=='Buisness'){
-        outgoingFlight.AvailableBuisnessSeatsNumber+=ticket.returnSeats.length;
-        returnFlight.AvailableBuisnessSeatsNumber+=ticket.returnSeats.length;
+        outgoingFlight.AvailableBuisnessSeatsNumber+=returnSeats.length;
+        returnFlight.AvailableBuisnessSeatsNumber+=returnSeats.length;
 
     }else{
-        outgoingFlight.AvailableEconomySeatsNumber+=ticket.returnSeats.length;
-        returnFlight.AvailableEconomySeatsNumber+=ticket.returnSeats.length;
+        outgoingFlight.AvailableEconomySeatsNumber+=returnSeats.length;
+        returnFlight.AvailableEconomySeatsNumber+=returnSeats.length;
 
     }
     console.log("jngfdljnjklngdfjln ");
@@ -440,7 +440,7 @@ const deleteTicket = (req, res) => {
 
 
 
-    User.findByIdAndUpdate("61a8eabcb718e01f2523d953", bunchOfTickets, { useFindAndModify: false })
+    User.findByIdAndUpdate("61a7e41644e96c67df866cdd", bunchOfTickets, { useFindAndModify: false })
         .then(data => {
             if (!data) {
                 res.status(404).send({ message: " update can not be empty " })
@@ -459,13 +459,13 @@ const deleteTicket = (req, res) => {
             {
                 service: "hotmail",
                 auth: {
-                    user: "aclacl_@outlook.com",
+                    user: "aclacl_2000@outlook.com",
                     pass: "nodemailer@2000"
                 }
             }
         );
         const options = {
-            from: "aclacl_@outlook.com",
+            from: "aclacl_2000@outlook.com",
             to: "mohamedelshaarawy87@gmail.com",
             subject: "Node mailer test",
             text: "woooow",
@@ -510,7 +510,7 @@ const updateUser = (req, res) => {
     const reqKeys = Object.keys(body);
     removeEmptyAttributes(reqKeys, body)
     const id = req.params.id;
-    User.findByIdAndUpdate("61a8eabcb718e01f2523d953", body, { useFindAndModify: false })
+    User.findByIdAndUpdate("61a7e41644e96c67df866cdd", body, { useFindAndModify: false })
         .then(data => {
             if (!data) {
                 res.status(404).send({ message: " update can not be empty " })

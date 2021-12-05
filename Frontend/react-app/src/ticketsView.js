@@ -24,7 +24,7 @@ function TicketsView() {
   }, []);
  const DeleteClickHandler = async (flightObj) => {
     
-    const result = await confirm("Are you sure to delete this flight?");
+    const result = await confirm("Are you sure to cancel this flight?");
     if (result) {
       axios.post('http://localhost:150/flight/ticketDeletion',flightObj)
         .then(function (response) {
@@ -50,7 +50,7 @@ function TicketsView() {
   if(flight.length>0){
     return (
         <div className="">
-          <h1 style={{ marginTop: 70 }}>My Tickets </h1>
+          <h1 style={{ marginTop: 70,marginLeft:40 }}>My Tickets </h1>
           <div className="content">
             
         <br></br>

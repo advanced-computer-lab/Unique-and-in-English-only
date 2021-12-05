@@ -53,6 +53,7 @@ function flightSelectionCard(props) {
             <h2>baggageAllowance: {props.f.baggageAllowance} Kg</h2>
             <h2>price for adults: {price} USD</h2>
             <h2>price for children: {price * 0.5} USD</h2>
+            <h2>Trip Duration: {props.f.TripDuration} </h2>
           </div>
         </div>
 
@@ -60,7 +61,6 @@ function flightSelectionCard(props) {
 
         <h4>Departure Time: {formatDate(props.f.DepartureTime)}</h4>
         <h4>Arrival Time: {formatDate(props.f.ArrivalTime)}</h4>
-
 
 
 
