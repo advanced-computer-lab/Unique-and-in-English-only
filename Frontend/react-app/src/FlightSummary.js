@@ -13,14 +13,21 @@ function FlightSummary(props) {
 
   var price = 0;
 
+
   console.log(props.cabin);
   if (props.cabin == "Business") {
     price = props.f.BusinessPrice;
+    console.log("props. f  sfdf ");
   }
   else {
     price = props.f.EconomyPrice;
+    console.log(price);
   }
-  console.log(props.f);
+
+  const totalFlightPrice = price * parseInt(props.adults) + price * parseInt(props.children) * 0.5;
+  const flightPrice = props.price;
+
+
 
 
   return (
@@ -45,7 +52,8 @@ function FlightSummary(props) {
             <h4>Arrival Time: {formatDate(props.f.ArrivalTime)}</h4>
           </div>
           <div id="row3">
-            <h4>Price: {(price * props.adults) + (price * props.f.children)}</h4>
+            <h4>Cabin: {props.cabin}</h4>
+            <h4>Price: {flightPrice}</h4>
             <h4>Arrival Port: {props.f.ArrivalPort}</h4>
           </div>
         </div>

@@ -20,13 +20,20 @@ import Grid from '@mui/material/Grid';
 function FlightSelection() {
   const history = useHistory();
   const [flight, setFlight] = useState([]);
+  const [cabin, setCabin] = useState();
   useEffect(() => {
     axios.get('http://localhost:150/flight/showFlights/').then(
       (result) => {
         console.log(result);
         setFlight(result.data);
 
-      }, []);
+      });
+    axios.get('http://localhost:150/flight/getCabin').then(
+      (result) => {
+        console.log(result);
+        setCabin(result.data);
+
+      });
 
 
 
@@ -55,7 +62,7 @@ function FlightSelection() {
           <div className="table">
 
             {flight.map((f) =>
-              <FlightSelectionCard f={f} submitHandler={onSubmit} />
+              <FlightSelectionCard f={f} cabin={cabin} submitHandler={onSubmit} />
             )}
 
           </div>
@@ -65,11 +72,11 @@ function FlightSelection() {
   }
   else {
     return (
-      <Grid style={{margin:'120px auto'}} align="center" >
+      <Grid style={{ margin: '120px auto' }} align="center" >
         <BlockOutlinedIcon color="primary" style={{ fontSize: "300" }} />
-        <br/>
-        <br/>
-        <br/>
+        <br />
+        <br />
+        <br />
         <h1>No flights match your search criteria</h1>
       </Grid>
     )

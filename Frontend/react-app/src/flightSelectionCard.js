@@ -15,6 +15,18 @@ function formatDate(date) {
 function flightSelectionCard(props) {
 
 
+  const cabin = props.cabin;
+  var price = 0;
+
+  if (cabin == "Business") {
+    price = props.f.BusinessPrice;
+  }
+  else {
+    price = props.f.EconomyPrice;
+  }
+
+
+
   const submitHelper = async (flightObj) => {
     props.submitHandler(flightObj)
   }
@@ -39,8 +51,8 @@ function flightSelectionCard(props) {
         <div className="details-row">
           <div id="row3">
             <h2>baggageAllowance: {props.f.baggageAllowance} Kg</h2>
-            <h2>price for adults: {props.f.price} USD</h2>
-            <h2>price for children: {props.f.price * 0.5} USD</h2>
+            <h2>price for adults: {price} USD</h2>
+            <h2>price for children: {price * 0.5} USD</h2>
             <h2>Trip Duration: {props.f.TripDuration} </h2>
           </div>
         </div>
