@@ -529,5 +529,6 @@ module.exports =
     updateUser,
     getUserById,
     getChildren,
-    getAdults
+    getAdults,
+    getCabin
 }

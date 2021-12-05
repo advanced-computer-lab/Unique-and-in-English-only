@@ -30,6 +30,7 @@ function SummaryPage(props) {
     const [flagOutGoing, setFlagOutGoing] = useState(false)
     const [flagReturn, setFlagReturn] = useState(false)
     const [adults, setAdults] = useState(0);
+    const [cabin, setCabin] = useState(0);
     const [children, setChildren] = useState(0);
     const [outgoingFlight, setOutgoingFlight] = useState({
         FlightNumber: "",
@@ -158,7 +159,7 @@ function SummaryPage(props) {
                         <Grid container>
                             <Grid item xs={6} align="left">
                                 <h2 style={{ color: "#be8b14" }}>Outgoing Flight:-</h2>
-                                <FlightSummary f={outgoingFlight} adults={adults} children={children} ></FlightSummary>
+                                <FlightSummary f={outgoingFlight} adults={adults} children={children} cabin={cabin}></FlightSummary>
                                 {outgoingSeats.map((s) =>
                                     <h4 display="inline">Booked seats: {s.number}</h4>
                                 )}

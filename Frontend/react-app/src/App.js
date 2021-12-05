@@ -20,6 +20,7 @@ import ViewTickets from './ticketsView';
 import { Link } from 'react-router-dom';
 import { useHistory } from "react-router-dom";
 import { Avatar, createMuiTheme, FormControlLabel, ThemeProvider } from '@mui/material';
+import UpdateUser from './updateUser';
 
 const theme = createMuiTheme({
   palette: {
@@ -31,7 +32,6 @@ const theme = createMuiTheme({
     }
   }
 })
-import UpdateUser from './updateUser';
 
 function App() {
   useEffect(() => {

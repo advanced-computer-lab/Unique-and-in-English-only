@@ -11,6 +11,18 @@ function formatDate(date) {
 
 function FlightSummary(props) {
 
+  var price = 0;
+
+  console.log(props.cabin);
+  if (props.cabin == "Business") {
+    price = props.f.BusinessPrice;
+  }
+  else {
+    price = props.f.EconomyPrice;
+  }
+  console.log(props.f);
+
+
   return (
     <div className="">
 
@@ -33,7 +45,7 @@ function FlightSummary(props) {
             <h4>Arrival Time: {formatDate(props.f.ArrivalTime)}</h4>
           </div>
           <div id="row3">
-            <h4>Price: {(props.f.price * props.adults) + (props.f.price * props.f.children)}</h4>
+            <h4>Price: {(price * props.adults) + (price * props.f.children)}</h4>
             <h4>Arrival Port: {props.f.ArrivalPort}</h4>
           </div>
         </div>
