@@ -44,6 +44,7 @@ function SummaryPage(props) {
         ArrivalTerminal: '',
         BuisnessSeats: '',
         EconomySeats: '',
+        BusinessPrice: '',
     })
     const [returnFlight, setReturnFlight] = useState({
         FlightNumber: "",
@@ -60,6 +61,22 @@ function SummaryPage(props) {
     })
     const [outgoingSeats, setOutgoingSeats] = useState([]);
     const [returnSeats, setReturnSeats] = useState([]);
+    const [outgoingPrice, setOutgoingPrice] = useState(0);
+    const [returnPrice, setReturnPrice] = useState(0);
+    const [totalPrice, setTotalPrice] = useState(0);
+
+
+    const getPriceOfFlight = (flight) => {
+        var price = 0;
+        if (cabin == "Buisness") {
+            price = flight.BusinessPrice;
+        }
+        else {
+            price = flight.EconomyPrice;
+        }
+
+        return price * parseInt(adults) + price * parseInt(children) * 0.5;
+    }
 
     useEffect(() => {
         axios.get('http://localhost:150/flight/getOutgoingFlight')
@@ -120,19 +137,31 @@ function SummaryPage(props) {
         axios.get('http://localhost:150/flight/getChildren')
             .then(function (response) {
 
-                setChildren(response.data)
+                setChildren(response.data);
+                setPrices();
                 console.log(response)
             })
             .catch(function (error) {
                 console.log(error)
             });
 
-    }, [])
+    }, []);
+
+
+    const setPrices = () => {
+        setOutgoingPrice(getPriceOfFlight(outgoingFlight));
+        setReturnPrice(getPriceOfFlight(returnFlight));
+        setTotalTicketPrice();
+    }
+
+    const setTotalTicketPrice = () => {
+        setTotalPrice(outgoingPrice + returnPrice);
+    }
 
 
     const onSubmit = (e) => {
         //   history.push("")
-        const ticketObj = { outgoingFlight, returnFlight, outgoingSeats, returnSeats, confirmationNum: "ungiuhaf68n", cabin }
+        const ticketObj = { outgoingFlight, returnFlight, outgoingSeats, returnSeats, confirmationNum: "ungiuhaf68n", cabin, TicketTotalPrice: totalPrice }
         axios.post('http://localhost:150/flight/confirmTicket', ticketObj)
             .then(function (response) {
                 setOutgoingSeats(response.data)
@@ -159,7 +188,7 @@ function SummaryPage(props) {
                         <Grid container>
                             <Grid item xs={6} align="left">
                                 <h2 style={{ color: "#be8b14" }}>Outgoing Flight:-</h2>
-                                <FlightSummary f={outgoingFlight} adults={adults} children={children} cabin={cabin}></FlightSummary>
+                                <FlightSummary f={outgoingFlight} adults={adults} children={children} cabin={cabin} price={outgoingPrice}></FlightSummary>
                                 {outgoingSeats.map((s) =>
                                     <h4 display="inline">Booked seats: {s.number}</h4>
                                 )}
@@ -167,7 +196,7 @@ function SummaryPage(props) {
                             </Grid>
                             <Grid item xs={6} align="left">
                                 <h2 style={{ color: "#be8b14" }}>Return Flight:-</h2>
-                                <FlightSummary f={returnFlight} adults={adults} children={children} ></FlightSummary>
+                                <FlightSummary f={returnFlight} adults={adults} children={children} cabin={cabin} price={returnPrice} ></FlightSummary>
                                 {returnSeats.map((s) =>
                                     <h4 display="inline">Booked seats: {s.number}</h4>
                                 )}
@@ -175,12 +204,17 @@ function SummaryPage(props) {
 
                             </Grid>
                             <Grid item xs={12}>
+                                <h2>Total price : {totalPrice}</h2>
+                            </Grid>
+                            <Grid item xs={12}>
                                 <Button type="button" variant="contained" style={{ backgroundColor: '#bd8b13', width: '30%' }} onClick={(e) => { onSubmit(e) }}>Confirm</Button>
                             </Grid>
+
+
                         </Grid>
                     </Paper>
                 </Grid>
-            </ThemeProvider>
+            </ThemeProvider >
 
         )
     }
@@ -207,6 +241,9 @@ function SummaryPage(props) {
                                 <FlightSummary f={returnFlight} ></FlightSummary>
                                 <h4>Booked seats:</h4>
                                 <hr />
+                            </Grid>
+                            <Grid item xs={6} align="left">
+                                <h2>Total price : {}</h2>
                             </Grid>
                         </Grid>
                     </Paper>
