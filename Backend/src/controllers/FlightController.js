@@ -62,30 +62,8 @@ const addFlight = (req, res) => {
             console.log(err)
             res.status(500).send("error")
         });
-    const output = `<p> your flight number is : ${flightNumber}`;
-    const transporter = nodemailer.createTransport(
-        {
-            service: "hotmail",
-            auth: {
-                user: "aclacl_14787@outlook.com",
-                pass: "nodemailer@14787"
-            }
-        }
-    );
-    const options = {
-        from: "aclacl_14787@outlook.com",
-        to: "as@gmail.com",
-        subject: "Node mailer test",
-        text: "woooow",
-        html: output
-    }
-    transporter.sendMail(options, function (err, info) {
-        if (err) {
-            console.log(err);
-            return;
-        }
-        console.log(info.response);
-    })
+    
+   
 
 }
 
@@ -116,7 +94,7 @@ const getFlightById = (req, res) => {
 
 const getUserById = (req, res) => {
 
-    Flight.findById(sessions.userId).then((result) => {
+    User.findById("61a8eabcb718e01f2523d953").then((result) => {
 
         res.send(result);
     }).catch(err => console.log(err));
@@ -373,7 +351,7 @@ const confirmTicket = (req, res) => {
     // }).catch(err => console.log(""));
 
 
-    User.findById("61a7dd88d95ac28b50a4d080").then((result) => {
+    User.findById("61a8eabcb718e01f2523d953").then((result) => {
         result.Tickets.push(ticket);
         result.save().then((res) => {
             ;
@@ -418,7 +396,7 @@ function changeSeatsReservationinFlight(flight, seatsSelected, cabin, changeTo) 
 
 const listReservations = (req, res) => {
     const body = req.body;
-    User.findById("61a7e41644e96c67df866cdd").then((result) => {
+    User.findById("61a8eabcb718e01f2523d953").then((result) => {
 
         sessions.tickets = result.Tickets;
         res.send(result.Tickets);
@@ -462,7 +440,7 @@ const deleteTicket = (req, res) => {
 
 
 
-    User.findByIdAndUpdate("61a7dd88d95ac28b50a4d080", bunchOfTickets, { useFindAndModify: false })
+    User.findByIdAndUpdate("61a8eabcb718e01f2523d953", bunchOfTickets, { useFindAndModify: false })
         .then(data => {
             if (!data) {
                 res.status(404).send({ message: " update can not be empty " })
@@ -475,6 +453,33 @@ const deleteTicket = (req, res) => {
             res.status(500).send({ message: " update can not be done " });
 
         })
+
+        const output = `<p> we want to inform you that you have cancelled your flight and your refunded amount is `;
+        const transporter = nodemailer.createTransport(
+            {
+                service: "hotmail",
+                auth: {
+                    user: "aclacl_@outlook.com",
+                    pass: "nodemailer@2000"
+                }
+            }
+        );
+        const options = {
+            from: "aclacl_@outlook.com",
+            to: "mohamedelshaarawy87@gmail.com",
+            subject: "Node mailer test",
+            text: "woooow",
+            html: output
+        }
+
+transporter.sendMail(options, function (err, info) {
+            if (err) {
+                console.log(err);
+                return;
+            }
+            console.log(info.response);
+        })
+
 
 
     function removeObjectFromArray(flight, flightObj) {
@@ -505,7 +510,7 @@ const updateUser = (req, res) => {
     const reqKeys = Object.keys(body);
     removeEmptyAttributes(reqKeys, body)
     const id = req.params.id;
-    Flight.findByIdAndUpdate(sessions.userId, body, { useFindAndModify: false })
+    User.findByIdAndUpdate("61a8eabcb718e01f2523d953", body, { useFindAndModify: false })
         .then(data => {
             if (!data) {
                 res.status(404).send({ message: " update can not be empty " })
