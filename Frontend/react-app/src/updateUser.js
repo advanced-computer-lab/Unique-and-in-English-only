@@ -5,9 +5,45 @@ import PopUp from './popUp.js'
 import "./searchFlights.css";
 import Input from '@mui/material/Input';
 import Button from '@mui/material/Button';
+import Grid from '@mui/material/Grid';
+import Paper from '@mui/material/Paper';
+import UpdateOutlinedIcon from '@mui/icons-material/UpdateOutlined';
+import TextField from '@mui/material/TextField';
+import Stack from '@mui/material/Stack';
+import Snackbar from '@mui/material/Snackbar';
+import MuiAlert from '@mui/material/Alert';
+import * as React from 'react';
+
+const paperStyle = { padding: 20, height: '400px', width: '500px', margin: "150px auto" }
 
 
 function UpdateUser(props) {
+
+  const [open1, setOpen1] = React.useState(false);
+  const handleClick1 = () => {
+    setOpen1(true);
+  };
+
+  const handleClose1 = (event, reason) => {
+    if (reason === 'clickaway') {
+      return;
+    }
+
+    setOpen1(false);
+  };
+  const [open2, setOpen2] = React.useState(false);
+
+  const handleClick2 = () => {
+    setOpen2(true);
+  };
+
+  const handleClose2 = (event, reason) => {
+    if (reason === 'clickaway') {
+      return;
+    }
+
+    setOpen2(false);
+  };
     
     const [buttonSuccessPopup, setButtonSuccessPopup] = useState(false);
     const [buttonFailurePopup, setButtonFailurePopup] = useState(false);
@@ -58,40 +94,68 @@ function UpdateUser(props) {
       axios.put('http://localhost:150/flight/updateUser', values)
         .then(function (response) {
           console.log(response);
-          setButtonSuccessPopup(true);
+          setOpen1(true)
         })
         .catch(function (error) {
           console.log(error);
-          setButtonFailurePopup(true)
+          setOpen2(true)
         });
         
     }
+    const Alert = React.forwardRef(function Alert(props, ref) {
+    
+      return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
+    });
   
     return (
-      <div className="createflight-form">
-        <h1>Update User</h1>
-        <form>
-          <label > First name :</label><br></br>
-          <Input type="text" required id="FirstName" value={values.FirstName} onChange={set('FirstName')}  ></Input><br></br>
-          <label > Last name :</label><br></br>
-          <Input type="text" required id="LastName" value={values.LastName} onChange={set('LastName')}  ></Input><br></br>
-          <label > passport number :</label><br></br>
-          <Input type="number" required id="PassportNumber" value={values.PassportNumber} onChange={set('PassportNumber')} ></Input><br></br>
-          <label > email :</label><br></br>
-          <Input type="email" required id="Email" value={values.Email} onChange={set('Email')} ></Input><br></br>
-          
-          <br></br>
-          <Button type="button" variant="contained" style={{backgroundColor:'#bd8b13',width:'20%'}} onClick={(e) => { onSubmit(e) }}>update</Button>
-        </form>
-        <PopUp trigger={buttonSuccessPopup} setTrigger={setButtonSuccessPopup}>
-          <h3>User updated successfully</h3>
-  
-  
-        </PopUp>
-        <PopUp trigger={buttonFailurePopup} setTrigger={setButtonFailurePopup}>
-          <h3>error : User was not updated</h3>
-        </PopUp>
-      </div>
+      <Grid align="center" >
+          <Paper elevation={10} style={paperStyle}>
+            <Grid container spacing={2}>
+              <Grid item xs={12}>
+            <UpdateOutlinedIcon  color="primary" style={{fontSize:"100"}}/>
+            </Grid>
+
+            <Grid item xs={6}>
+            <TextField variant="outlined" label="First Name" required id="FirstName" value={values.FirstName} onChange={set('FirstName')}  ></TextField>
+            </Grid>
+
+            <Grid item xs={6}>
+            <TextField variant="outlined" label="Last Name" required id="LastName" value={values.LastName} onChange={set('LastName')}  ></TextField>
+            </Grid>
+
+            <Grid item xs={6}>
+            <TextField type="number" variant="outlined" label="Passport Number" required id="PassportNumber" value={values.PassportNumber} onChange={set('PassportNumber')}></TextField>
+            </Grid>
+
+            <Grid item xs={6}>
+            <TextField variant="outlined" label="Email" required id="Email" value={values.Email} onChange={set('Email')}></TextField>
+            </Grid>
+
+            <Grid margin="12px" item xs={12} align="right">
+            <Button type="button" variant="contained" style={{backgroundColor:'#bd8b13',width:'40%',height:'100%'}} onClick={(e) => { onSubmit(e) }}>update</Button>
+            </Grid>
+
+            </Grid>
+            </Paper>
+
+      <Stack spacing={2} sx={{ width: '100%' }}>
+      
+      <Snackbar open={open1} autoHideDuration={6000} onClose={handleClose1}>
+        <Alert onClose={handleClose1} severity="success" sx={{ width: '100%' }}>
+          User updated!
+        </Alert>
+      </Snackbar>
+      </Stack>
+      <Stack spacing={2} sx={{ width: '100%' }}>
+      
+      <Snackbar open={open2} autoHideDuration={6000} onClose={handleClose2}>
+        <Alert onClose={handleClose2} severity="error" sx={{ width: '100%' }}>
+          User not updated!
+        </Alert>
+      </Snackbar>
+      </Stack>
+      </Grid>
+      
     )
   }
   export default UpdateUser;

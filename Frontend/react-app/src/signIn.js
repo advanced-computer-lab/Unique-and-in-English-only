@@ -41,7 +41,7 @@ export default function SignIn () {
     const[password,setPassword]=useState('')
     const[usernameError,setUsermameError]=useState(false)
     const[passwordError,setPasswordError]=useState(false)
-    const paperStyle={padding:20, height:'60vh',width:380,margin:"150px auto",minheight: '60vh'}
+    const paperStyle={padding:20, height:'60vh',width:400,margin:"150px auto",minheight: '60vh'}
     const avatarStyle={backgroundColor:'#be8b14'}
 
     const handleSubmit=(e)=>{
@@ -62,7 +62,7 @@ export default function SignIn () {
       }
     }
     return (
-    <ThemeProvider theme={theme}>
+    
        
        <Container>
  
@@ -82,7 +82,7 @@ export default function SignIn () {
          placeholder="Enter Username"
          required S
          error={usernameError}
-         style={{width:'380px',margin:"8px 0"}}
+         style={{width:'100%',margin:"8px 0"}}
          />
 
          <TextField 
@@ -94,7 +94,7 @@ export default function SignIn () {
          required
          type='password'
          error={passwordError}
-         style={{width:'380px',margin:"8px 0"}}
+         style={{width:'100%',margin:"8px 0"}}
     
          />
           <FormControlLabel
@@ -111,7 +111,7 @@ export default function SignIn () {
          color="primary"
          variant="contained" 
         endIcon={<KeyboardArrowRightOutlinedIcon/>}
-        style={{width:'380px', fontSize:18,margin:'8px 0'}}
+        style={{width:'100%', fontSize:18,margin:'8px 0'}}
          >Sign In</Button>
 
          <typography>
@@ -126,7 +126,7 @@ export default function SignIn () {
           </Paper>
           </Grid>
           </Container>
-       </ThemeProvider>
+       
 
      
     );
