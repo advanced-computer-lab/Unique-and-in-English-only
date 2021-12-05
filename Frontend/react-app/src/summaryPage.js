@@ -242,6 +242,9 @@ function SummaryPage(props) {
 
                             </Grid>
                             <Grid item xs={12}>
+                                <h2>Total price : {outgoingPrice+returnPrice}</h2>
+                            </Grid>
+                            <Grid item xs={12}>
                                 <Button type="button" variant="contained" style={{ backgroundColor: '#bd8b13', width: '30%' }} onClick={(e) => { onSubmit(e) }}>Confirm</Button>
                             </Grid>
 
