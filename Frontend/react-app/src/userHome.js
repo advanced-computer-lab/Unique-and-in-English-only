@@ -1,5 +1,5 @@
 import Footer from "./Footer";
-import ResponsiveAppBar from "./ResponsiveAppBar";
+import ResponsiveAppBar from "./ResponsiveAppBar.js";
 import Card from "./Card";
 import "./userHome.css";
 import FlightSearch from "./searchFlightDiv.js";

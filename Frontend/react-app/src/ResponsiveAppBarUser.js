@@ -32,7 +32,7 @@ function BookClickHandler() {
     ;
 }
 
-const ResponsiveAppBar = () => {
+const ResponsiveAppBarUser = () => {
     const [anchorElNav, setAnchorElNav] = React.useState(null);
     const [anchorElUser, setAnchorElUser] = React.useState(null);
     const history = useHistory();
@@ -227,4 +227,4 @@ const ResponsiveAppBar = () => {
         </AppBar >
     );
 };
-export default ResponsiveAppBar;
+export default ResponsiveAppBarUser;

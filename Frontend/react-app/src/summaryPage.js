@@ -62,12 +62,13 @@ function SummaryPage(props) {
         ArrivalTerminal: '',
         BuisnessSeats: '',
         EconomySeats: '',
+        BusinessPrice: '',
     })
     const [outgoingSeats, setOutgoingSeats] = useState([]);
     const [returnSeats, setReturnSeats] = useState([]);
-    const [outgoingPrice, setOutgoingPrice] = useState(0);
-    const [returnPrice, setReturnPrice] = useState(0);
-    const [totalPrice, setTotalPrice] = useState(0);
+    const [outgoingPrice, setOutgoingPrice] = useState(500);
+    const [returnPrice, setReturnPrice] = useState(500);
+    const [totalPrice, setTotalPrice] = useState(1000);
 
 
     const getPriceOfFlight = (flight) => {
@@ -159,7 +160,9 @@ function SummaryPage(props) {
             .then(function (response) {
 
                 setChildren(response.data);
-                setPrices();
+                setOutgoingPrice(getPriceOfFlight(outgoingFlight));
+                 setReturnPrice(getPriceOfFlight(returnFlight));
+                setTotalTicketPrice();
                 console.log(response)
             })
             .catch(function (error) {
@@ -263,18 +266,18 @@ function SummaryPage(props) {
                             <Grid item xs={6} align="left">
                                 <h2 style={{ color: "#be8b14" }}>Outgoing Flight:-</h2>
 
-                                <FlightSummary f={outgoingFlight} ></FlightSummary>
+                                <FlightSummary f={outgoingFlight} adults={adults} children={children} cabin={cabin} price={outgoingPrice} ></FlightSummary>
                                 <h4>Booked seats:</h4>
                                 <hr />
                             </Grid>
                             <Grid item xs={6} align="left">
                                 <h2 style={{ color: "#be8b14" }}>Return Flight:-</h2>
-                                <FlightSummary f={returnFlight} ></FlightSummary>
+                                <FlightSummary f={returnFlight} adults={adults} children={children} cabin={cabin} price={returnPrice} ></FlightSummary>
                                 <h4>Booked seats:</h4>
                                 <hr />
                             </Grid>
                             <Grid item xs={6} align="left">
-                                <h2>Total price : {}</h2>
+                                <h2>Total price : {totalPrice}</h2>
                             </Grid>
                         </Grid>
                     </Paper>
