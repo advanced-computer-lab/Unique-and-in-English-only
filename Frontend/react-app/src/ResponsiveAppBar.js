@@ -143,8 +143,8 @@ const ResponsiveAppBar = () => {
                 Help
               </Button>
             }
-            <Dropdown cssClass='e-caret-hide' container="body" >
-              <Dropdown.Toggle variant="success" id="dropdown-basic" size="sm" style={{}}>
+            <Dropdown className="mt-2" container="body" >
+              <Dropdown.Toggle variant="dark" id="dropdown-basic" size="sm" style={{}}>
                 Flight
               </Dropdown.Toggle>
 

@@ -4,7 +4,11 @@ import axios from 'axios'
 import ListFlights from "./listFlights";
 import Button from '@mui/material/Button';
 
+function formatDate(date) {
+  const d = new Date(date);
+  return d.toLocaleDateString("en-US");
 
+}
 
 function FlightSummary(props) {
 
@@ -14,7 +18,7 @@ function FlightSummary(props) {
       <div className="details-container">
         <div className="details-row">
           <div id="row1">
-            <hr/>
+            <hr />
             <h3>Flight Number: {props.f.FlightNumber}</h3>
           </div>
         </div>
@@ -26,13 +30,12 @@ function FlightSummary(props) {
         </div>
         <div className="details-row">
           <div id="row3">
-            <h4>Departure Time: {props.f.DepartureTime}</h4>
-            <h4>Arrival Time: {props.f.ArrivalTime}</h4>
+            <h4>Departure Time: {formatDate(props.f.DepartureTime)}</h4>
+            <h4>Arrival Time: {formatDate(props.f.ArrivalTime)}</h4>
           </div>
           <div id="row3">
-            <h4>Departure Port: {props.f.DeparturePort}</h4>
+            <h4>Price: {(props.f.price * props.adults) + (props.f.price * props.f. }</h4>
             <h4>Arrival Port: {props.f.ArrivalPort}</h4>
-           
           </div>
         </div>
       </div>

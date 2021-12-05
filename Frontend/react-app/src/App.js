@@ -15,14 +15,19 @@ import OutgoingSeatSelection from "./OutgoinSeatSelection";
 import ReturnSeatSelection from "./ReturnSeatSelection";
 import SummaryPage from './summaryPage';
 import SignIn from './signIn';
-import {useEffect} from 'react';
+import { useEffect } from 'react';
 import ViewTickets from './ticketsView'
 function App() {
   useEffect(() => {
     document.title = "Unique Airlines"
-  }, [])
+  }, []);
+  function formatDate(date) {
+    const d = new Date(date);
+    return d.toLocaleDateString("en-US");
+
+  }
   return (
-   
+
 
     <Router>
       <nav className="navbarcontainer">

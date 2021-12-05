@@ -7,6 +7,10 @@ import Seatmap from 'react-seatmap';
 import axios from 'axios';
 import Button from '@mui/material/Button';
 import { useHistory } from "react-router-dom";
+import Stack from '@mui/material/Stack';
+import Snackbar from '@mui/material/Snackbar';
+import MuiAlert from '@mui/material/Alert';
+
 
 
 
@@ -17,14 +21,38 @@ function SeatSelection(props) {
     const removeSeat = props.removeSeat;
     //flightType either  "Return" or "Outgoing"
     const flightType = props.flightType;
-    const reservationDetails = props.reservationDetails;
+    const reservationDetails = props.reservationDetails
     const history = useHistory();
+    var flight;
     // const selectedSeats = props.selectedSeats;
     // const setSelectedSeats = props.setSelectedSeats;
     const [selectedSeats, setSelectedSeats] = useState([]);
     // const [reservationDetails, setReservationDetails] = useState({});
     var seats = new Array();
 
+    const Alert = React.forwardRef(function Alert(props, ref) {
+
+        return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
+    });
+    const [open1, setOpen1] = React.useState(false);
+    const handleClick1 = () => {
+        setOpen1(true);
+    };
+
+    if (flightType == "Outgoing") {
+        flight = reservationDetails.outgoingFlightSelected;
+    }
+    else {
+        flight = reservationDetails.returnFlightSelected;
+    }
+
+    const handleClose1 = (event, reason) => {
+        if (reason === 'clickaway') {
+            return;
+        }
+
+        setOpen1(false);
+    };
 
     // useEffect(() => {
     //     axios.get('http://localhost:150/flight/getReservationDetails').then(
@@ -35,6 +63,7 @@ function SeatSelection(props) {
     //             console.log("reservationDetails Here");
     //         });
     // });
+
 
     if (isEmpty(reservationDetails)) {
 
@@ -95,38 +124,38 @@ function SeatSelection(props) {
     }
 
 
-    for (let index = 0; index < 30; index++) {
-        const row = new Array();
-        for (let j = 0; j < 6; j++) {
+    // for (let index = 0; index < 30; index++) {
+    //     const row = new Array();
+    //     for (let j = 0; j < 6; j++) {
 
 
-            // if (flightSeats.length == 0) {
-            //     console.log("break 1")
-            //     break;
-            // }
-            // const seat = flightSeats.splice(0, 1);
-            // row.push(seat[0]);
+    //         // if (flightSeats.length == 0) {
+    //         //     console.log("break 1")
+    //         //     break;
+    //         // }
+    //         // const seat = flightSeats.splice(0, 1);
+    //         // row.push(seat[0]);
 
-            //to be removed >>>>
-            row.push({ isSelected: false, number: counter, id: counter + 1 });
-            counter++;
-            //<<<<
+    //         //to be removed >>>>
+    //         row.push({ isSelected: false, number: counter, id: counter + 1 });
+    //         counter++;
+    //         //<<<<
 
-            if (j % 2 == 1)
-                // row.push(null);
-                ;
+    //         if (j % 2 == 1)
+    //             // row.push(null);
+    //             ;
 
-        }
+    //     }
 
-        // seats.push(row);
+    //     // seats.push(row);
 
-        // if (flightSeats.length == 0) {
-        //     console.log("break 2")
+    //     // if (flightSeats.length == 0) {
+    //     //     console.log("break 2")
 
-        //     break;
-        // }
+    //     //     break;
+    //     // }
 
-    }
+    // }
     console.log("seats");
     console.log(seats);
 
@@ -147,7 +176,7 @@ function SeatSelection(props) {
 
     const addSeatCallback = ({ row, number, id }, addCb) => {
         console.log(`Added seat ${number}, row ${row}, id ${id}`)
-        const newTooltip = `tooltip for id-${id} added by callback`
+        const newTooltip = `price ${flight.price} $`
         selectedSeats.push({ number });
         console.log(selectedSeats);
         addCb(row, number, id, newTooltip)
@@ -163,16 +192,20 @@ function SeatSelection(props) {
 
     const submitHandler = () => {
 
+        if (selectedSeats.length < maxReservableSeats) {
+            handleClick1();
+            return;
+        }
+
         axios.post(`http://localhost:150/flight/setSelected${flightType}Seats/`, selectedSeats).then((result) => {
 
-            console.log("Akheran ");
             console.log(selectedSeats);
 
             if (flightType == "Outgoing")
                 history.push("ReturnSeatSelection");
-            else if (flightType == "Return"){
+            else if (flightType == "Return") {
                 history.push("summaryPage");
-                
+
             }
         }
 
@@ -198,6 +231,15 @@ function SeatSelection(props) {
                 loading={false}
             />
             <Button onClick={submitHandler}> Select  </Button>
+
+            <Stack spacing={2} sx={{ width: '100%' }}>
+                <Snackbar open={open1} autoHideDuration={6000} onClose={handleClose1}>
+                    <Alert onClose={handleClose1} severity="error" sx={{ width: '100%' }}>
+                        You have to choose {maxReservableSeats} seats !
+                     </Alert>
+                </Snackbar>
+            </Stack>
+
         </div>
     )
 
