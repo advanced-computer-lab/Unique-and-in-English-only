@@ -10,7 +10,7 @@ import SeatSelection from "./SeatSelection";
 
 ReactDOM.render(
   <React.StrictMode>
-    <SeatSelection />
+    <App />
   </React.StrictMode>,
   document.getElementById('root')
 );
