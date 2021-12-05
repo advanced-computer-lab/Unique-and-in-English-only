@@ -143,6 +143,7 @@ const ResponsiveAppBar = () => {
                 Help
               </Button>
             }
+            <div style={{marginLeft:"8px",marginTop:"5px"}}>
             <Dropdown className="mt-2" container="body" >
               <Dropdown.Toggle variant="dark" id="dropdown-basic" size="sm" style={{}}>
                 Flight
@@ -154,6 +155,8 @@ const ResponsiveAppBar = () => {
                 <Dropdown.Item onClick={() => { goToPage("searchFlight") }}>Search Flight</Dropdown.Item>
               </Dropdown.Menu>
             </Dropdown>
+            </div>
+            
 
           </Box>
 
