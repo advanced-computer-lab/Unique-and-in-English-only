@@ -122,15 +122,24 @@ const ResponsiveAppBar = () => {
             LOGO
           </Typography>
           <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }} ml="60%">
-            {
+          {
               <Button
                 style={{ color: 'black', fontWeight: "bold", fontFamily: "Etihad Altis Medium", size: "larger" }}
-                onClick={(e) => { BookClickHandler() }}
+                onClick={(e) => { goToPage('viewTickets') }}
+                sx={{ my: 2, color: 'white', display: 'block' }}
+              >
+                viewTickets
+              </Button>
+            } {
+              <Button
+                style={{ color: 'black', fontWeight: "bold", fontFamily: "Etihad Altis Medium", size: "larger" }}
+                onClick={(e) => { goToPage('') }}
                 sx={{ my: 2, color: 'white', display: 'block' }}
               >
                 Book
               </Button>
             }
+            
 
 
             {
@@ -182,11 +191,20 @@ const ResponsiveAppBar = () => {
               open={Boolean(anchorElUser)}
               onClose={handleCloseUserMenu}
             >
-              {settings.map((setting) => (
-                <MenuItem key={setting} onClick={handleCloseNavMenu}>
-                  <Typography textAlign="center">{setting}</Typography>
+              {
+                <div>
+                <MenuItem key="Edit Profile"   onClick={()=>{window.location.href = `/updateUser`}}>
+                  <Typography textAlign="center">Edit Profile</Typography>
                 </MenuItem>
-              ))}
+                <MenuItem key="Account"   onClick={()=>{}}>
+                <Typography textAlign="center">Account</Typography>
+              </MenuItem>
+              <MenuItem key="Log Out"   onClick={()=>{}}>
+                <Typography textAlign="center">Log Out</Typography>
+              </MenuItem>
+              
+              </div>
+              }
             </Menu>
           </Box>
         </Toolbar>

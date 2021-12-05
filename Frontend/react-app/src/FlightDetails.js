@@ -65,9 +65,6 @@ function FlightDetails(props) {
             <Button type="button" variant="contained" style={{ backgroundColor: '#bd8b13', width: '45%', float: "right" }} onClick={(e) => { updateHelper(props.f) }}>  <b>update</b></Button>
           </Paper>
         </Grid>
-        <Grid>
-
-        </Grid>
       </Grid>
     </Container>
   );

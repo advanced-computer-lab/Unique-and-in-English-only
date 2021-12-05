@@ -26,7 +26,7 @@ function FlightSelection() {
         console.log(result);
         setFlight(result.data);
 
-      });
+      }, []);
 
 
 

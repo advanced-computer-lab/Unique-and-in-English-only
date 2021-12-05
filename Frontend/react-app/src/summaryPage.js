@@ -110,7 +110,7 @@ function SummaryPage(props) {
         axios.get('http://localhost:150/flight/getAdults')
             .then(function (response) {
 
-                setAdults(response.data)
+                setAdults(response.data.adults)
                 console.log(response)
             })
             .catch(function (error) {
@@ -120,7 +120,7 @@ function SummaryPage(props) {
         axios.get('http://localhost:150/flight/getChildren')
             .then(function (response) {
 
-                setChildren(response.data)
+                setChildren(response.data.children)
                 console.log(response)
             })
             .catch(function (error) {
