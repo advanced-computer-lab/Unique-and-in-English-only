@@ -150,7 +150,7 @@ function SummaryPage(props) {
                         <Grid container>
                             <Grid item xs={6} align="left">
                                 <h2 style={{ color: "#be8b14" }}>Outgoing Flight:-</h2>
-                                <FlightSummary f={outgoingFlight} ></FlightSummary>
+                                <FlightSummary f={outgoingFlight} adults={adults} children={children} ></FlightSummary>
                                 {outgoingSeats.map((s) =>
                                     <h4 display="inline">Booked seats: {s.number}</h4>
                                 )}
@@ -158,7 +158,7 @@ function SummaryPage(props) {
                             </Grid>
                             <Grid item xs={6} align="left">
                                 <h2 style={{ color: "#be8b14" }}>Return Flight:-</h2>
-                                <FlightSummary f={returnFlight} adults ></FlightSummary>
+                                <FlightSummary f={returnFlight} adults={adults} children={children} ></FlightSummary>
                                 {returnSeats.map((s) =>
                                     <h4 display="inline">Booked seats: {s.number}</h4>
                                 )}
