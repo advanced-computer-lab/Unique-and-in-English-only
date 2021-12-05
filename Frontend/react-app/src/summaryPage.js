@@ -78,8 +78,6 @@ function SummaryPage(props) {
         else {
             price = flight.EconomyPrice;
         }
-        console.log("children")
-        console.log(children)
         return price * parseInt(adults) + price * parseInt(children) * 0.5;
     }
 
@@ -183,16 +181,16 @@ function SummaryPage(props) {
 
     const setPrices = () => {
         setOutgoingPrice(getPriceOfFlight(outgoingFlight));
-        console.log("outgoingFlight");
-        console.log(outgoingFlight);
         setReturnPrice(getPriceOfFlight(returnFlight));
-        console.log("outgoingFlight");
-        console.log(returnFlight);
         setTotalTicketPrice();
+        console.log(getPriceOfFlight(outgoingFlight+"ticket1"));
+        console.log(getPriceOfFlight(returnFlight));
     }
 
     const setTotalTicketPrice = () => {
+
         setTotalPrice(outgoingPrice + returnPrice);
+        console.log(outgoingPrice + returnPrice+"asdasd");
     }
 
 
@@ -244,9 +242,6 @@ function SummaryPage(props) {
 
                             </Grid>
                             <Grid item xs={12}>
-                                <h2>Total price : {totalPrice}</h2>
-                            </Grid>
-                            <Grid item xs={12}>
                                 <Button type="button" variant="contained" style={{ backgroundColor: '#bd8b13', width: '30%' }} onClick={(e) => { onSubmit(e) }}>Confirm</Button>
                             </Grid>
 
@@ -288,9 +283,6 @@ function SummaryPage(props) {
                                 <FlightSummary f={returnFlight} ></FlightSummary>
                                 <h4>Booked seats:</h4>
                                 <hr />
-                            </Grid>
-                            <Grid item xs={6} align="left">
-                                <h2>Total price : {totalPrice}</h2>
                             </Grid>
                         </Grid>
                     </Paper>

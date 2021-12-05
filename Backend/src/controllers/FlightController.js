@@ -403,7 +403,6 @@ const listReservations = (req, res) => {
     })
 };
 const deleteTicket = (req, res) => {
-    
     const deletedTicket = req.body
     const PR = deletedTicket.TicketTotalPrice;
     if (!deletedTicket) {
@@ -456,7 +455,7 @@ const deleteTicket = (req, res) => {
 
         })
 
-        const output = `<p> we want to inform you that you have cancelled your flight and your refunded amount is ${PR}</p> `;
+        const output = `We want to inform you that you have cancelled your flight and your refunded amount is ${PR} `;
         const transporter = nodemailer.createTransport(
             {
                 service: "hotmail",
@@ -470,7 +469,7 @@ const deleteTicket = (req, res) => {
             from: "aclacl_2000@outlook.com",
             to: "mohamedelshaarawy87@gmail.com",
             subject: "Node mailer test",
-            text: "woooow",
+            text: "Unique airlines",
             html: output
         }
 
@@ -487,7 +486,7 @@ transporter.sendMail(options, function (err, info) {
     function removeObjectFromArray(flight, flightObj) {
 
         return flight.filter(function (ele) {
-            return ele.outgoingFlight._id != flightObj.outgoingFlight._id | ele.returnFlight._id != flightObj.returnFlight._id | !checkSeats(ele.outgoingSeats, flightObj.outgoingSeats) | !checkSeats(ele.returnSeats, flightObj.returnSeats);
+            return ele.outgoingFlight._id != flightObj.outgoingFlight._id | ele.returnFlight._id != flightObj.returnFlight._id;
         });
     }
 
@@ -495,10 +494,19 @@ transporter.sendMail(options, function (err, info) {
 
 
 function checkSeats(seats1, seats2) {
+    if(seats1.length>=seats2.length){
     for (let i = 0; i < seats1.length; i++) {
         if (seats1[i].number != seats2[i].number)
             return false
     }
+}
+
+if(seats1.length<seats2.length){
+    for (let i = 0; i < seats2.length; i++) {
+        if (seats1[i].number != seats2[i].number)
+            return false
+    }
+}
     return true
 
 
