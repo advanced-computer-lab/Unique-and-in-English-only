@@ -15,7 +15,10 @@ const addFlight = (req, res) => {
     const arrivalPort = req.body.ArrivalPort;
     const arrivalTerminal = req.body.ArrivalTerminal;
     const DepartureTerminal = req.body.DepartureTerminal;
-
+    const TripDuration = req.body.TripDuration;
+    const BaggageAllowance=req.body.BaggageAllowance;
+    const BusinessPrice=req.body.BusinessPrice;
+    const EconomyPrice=req.body.EconomyPrice;
     const buisnessSeats = new Array();
     const economySeats = new Array();
     for (var index = 0; index < buisnessSeatsNumber; index++) {
@@ -41,7 +44,14 @@ const addFlight = (req, res) => {
             ArrivalTerminal: arrivalTerminal,
             DepartureTerminal: DepartureTerminal,
             BuisnessSeats: buisnessSeats,
-            EconomySeats: economySeats
+            EconomySeats: economySeats,
+            TripDuration: TripDuration,
+            BaggageAllowance:BaggageAllowance,
+            AvailableEconomySeatsNumber:economySeatsNumber,
+            AvailableBuisnessSeatsNumber:buisnessSeatsNumber,
+            BusinessPrice:BusinessPrice,
+            EconomyPrice:EconomyPrice,
+
         }
     );
     flight.save()

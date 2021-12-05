@@ -199,6 +199,8 @@ function UpdateFlight(props) {
     ArrivalTime: startValues.ArrivalTime,
     EconomySeatsNumber: startValues.EconomySeatsNumber,
     BuisnessSeatsNumber: startValues.BuisnessSeatsNumber,
+    AvailableBuisnessSeatsNumber:startValues.BuisnessSeatsNumber,
+    AvailableEconomySeatsNumber:startValues.EconomySeatsNumber,
     DeparturePort: startValues.DeparturePort,
     ArrivalPort: startValues.ArrivalPort,
     DepartureTerminal: startValues.DepartureTerminal,
@@ -208,6 +210,8 @@ function UpdateFlight(props) {
     EconomyPrice: startValues.EconomyPrice,
     BaggageAllowance: startValues.BaggageAllowance,
     TripDuration: startValues.TripDuration,
+    BuisnessSeats: startValues.BuisnessSeats,
+    EconomySeats: startValues.EconomySeats,
   })
   const Alert = React.forwardRef(function Alert(props, ref) {
     
@@ -383,6 +387,21 @@ function UpdateFlight(props) {
     }
     if (flag1 && flag2 && flag3 && flag4 && flag5&&flag6) {
       event.preventDefault();
+      var buisnessSeats = new Array();
+      var economySeats = new Array();
+     
+      for (var index = 0; index < values.EconomySeatsNumber; index++) {
+        const seat = { isSelected: false, number: index + 1, id: index + 1 }
+        economySeats.push(seat);
+    }
+    for (var index = 0; index < values.BuisnessSeatsNumber; index++) {
+      const seat = { isSelected: false, number: index + 1, id: index + 1 }
+      buisnessSeats.push(seat);
+  }
+      values.BuisnessSeats=buisnessSeats;
+      values.EconomySeats=economySeats;
+      values.AvailableBuisnessSeatsNumber=values.BuisnessSeatsNumber;
+      values.AvailableEconomySeatsNumber=values.EconomySeatsNumber;
       axios.put('http://localhost:150/flight/updateFlight/' + id, values)
         .then(function (response) {
           console.log(response);
