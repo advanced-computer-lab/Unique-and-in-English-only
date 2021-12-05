@@ -44,7 +44,7 @@ export default function CardTab() {
           Flexible travel for the future
           </Typography>
           <Typography variant="body2" color="text.secondary">
-          Book now for freedom to change your travel plans if you need to.
+          Book now for kosom agiz
           </Typography>
         </CardContent>
       </CardActionArea>
