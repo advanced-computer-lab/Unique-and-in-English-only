@@ -50,12 +50,15 @@ const ResponsiveAppBar = () => {
   const handleCloseUserMenu = () => {
     setAnchorElUser(null);
   };
+
   const classes = useStyles();
   const style = {
 
     background: '#bd8b13'
   };
-
+  const goBack = ()=>{
+    history.goBack();
+  }
   const goToPage = (pageName) => {
     history.push(`/${pageName}`);
   }
@@ -121,7 +124,7 @@ const ResponsiveAppBar = () => {
           >
             LOGO
           </Typography>
-          <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }} ml="60%">
+          <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }} ml="55%">
           {
               <Button
                 style={{ color: 'black', fontWeight: "bold", fontFamily: "Etihad Altis Medium", size: "larger" }}
@@ -151,6 +154,18 @@ const ResponsiveAppBar = () => {
               >
                 Help
               </Button>
+              
+            }
+               {
+              <Button
+                style={{ color: 'black', fontWeight: "bold", fontFamily: "Etihad Altis Medium", size: "larger" }}
+
+                onClick={goBack}
+                sx={{ my: 2, color: 'white', display: 'block' }}
+              >
+                Back
+              </Button>
+              
             }
             <div style={{marginLeft:"8px",marginTop:"5px"}}>
             <Dropdown className="mt-2" container="body" >
@@ -193,7 +208,7 @@ const ResponsiveAppBar = () => {
             >
               {
                 <div>
-                <MenuItem key="Edit Profile"   onClick={()=>{window.location.href = `/updateUser`}}>
+                <MenuItem key="Edit Profile"   onClick={()=>{goToPage(`updateUser`)}}>
                   <Typography textAlign="center">Edit Profile</Typography>
                 </MenuItem>
                 <MenuItem key="Account"   onClick={()=>{}}>
