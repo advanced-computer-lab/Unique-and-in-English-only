@@ -403,8 +403,9 @@ const listReservations = (req, res) => {
     })
 };
 const deleteTicket = (req, res) => {
-    const PR = deletedTicket.TicketTotalPrice;
+    
     const deletedTicket = req.body
+    const PR = deletedTicket.TicketTotalPrice;
     if (!deletedTicket) {
         return res.status(400).send({ message: "data to update can not be empty " });
     }

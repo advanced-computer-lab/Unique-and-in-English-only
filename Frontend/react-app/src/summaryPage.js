@@ -105,6 +105,8 @@ function SummaryPage(props) {
             .then(function (response) {
                 setOutgoingFlight(response.data);
 
+
+
             })
             .catch(function (error) {
 
@@ -112,7 +114,6 @@ function SummaryPage(props) {
         axios.get('http://localhost:150/flight/getReturnFlight')
             .then(function (response) {
                 setReturnFlight(response.data);
-                setPrices();
 
 
             })
@@ -122,6 +123,7 @@ function SummaryPage(props) {
         axios.get('http://localhost:150/flight/getCabin')
             .then(function (response) {
                 setCabin(response.data);
+
 
             })
             .catch(function (error) {
@@ -140,7 +142,8 @@ function SummaryPage(props) {
         axios.get('http://localhost:150/flight/getSelectedReturnSeats')
             .then(function (response) {
 
-                setReturnSeats(response.data)
+                setReturnSeats(response.data);
+
                 console.log(response)
                 if (response.data != '')
                     setFlagReturn(true)
@@ -151,7 +154,7 @@ function SummaryPage(props) {
         axios.get('http://localhost:150/flight/getAdults')
             .then(function (response) {
 
-                setAdults(response.data.adults)
+                setAdults(response.data.adults);
                 console.log(response)
             })
             .catch(function (error) {
@@ -171,6 +174,11 @@ function SummaryPage(props) {
             });
 
     }, []);
+
+    useEffect(() => {
+        setPrices();
+
+    }, [adults, children, outgoingFlight, returnFlight]);
 
 
     const setPrices = () => {
