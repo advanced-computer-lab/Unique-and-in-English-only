@@ -18,6 +18,8 @@ import * as React from 'react';
 import Stack from '@mui/material/Stack';
 import Snackbar from '@mui/material/Snackbar';
 import MuiAlert from '@mui/material/Alert';
+import {useHistory} from "react-router-dom";
+import { Link } from "react-router-dom"
 
 
 const paperStyle = { padding: 20, height: '1300px', width: 600, margin: "150px auto", minheight: '1300px' }
@@ -32,6 +34,7 @@ const theme = createMuiTheme({
   }
 })
 function SearchFlight() {
+  let history=useHistory();
   const [values, setValues] = useState({
     FlightNumber: '',
     DepartureTime: '',
@@ -119,33 +122,25 @@ function SearchFlight() {
   }
   if (flight.length >= 1) {
     return (
+      
       <ThemeProvider theme={theme}>
-        
         <Grid style={{margin:'120px auto'}} align="center" >
-          <Grid  >
-          
             <Grid>
-              
-              
                 <ScreenSearchDesktopOutlinedIcon color="primary" style={{ fontSize: "200" }} />
-                <h1 align="center">Search Results</h1>
             </Grid>
-             
-           
-             
-
-
-
-            <Grid  item xs={6}  width="600px">
+           <Grid  item xs={12}  align="left">
                 {
                   flight.map((f) =>
                     <FlightDetails f={f} deleteHandler={DeleteClickHandler} updateHandler={UpdateClickHandler} />
                   )}
 
               </Grid>
-                </Grid>
-            </Grid>
-         
+              </Grid>
+              <Grid align="center">
+                <h3>
+              <Link to onClick={()=>{setFlight('')}}>Search for other flights</Link>
+              </h3>
+              </Grid>
         
       </ThemeProvider>
     )

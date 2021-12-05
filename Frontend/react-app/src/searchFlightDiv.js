@@ -30,7 +30,7 @@ const theme=createMuiTheme({
 
 
 
-const paperStyle={padding:20, height:'400px',width:'800px',margin:"20px auto",minheight: '500px',minwidth:'1000px'}
+const paperStyle={padding:20, height:'300px',width:'1200px',margin:"25px 0"}
 
 
 const airports = [
@@ -101,11 +101,12 @@ function SearchFlightDiv() {
     <Container>
         
     <Grid align="center">
-        <Paper elevation={24} rounded style={paperStyle}>
+        <Paper elevation={3} rounded style={paperStyle}>
         <Grid container spacing={1}>
-            <Grid item xs={6}>
-                <h4 style={{color:"#be8b14"}}>From:</h4>
+            <Grid item xs={3}>
+                <h5>From</h5>
             <Autocomplete
+            variant="standard"
                     id="flying-from-box"
                     options={airports}
                     value={flyingFrom}
@@ -127,8 +128,8 @@ function SearchFlightDiv() {
          
             />
          </Grid>
-         <Grid item xs={6}>
-                <h4 style={{color:"#be8b14"}}>To:</h4>
+         <Grid item xs={3}>
+         <h5>To</h5>
                 <Autocomplete
                     id="flying-to-box"
                     options={airports}
@@ -146,42 +147,20 @@ function SearchFlightDiv() {
                     renderInput={(params) => <TextField {...params} value={values.flyingTo} onChange={set('flyingTo')} label="Flying to" />}
                 />
          </Grid>
-         <Grid item xs={4}>
-                <h4 style={{color:"#be8b14"}}>Outbound Date:</h4>
+         <Grid item xs={3}>
+             <h5>Outbound Date</h5>
+                
                 <TextField id="outboundDate" value={values.outboundDate} onChange={set('outboundDate')} type="date" variant="standard"> </TextField>
          </Grid>
-         <Grid item xs={4}>
-         <h4 style={{color:"#be8b14"}}>Return Date:</h4>
+         <Grid item xs={3}>
+         <h5>Return Date</h5>
                 <TextField id="returnDate" value={values.returnDate} onChange={set('returnDate')} type="date" variant="standard"> </TextField>
          
          </Grid>
-         <Grid item xs={4}>
-         {/* <Autocomplete
-                    id="cabin-box"
-                    options={cabinOptions}
-                    // value={values.cabin}
-                    getOptionLabel={option => option.class}
-                    renderInput={(params) => <TextField {...params} value={values.cabin} onChange={set('cabin')} label="Cabin" />}
-                /> */}
-                <h4 style={{color:"#be8b14"}}>Cabin:</h4>
-                <Select
-                color="primary"
-                    labelId="cabin-select-label"
-                    id="demo-simple-select"
-                    value={values.cabin}
-                    label="Cabin"
-                    onChange={set('cabin')}
-                    fullWidth
-                    variant="standard"
-                >
-                    <MenuItem value={"Buisness"}>Buisness</MenuItem>
-                    <MenuItem value={"Economy"}>Economy</MenuItem>
-                </Select>
          
-         </Grid>
 
-         <Grid item xs={6}>
-         <h4 style={{color:"#be8b14"}}>Adults:</h4>
+         <Grid item xs={4}>
+         <h5>Adults</h5>
          <TextField 
             label="adults"
             variant="standard"
@@ -197,8 +176,8 @@ function SearchFlightDiv() {
                     />
          </Grid>
 
-         <Grid item xs={6}>
-         <h4 style={{color:"#be8b14"}}>Children:</h4>
+         <Grid item xs={4}>
+         <h5>Children</h5>
          <TextField label="children"
          variant="standard"
                         value={values.children}
@@ -212,9 +191,34 @@ function SearchFlightDiv() {
                         }}
                     />
          </Grid>
-         <Grid item xs={12}>
+         <Grid item xs={4}>
+         {/* <Autocomplete
+                    id="cabin-box"
+                    options={cabinOptions}
+                    // value={values.cabin}
+                    getOptionLabel={option => option.class}
+                    renderInput={(params) => <TextField {...params} value={values.cabin} onChange={set('cabin')} label="Cabin" />}
+                /> */}
+                <h5>Cabin</h5>
+                
+                <Select
+                color="primary"
+                    labelId="cabin-select-label"
+                    id="demo-simple-select"
+                    value={values.cabin}
+                    label="Cabin"
+                    onChange={set('cabin')}
+                    fullWidth
+                    variant="standard"
+                >
+                    <MenuItem value={"Buisness"}>Buisness</MenuItem>
+                    <MenuItem value={"Economy"}>Economy</MenuItem>
+                </Select>
+         
+         </Grid>
+         <Grid item xs={12} align="right">
              <br/>
-         <Button style={{backgroundColor:'#bd8b13',width:'50%',display:'block'}} onClick={confirmSearch} variant="contained">Search</Button>
+         <Button style={{backgroundColor:'#bd8b13',width:'30%',display:'block',height:'60%'}} onClick={confirmSearch} variant="contained">Search</Button>
              </Grid>
 
 

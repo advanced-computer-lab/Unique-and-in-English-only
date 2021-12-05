@@ -16,7 +16,21 @@ import ReturnSeatSelection from "./ReturnSeatSelection";
 import SummaryPage from './summaryPage';
 import SignIn from './signIn';
 import { useEffect } from 'react';
-import ViewTickets from './ticketsView'
+import ViewTickets from './ticketsView';
+import { Link } from 'react-router-dom';
+import { useHistory } from "react-router-dom";
+import { Avatar, createMuiTheme, FormControlLabel, ThemeProvider } from '@mui/material';
+
+const theme = createMuiTheme({
+  palette: {
+    primary: {
+      main: '#be8b14'
+    },
+    secondary: {
+      main: '#000000'
+    }
+  }
+})
 function App() {
   useEffect(() => {
     document.title = "Unique Airlines"
@@ -28,60 +42,61 @@ function App() {
   }
   return (
 
+    <ThemeProvider theme={theme}>
+      <Router>
+        <nav className="navbarcontainer">
+          <ResponsiveAppBar />
+        </nav>
 
-    <Router>
-      <nav className="navbarcontainer">
-        <ResponsiveAppBar />
-      </nav>
 
-      {/* <div className="mainContainer"> */}
-      <Switch>
-        <Route exact path="/">
-          <UserHome />
-        </Route>
-        < Route exact path="/createFlight">
-          <Create />
-        </Route>
-        < Route exact path="/summaryPage">
-          <SummaryPage />
-        </Route>
-        < Route exact path="/searchFlight">
-          <Search />
-        </Route>
-        < Route path="/updateFlight/:id" >
-          <Update />
-        </Route>
-        < Route exact path="/listFlights">
-          <List />
-        </Route>
-        < Route exact path="/flightSelection">
-          <FlightSelection />
-        </Route>
-        < Route exact path="/OutgoingSeatSelection">
-          <OutgoingSeatSelection />
-        </Route>
-        < Route exact path="/ReturnSeatSelection">
-          <ReturnSeatSelection />
-        </Route>
-        < Route exact path="/returnFlightSelection">
-          <ReturnFlightSelection />
-        </Route>
-        < Route exact path="/SignIn">
-          <SignIn />
-        </Route>
-        < Route exact path="/viewTickets">
-          <ViewTickets />
-        </Route>
+        {/* <div className="mainContainer"> */}
+        <Switch>
+          <Route exact path="/">
+            <UserHome />
+          </Route>
+          < Route exact path="/createFlight">
+            <Create />
+          </Route>
+          < Route exact path="/summaryPage">
+            <SummaryPage />
+          </Route>
+          < Route exact path="/searchFlight">
+            <Search />
+          </Route>
+          < Route path="/updateFlight/:id" >
+            <Update />
+          </Route>
+          < Route exact path="/listFlights">
+            <List />
+          </Route>
+          < Route exact path="/flightSelection">
+            <FlightSelection />
+          </Route>
+          < Route exact path="/OutgoingSeatSelection">
+            <OutgoingSeatSelection />
+          </Route>
+          < Route exact path="/ReturnSeatSelection">
+            <ReturnSeatSelection />
+          </Route>
+          < Route exact path="/returnFlightSelection">
+            <ReturnFlightSelection />
+          </Route>
+          < Route exact path="/SignIn">
+            <SignIn />
+          </Route>
+          < Route exact path="/viewTickets">
+            <ViewTickets />
+          </Route>
 
-        <Route path="*">
-          <NotFound />
-        </Route>
-      </Switch>
-      {/* </div> */}
-      <Footer></Footer>
+          <Route path="*">
+            <NotFound />
+          </Route>
+        </Switch>
+        {/* </div> */}
+        <Footer></Footer>
 
-    </Router>
-
+      </Router>
+    </ThemeProvider>
   );
 }
 export default App;

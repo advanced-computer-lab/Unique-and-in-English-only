@@ -42,7 +42,7 @@ const useStyles = makeStyles({
 })
 
 function FlightDetails(props) {
-  const paperStyle = { padding: 20, height: '300px', width: '200', margin: "10px auto", minheight: '400px' }
+  const paperStyle = { padding: 20, height: '300px', width: '800px', margin: "10px auto", minheight: '400px' }
 
   const deleteHelper = async (flightObj) => {
     props.deleteHandler(flightObj)
