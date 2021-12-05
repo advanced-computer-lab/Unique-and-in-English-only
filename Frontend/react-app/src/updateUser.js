@@ -72,13 +72,13 @@ function UpdateUser(props) {
         <h1>Update User</h1>
         <form>
           <label > First name :</label><br></br>
-          <Input type="text" required id="FlightNumber" value={values.FirstName} onChange={set('FlightNumber')}  ></Input><br></br>
+          <Input type="text" required id="FirstName" value={values.FirstName} onChange={set('FirstName')}  ></Input><br></br>
           <label > Last name :</label><br></br>
-          <Input type="text" required id="DepartureTime" value={values.LastName} onChange={set('DepartureTime')}  ></Input><br></br>
+          <Input type="text" required id="LastName" value={values.LastName} onChange={set('LastName')}  ></Input><br></br>
           <label > passport number :</label><br></br>
-          <Input type="number" required id="ArrivalTime" value={values.PassportNumber} onChange={set('ArrivalTime')} ></Input><br></br>
+          <Input type="number" required id="PassportNumber" value={values.PassportNumber} onChange={set('PassportNumber')} ></Input><br></br>
           <label > email :</label><br></br>
-          <Input type="email" required id="EconomySeatsNumber" value={values.Email} onChange={set('EconomySeatsNumber')} ></Input><br></br>
+          <Input type="email" required id="Email" value={values.Email} onChange={set('Email')} ></Input><br></br>
           
           <br></br>
           <Button type="button" variant="contained" style={{backgroundColor:'#bd8b13',width:'20%'}} onClick={(e) => { onSubmit(e) }}>update</Button>
