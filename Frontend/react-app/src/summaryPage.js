@@ -11,6 +11,10 @@ import Paper from '@mui/material/Paper';
 import Grid from '@mui/material/Grid';
 import SummarizeOutlinedIcon from '@mui/icons-material/SummarizeOutlined';
 import { Avatar, createMuiTheme, FormControlLabel, ThemeProvider } from '@mui/material';
+import * as React from 'react';
+import Stack from '@mui/material/Stack';
+import Snackbar from '@mui/material/Snackbar';
+import MuiAlert from '@mui/material/Alert';
 
 const theme = createMuiTheme({
     palette: {
@@ -60,6 +64,23 @@ function SummaryPage(props) {
     })
     const [outgoingSeats, setOutgoingSeats] = useState([]);
     const [returnSeats, setReturnSeats] = useState([]);
+
+    const Alert = React.forwardRef(function Alert(props, ref) {
+        return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
+      });
+      const [open1, setOpen1] = React.useState(false);
+    
+      const handleClick1 = () => {
+        setOpen1(true);
+      };
+    
+      const handleClose1 = (event, reason) => {
+        if (reason === 'clickaway') {
+          return;
+        }
+    
+        setOpen1(false);
+      };
 
     useEffect(() => {
         axios.get('http://localhost:150/flight/getOutgoingFlight')
@@ -137,12 +158,15 @@ function SummaryPage(props) {
             .then(function (response) {
                 setOutgoingSeats(response.data)
                 console.log(response.data)
-                setFlagOutGoing(true)
+                setFlagOutGoing(true);
+                history.push("/viewTickets")
             })
             .catch(function (error) {
                 console.log(error)
             });
-
+            handleClick1();
+          
+          
 
     }
     if (flagReturn && flagOutGoing) {
@@ -180,6 +204,14 @@ function SummaryPage(props) {
                         </Grid>
                     </Paper>
                 </Grid>
+                <Stack spacing={2} sx={{ width: '100%' }}>
+      
+      <Snackbar open={open1} autoHideDuration={6000} onClose={handleClose1}>
+        <Alert onClose={handleClose1} severity="success" sx={{ width: '100%' }}>
+          The ticket is confirmed!
+        </Alert>
+      </Snackbar>
+      </Stack>
             </ThemeProvider>
 
         )
