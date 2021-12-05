@@ -18,10 +18,13 @@ flightRouter.post("/setSelectedReturnSeats", flightController.setSelectedReturnS
 flightRouter.get("/getSelectedOutgoingSeats", flightController.getSelectedOutgoingSeats);
 flightRouter.get("/getSelectedReturnSeats", flightController.getSelectedReturnSeats);
 flightRouter.post("/confirmTicket", flightController.confirmTicket);
-flightRouter.get("/getFlightById/:id", flightController.getFlightById)
-flightRouter.get("/getOutgoingFlight", flightController.getOutgoingFlight)
-flightRouter.get("/getReturnFlight", flightController.getReturnFlight)
-flightRouter.get("/listReservations", flightController.listReservations)
+flightRouter.get("/getFlightById/:id", flightController.getFlightById);
+flightRouter.get("/getOutgoingFlight", flightController.getOutgoingFlight);
+flightRouter.get("/getReturnFlight", flightController.getReturnFlight);
+flightRouter.get("/getAdults", flightController.getAdults);
+flightRouter.get("/getChildren", flightController.getChildren);
+flightRouter.get("/listReservations", flightController.listReservations);
 flightRouter.put("/updateUser", flightController.updateUser);
-flightRouter.post("/ticketDeletion",flightController.deleteTicket);
+flightRouter.get("/getCabin", flightController.getCabin);
+flightRouter.post("/ticketDeletion", flightController.deleteTicket);
 module.exports = flightRouter;
