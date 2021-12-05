@@ -72,13 +72,14 @@ function SummaryPage(props) {
 
     const getPriceOfFlight = (flight) => {
         var price = 0;
-        if (cabin == "Buisness") {
+        if (cabin == "Business") {
             price = flight.BusinessPrice;
         }
         else {
             price = flight.EconomyPrice;
         }
-
+        console.log("children")
+        console.log(children)
         return price * parseInt(adults) + price * parseInt(children) * 0.5;
     }
 
@@ -102,7 +103,7 @@ function SummaryPage(props) {
     useEffect(() => {
         axios.get('http://localhost:150/flight/getOutgoingFlight')
             .then(function (response) {
-                setOutgoingFlight(response.data)
+                setOutgoingFlight(response.data);
 
             })
             .catch(function (error) {
@@ -110,7 +111,9 @@ function SummaryPage(props) {
             });
         axios.get('http://localhost:150/flight/getReturnFlight')
             .then(function (response) {
-                setReturnFlight(response.data)
+                setReturnFlight(response.data);
+                setPrices();
+
 
             })
             .catch(function (error) {
@@ -158,9 +161,10 @@ function SummaryPage(props) {
         axios.get('http://localhost:150/flight/getChildren')
             .then(function (response) {
 
-                setChildren(response.data);
-                setPrices();
-                console.log(response)
+                setChildren(response.data.children);
+
+
+
             })
             .catch(function (error) {
                 console.log(error)
@@ -171,7 +175,11 @@ function SummaryPage(props) {
 
     const setPrices = () => {
         setOutgoingPrice(getPriceOfFlight(outgoingFlight));
+        console.log("outgoingFlight");
+        console.log(outgoingFlight);
         setReturnPrice(getPriceOfFlight(returnFlight));
+        console.log("outgoingFlight");
+        console.log(returnFlight);
         setTotalTicketPrice();
     }
 
@@ -274,7 +282,7 @@ function SummaryPage(props) {
                                 <hr />
                             </Grid>
                             <Grid item xs={6} align="left">
-                                <h2>Total price : {}</h2>
+                                <h2>Total price : {totalPrice}</h2>
                             </Grid>
                         </Grid>
                     </Paper>

@@ -403,6 +403,7 @@ const listReservations = (req, res) => {
     })
 };
 const deleteTicket = (req, res) => {
+    const PR = deletedTicket.TicketTotalPrice;
     const deletedTicket = req.body
     if (!deletedTicket) {
         return res.status(400).send({ message: "data to update can not be empty " });
@@ -454,7 +455,7 @@ const deleteTicket = (req, res) => {
 
         })
 
-        const output = `<p> we want to inform you that you have cancelled your flight and your refunded amount is `;
+        const output = `<p> we want to inform you that you have cancelled your flight and your refunded amount is ${PR}</p> `;
         const transporter = nodemailer.createTransport(
             {
                 service: "hotmail",
