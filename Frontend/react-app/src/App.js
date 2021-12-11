@@ -15,6 +15,7 @@ import OutgoingSeatSelection from "./OutgoinSeatSelection";
 import ReturnSeatSelection from "./ReturnSeatSelection";
 import SummaryPage from './summaryPage';
 import SignIn from './signIn';
+import SignUp from './signUp';
 import { useEffect } from 'react';
 import ViewTickets from './ticketsView';
 import { Link } from 'react-router-dom';
@@ -91,6 +92,9 @@ function App() {
           </Route>
           < Route exact path="/updateUser">
             <UpdateUser />
+          </Route>
+          <Route exact path="/signUp">
+            <SignUp />
           </Route>
           <Route path="*">
             <NotFound />
