@@ -123,26 +123,22 @@ function SearchFlight() {
   if (flight.length >= 1) {
     return (
       
-      <ThemeProvider theme={theme}>
-        <Grid style={{margin:'120px auto'}} align="center" >
-            <Grid>
-                <ScreenSearchDesktopOutlinedIcon color="primary" style={{ fontSize: "200" }} />
-            </Grid>
-           <Grid  item xs={12}  align="left">
-                {
-                  flight.map((f) =>
-                    <FlightDetails f={f} deleteHandler={DeleteClickHandler} updateHandler={UpdateClickHandler} />
-                  )}
+      <div>
+      <div align="center">
+      <ScreenSearchDesktopOutlinedIcon   color="primary" className="icon" style={{fontSize:"200"}}/>
+      </div>
+      <br/>
+        <div className="container">
+        <div className="flex-container">
 
-              </Grid>
-              </Grid>
-              <Grid align="center">
-                <h3>
-              <Link to onClick={()=>{setFlight('')}}>Search for other flights</Link>
-              </h3>
-              </Grid>
-        
-      </ThemeProvider>
+        {
+           flight.map((f) =>
+          <FlightDetails f={f} deleteHandler={DeleteClickHandler} updateHandler={UpdateClickHandler} />
+        )}
+
+      </div>
+    </div>
+    </div>
     )
   }
   else {
