@@ -14,6 +14,7 @@ import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import { fontSize, typography } from '@mui/system';
 import Checkbox from '@mui/material/Checkbox';
 import Link from '@mui/material/Link';
+import PersonOutlineOutlinedIcon from '@mui/icons-material/PersonOutlineOutlined';
 
 const theme=createMuiTheme({
   palette:{
@@ -124,7 +125,7 @@ export default function SignUp () {
        <Grid>
           <Paper elevation={10} style={paperStyle}>
             <Grid align="center">
-            <Avatar style={avatarStyle}><LockOutlinedIcon/></Avatar>
+            <Avatar style={avatarStyle}><PersonOutlineOutlinedIcon/></Avatar>
            <h1>Register</h1>
             </Grid>
             <form noValidate autoComplete='off' onSubmit={handleSubmit}>
