@@ -45,13 +45,16 @@ export default function SignUp () {
     const[confirmpassword,setConfirmPassword]=useState('')
     const[passport,setPasport]=useState('')
 
-
+    const[firstnameError,setFirstNameError]=useState(false)
+    const[lastnameError,setLastNameError]=useState(false)
     const[usernameError,setUsermameError]=useState(false)
     const[emailError,setEmailError]=useState(false)
     const[passwordError,setPasswordError]=useState(false)
     const[confirmpasswordError,setConfirmPasswordError]=useState(false)
     const[passportError,setPassportError]=useState(false)
 
+    const[firstnameErrorHelper,setFirstNameErrorHelper]=useState('')
+    const[lastnameErrorHelper,setLastNameErrorHelper]=useState('')
     const[usernameErrorHelper,setUsermameErrorHelper]=useState('')
     const[emailErrorHelper,setEmailErrorHelper]=useState('')
     const[passwordErrorHelper,setPasswordErrorHelper]=useState('')
@@ -64,11 +67,51 @@ export default function SignUp () {
     const handleSubmit=(e)=>{
       e.preventDefault()
 
+      setFirstNameError(false)
+      setLastNameError(false)
       setUsermameError(false)
       setEmailError(false)
       setPasswordError(false)
       setConfirmPasswordError(false)
       setPassportError(false)
+
+      setFirstNameErrorHelper('')
+      setLastNameErrorHelper('')
+      setUsermameErrorHelper('')
+      setEmailErrorHelper('')
+      setPasswordErrorHelper('')
+      setConfirmPasswordErrorHelper('')
+      setPassportErrorHelper('')
+      
+
+      if(firstname==''){
+        setFirstNameError(true)
+        setFirstNameErrorHelper('First Name')
+      }
+      if(lastname==''){
+        setLastNameError(true)
+        setLastNameErrorHelper('Last Name')
+      }
+      if(passport==''){
+          setPassportError(true)
+          setPassportErrorHelper('Passport')
+      }
+      if(username==''){
+          setUsermameError(true)
+          setUsermameErrorHelper('Username')
+      }
+      if(email==''){
+          setEmailError(true)
+          setEmailErrorHelper('Email')
+      }
+      if(password==''){
+          setPasswordError(true)
+          setPasswordErrorHelper('Password')
+      }
+      if(confirmpassword==''){
+        setConfirmPasswordError(true)
+        setConfirmPasswordErrorHelper('Confirm Pass')
+    }
 
       
 
@@ -90,6 +133,9 @@ export default function SignUp () {
         <Grid item xs={6}>
         <TextField
          className={classes.field}
+         onChange={(e)=>setFirstName(e.target.value)}
+         helperText={firstnameErrorHelper}
+         error={firstnameError}
          label="First Name"
          variant="outlined"
          placeholder="Enter First Name"
@@ -99,7 +145,10 @@ export default function SignUp () {
         </Grid>
         <Grid item xs={6}>
         <TextField
+        onChange={(e)=>setLastName(e.target.value)}
+        helperText={lastnameErrorHelper}
          className={classes.field}
+         error={lastnameError}
          label="Last Name"
          variant="outlined"
          placeholder="Enter Last Name"
