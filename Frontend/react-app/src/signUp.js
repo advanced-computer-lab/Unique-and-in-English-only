@@ -228,13 +228,12 @@ export default function SignUp () {
     
          />
          </Grid>
-       
          <Button
          type="submit"
          color="primary"
          variant="contained" 
         endIcon={<KeyboardArrowRightOutlinedIcon/>}
-        style={{width:'100%', fontSize:18,margin:'8px 0'}}
+        style={{width:'100%', fontSize:20,margin:'13px 0'}}
          >Sign Up</Button>
 
          
