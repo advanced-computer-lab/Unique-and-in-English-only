@@ -63,22 +63,21 @@ function ListFlights() {
   }
   if(flight.length>0){
     return (
-      <ThemeProvider theme={theme}>
-      <Grid style={{margin:'120px auto'}} align="center" >
-          <Grid>
-              <ListAltOutlinedIcon color="primary" style={{ fontSize: "200" }} />
-          </Grid>
-         <Grid  item xs={12}  align="left">
-              {
-                flight.map((f) =>
-                  <FlightDetails f={f} deleteHandler={DeleteClickHandler} updateHandler={UpdateClickHandler} />
-                )}
+      <div>
+        <div align="center">
+        <ListAltOutlinedIcon  color="primary" className="icon" style={{fontSize:"200"}}/>
+        </div>
+          <div className="containerList">
+          <div className="flex-containerList">
 
-            </Grid>
-            </Grid>
+            {flight.map((f) =>
+              <FlightDetails f={f} deleteHandler={DeleteClickHandler} updateHandler={UpdateClickHandler} />
+            )}
+
+        </div>
+      </div>
+      </div>
       
-      
-    </ThemeProvider>
   );}
   else{
     return(

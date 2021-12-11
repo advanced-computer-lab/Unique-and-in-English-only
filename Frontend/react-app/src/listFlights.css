@@ -8,6 +8,16 @@
     flex: 50%; 
   }
 
+  .flex-containerList {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+  
+  }
+  .containerList > div {
+      flex: 50%; 
+    }
+
   .title{
       margin-top: 20px;
         text-align: center;
@@ -17,4 +27,8 @@
       color:"primary";
       margin-top: 90px;
       align: center;
+  }
+
+  .fNumber{
+      color:#be8b14;
   }
