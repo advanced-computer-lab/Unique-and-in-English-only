@@ -62,11 +62,11 @@ function flightSelectionCard(props) {
       </Grid>
 
       <Grid item xs={6}>
-      <h3>Adult Price: {price} USD</h3>
+      <h3>Adult Price: ${price}</h3>
       </Grid>
 
       <Grid item xs={6}>
-      <h3>Child Price: {price * 0.5} USD</h3>
+      <h3>Child Price: ${price * 0.5}</h3>
       </Grid>
 
       <Grid item xs={6}>
