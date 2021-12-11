@@ -8,7 +8,7 @@ import { useHistory } from "react-router-dom";
 import Paper from '@mui/material/Paper';
 import Grid from '@mui/material/Grid';
 
-const paperStyle={padding:20, height:'450px',width:'600px',margin:"50px auto",minheight: '1300px'}
+const paperStyle={padding:20, height:'480px',width:'600px',margin:"50px auto",minheight: '1300px'}
 
 
 function formatDate(date) {
