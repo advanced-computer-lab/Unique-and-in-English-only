@@ -156,17 +156,7 @@ const ResponsiveAppBar = () => {
               </Button>
               
             }
-               {
-              <Button
-                style={{ color: 'black', fontWeight: "bold", fontFamily: "Etihad Altis Medium", size: "larger" }}
-
-                onClick={goBack}
-                sx={{ my: 2, color: 'white', display: 'block' }}
-              >
-                Back
-              </Button>
               
-            }
             <div style={{marginLeft:"8px",marginTop:"5px"}}>
             <Dropdown className="mt-2" container="body" >
               <Dropdown.Toggle variant="dark" id="dropdown-basic" size="sm" style={{}}>

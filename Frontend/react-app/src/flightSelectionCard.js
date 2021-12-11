@@ -5,6 +5,10 @@ import ListFlights from "./listFlights";
 import Button from '@mui/material/Button';
 import "./flightSelectionCard.css"
 import { useHistory } from "react-router-dom";
+import Paper from '@mui/material/Paper';
+import Grid from '@mui/material/Grid';
+
+const paperStyle={padding:20, height:'450px',width:'600px',margin:"50px auto",minheight: '1300px'}
 
 
 function formatDate(date) {
@@ -34,41 +38,57 @@ function flightSelectionCard(props) {
     props.updateHandler(flightObj)
   }
   return (
-    <div className="main">
+    <Grid>
+      <Paper style={paperStyle} elevation={10}>
+        <Grid container spacing={2}>
+        <Grid item xs={12} align="center">
+      <h2 className="colorBrown">Flight Number: {props.f.FlightNumber}</h2>
+      </Grid>
 
-      <div className="select-container">
-        <div className="details-row">
-          <div id="row1">
-            <h2 className="colorBrown">Flight Number: {props.f.FlightNumber}</h2>
-          </div>
-        </div>
-        <div className="details-row">
-          <div id="row2">
-            <h3>From: {props.f.DeparturePort}</h3>
-            <h3>To: {props.f.ArrivalPort}</h3>
-          </div>
-        </div>
-        <div className="details-row">
-          <div id="row3">
-            <h2>baggageAllowance: {props.f.baggageAllowance} Kg</h2>
-            <h2>price for adults: {price} USD</h2>
-            <h2>price for children: {price * 0.5} USD</h2>
-            <h2>Trip Duration: {props.f.TripDuration} </h2>
-          </div>
-        </div>
+      <Grid item xs={6}>
+      <h3 className>From: {props.f.DeparturePort}</h3>
+      </Grid>
+
+      <Grid item xs={6}>
+      <h3>To: {props.f.ArrivalPort}</h3>
+      </Grid>
+
+      <Grid item xs={6}>
+      <h3>Baggage: {props.f.baggageAllowance} kg</h3>
+      </Grid>
+
+      <Grid item xs={6}>
+      <h3>Trip Duration: {props.f.TripDuration} </h3>
+      </Grid>
+
+      <Grid item xs={6}>
+      <h3>Adult Price: {price} USD</h3>
+      </Grid>
+
+      <Grid item xs={6}>
+      <h3>Child Price: {price * 0.5} USD</h3>
+      </Grid>
+
+      <Grid item xs={6}>
+      <h3>Departure Time: {formatDate(props.f.DepartureTime)}</h3>
+      </Grid>
+
+      <Grid item xs={6}>
+      <h3>Arrival Time: {formatDate(props.f.ArrivalTime)}</h3>
+      </Grid>
+
+      <Grid item xs={12} align="right">
+      <Button type="button" variant="contained" style={{ backgroundColor: '#bd8b13', width: '45%', height: "50%", margin: "20px" }} onClick={(e) => { submitHelper(props.f) }}>  <b>Select</b></Button>
+      </Grid>
 
 
 
-        <h4>Departure Time: {formatDate(props.f.DepartureTime)}</h4>
-        <h4>Arrival Time: {formatDate(props.f.ArrivalTime)}</h4>
+      </Grid>
+      </Paper>
 
+      
 
-
-        <Button type="button" variant="contained" style={{ backgroundColor: '#bd8b13', width: '45%', height: "50%", margin: "20px" }} onClick={(e) => { submitHelper(props.f) }}>  <b>Select</b></Button>
-      </div>
-
-
-    </div>
+    </Grid>
   );
 }
 
