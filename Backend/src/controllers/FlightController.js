@@ -457,7 +457,39 @@ const deleteTicket = (req, res) => {
 
         })
 
-    const output = `We want to inform you that you have cancelled your flight and your refunded amount is ${PR} `;
+    const output = `<!DOCTYPE html>
+    <html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Document</title>
+    </head>
+    <style>
+        .title{
+            color:#bd8b13
+        }
+    </style>
+    <body>
+        <div>
+             <h1 align="center" class="title">Unique Airlines</h1>
+             <hr/>
+             <br/>
+             <h2>Ticket Refund Notification</h2>
+             <br/>
+             <h2>We want to inform you that you have cancelled your flight, and your refunded amount is ${PR}</h2>
+             <br/>
+             <p>Please keep in mind that the refunded amount may take up to 10 days to be deposited in your bank account, if you have any questions please contact our <a href="google.com">Customer Service</a>.</p>
+             <br/>
+             <hr/>
+             <p>Contact us: <a href="google.com">help@uniqueairlines.com</a> </p>
+    
+             <p align="center"> This email was sent by Unique Airlines (1 5th Settlement, New Cairo)
+    If you don't want to receive this type of email in the future, please <a href="google.com">unsubscribe</a>.</p>
+             
+           </div>
+    </body>
+    </html>`;
     const transporter = nodemailer.createTransport(
         {
             service: "hotmail",

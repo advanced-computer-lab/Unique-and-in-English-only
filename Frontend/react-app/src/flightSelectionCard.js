@@ -8,7 +8,7 @@ import { useHistory } from "react-router-dom";
 import Paper from '@mui/material/Paper';
 import Grid from '@mui/material/Grid';
 
-const paperStyle={padding:20, height:'480px',width:'600px',margin:"50px auto",minheight: '1300px'}
+const paperStyle={padding:20, height:'400px',width:'1000px',margin:"50px auto",minheight: '1300px'}
 
 
 function formatDate(date) {
@@ -58,7 +58,7 @@ function flightSelectionCard(props) {
       </Grid>
 
       <Grid item xs={6}>
-      <h3>Trip Duration: {props.f.TripDuration} </h3>
+      <h3>Trip Duration: {props.f.TripDuration} min </h3>
       </Grid>
 
       <Grid item xs={6}>

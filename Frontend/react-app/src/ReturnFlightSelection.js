@@ -11,7 +11,7 @@ import FlightSelectionCard from "./flightSelectionCard.js";
 import ResponsiveAppBar from "./ResponsiveAppBar";
 import { useHistory } from "react-router-dom";
 import SummarizeOutlinedIcon from '@mui/icons-material/SummarizeOutlined';
-
+import FlightLandOutlinedIcon from '@mui/icons-material/FlightLandOutlined';
 
 
 //import userRouter from '../../../backEnd/routes/UserRoutes';
@@ -48,18 +48,16 @@ function FlightSelection() {
     return (
       <div>
       <div align="center">
-      <SummarizeOutlinedIcon color="primary" className="icon" style={{fontSize:"200"}}/>
+      <FlightLandOutlinedIcon color="primary" className="icon" style={{fontSize:"200"}}/>
       </div>
         <h1 className="title">Choose Return Flight </h1>
-        <div className="container">
-        <div className="flex-container">
+       
 
         {flight.map((f) =>
               <FlightSelectionCard f={f} submitHandler={onSubmit} />
             )}
 
-      </div>
-    </div>
+    
     </div>
     );
   }

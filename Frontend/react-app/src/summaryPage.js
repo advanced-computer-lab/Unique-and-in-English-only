@@ -202,11 +202,12 @@ function SummaryPage(props) {
                 setOutgoingSeats(response.data)
                 console.log(response.data)
                 setFlagOutGoing(true);
-                history.push("/viewTickets")
+                
             })
             .catch(function (error) {
                 console.log(error)
             });
+            history.push("/viewTickets")
         handleClick1();
 
 

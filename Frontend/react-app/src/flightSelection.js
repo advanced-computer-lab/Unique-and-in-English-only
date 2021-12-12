@@ -13,7 +13,7 @@ import ResponsiveAppBar from "./ResponsiveAppBar";
 import BlockOutlinedIcon from '@mui/icons-material/BlockOutlined';
 import Grid from '@mui/material/Grid';
 import SummarizeOutlinedIcon from '@mui/icons-material/SummarizeOutlined';
-
+import FlightTakeoffOutlinedIcon from '@mui/icons-material/FlightTakeoffOutlined';
 
 //import userRouter from '../../../backEnd/routes/UserRoutes';
 
@@ -56,18 +56,16 @@ function FlightSelection() {
     return (
       <div>
         <div align="center">
-        <SummarizeOutlinedIcon color="primary" className="icon" style={{fontSize:"200"}}/>
+        <FlightTakeoffOutlinedIcon color="primary" className="icon" style={{fontSize:"200"}}/>
         </div>
           <h1 className="title">Choose Outgoing Flight </h1>
-          <div className="container">
-          <div className="flex-container">
+         
 
             {flight.map((f) =>
               <FlightSelectionCard f={f} cabin={cabin} submitHandler={onSubmit} />
             )}
 
-        </div>
-      </div>
+     
       </div>
     );
   }

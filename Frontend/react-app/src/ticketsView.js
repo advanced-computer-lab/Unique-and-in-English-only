@@ -8,6 +8,7 @@ import { Link } from "react-router-dom";
 import FlightDetails from './FlightDetails';
 import "./listFlights.css";
 import TicketDetails from "./ticketDetails.js";
+import ConfirmationNumberOutlinedIcon from '@mui/icons-material/ConfirmationNumberOutlined';
 
 //import userRouter from '../../../backEnd/routes/UserRoutes';
 
@@ -49,20 +50,21 @@ function TicketsView() {
   }
   if(flight.length>0){
     return (
-        <div className="">
-          <h1 style={{ marginTop: 70,marginLeft:40 }}>My Tickets </h1>
-          <div className="content">
+        <div style={{ marginTop:'100px'}}>
+          <div align="center">
+          <ConfirmationNumberOutlinedIcon color="primary" style={{ fontSize: "200" }} />
+          </div>
             
         <br></br>
   
-<div className="table">
+
         
         {flight.map((f) =>
           <TicketDetails f={f} deleteHandler={DeleteClickHandler}  />
         )}
 
-      </div>
-    </div>
+
+   
 </div>
   );}
   else{
