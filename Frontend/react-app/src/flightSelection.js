@@ -12,7 +12,7 @@ import { useHistory } from "react-router-dom";
 import ResponsiveAppBar from "./ResponsiveAppBar";
 import BlockOutlinedIcon from '@mui/icons-material/BlockOutlined';
 import Grid from '@mui/material/Grid';
-
+import SummarizeOutlinedIcon from '@mui/icons-material/SummarizeOutlined';
 
 
 //import userRouter from '../../../backEnd/routes/UserRoutes';
@@ -54,19 +54,20 @@ function FlightSelection() {
   }
   if (flight.length >= 1) {
     return (
-      <div className="">
-        <div className="content">
-          <h1 style={{ marginTop: "100px" }} >Choose Outgoing Flight </h1>
-          <br></br>
-
-          <div className="table">
+      <div>
+        <div align="center">
+        <SummarizeOutlinedIcon color="primary" className="icon" style={{fontSize:"200"}}/>
+        </div>
+          <h1 className="title">Choose Outgoing Flight </h1>
+          <div className="container">
+          <div className="flex-container">
 
             {flight.map((f) =>
               <FlightSelectionCard f={f} cabin={cabin} submitHandler={onSubmit} />
             )}
 
-          </div>
         </div>
+      </div>
       </div>
     );
   }

@@ -111,7 +111,7 @@ export default function SignIn () {
          color="primary"
          variant="contained" 
         endIcon={<KeyboardArrowRightOutlinedIcon/>}
-        style={{width:'100%', fontSize:18,margin:'8px 0'}}
+        style={{width:'100%', fontSize:20,margin:'8px 0'}}
          >Sign In</Button>
 
          <typography>

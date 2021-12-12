@@ -10,6 +10,8 @@ import "./listFlights.css";
 import FlightSelectionCard from "./flightSelectionCard.js";
 import ResponsiveAppBar from "./ResponsiveAppBar";
 import { useHistory } from "react-router-dom";
+import SummarizeOutlinedIcon from '@mui/icons-material/SummarizeOutlined';
+
 
 
 //import userRouter from '../../../backEnd/routes/UserRoutes';
@@ -44,22 +46,21 @@ function FlightSelection() {
   }
   if (flight.length >= 1) {
     return (
-      <div className="">
-        <ResponsiveAppBar />
-        <div className="content">
+      <div>
+      <div align="center">
+      <SummarizeOutlinedIcon color="primary" className="icon" style={{fontSize:"200"}}/>
+      </div>
+        <h1 className="title">Choose Return Flight </h1>
+        <div className="container">
+        <div className="flex-container">
 
-          <h1 style={{ marginTop: "100px" }} >Choose Return Flight </h1>
-          <br></br>
-
-          <div className="table">
-
-            {flight.map((f) =>
+        {flight.map((f) =>
               <FlightSelectionCard f={f} submitHandler={onSubmit} />
             )}
 
-          </div>
-        </div>
       </div>
+    </div>
+    </div>
     );
   }
   else {
