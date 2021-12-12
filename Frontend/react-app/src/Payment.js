@@ -19,6 +19,7 @@ import Box from '@mui/material/Box';
 import { useParams } from "react-router-dom";
 import { PromiseProvider } from 'mongoose';
 import InputAdornment from '@mui/material/InputAdornment';
+import CreditCardOutlinedIcon from '@mui/icons-material/CreditCardOutlined';
 
 
 
@@ -53,7 +54,7 @@ const useStyles=makeStyles({
 
 export default function Payment() {
     const classes = useStyles();
-    const paperStyle={padding:20, height:'1300px',width:600,margin:"150px auto",minheight: '1300px'}
+    const paperStyle={padding:20, height:'700px',width:600,margin:"150px auto",minheight: '1300px'}
     const Alert = React.forwardRef(function Alert(props, ref) {
     
         return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
@@ -75,174 +76,113 @@ export default function Payment() {
       }
       const onSubmit = async (event) => {}
   return (
-    <ThemeProvider theme={theme}>
-    <Container>
-      
-        <Grid>
-        <Paper elevation={10} style={paperStyle}>
-        <Grid align="center" >
-            <AirplaneTicketOutlinedIcon  color="primary" style={{fontSize:"100"}}/>
-            </Grid>
-            <Box component="form" sx={{'& .MuiTextField-root': { m: 1, width: '25ch' },}}>
-            <form noValidate autoComplete='off' >
+    <Grid>
+    <Paper elevation={10} style={paperStyle}>
+      <Grid align="center">
+      <CreditCardOutlinedIcon color="primary" style={{ fontSize: "100" }} />
+        <h1 >Payment Info</h1>
+      </Grid>
+      <form noValidate autoComplete='' >
+        
+        <Grid container spacing={1}>
 
-            <Grid container spacing={2}>
+          <Grid item xs={6}>
+            
+            <TextField
+              className={classes.field}
+              value={paymentInfo.Email} onChange={set('Email')} 
+             // helperText={firstnameErrorHelper}
+             // error={firstnameError}
+              label="Email"
+              variant="outlined"
+              placeholder="Enter Email"
+              required
+              style={{ width: '100%', margin: "8px 0" }}
+            />
+          </Grid>
+          <Grid item xs={6}>
+            <TextField
+              value={paymentInfo.cardNum} 
+              onChange={set('CardNum')}
+             // helperText={lastnameErrorHelper}
+              className={classes.field}
+             // error={lastnameError}
+              label="Card Number"
+              variant="outlined"
+              placeholder="Enter CN"
+              required
+              style={{ width: '100%', margin: "8px 0" }}
+            />
+          </Grid>
+          
+          <Grid item xs={6}>
+            <TextField
+              value={paymentInfo.cardExpDate} onChange={set('cardExpDate')}
+              className={classes.field}
+              label="Card Expiry Date"
+              variant="outlined"
+              placeholder="Enter Expiry Date"
+              required S
+             // error={usernameError}
+             // helperText={usernameErrorHelper}
+              style={{ width: '100%', margin: "8px 0" }}
+            />
+          </Grid>
+          <Grid item xs={6}>
+            <TextField
+              value={paymentInfo.cardCVC} onChange={set('cardCVC')}
+              className={classes.field}
+              label="CVC"
+              variant="outlined"
+              placeholder="Enter CVC"
+              required S
+             // error={emailError}
+             // helperText={emailErrorHelper}
+              style={{ width: '100%', margin: "8px 0" }}
+              type="email"
+            />
+          </Grid>
 
-              <Grid item xs={6}>
-        <h2 style={{color:"#be8b14"}}>Email:</h2>
-         <TextField
-         
-         label="Email"
-         variant="standard"
-         placeholder="Enter Email"
-         required 
-         color="primary"
-         style={{width:'200' }}
-         minLength="3"
-         id="FlightNumber"
-         value={paymentInfo.Email} onChange={set('Email')} 
-         //helperText={flightNumberValidate}
-        //error={flightNumberValidateFlag}
-         
-         />
-         </Grid>
+          <Grid item xs={6}>
+            <TextField
+              value={paymentInfo.Country} 
+              onChange={set('Country') }
+              className={classes.field}
+              label="Country/Region"
+              variant="outlined"
+              placeholder="Enter Region"
+              required S
+             // error={passwordError}
+             // helperText={passwordErrorHelper}
+              style={{ width: '100%', margin: "8px 0" }}
+              type='password'
+            />
+          </Grid>
 
-         <Grid item xs={6} align="center">
+          <Grid item xs={6}>
+            <TextField
+              value={paymentInfo.ZIP}
+              onChange={set('ZIP')}
+              label="Zip Number"
+              placeholder="Enter ZIP"
+              variant="outlined"
+              required
+              type='password'
+              //error={confirmpasswordError}
+             // helperText={confirmpasswordErrorHelper}
+              style={{ width: '100%', margin: "8px 0" }}
 
-          <h2 style={{color:"#be8b14"}}>Card Number:</h2>
-          <TextField
-          InputProps={{
-            endAdornment: <InputAdornment  position="end"></InputAdornment>,
-          }}
-          type="text"
-          id="CardNumber"
-          variant="standard"
-          label="Card Number"
-          placeholder="Enter Card Number"
-          required 
-          color="primary"
-          style={{width:'200' }}
-          required 
-          value={paymentInfo.cardNum} 
-          onChange={set('CardNum')}
-          //helperText={tripDurationValidate}
-        //error={tripDurationValidateFlag}
-          />
+            />
+          </Grid>
+          <Grid item xs={12} align="right" margin="auto auto">
+          <Button  type="button"  variant="contained" style={{backgroundColor:'#bd8b13',width:'50%',height:"100%"}} onClick={(e) => { onSubmit(e) }}>Confirm Payment</Button>
+          </Grid>
+
+
         </Grid>
-
-        
-         
-         
-
-         <Grid item xs={6}  >
-        <h2 style={{color:"#be8b14"}}>Card Expiry Date:</h2>
-         <TextField
-         type="date"
-         id="CardExpiryDate"
-         variant="standard"
-         required 
-         color="primary"
-         style={{width:'200' }}
-        required 
-        value={paymentInfo.cardExpDate} onChange={set('cardExpDate')}
-        //helperText={arrTimeValidate}
-        //error={arrTimeValidateFlag}
-        
-         />
-         </Grid>
-
-         <Grid item xs={6} align="center"> 
-         <h2 style={{color:"#be8b14"}}>Card CVC:</h2>
-         
-         <TextField 
-         type="number"
-         id="DepartureTime"
-         variant="standard"
-         label="Card CVC"
-          placeholder="Enter Card CVC"
-          required
-         required 
-         color="primary"
-         style={{width:'200' }}
-        required
-        value={paymentInfo.cardCVC} onChange={set('cardCVC')}
-        //helperText={depTimeValidate}
-        //error={depTimeValidateFlag}
-         />
-         </Grid>
-
-         
-         
-         <Grid item xs={6}>
-        <h2 style={{color:"#be8b14"}}>Country/Region:</h2>
-         <TextField
-         type="number"
-         id="BuisnessSeatsNumber"
-         label="Country/Region"
-         variant="standard"
-         required 
-         color="primary"
-         style={{width:'200' }}
-        required 
-        value={paymentInfo.Country} 
-        onChange={set('Country') }
-        //helperText={businessSeatsValidate}
-        //error={businessSeatsValidateFlag}
-         />
-        </Grid>
-
-        <Grid item xs={6} align="center">
-        <h2 style={{color:"#be8b14"}}>ZIP:</h2>
-         <TextField
-         type="number"
-         id="ZIP"
-         variant="standard"
-         required 
-         color="primary"
-         style={{width:'200' }}
-        required 
-        label="ZIP"
-        value={paymentInfo.ZIP}
-        onChange={set('ZIP')}
-        //helperText={economySeatsValidate}
-        //error={economySeatsValidateFlag}
-         />
-         </Grid>
-
-
-        
-        
-         </Grid>
-         <br/>
-        <br/>
-        <br/>
-        <br/>
-        <Grid align="right">
-         <Button margin="0" type="button"  variant="contained" style={{backgroundColor:'#bd8b13',width:'30%',height:"35%"}} onClick={(e) => { onSubmit(e) }}>Confirm Payment</Button>
-</Grid>
-        
-
-        
-
-         </form>
-         </Box>
-
-
-          </Paper>
-         
-        </Grid>
-
-
-
-
-
-      {/* <PopUp trigger={buttonSuccessPopup} setTrigger={setButtonSuccessPopup}>
-        <h3>Flight created Successfully</h3>
-      </PopUp>
-      <PopUp trigger={buttonFailurePopup} setTrigger={setButtonFailurePopup}>
-        <h3>error : flight was not created</h3>
-      </PopUp> */}
-      <Stack spacing={2} sx={{ width: '100%' }}>
+      </form>
+    </Paper>
+    <Stack spacing={2} sx={{ width: '100%' }}>
       
       <Snackbar /*open={open1}*/ autoHideDuration={6000} /*onClose={handleClose1}*/>
         <Alert /*onClose={handleClose1}*/ severity="success" sx={{ width: '100%' }}>
@@ -258,9 +198,8 @@ export default function Payment() {
         </Alert>
       </Snackbar>
       </Stack>
-
-      </Container>
-      </ThemeProvider>
+  </Grid>
+  
   )
 }
 
