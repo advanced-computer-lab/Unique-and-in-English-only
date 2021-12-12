@@ -15,6 +15,7 @@ import * as React from 'react';
 import Stack from '@mui/material/Stack';
 import Snackbar from '@mui/material/Snackbar';
 import MuiAlert from '@mui/material/Alert';
+import ScrollToTop from './scrollToTop';
 
 const theme = createMuiTheme({
     palette: {
@@ -27,8 +28,12 @@ const theme = createMuiTheme({
     }
 })
 
+
 function SummaryPage(props) {
-    const paperStyle = { padding: 20, height: '800px', width: 900, margin: "150px auto", minheight: '1300px' }
+    useEffect(() => {
+        window.scrollTo(0, 0)
+      }, [])
+    const paperStyle = { padding: 20, height: '800px', width: 900, margin: "150px auto" }
 
     const history = useHistory();
     const [flagOutGoing, setFlagOutGoing] = useState(false)
@@ -207,7 +212,7 @@ function SummaryPage(props) {
             .catch(function (error) {
                 console.log(error)
             });
-            history.push("/viewTickets")
+            history.push("/payment")
         handleClick1();
 
 
@@ -217,7 +222,7 @@ function SummaryPage(props) {
         console.log(true)
         return (
 
-            <ThemeProvider theme={theme}>
+            
                 <Grid align="center">
                     <Paper elevation={10} style={paperStyle}>
                         <Grid>
@@ -252,46 +257,26 @@ function SummaryPage(props) {
 
                         </Grid>
                     </Paper>
-                </Grid>
-                <Stack spacing={2} sx={{ width: '100%' }}>
+                    <Stack spacing={2} sx={{ width: '100%' }}>
                     <Snackbar open={open1} autoHideDuration={6000} onClose={handleClose1}>
                         <Alert onClose={handleClose1} severity="success" sx={{ width: '100%' }}>
                             The ticket is confirmed!
                          </Alert>
                     </Snackbar>
                 </Stack>
-            </ThemeProvider>
+                </Grid>
+               
+    
 
         )
     }
     else {
-        console.log(false)
+        
+       
         return (
-            <ThemeProvider theme={theme}>
-                <Grid align="center">
-                    <Paper elevation={10} style={paperStyle}>
-                        <Grid>
-                            <SummarizeOutlinedIcon color="primary" style={{ fontSize: "100" }} />
-                        </Grid>
-                        <br />
-                        <Grid container>
-                            <Grid item xs={6} align="left">
-                                <h2 style={{ color: "#be8b14" }}>Outgoing Flight:-</h2>
-
-                                <FlightSummary f={outgoingFlight} ></FlightSummary>
-                                <h4>Booked seats:</h4>
-                                <hr />
-                            </Grid>
-                            <Grid item xs={6} align="left">
-                                <h2 style={{ color: "#be8b14" }}>Return Flight:-</h2>
-                                <FlightSummary f={returnFlight} ></FlightSummary>
-                                <h4>Booked seats:</h4>
-                                <hr />
-                            </Grid>
-                        </Grid>
-                    </Paper>
-                </Grid>
-            </ThemeProvider>
+            
+          <div></div>
+           
         )
     }
 }
