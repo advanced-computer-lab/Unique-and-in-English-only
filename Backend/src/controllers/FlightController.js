@@ -451,12 +451,9 @@ const deleteTicket = (req, res) => {
         }
 
         ).catch(err => {
-            console.log(err)
             res.status(500).send({ message: " update can not be done " });
 
         })
-
-        const hbs=require('nodemailer-express-handlebars');
 
         const output = `We want to inform you that you have cancelled your flight and your refunded amount is ${PR} `;
         const transporter = nodemailer.createTransport(
@@ -468,17 +465,12 @@ const deleteTicket = (req, res) => {
                 }
             }
         );
-
-        transporter.use('compile',hbs({
-            viewEngine:'express-handlebars',
-            viewPath:'./views/'
-        }));
         const options = {
-            from: "Unique Airlines",
-            to: "faroukamr508@gmail.com",
-            subject: "Flight Cancellation",
+            from: "aclacl_2000@outlook.com",
+            to: "mohamedelshaarawy87@gmail.com",
+            subject: "Node mailer test",
             text: "Unique airlines",
-            template:'flightCancellationTemp'
+            html: output
         }
 
 transporter.sendMail(options, function (err, info) {
