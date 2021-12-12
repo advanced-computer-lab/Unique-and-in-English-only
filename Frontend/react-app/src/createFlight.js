@@ -164,7 +164,7 @@ export default function CreateFlight() {
   
   const onSubmit = async (event) => {
     event.preventDefault();
-   
+    
    
     
     
@@ -356,6 +356,7 @@ export default function CreateFlight() {
     }else{
       setOpen2(true)
     }
+      
   }
   
   return (
