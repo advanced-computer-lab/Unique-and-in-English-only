@@ -11,6 +11,7 @@ const sessions = require('express-session');
 //Routers
 const router = require("./routes/router");
 const flightRouter = require("./routes/flightRouter");
+const userRouter = require("./routes/userRouter");
 
 // to read the .env file
 const dotenv = require('dotenv');
@@ -25,9 +26,9 @@ const app = express();
 const port = process.env.PORT || "8000";
 app.use(sessions({
     secret: "thisismysecrctekeyfhrgfgrfrty84fwir767",
-    saveUninitialized:true,
+    saveUninitialized: true,
 
-    resave: false 
+    resave: false
 }));
 app.use(cookieParser());
 
@@ -62,6 +63,8 @@ app.listen(port, () => {
 
 app.use('/', router);
 app.use('/flight', flightRouter);
+app.use('/user', userRouter);
+
 
 // app.use(bodyParser.urlencoded())
 // app.use(bodyParser.urlencoded({
