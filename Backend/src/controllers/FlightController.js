@@ -94,7 +94,7 @@ const getFlightById = (req, res) => {
 
 const getUserById = (req, res) => {
 
-    User.findById("61a7e41644e96c67df866cdd").then((result) => {
+    User.findById("61b619887e7183c56adc6b99").then((result) => {
 
         res.send(result);
     }).catch(err => console.log(err));
@@ -351,7 +351,7 @@ const confirmTicket = (req, res) => {
     // }).catch(err => console.log(""));
 
 
-    User.findById("61a7e41644e96c67df866cdd").then((result) => {
+    User.findById("61b619887e7183c56adc6b99").then((result) => {
         result.Tickets.push(ticket);
         result.save().then((res) => {
             ;
@@ -396,7 +396,7 @@ function changeSeatsReservationinFlight(flight, seatsSelected, cabin, changeTo) 
 
 const listReservations = (req, res) => {
     const body = req.body;
-    User.findById("61a7e41644e96c67df866cdd").then((result) => {
+    User.findById("61b619887e7183c56adc6b99").then((result) => {
 
         sessions.tickets = result.Tickets;
         res.send(result.Tickets);
@@ -441,7 +441,7 @@ const deleteTicket = (req, res) => {
 
 
 
-    User.findByIdAndUpdate("61a7e41644e96c67df866cdd", bunchOfTickets, { useFindAndModify: false })
+    User.findByIdAndUpdate("61b619887e7183c56adc6b99", bunchOfTickets, { useFindAndModify: false })
         .then(data => {
             if (!data) {
                 res.status(404).send({ message: " update can not be empty " })
@@ -451,9 +451,12 @@ const deleteTicket = (req, res) => {
         }
 
         ).catch(err => {
+            console.log(err)
             res.status(500).send({ message: " update can not be done " });
 
         })
+
+        const hbs=require('nodemailer-express-handlebars');
 
         const output = `We want to inform you that you have cancelled your flight and your refunded amount is ${PR} `;
         const transporter = nodemailer.createTransport(
@@ -465,12 +468,17 @@ const deleteTicket = (req, res) => {
                 }
             }
         );
+
+        transporter.use('compile',hbs({
+            viewEngine:'express-handlebars',
+            viewPath:'./views/'
+        }));
         const options = {
-            from: "aclacl_2000@outlook.com",
-            to: "mohamedelshaarawy87@gmail.com",
-            subject: "Node mailer test",
+            from: "Unique Airlines",
+            to: "faroukamr508@gmail.com",
+            subject: "Flight Cancellation",
             text: "Unique airlines",
-            html: output
+            template:'flightCancellationTemp'
         }
 
 transporter.sendMail(options, function (err, info) {
@@ -520,7 +528,7 @@ const updateUser = (req, res) => {
     const reqKeys = Object.keys(body);
     removeEmptyAttributes(reqKeys, body)
     const id = req.params.id;
-    User.findByIdAndUpdate("61a7e41644e96c67df866cdd", body, { useFindAndModify: false })
+    User.findByIdAndUpdate("61b619887e7183c56adc6b99", body, { useFindAndModify: false })
         .then(data => {
             if (!data) {
                 res.status(404).send({ message: " update can not be empty " })

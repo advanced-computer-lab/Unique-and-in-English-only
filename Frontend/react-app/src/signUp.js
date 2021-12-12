@@ -162,6 +162,7 @@ export default function SignUp () {
          onChange={(e)=>setUsermame(e.target.value)}
          className={classes.field}
          label="Username"
+         type="username"
          variant="outlined"
          placeholder="Enter Username"
          required S
