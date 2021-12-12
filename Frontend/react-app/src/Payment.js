@@ -20,7 +20,7 @@ import { useParams } from "react-router-dom";
 import { PromiseProvider } from 'mongoose';
 import InputAdornment from '@mui/material/InputAdornment';
 import CreditCardOutlinedIcon from '@mui/icons-material/CreditCardOutlined';
-
+import { useEffect } from "react";
 
 
 
@@ -53,6 +53,10 @@ const useStyles=makeStyles({
 })
 
 export default function Payment() {
+  console.log(false)
+        useEffect(() => {
+            window.scrollTo(0, 0)
+          }, [])
     const classes = useStyles();
     const paperStyle={padding:20, height:'700px',width:600,margin:"150px auto",minheight: '1300px'}
     const Alert = React.forwardRef(function Alert(props, ref) {

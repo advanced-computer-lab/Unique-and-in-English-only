@@ -69,7 +69,7 @@ function TicketsView() {
   );}
   else{
     return(
-    <div>
+    <div style={{marginTop:'100px'}}>
       <h1>no flights available </h1>
     </div>
     )

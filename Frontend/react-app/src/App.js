@@ -23,6 +23,7 @@ import { useHistory } from "react-router-dom";
 import { Avatar, createMuiTheme, FormControlLabel, ThemeProvider } from '@mui/material';
 import UpdateUser from './updateUser';
 import Payment from './Payment';
+import scrollToTop from './scrollToTop';
 
 const theme = createMuiTheme({
   palette: {
@@ -48,7 +49,9 @@ function App() {
 
 
     <ThemeProvider theme={theme}>
+      
       <Router>
+      <scrollToTop/>
         <nav className="navbarcontainer">
           <ResponsiveAppBar />
         </nav>
