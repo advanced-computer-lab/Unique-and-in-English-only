@@ -73,7 +73,7 @@ export default function SignIn() {
         }
         else {
           console.log(response);
-          history.push("");
+          history.push("/SignIn");
         }
       }).catch((error) => {
         console.log(error)

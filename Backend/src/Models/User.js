@@ -38,14 +38,16 @@ const userSchema = new Schema({
 }, { timestamps: true });
 
 userSchema.pre("save", async function (next) {
-    const salt = await bcrypt.genSalt();
-    this.Password = await bcrypt.hash(this.Password, salt);
-    if (this.FirstName == "Ahmed_694") {
-        this.Admin = true;
-    } else {
-        this.Admin = false;
+    if (!this.Password) {
+        const salt = await bcrypt.genSalt();
+        this.Password = await bcrypt.hash(this.Password, salt);
+        if (this.FirstName == "Ahmed_694") {
+            this.Admin = true;
+        } else {
+            this.Admin = false;
+        }
+        this.Tickets = new Array();
     }
-    this.Tickets = new Array();
     next();
 });
 

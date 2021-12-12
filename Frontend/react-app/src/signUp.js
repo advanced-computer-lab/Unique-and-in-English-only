@@ -119,10 +119,7 @@ export default function SignUp() {
 
     axios.post('http://localhost:150/user/signUp', { FirstName: firstname, LastName: lastname, Email: email, Password: password, PassportNumber: passport })
       .then((res) => {
-        if (res.err) {
-          console.log(res.err);
-        }
-        history.push('/signIn');
+        history.push("/SignIn");
       }).catch(err => {
         console.log(err);
       });

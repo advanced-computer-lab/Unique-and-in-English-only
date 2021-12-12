@@ -40,6 +40,7 @@ const signUp = async (req, res) => {
     console.log(userInfo);
     try {
         const user = await User.create(userInfo);
+        res.send();
     }
     catch (err) {
         console.log(err.message);
