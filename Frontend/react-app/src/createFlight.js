@@ -465,7 +465,7 @@ export default function CreateFlight() {
          color="primary"
          style={{width:'200' }}
         required 
-        alue={values.BuisnessSeatsNumber} 
+        value={values.BuisnessSeatsNumber} 
         onChange={set('BuisnessSeatsNumber') }
         helperText={businessSeatsValidate}
         error={businessSeatsValidateFlag}
