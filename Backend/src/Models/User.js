@@ -14,12 +14,12 @@ const userSchema = new Schema({
     },
     Email: {
         type: String,
-        required: false,
+        required: true,
         unique: true,
     },
     PassportNumber: {
         type: String,
-        required: false,
+        required: true,
         unique: true,
     },
     Admin: {
@@ -29,7 +29,7 @@ const userSchema = new Schema({
     },
     Password: {
         type: String,
-        required: false,
+        required: true,
     },
     Tickets: {
         type: Array,
@@ -39,19 +39,19 @@ const userSchema = new Schema({
 
 userSchema.pre("save", async function (next) {
     const salt = await bcrypt.genSalt();
-    this.password = await bcrypt.hash(this.password, salt);
-    if (this.username == "Ahmed_694") {
-        this.role = "super-admin";
-    } else if (this.username == "Mohamed") {
-        this.role = "admin";
+    this.Password = await bcrypt.hash(this.Password, salt);
+    if (this.FirstName == "Ahmed_694") {
+        this.Admin = true;
     } else {
-        this.role = "user";
+        this.Admin = false;
     }
+    this.Tickets = new Array();
     next();
 });
 
 userSchema.statics.login = async function (Email, Password) {
     const user = await this.findOne({ Email });
+    // console.log(user);
     if (user) {
         const auth = await bcrypt.compare(Password, user.Password);
         if (auth) {
