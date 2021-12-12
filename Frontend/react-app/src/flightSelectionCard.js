@@ -54,7 +54,7 @@ function flightSelectionCard(props) {
       </Grid>
 
       <Grid item xs={6}>
-      <h3>Baggage: {props.f.baggageAllowance} kg</h3>
+      <h3>Baggage: {props.f.BaggageAllowance} kg</h3>
       </Grid>
 
       <Grid item xs={6}>
