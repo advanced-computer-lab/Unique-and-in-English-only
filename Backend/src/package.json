@@ -13,6 +13,8 @@
     "nodemailer": "^6.7.2",
     "nodemon": "^2.0.15",
     "parser": "^0.1.4",
-    "react-seatmap": "^0.1.2"
+    "react-seatmap": "^0.1.2",
+    "stripe": "^8.193.0",
+    "uuid": "^8.3.2"
   }
 }

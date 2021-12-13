@@ -21,6 +21,9 @@ import { PromiseProvider } from 'mongoose';
 import InputAdornment from '@mui/material/InputAdornment';
 import CreditCardOutlinedIcon from '@mui/icons-material/CreditCardOutlined';
 import { useEffect } from "react";
+import {Elements} from '@stripe/react-stripe-js';
+import {loadStripe} from '@stripe/stripe-js';
+
 
 
 
@@ -53,6 +56,7 @@ const useStyles=makeStyles({
 })
 
 export default function Payment() {
+  const stripe = useStripe()
   console.log(false)
         useEffect(() => {
             window.scrollTo(0, 0)
@@ -78,13 +82,47 @@ export default function Payment() {
           setPaymentInfo(oldValues => ({ ...oldValues, [name]: value }));
         }
       }
-      const onSubmit = async (event) => {}
+      const onSubmit = async (event) => {
+        e.preventDefault()
+        const {error, paymentMethod} = await stripe.createPaymentMethod({
+            type: "card",
+            card: {number: "4242424242424242",
+            cvc: "123",
+            exp_month: "12",
+            exp_year: "23"},
+            billing_details: {
+                name: 'd7kawy',
+              },
+        })
+
+
+    if(!error) {
+        try {
+            const {id} = paymentMethod
+            const response = await axios.post("http://localhost:150/user/pay", {
+                amount: 1000,
+                id
+            })
+
+            if(response.data.success) {
+                console.log("Successful payment")
+                setSuccess(true)
+            }
+
+        } catch (error) {
+            console.log("Error", error)
+        }
+    } else {
+        console.log(error.message)
+    }
+
+      }
   return (
     <Grid>
     <Paper elevation={10} style={paperStyle}>
       <Grid align="center">
       <CreditCardOutlinedIcon color="primary" style={{ fontSize: "100" }} />
-        <h1 >Payment Info</h1>
+        <h1 >payment</h1>
       </Grid>
       <form noValidate autoComplete='off' >
         
@@ -179,8 +217,10 @@ export default function Payment() {
             />
           </Grid>
           <Grid item xs={12} align="right" margin="auto auto">
-          <Button  type="button"  variant="contained" style={{backgroundColor:'#bd8b13',width:'50%',height:"100%"}} onClick={(e) => { onSubmit(e) }}>Confirm Payment</Button>
+          <Button  type="button"  variant="contained" style={{backgroundColor:'#bd8b13',width:'50%',height:"100%"}} onClick={(e) => { onSubmit(e) }}>Confirm payment</Button>
+          
           </Grid>
+          
 
 
         </Grid>

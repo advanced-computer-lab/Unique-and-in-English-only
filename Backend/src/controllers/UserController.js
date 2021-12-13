@@ -1,5 +1,11 @@
 const User = require("../Models/User");
 const jwt = require("jsonwebtoken");
+const { v4: uuidv4 } = require('uuid');
+
+var Publishable_Key = 'pk_test_51K69PxHSnuUCIvbwdqHkVQzUOiDz7lPbkuI0ES8nGf7NJyp1q2apcATscjtzJfoH3dil22wMvjnGA3xj9GCESc7m00drV3YzVF'
+var Secret_Key = 'sk_test_51K69PxHSnuUCIvbw7EuFbCCSmWkKBscPONjHcEFdcEsOO4CmMWlTdBb6QFFvGbBsspU6yWW96rTc64Icf2V1YJZZ008qRLI55I'
+
+const stripe = require('stripe')(Secret_Key) 
 
 async function signInController(req, res) {
     const { Email, Password } = req.body;
@@ -55,9 +61,37 @@ async function logOutController(req, res) {
     res.send();
 }
 
+ const pay= async (req,res)=>{
+    const uuid=require('uuid');
+    const{product,token}=req.body;
+    console.log("PRODUCT",product);
+    console.log("PRICE",product.price);
+
+    const idempontencyKey=uuidv4();
+
+    return stripe.customers.create({
+        email:token.email,
+        source:token.id,
+    }).then(customer =>{
+        stripe.charges.create({
+            amount: product.price*100,
+            currency:'usd',
+            customer: customer.id,
+            receipt_email:token.email,
+            
+
+        })
+    })
+    .then(result=>{
+        res.status(200).json(result)
+    })
+    .catch(err=>console.log(err))
+}
+
 
 module.exports = {
     signUp,
     signInController,
-    logOutController
+    logOutController,
+    pay,
 };

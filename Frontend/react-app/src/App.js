@@ -23,7 +23,7 @@ import { useHistory } from "react-router-dom";
 import { Avatar, createMuiTheme, FormControlLabel, ThemeProvider } from '@mui/material';
 import UpdateUser from './updateUser';
 import Payment from './Payment';
-import scrollToTop from './scrollToTop';
+import Pay from './pay';
 
 const theme = createMuiTheme({
   palette: {
@@ -97,9 +97,7 @@ function App() {
           < Route exact path="/updateUser">
             <UpdateUser />
           </Route>
-          < Route exact path="/Payment">
-            <Payment />
-          </Route>
+          
           <Route exact path="/signUp">
             <SignUp />
           </Route>
