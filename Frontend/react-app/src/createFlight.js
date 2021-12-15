@@ -164,7 +164,7 @@ export default function CreateFlight() {
   
   const onSubmit = async (event) => {
     event.preventDefault();
-   
+    
    
     
     
@@ -356,6 +356,7 @@ export default function CreateFlight() {
     }else{
       setOpen2(true)
     }
+      
   }
   
   return (
@@ -465,7 +466,7 @@ export default function CreateFlight() {
          color="primary"
          style={{width:'200' }}
         required 
-        alue={values.BuisnessSeatsNumber} 
+        value={values.BuisnessSeatsNumber} 
         onChange={set('BuisnessSeatsNumber') }
         helperText={businessSeatsValidate}
         error={businessSeatsValidateFlag}

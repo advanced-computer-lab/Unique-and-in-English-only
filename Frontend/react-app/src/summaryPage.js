@@ -15,6 +15,8 @@ import * as React from 'react';
 import Stack from '@mui/material/Stack';
 import Snackbar from '@mui/material/Snackbar';
 import MuiAlert from '@mui/material/Alert';
+import ScrollToTop from './scrollToTop';
+import StripeCheckout from "react-stripe-checkout"
 
 const theme = createMuiTheme({
     palette: {
@@ -27,8 +29,12 @@ const theme = createMuiTheme({
     }
 })
 
+
 function SummaryPage(props) {
-    const paperStyle = { padding: 20, height: '800px', width: 900, margin: "150px auto", minheight: '1300px' }
+    useEffect(() => {
+        window.scrollTo(0, 0)
+      }, [])
+    const paperStyle = { padding: 20, height: '800px', width: 900, margin: "150px auto" }
 
     const history = useHistory();
     const [flagOutGoing, setFlagOutGoing] = useState(false)
@@ -192,7 +198,43 @@ function SummaryPage(props) {
         setTotalPrice(outgoingPrice + returnPrice);
         console.log(outgoingPrice + returnPrice+"asdasd");
     }
-
+    const [product,setProduct]=useState({name:"ahmed",price:"10000",productBy:"unique airways"})
+    const makePayment=token=>{
+        const body ={
+            token,
+            product
+        }
+        const header={
+            "Content-Type":"application/json"
+        }
+        
+            axios.post('http://localhost:150/user/pay', body)
+        .then(function (response) {
+          console.log("status",response);
+          const {status}=response
+          console.log("status",status)
+          
+        }).then(function (response) {
+            const ticketObj = { outgoingFlight, returnFlight, outgoingSeats, returnSeats, confirmationNum: "ungiuhaf68n", cabin, TicketTotalPrice: outgoingPrice+returnPrice }
+            axios.post('http://localhost:150/flight/confirmTicket', ticketObj)
+            .then(function (response) {
+                setOutgoingSeats(response.data)
+                console.log(response.data)
+                setFlagOutGoing(true);
+                
+            })
+            .catch(function (error) {
+                console.log(error)
+            });
+            //history.push("/payment")
+        handleClick1();
+        })
+        .catch(function (error) {
+          console.log("error",error);
+          
+        });
+          
+    }
 
     const onSubmit = (e) => {
         //   history.push("")
@@ -202,11 +244,12 @@ function SummaryPage(props) {
                 setOutgoingSeats(response.data)
                 console.log(response.data)
                 setFlagOutGoing(true);
-                history.push("/viewTickets")
+                
             })
             .catch(function (error) {
                 console.log(error)
             });
+            //history.push("/payment")
         handleClick1();
 
 
@@ -216,7 +259,7 @@ function SummaryPage(props) {
         console.log(true)
         return (
 
-            <ThemeProvider theme={theme}>
+            
                 <Grid align="center">
                     <Paper elevation={10} style={paperStyle}>
                         <Grid>
@@ -245,52 +288,34 @@ function SummaryPage(props) {
                                 <h2>Total price : {outgoingPrice+returnPrice}</h2>
                             </Grid>
                             <Grid item xs={12}>
-                                <Button type="button" variant="contained" style={{ backgroundColor: '#bd8b13', width: '30%' }} onClick={(e) => { onSubmit(e) }}>Confirm</Button>
+                            <StripeCheckout stripeKey="pk_test_51K69PxHSnuUCIvbwdqHkVQzUOiDz7lPbkuI0ES8nGf7NJyp1q2apcATscjtzJfoH3dil22wMvjnGA3xj9GCESc7m00drV3YzVF" token={makePayment} name="flight" amount={(outgoingPrice+returnPrice)*100} >
+                            <Button  type="button"  variant="contained" style={{backgroundColor:'#bd8b13',width:'50%',height:"100%"}} >Confirm payment</Button>
+                            </StripeCheckout>
                             </Grid>
 
 
                         </Grid>
                     </Paper>
-                </Grid>
-                <Stack spacing={2} sx={{ width: '100%' }}>
+                    <Stack spacing={2} sx={{ width: '100%' }}>
                     <Snackbar open={open1} autoHideDuration={6000} onClose={handleClose1}>
                         <Alert onClose={handleClose1} severity="success" sx={{ width: '100%' }}>
                             The ticket is confirmed!
                          </Alert>
                     </Snackbar>
                 </Stack>
-            </ThemeProvider>
+                </Grid>
+               
+    
 
         )
     }
     else {
-        console.log(false)
+        
+       
         return (
-            <ThemeProvider theme={theme}>
-                <Grid align="center">
-                    <Paper elevation={10} style={paperStyle}>
-                        <Grid>
-                            <SummarizeOutlinedIcon color="primary" style={{ fontSize: "100" }} />
-                        </Grid>
-                        <br />
-                        <Grid container>
-                            <Grid item xs={6} align="left">
-                                <h2 style={{ color: "#be8b14" }}>Outgoing Flight:-</h2>
-
-                                <FlightSummary f={outgoingFlight} ></FlightSummary>
-                                <h4>Booked seats:</h4>
-                                <hr />
-                            </Grid>
-                            <Grid item xs={6} align="left">
-                                <h2 style={{ color: "#be8b14" }}>Return Flight:-</h2>
-                                <FlightSummary f={returnFlight} ></FlightSummary>
-                                <h4>Booked seats:</h4>
-                                <hr />
-                            </Grid>
-                        </Grid>
-                    </Paper>
-                </Grid>
-            </ThemeProvider>
+            
+          <div></div>
+           
         )
     }
 }

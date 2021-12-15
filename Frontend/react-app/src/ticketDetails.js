@@ -53,22 +53,23 @@ const deleteHelper= async(flightObj) =>{
       <Grid container spacing={2} >
         <Grid item xs={12} >
           <Paper elevation={10} style={paperStyle}>
-           <h3>Flight Number: {props.f.outgoingFlight.FlightNumber}</h3>
+           <h1>Flight Number: {props.f.outgoingFlight.FlightNumber}</h1>
       <div className="">
-          <p> From: {props.f.outgoingFlight.DeparturePort+' ----->'} {props.f.outgoingFlight.ArrivalPort}</p>
-          <p>Departure Date:{props.f.outgoingFlight.DepartureTime+' '}, Arrival Date:{props.f.outgoingFlight.ArrivalTime} </p>
-          <p>Chosen Cabin:{props.f.cabin+' ' } , Chosen Seats:{looper(props.f.outgoingSeats)} </p>
+          <h5> From: {props.f.outgoingFlight.DeparturePort+' ----->'} {props.f.outgoingFlight.ArrivalPort}</h5>
+          <h5>Departure Date:{props.f.outgoingFlight.DepartureTime+' '}, Arrival Date:{props.f.outgoingFlight.ArrivalTime} </h5>
+          <h5>Cabin: {props.f.cabin+' ' } , Seats: {looper(props.f.outgoingSeats)} </h5>
       </div>
-      <h3>Flight Number: {props.f.returnFlight.FlightNumber}</h3>
+      <hr/>
+      <h1>Flight Number: {props.f.returnFlight.FlightNumber}</h1>
 
-      <div className="">
-          <p> From: {props.f.returnFlight.DeparturePort+" ---->"}  {props.f.returnFlight.ArrivalPort}</p>
+          <h5> From: {props.f.returnFlight.DeparturePort+" ---->"}  {props.f.returnFlight.ArrivalPort}</h5>
         
-          <p>Departure Date:{props.f.returnFlight.DepartureTime+' '} , Arrival Date:{props.f.returnFlight.ArrivalTime}</p>
-          <p>Chosen Cabin:{props.f.cabin+' '} , Chosen Seats:{looper(props.f.returnSeats)} </p>
-          <p>Confirmation Number:{props.f.confirmationNum}</p>
-          <p>Total Price:{props.f.TicketTotalPrice} </p>
-      </div>
+          <h5>Departure Date:{props.f.returnFlight.DepartureTime+' '} , Arrival Date:{props.f.returnFlight.ArrivalTime}</h5>
+          <h5>Cabin: {props.f.cabin+' '} , Seats: {looper(props.f.returnSeats)} </h5>
+          <hr/>
+          <h5>Confirmation Number: {props.f.confirmationNum}</h5>
+          <h5>Total Price: ${props.f.TicketTotalPrice} </h5>
+
       <div className="">
           <Button type="button" variant="contained" style={{backgroundColor:'#bd8b13',width:'25%',float:"Right"}} onClick={(e) =>{deleteHelper(props.f)}}>Cancel</Button>
     </div>
