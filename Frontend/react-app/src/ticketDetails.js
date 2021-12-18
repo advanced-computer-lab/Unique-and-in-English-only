@@ -34,10 +34,13 @@ const useStyles = makeStyles({
 
 
 function TicketDetails(props) {
-  const paperStyle = { padding: 20, height: '500px', width: '800px', margin: "10px auto", minheight: '400px' }
+  const paperStyle = { padding: 20, height: '700px', width: '800px', margin: "10px auto", minheight: '400px' }
 
 const deleteHelper= async(flightObj) =>{
   props.deleteHandler(flightObj);
+}
+const editReturnHelper= async(flightObj) =>{
+  props.editReturnHandler(flightObj);
 }
  function looper(seats){
   var result=[];
@@ -58,7 +61,13 @@ const deleteHelper= async(flightObj) =>{
           <h5> From: {props.f.outgoingFlight.DeparturePort+' ----->'} {props.f.outgoingFlight.ArrivalPort}</h5>
           <h5>Departure Date:{props.f.outgoingFlight.DepartureTime+' '}, Arrival Date:{props.f.outgoingFlight.ArrivalTime} </h5>
           <h5>Cabin: {props.f.cabin+' ' } , Seats: {looper(props.f.outgoingSeats)} </h5>
+          <div className="">
+          <Button type="button" variant="contained" style={{backgroundColor:'#bd8b13',width:'25%',float:"Right"}} onClick={(e) =>{deleteHelper(props.f)}}>Edit</Button>
+</div>
+
       </div>
+      <br /><br />
+  
       <hr/>
       <h1>Flight Number: {props.f.returnFlight.FlightNumber}</h1>
 
@@ -66,6 +75,9 @@ const deleteHelper= async(flightObj) =>{
         
           <h5>Departure Date:{props.f.returnFlight.DepartureTime+' '} , Arrival Date:{props.f.returnFlight.ArrivalTime}</h5>
           <h5>Cabin: {props.f.cabin+' '} , Seats: {looper(props.f.returnSeats)} </h5>
+          <Button type="button" variant="contained" style={{backgroundColor:'#bd8b13',width:'25%',float:"Right"}} onClick={(e) =>{editReturnHelper(props.f)}}>Edit</Button>
+          <br /><br />
+
           <hr/>
           <h5>Confirmation Number: {props.f.confirmationNum}</h5>
           <h5>Total Price: ${props.f.TicketTotalPrice} </h5>

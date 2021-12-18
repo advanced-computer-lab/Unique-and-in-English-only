@@ -22,9 +22,10 @@ import { Link } from 'react-router-dom';
 import { useHistory } from "react-router-dom";
 import { Avatar, createMuiTheme, FormControlLabel, ThemeProvider } from '@mui/material';
 import UpdateUser from './updateUser';
-import Payment from './Payment';
+import EditReturnFlight from './editReturnFlight';
 import Pay from './pay';
-
+import EditReturnFlightSeats from './editReturnFlightSeats';
+import EditReturnFlightConfirmation from './editReturnConfirmation';
 const theme = createMuiTheme({
   palette: {
     primary: {
@@ -97,7 +98,15 @@ function App() {
           < Route exact path="/updateUser">
             <UpdateUser />
           </Route>
-          
+          < Route exact path="/editReturnFlight">
+            <EditReturnFlight />
+          </Route>
+          < Route exact path="/editReturnFlightSeats">
+            <EditReturnFlightSeats />
+          </Route>
+          < Route exact path="/editedFlightConfirmation">
+            <EditReturnFlightConfirmation />
+          </Route>
           <Route exact path="/signUp">
             <SignUp />
           </Route>

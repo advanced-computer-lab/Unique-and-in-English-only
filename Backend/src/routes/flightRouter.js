@@ -28,4 +28,12 @@ flightRouter.put("/updateUser", flightController.updateUser);
 flightRouter.get("/getCabin", flightController.getCabin);
 flightRouter.post("/ticketDeletion", flightController.deleteTicket);
 flightRouter.get("/getUserById",flightController.getUserById);
+flightRouter.post("/editReturnFlight", flightController.editReturnFlight);
+flightRouter.post("/listReturnFlights", flightController.listReturnFlights);
+flightRouter.post("/selectEditedReturnFlight", flightController.selectEditedReturnFlight);
+flightRouter.post("/setSelectededitingReturnSeats", flightController.setSelectedReturnSeats);
+flightRouter.get("/getOldTicketAndNewFlight", flightController.getOldTicketAndNewFlight);
+flightRouter.post("/editReturnFlightConfirmation", flightController.editReturnFlightConfirmation);
+
+
 module.exports = flightRouter;

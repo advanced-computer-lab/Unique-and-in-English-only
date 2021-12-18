@@ -82,7 +82,7 @@ function SeatSelection(props) {
         if (flightType == "Outgoing") {
             flightSeats = reservationDetails.outgoingFlightSelected.BuisnessSeats;
         }
-        else if (flightType == "Return") {
+        else  {
             flightSeats = reservationDetails.returnFlightSelected.BuisnessSeats;
 
         }
@@ -91,9 +91,9 @@ function SeatSelection(props) {
         if (flightType == "Outgoing") {
             flightSeats = reservationDetails.outgoingFlightSelected.EconomySeats;
         }
-        else if (flightType == "Return") {
+        else  {
             flightSeats = reservationDetails.returnFlightSelected.EconomySeats;
-        }
+        } 
     }
     // if (cabin == "Buisness") {
     //     flightSeats = reservationDetails.outgoingFlightSelected.BuisnessSeats;
@@ -208,7 +208,8 @@ function SeatSelection(props) {
                 history.push("ReturnSeatSelection");
             else if (flightType == "Return") {
                 history.push("summaryPage");
-
+            }  else if (flightType == "editingReturn") {
+                history.push("editedFlightConfirmation");
             }
         }
 

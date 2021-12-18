@@ -94,7 +94,7 @@ const getFlightById = (req, res) => {
 
 const getUserById = (req, res) => {
 
-    User.findById("61b619887e7183c56adc6b99").then((result) => {
+    User.findById("61b9f15b61d188f8862f8bbf").then((result) => {
 
         res.send(result);
     }).catch(err => console.log(err));
@@ -218,12 +218,16 @@ function searchFlightPassenger(req, res) {
     //  const user = new User({
     //     FirstName: "Men3am",
     //     LastName: "ElDardey",
-    //     Tickets: []
+    //     Tickets: [],
+    //     PassportNumber:"46589",
+        
+    //     Password:"lolo123",
+
     // })
 
     // user.save().then((res) => {
 
-    // }).catch(err => console.log(""));
+    // }).catch(err => console.log("saved"));
 
 }
 
@@ -234,7 +238,7 @@ const showFlights = (req, res) => {
     if (!outgoingFlightSearch)
         return;
     Flight.find(outgoingFlightSearch).where(`${seats}`).gt(numPassengers).then((result) => {
-        console.log(result);
+       
         res.send(result);
     }).catch(err => console.log(err));
 };
@@ -351,7 +355,7 @@ const confirmTicket = (req, res) => {
     // }).catch(err => console.log(""));
 
 
-    User.findById("61b619887e7183c56adc6b99").then((result) => {
+    User.findById("61b9f15b61d188f8862f8bbf").then((result) => {
         console.log(result.Tickets);
         result.Tickets.push(ticket);
         console.log(result.Tickets);
@@ -398,7 +402,7 @@ function changeSeatsReservationinFlight(flight, seatsSelected, cabin, changeTo) 
 
 const listReservations = (req, res) => {
     const body = req.body;
-    User.findById("61b619887e7183c56adc6b99").then((result) => {
+    User.findById("61b9f15b61d188f8862f8bbf").then((result) => {
 
         sessions.tickets = result.Tickets;
         res.send(result.Tickets);
@@ -443,7 +447,7 @@ const deleteTicket = (req, res) => {
 
 
 
-    User.findByIdAndUpdate("61b619887e7183c56adc6b99", bunchOfTickets, { useFindAndModify: false })
+    User.findByIdAndUpdate("61b9f15b61d188f8862f8bbf", bunchOfTickets, { useFindAndModify: false })
         .then(data => {
             if (!data) {
                 res.status(404).send({ message: " update can not be empty " })
@@ -517,13 +521,15 @@ const deleteTicket = (req, res) => {
 
 
 
-    function removeObjectFromArray(flight, flightObj) {
+   
 
-        return flight.filter(function (ele) {
-            return ele.outgoingFlight._id != flightObj.outgoingFlight._id | ele.returnFlight._id != flightObj.returnFlight._id;
-        });
-    }
+}
 
+function removeObjectFromArray(flight, flightObj) {
+
+    return flight.filter(function (ele) {
+        return ele.outgoingFlight._id != flightObj.outgoingFlight._id | ele.returnFlight._id != flightObj.returnFlight._id;
+    });
 }
 
 
@@ -554,7 +560,7 @@ const updateUser = (req, res) => {
     const reqKeys = Object.keys(body);
     removeEmptyAttributes(reqKeys, body)
     const id = req.params.id;
-    User.findByIdAndUpdate("61b619887e7183c56adc6b99", body, { useFindAndModify: false })
+    User.findByIdAndUpdate("61b9f15b61d188f8862f8bbf", body, { useFindAndModify: false })
         .then(data => {
             if (!data) {
                 res.status(404).send({ message: " update can not be empty " })
@@ -569,7 +575,153 @@ const updateUser = (req, res) => {
 
 
 }
+const editReturnFlight = (req, res) => {
+    sessions.ticketTobeEdited= req.body;
+}
+const listReturnFlights = (req, res)=>{
+ console.log(req.body)
+    const date= new Date(req.body.returnDate)
+  
+    const cabinClass= req.body.cabin
+    sessions.cabin=req.body.cabin;
+  const oldFlight = sessions.ticketTobeEdited.returnFlight
+  var seats = "AvailableEconomySeatsNumber"
+  var numPassengers= sessions.ticketTobeEdited.returnSeats.length;
+  if (cabinClass == "Buisness") {
+      seats = "AvailableBuisnessSeatsNumber";
+  }
+  const searchCriteria ={
+      DeparturePort:oldFlight.DeparturePort,
+      ArrivalPort:oldFlight.ArrivalPort,
+      DepartureTime: date,
+  }
 
+  Flight.find(searchCriteria).where(`${seats}`).gt(numPassengers).then((result) => {
+       
+    res.send(result);
+}).catch(err => console.log(err));
+}
+
+const selectEditedReturnFlight = (req, res) => {
+    console.log(req.body);
+   sessions.returnFlightSelected=req.body;
+   sessions.adults=sessions.ticketTobeEdited.returnSeats.length;
+   sessions.children =0;
+   sessions.outgoingFlightSelected=sessions.ticketTobeEdited.outgoingFlight;
+
+}
+
+const getOldTicketAndNewFlight = (req, res) => {
+  const confirmationData ={
+      oldTicket:sessions.ticketTobeEdited,
+      newSeats :sessions.selectedReturnSeats,
+      newFlight:sessions.returnFlightSelected,
+      newCabin: sessions.cabin
+  }
+    res.send(confirmationData);
+
+}
+
+const editReturnFlightConfirmation = (req, res) => {
+    const deletedTicket = req.body.deletedTicket;
+    const PR = deletedTicket.TicketTotalPrice;
+    if (!deletedTicket) {
+        return res.status(400).send({ message: "data to update can not be empty " });
+    }
+
+    const cabin = deletedTicket.cabin;
+    var outgoingSeats = deletedTicket.outgoingSeats;
+    var returnSeats = deletedTicket.returnSeats;
+    var outgoingFlight = deletedTicket.outgoingFlight;
+    var returnFlight = deletedTicket.returnFlight;
+    unreserveSeatsinFlight(outgoingFlight, outgoingSeats, cabin);
+    unreserveSeatsinFlight(returnFlight, returnSeats, cabin);
+    if (cabin == 'Buisness') {
+        outgoingFlight.AvailableBuisnessSeatsNumber += returnSeats.length;
+        returnFlight.AvailableBuisnessSeatsNumber += returnSeats.length;
+
+    } else {
+        outgoingFlight.AvailableEconomySeatsNumber += returnSeats.length;
+        returnFlight.AvailableEconomySeatsNumber += returnSeats.length;
+
+    }
+ 
+
+
+    Flight.findByIdAndUpdate(outgoingFlight._id, outgoingFlight).then(result => { console.log("updated fgfd") });
+    Flight.findByIdAndUpdate(returnFlight._id, returnFlight).then((result) => { console.log("updated return") });
+
+
+    const newTickets = removeObjectFromArray(sessions.tickets, deletedTicket);
+    sessions.tickets = newTickets;
+    const bunchOfTickets = { Tickets: newTickets };
+
+
+
+    User.findByIdAndUpdate("61b9f15b61d188f8862f8bbf", bunchOfTickets, { useFindAndModify: false })
+        .then(data => {
+            if (!data) {
+                res.status(404).send({ message: " update can not be empty " })
+            } else {
+                res.send(data);
+            }
+        }
+
+        ).catch(err => {
+            res.status(500).send({ message: " update can not be done " });
+
+        }) 
+        
+        const ticket = req.body.newTicket;
+         outgoingFlight = ticket.outgoingFlight;
+         returnFlight = ticket.returnFlight
+        // console.log(ticket);
+    
+        reserveSeatsinFlight(outgoingFlight, ticket.outgoingSeats, ticket.cabin)
+        reserveSeatsinFlight(returnFlight, ticket.returnSeats, ticket.cabin)
+        if (sessions.cabin == 'Buisness') {
+            outgoingFlight.AvailableBuisnessSeatsNumber -= ticket.returnSeats.length;
+            returnFlight.AvailableBuisnessSeatsNumber -= ticket.returnSeats.length;
+    
+        } else {
+            outgoingFlight.AvailableEconomySeatsNumber -= ticket.returnSeats.length;
+            returnFlight.AvailableEconomySeatsNumber -= ticket.returnSeats.length;
+    
+        }
+    
+    
+        Flight.findByIdAndUpdate(outgoingFlight._id, outgoingFlight)
+            .then((result) => {
+                console.log("updated")
+            }).catch(err => console.log(err));
+    
+        Flight.findByIdAndUpdate(returnFlight._id, returnFlight)
+            .then((result) => {
+                console.log("updated")
+            }).catch(err => console.log(err));
+    
+        // const user = new User({
+        //     FirstName: "Men3am",
+        //     LastName: "ElDardey",
+        //     Tickets: []
+        // })
+    
+        // user.save().then((res) => {
+    
+        // }).catch(err => console.log(""));
+    
+    
+        User.findById("61b9f15b61d188f8862f8bbf").then((result) => {
+            console.log(result.Tickets);
+            result.Tickets.push(ticket);
+            console.log(result.Tickets);
+            result.save().then((res) => {
+                console.log("tickets updated");
+            });
+        });
+    
+
+}
 module.exports =
 {
     addFlight,
@@ -597,5 +749,10 @@ module.exports =
     getUserById,
     getChildren,
     getAdults,
-    getCabin
+    getCabin,
+    editReturnFlight,
+    listReturnFlights,
+    selectEditedReturnFlight,
+    getOldTicketAndNewFlight,
+    editReturnFlightConfirmation
 }

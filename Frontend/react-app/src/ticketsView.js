@@ -9,6 +9,7 @@ import FlightDetails from './FlightDetails';
 import "./listFlights.css";
 import TicketDetails from "./ticketDetails.js";
 import ConfirmationNumberOutlinedIcon from '@mui/icons-material/ConfirmationNumberOutlined';
+import { useHistory } from "react-router-dom";
 
 //import userRouter from '../../../backEnd/routes/UserRoutes';
 
@@ -23,6 +24,7 @@ function TicketsView() {
       })
 
   }, []);
+  const history = useHistory();
  const DeleteClickHandler = async (flightObj) => {
     
     const result = await confirm("Are you sure to cancel this flight?");
@@ -37,12 +39,27 @@ function TicketsView() {
           console.log(error);
         });
     }
+    console.log("You click yes!");
+    return;
+  }
+  const EditReturnHandler = async (flightObj) => {
+    
+    
+      axios.post('http://localhost:150/flight/editReturnFlight',flightObj)
+        .then(function (response) {
+          console.log(response);
+        })
+        .catch(function (error) {
+          console.log(error);
+        });
+        history.push("/editReturnFlight");
+
 
     console.log("You click yes!");
     return;
   }
 
-  console.log("You click No!");
+  
 
   function UpdateClickHandler(flightObj) {
     const id = flightObj._id;
@@ -60,7 +77,7 @@ function TicketsView() {
 
         
         {flight.map((f) =>
-          <TicketDetails f={f} deleteHandler={DeleteClickHandler}  />
+          <TicketDetails f={f} deleteHandler={DeleteClickHandler} editReturnHandler={EditReturnHandler}  />
         )}
 
 

@@ -12,20 +12,22 @@ function formatDate(date) {
 function FlightSummary(props) {
 
   var price = 0;
-
+  var flightPrice ="";
 
   console.log(props.cabin);
   if (props.cabin == "Business") {
     price = props.f.BusinessPrice;
-    console.log("props. f  sfdf ");
+    flightPrice=props.f.BusinessPrice;
+    console.log(flightPrice);
   }
   else {
     price = props.f.EconomyPrice;
+    flightPrice=props.f.EconomyPrice;
+
     console.log(price);
   }
 
   const totalFlightPrice = price * parseInt(props.adults) + price * parseInt(props.children) * 0.5;
-  const flightPrice = props.price;
 
 
 
