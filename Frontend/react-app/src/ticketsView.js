@@ -59,7 +59,24 @@ function TicketsView() {
     return;
   }
 
-  
+  const editDepartureHandler = async (flightObj) => {
+    
+    const result = await confirm("Are you sure to edit this flight? (By editing this flight,this ticket will be cancelled and money will be refunded)");
+    if (result) {
+      axios.post('http://localhost:150/flight/ticketDeletion',flightObj)
+        .then(function (response) {
+          console.log(response);
+          const newFlights = removeObjectFromArray(flight, flightObj);
+          setFlight(newFlights);
+        })
+        .catch(function (error) {
+          console.log(error);
+        });
+        history.push("/editDepartureFlight");
+    }
+    console.log("You click yes!");
+    return;
+  }
 
   function UpdateClickHandler(flightObj) {
     const id = flightObj._id;
@@ -77,7 +94,7 @@ function TicketsView() {
 
         
         {flight.map((f) =>
-          <TicketDetails f={f} deleteHandler={DeleteClickHandler} editReturnHandler={EditReturnHandler}  />
+          <TicketDetails f={f} deleteHandler={DeleteClickHandler} editReturnHandler={EditReturnHandler} editDepartureHandler={editDepartureHandler}  />
         )}
 
 

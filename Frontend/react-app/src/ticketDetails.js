@@ -42,6 +42,9 @@ const deleteHelper= async(flightObj) =>{
 const editReturnHelper= async(flightObj) =>{
   props.editReturnHandler(flightObj);
 }
+const editDepartureHelper= async(flightObj) =>{
+  props.editDepartureHandler(flightObj);
+}
  function looper(seats){
   var result=[];
   seats.forEach(element => {
@@ -62,7 +65,7 @@ const editReturnHelper= async(flightObj) =>{
           <h5>Departure Date:{props.f.outgoingFlight.DepartureTime+' '}, Arrival Date:{props.f.outgoingFlight.ArrivalTime} </h5>
           <h5>Cabin: {props.f.cabin+' ' } , Seats: {looper(props.f.outgoingSeats)} </h5>
           <div className="">
-          <Button type="button" variant="contained" style={{backgroundColor:'#bd8b13',width:'25%',float:"Right"}} onClick={(e) =>{deleteHelper(props.f)}}>Edit</Button>
+          <Button type="button" variant="contained" style={{backgroundColor:'#bd8b13',width:'25%',float:"Right"}} onClick={(e) =>{editDepartureHelper(props.f)}}>Edit</Button>
 </div>
 
       </div>

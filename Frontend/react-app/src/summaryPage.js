@@ -228,6 +228,7 @@ function SummaryPage(props) {
             });
             //history.push("/payment")
         handleClick1();
+        history.push("/")
         })
         .catch(function (error) {
           console.log("error",error);
