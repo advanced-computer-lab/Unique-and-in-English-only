@@ -45,6 +45,9 @@ const editReturnHelper= async(flightObj) =>{
 const editDepartureHelper= async(flightObj) =>{
   props.editDepartureHandler(flightObj);
 }
+const sendEmailHelper= async(flightObj) =>{
+  props.sendEmailHandler(flightObj);
+}
  function looper(seats){
   var result=[];
   seats.forEach(element => {
@@ -87,6 +90,7 @@ const editDepartureHelper= async(flightObj) =>{
 
       <div className="">
           <Button type="button" variant="contained" style={{backgroundColor:'#bd8b13',width:'25%',float:"Right"}} onClick={(e) =>{deleteHelper(props.f)}}>Cancel</Button>
+          <Button type="button" variant="contained" style={{backgroundColor:'#bd8b13',width:'25%',float:"Right"}} onClick={(e) =>{sendEmailHelper(props.f)}}>Send email</Button>
     </div>
         </Paper>
          </Grid>

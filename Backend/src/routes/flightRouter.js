@@ -34,6 +34,7 @@ flightRouter.post("/selectEditedReturnFlight", flightController.selectEditedRetu
 flightRouter.post("/setSelectededitingReturnSeats", flightController.setSelectedReturnSeats);
 flightRouter.get("/getOldTicketAndNewFlight", flightController.getOldTicketAndNewFlight);
 flightRouter.post("/editReturnFlightConfirmation", flightController.editReturnFlightConfirmation);
+flightRouter.post("/sendEmailOfFlight",flightController.sendEmailOfFlight);
 
 
 module.exports = flightRouter;

@@ -77,6 +77,22 @@ function TicketsView() {
     console.log("You click yes!");
     return;
   }
+  const sendEmailHandler = async (flightObj) => {
+    
+    
+    axios.post('http://localhost:150/flight/sendEmailOfFlight',flightObj)
+      .then(function (response) {
+        console.log(response);
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+      
+
+
+  
+  return;
+}
 
   function UpdateClickHandler(flightObj) {
     const id = flightObj._id;
@@ -94,7 +110,7 @@ function TicketsView() {
 
         
         {flight.map((f) =>
-          <TicketDetails f={f} deleteHandler={DeleteClickHandler} editReturnHandler={EditReturnHandler} editDepartureHandler={editDepartureHandler}  />
+          <TicketDetails f={f} deleteHandler={DeleteClickHandler} editReturnHandler={EditReturnHandler} editDepartureHandler={editDepartureHandler} sendEmailHandler={sendEmailHandler} />
         )}
 
 
