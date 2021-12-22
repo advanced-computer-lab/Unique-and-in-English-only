@@ -3,8 +3,8 @@ import StripeCheckout from "react-stripe-checkout"
 import Button from '@mui/material/Button';
 import axios from "axios";
 
-function Pay() {
-    const [product,setProduct]=useState({name:"ahmed",price:"10000",productBy:"unique airways"})
+function Pay(props) {
+    const [product,setProduct]=useState({name:"ahmed",price:props.price,productBy:"unique airways"})
     const price=1000
     
     const makePayment=token=>{

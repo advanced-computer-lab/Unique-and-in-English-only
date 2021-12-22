@@ -198,8 +198,11 @@ function SummaryPage(props) {
         setTotalPrice(outgoingPrice + returnPrice);
         console.log(outgoingPrice + returnPrice+"asdasd");
     }
-    const [product,setProduct]=useState({name:"ahmed",price:"10000",productBy:"unique airways"})
+    const [product,setProduct]=useState({price:1000,productBy:"unique airways"})
     const makePayment=token=>{
+        console.log(outgoingPrice+returnPrice)
+        setProduct({price:(outgoingPrice+returnPrice),productBy:"unique airways"})
+        console.log(product)
         const body ={
             token,
             product
@@ -289,7 +292,7 @@ function SummaryPage(props) {
                                 <h2>Total price : {outgoingPrice+returnPrice}</h2>
                             </Grid>
                             <Grid item xs={12}>
-                            <StripeCheckout stripeKey="pk_test_51K69PxHSnuUCIvbwdqHkVQzUOiDz7lPbkuI0ES8nGf7NJyp1q2apcATscjtzJfoH3dil22wMvjnGA3xj9GCESc7m00drV3YzVF" token={makePayment} name="flight" amount={(outgoingPrice+returnPrice)*100} >
+                            <StripeCheckout stripeKey="pk_test_51K69PxHSnuUCIvbwdqHkVQzUOiDz7lPbkuI0ES8nGf7NJyp1q2apcATscjtzJfoH3dil22wMvjnGA3xj9GCESc7m00drV3YzVF" token={makePayment} name="Enter Credit Card Info" amount={(outgoingPrice+returnPrice)*100} >
                             <Button  type="button"  variant="contained" style={{backgroundColor:'#bd8b13',width:'50%',height:"100%"}} >Confirm payment</Button>
                             </StripeCheckout>
                             </Grid>
