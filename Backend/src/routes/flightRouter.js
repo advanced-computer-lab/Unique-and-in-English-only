@@ -2,6 +2,8 @@ const express = require('express');
 const flightRouter = express.Router();
 const flightController = require('../controllers/FlightController');
 
+
+//routes
 flightRouter.post("/createFlight", flightController.addFlight);
 flightRouter.post("/searchFlight", flightController.getFlight);
 flightRouter.get("/listFlights", flightController.listAllFlights);
