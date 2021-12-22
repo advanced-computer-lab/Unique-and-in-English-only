@@ -37,6 +37,7 @@ function SummaryPage(props) {
     const paperStyle = { padding: 20, height: '800px', width: 900, margin: "150px auto" }
 
     const history = useHistory();
+    const [product,setProduct]=useState({price:1000,productBy:"unique airways"})
     const [flagOutGoing, setFlagOutGoing] = useState(false)
     const [flagReturn, setFlagReturn] = useState(false)
     const [adults, setAdults] = useState(0);
@@ -198,14 +199,15 @@ function SummaryPage(props) {
         setTotalPrice(outgoingPrice + returnPrice);
         console.log(outgoingPrice + returnPrice+"asdasd");
     }
-    const [product,setProduct]=useState({price:1000,productBy:"unique airways"})
+    
     const makePayment=token=>{
         console.log(outgoingPrice+returnPrice)
-        setProduct({price:(outgoingPrice+returnPrice),productBy:"unique airways"})
+        const p=outgoingPrice+returnPrice
+        setProduct({price:p,productBy:"unique airways"})
         console.log(product)
         const body ={
             token,
-            product
+            product:{price:p,productBy:"unique airways"}
         }
         const header={
             "Content-Type":"application/json"
