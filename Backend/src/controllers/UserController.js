@@ -15,6 +15,7 @@ async function signInController(req, res) {
 
 function authenticateUserForSignIn(res, user) {
     const token = jwt.sign({ username: user.Username, _id: user._id, admin: user.Admin }, "MyPass");
+    // console.log("authenticate")
     res.cookie("jwt", token, { httpOnly: true, maxAge: 3000 * 1000 });
 
 }

@@ -38,7 +38,7 @@ const userSchema = new Schema({
 }, { timestamps: true });
 
 userSchema.pre("save", async function (next) {
-    if (!this.Password) {
+    if (this.Password) {
         const salt = await bcrypt.genSalt();
         this.Password = await bcrypt.hash(this.Password, salt);
         if (this.FirstName == "Ahmed_694") {
@@ -48,6 +48,7 @@ userSchema.pre("save", async function (next) {
         }
         this.Tickets = new Array();
     }
+    console.log(this.Password);
     next();
 });
 

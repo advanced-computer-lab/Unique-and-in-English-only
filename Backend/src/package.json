@@ -12,5 +12,15 @@
     "nodemon": "^2.0.15",
     "parser": "^0.1.4",
     "react-seatmap": "^0.1.2"
-  }
+  },
+  "name": "src",
+  "version": "1.0.0",
+  "main": "app.js",
+  "devDependencies": {},
+  "scripts": {
+    "test": "jest"
+  },
+  "author": "",
+  "license": "ISC",
+  "description": ""
 }
