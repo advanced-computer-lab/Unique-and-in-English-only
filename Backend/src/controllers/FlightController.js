@@ -469,7 +469,7 @@ const deleteTicket = (req, res) => {
     );
     const options = {
         from: "aclacl_2000@outlook.com",
-        to: "mohamedelshaarawy87@gmail.com",
+        to: "faroukamr508@gmail.com",
         subject: "Node mailer test",
         text: "Unique airlines",
         html: output
