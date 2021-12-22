@@ -94,7 +94,7 @@ const getFlightById = (req, res) => {
 
 const getUserById = (req, res) => {
 
-    User.findById("61c0bb7ce7c47f48305501af").then((result) => {
+    User.findById("61b619887e7183c56adc6b99").then((result) => {
 
         res.send(result);
     }).catch(err => console.log(err));
@@ -780,7 +780,7 @@ const confirmTicket = (req, res) => {
     // }).catch(err => console.log(""));
 
 
-    User.findById("61c0bb7ce7c47f48305501af").then((result) => {
+    User.findById("61b619887e7183c56adc6b99").then((result) => {
         console.log(result.Tickets);
         result.Tickets.push(ticket);
         console.log(result.Tickets);
@@ -835,7 +835,7 @@ function changeSeatsReservationinFlight(flight, seatsSelected, cabin, changeTo) 
 
 const listReservations = (req, res) => {
     const body = req.body;
-    User.findById("61c0bb7ce7c47f48305501af").then((result) => {
+    User.findById("61b619887e7183c56adc6b99").then((result) => {
 
         sessions.tickets = result.Tickets;
         res.send(result.Tickets);
@@ -880,7 +880,7 @@ const deleteTicket = (req, res) => {
 
 
 
-    User.findByIdAndUpdate("61c0bb7ce7c47f48305501af", bunchOfTickets, { useFindAndModify: false })
+    User.findByIdAndUpdate("61b619887e7183c56adc6b99", bunchOfTickets, { useFindAndModify: false })
         .then(data => {
             if (!data) {
                 res.status(404).send({ message: " update can not be empty " })
@@ -1357,7 +1357,7 @@ const updateUser = (req, res) => {
     const reqKeys = Object.keys(body);
     removeEmptyAttributes(reqKeys, body)
     const id = req.params.id;
-    User.findByIdAndUpdate("61c0bb7ce7c47f48305501af", body, { useFindAndModify: false })
+    User.findByIdAndUpdate("61b619887e7183c56adc6b99", body, { useFindAndModify: false })
         .then(data => {
             if (!data) {
                 res.status(404).send({ message: " update can not be empty " })
@@ -1514,7 +1514,7 @@ const editReturnFlightConfirmation = (req, res) => {
 
 
 
-    User.findByIdAndUpdate("61c0bb7ce7c47f48305501af", bunchOfTickets, { useFindAndModify: false })
+    User.findByIdAndUpdate("61b619887e7183c56adc6b99", bunchOfTickets, { useFindAndModify: false })
         .then(data => {
             if (!data) {
                 res.status(404).send({ message: " update can not be empty " })
@@ -1567,7 +1567,7 @@ const editReturnFlightConfirmation = (req, res) => {
         // }).catch(err => console.log(""));
     
     
-        User.findById("61c0bb7ce7c47f48305501af").then((result) => {
+        User.findById("61b619887e7183c56adc6b99").then((result) => {
             console.log(result.Tickets);
             result.Tickets.push(ticket);
             console.log(result.Tickets);
