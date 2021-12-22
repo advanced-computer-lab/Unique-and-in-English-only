@@ -27,7 +27,7 @@ import Pay from './pay';
 import EditReturnFlightSeats from './editReturnFlightSeats';
 import EditReturnFlightConfirmation from './editReturnConfirmation';
 import EditDepartureFlight from './editDepartureFlight';
-
+import EditPassword from './editPassword';
 const theme = createMuiTheme({
   palette: {
     primary: {
@@ -63,6 +63,9 @@ function App() {
         <Switch>
           <Route exact path="/">
             <UserHome />
+          </Route>
+          <Route exact path="/editpassword">
+            <EditPassword />
           </Route>
           < Route exact path="/createFlight">
             <Create />

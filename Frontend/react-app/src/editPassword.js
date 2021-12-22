@@ -19,7 +19,7 @@ import {useHistory} from "react-router-dom";
 const paperStyle = { padding: 20, height: '400px', width: '500px', margin: "150px auto" }
 
 
-function UpdateUser(props) {
+function EditPassword(props) {
   let history=useHistory();
 
   const [open1, setOpen1] = React.useState(false);
@@ -52,10 +52,10 @@ function UpdateUser(props) {
     const [buttonFailurePopup, setButtonFailurePopup] = useState(false);
     const [flag,setFlag] =useState(true)
     var startValues={
-    FirstName:'',
-    LastName:'',
-    PassportNumber:'',
-    Email:''
+    username:'',
+    oldPassword:'',
+    newPassword:'',
+    confirmNewPassword:''
     }
 
     if(flag){
@@ -119,27 +119,25 @@ function UpdateUser(props) {
             </Grid>
 
             <Grid item xs={6}>
-            <TextField variant="outlined" label="First Name" required id="FirstName" value={values.FirstName} onChange={set('FirstName')}  ></TextField>
+            <TextField variant="outlined" label="Username" required  value={values.FirstName} onChange={set('FirstName')}  ></TextField>
             </Grid>
 
             <Grid item xs={6}>
-            <TextField variant="outlined" label="Last Name" required id="LastName" value={values.LastName} onChange={set('LastName')}  ></TextField>
+            <TextField variant="outlined" label="Old Password" required id="LastName" value={values.LastName} onChange={set('LastName')}  ></TextField>
             </Grid>
 
             <Grid item xs={6}>
-            <TextField type="number" variant="outlined" label="Passport Number" required id="PassportNumber" value={values.PassportNumber} onChange={set('PassportNumber')}></TextField>
+            <TextField  variant="outlined" label="New Password" required id="PassportNumber" value={values.PassportNumber} onChange={set('PassportNumber')}></TextField>
             </Grid>
 
             <Grid item xs={6}>
-            <TextField variant="outlined" label="Email" required id="Email" value={values.Email} onChange={set('Email')}></TextField>
+            <TextField variant="outlined" label="Confirm Password" required id="Email" value={values.Email} onChange={set('Email')}></TextField>
             </Grid>
 
-            <Grid item xs ={6} align="center">
-            <Link to onClick={()=>{history.push('/editpassword')}}>Change Password</Link>
-            </Grid>
+            
 
-            <Grid  item xs={6} align="right">
-            <Button type="button" variant="contained" style={{backgroundColor:'#bd8b13',width:'100%',height:'100%'}} onClick={(e) => { onSubmit(e) }}>update</Button>
+            <Grid  item xs={12} align="right">
+            <Button type="button" variant="contained" style={{backgroundColor:'#bd8b13',width:'50%',height:'100%'}} onClick={(e) => { onSubmit(e) }}>update</Button>
             </Grid>
 
             </Grid>
@@ -149,7 +147,7 @@ function UpdateUser(props) {
       
       <Snackbar open={open1} autoHideDuration={6000} onClose={handleClose1}>
         <Alert onClose={handleClose1} severity="success" sx={{ width: '100%' }}>
-          User updated!
+          Password Updated!
         </Alert>
       </Snackbar>
       </Stack>
@@ -157,7 +155,7 @@ function UpdateUser(props) {
       
       <Snackbar open={open2} autoHideDuration={6000} onClose={handleClose2}>
         <Alert onClose={handleClose2} severity="error" sx={{ width: '100%' }}>
-          User not updated!
+          Password Not Updated!
         </Alert>
       </Snackbar>
       </Stack>
@@ -165,5 +163,5 @@ function UpdateUser(props) {
       
     )
   }
-  export default UpdateUser;
+  export default EditPassword;
   
