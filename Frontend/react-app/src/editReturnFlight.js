@@ -21,6 +21,8 @@ import Snackbar from '@mui/material/Snackbar';
 import MuiAlert from '@mui/material/Alert';
 import { Avatar, createMuiTheme,FormControlLabel,ThemeProvider } from '@mui/material';
 import FlightSelectionCard from './flightSelectionCard'
+import EditLocationOutlinedIcon from '@mui/icons-material/EditLocationOutlined';
+
 
 function EditReturnFlight(){
     const [flight, setFlight] = useState([]);
@@ -67,8 +69,9 @@ function EditReturnFlight(){
 }
 
     return(
-        <Grid align="center">
-             <h2 style={{ marginTop:90 }}>Choose return date and cabin class</h2>
+        <Grid align="center" >
+            <EditLocationOutlinedIcon color="primary" style={{ fontSize: "150",marginTop:"100"}}/>
+            <h1 style={{color:"#bd8b13"}}> Choose return date and cabin class</h1>
         <Paper elevation={3} rounded style={paperStyle}>
         <Grid container spacing={1}>
         <Grid item xs={3}>

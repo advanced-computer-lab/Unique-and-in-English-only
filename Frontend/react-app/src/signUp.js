@@ -71,17 +71,17 @@ export default function SignUp() {
   const handleSubmit = (e) => {
     e.preventDefault()
 
+    setUsermameError(false)
     setFirstNameError(false)
     setLastNameError(false)
-    setUsermameError(false)
     setEmailError(false)
     setPasswordError(false)
     setConfirmPasswordError(false)
     setPassportError(false)
 
+    setUsermameErrorHelper('')
     setFirstNameErrorHelper('')
     setLastNameErrorHelper('')
-    setUsermameErrorHelper('')
     setEmailErrorHelper('')
     setPasswordErrorHelper('')
     setConfirmPasswordErrorHelper('')
@@ -98,7 +98,7 @@ export default function SignUp() {
     }
     if (passport == '') {
       setPassportError(true)
-      setPassportErrorHelper('Passport')
+      setPassportErrorHelper('Passport Number')
     }
     if (username == '') {
       setUsermameError(true)
@@ -138,6 +138,19 @@ export default function SignUp() {
         </Grid>
         <form noValidate autoComplete='off' onSubmit={handleSubmit}>
           <Grid container spacing={1}>
+          <Grid item xs={6}>
+              <TextField
+                className={classes.field}
+               onChange={(e) => setUsermame(e.target.value)}
+               helperText={usernameErrorHelper}
+               error={usernameError}
+                label="Username"
+                variant="outlined"
+                placeholder="Enter Username"
+                required
+                style={{ width: '100%', margin: "8px 0" }}
+              />
+            </Grid>
 
             <Grid item xs={6}>
               <TextField
