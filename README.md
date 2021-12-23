@@ -68,7 +68,7 @@ In this project we used [MERN](https://www.geeksforgeeks.org/mern-stack/) stack 
 
 + [Mongoose](https://mongoosejs.com/) allows back-end to send or retrieve data from MongoDB.
 
-+ [Axios] is used to connect back-end with front-end.
++ [Axios])( https://www.npmjs.com/package/axios) is used to connect back-end with front-end.
 
 ### Installation
  First you should install [Node.js](https://nodejs.org/en/) then install the following 
