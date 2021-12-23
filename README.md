@@ -1,6 +1,6 @@
 # Unique-and-in-English-only
  ---
- ![Image](Frontend/react-app/src/images/logo.jpg)
+ ![Image](Frontend/react-app/src/images/Logo.jpg)
 
 + Team members:
   * Karim Elshaarawy
@@ -44,7 +44,7 @@ Here are some Screenshots from the website.
 
 - Flight Selection
 
-![Image](Frontend/react-app/src/images/select.png)
+![Image](Frontend/react-app/src/images/Select.png)
 
 - Seats Selection 
 
