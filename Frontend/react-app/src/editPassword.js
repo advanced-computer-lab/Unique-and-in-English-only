@@ -51,50 +51,17 @@ function EditPassword(props) {
     const [buttonSuccessPopup, setButtonSuccessPopup] = useState(false);
     const [buttonFailurePopup, setButtonFailurePopup] = useState(false);
     const [flag,setFlag] =useState(true)
-    var startValues={
-    username:'',
-    oldPassword:'',
-    newPassword:'',
-    confirmNewPassword:''
-    }
+ 
 
-    if(flag){
-      axios.get('http://localhost:150/flight/getUserById')
-      .then(function (response) {
-      
-        startValues=response.data
-        
-        setValues({
-        FirstName:startValues.FirstName,
-        LastName:startValues.LastName,
-        PassportNumber:startValues.PassportNumber,
-        Email:startValues.Email
-
-        })
-          setFlag(false)
-      })
-      .catch(function (error) {
-        console.log(error);
-        setFlag(false)
-      });
-}
+   
   
-    const [values, setValues] = useState({
-     FirstName:startValues.FirstName,
-     LastName:startValues.LastName,
-     PassportNumber:startValues.LastName,
-     Email:startValues.Email
-    })
+  
 
   
-    const set = name => {
-      return ({ target: { value } }) => {
-        setValues(oldValues => ({ ...oldValues, [name]: value }));
-      }
-    }
+    
     const onSubmit = async (event) => {
       event.preventDefault();
-      axios.put('http://localhost:150/flight/updateUser', values)
+      axios.put('http://localhost:150/flight/updateUser')
         .then(function (response) {
           console.log(response);
           setOpen1(true)
@@ -119,19 +86,19 @@ function EditPassword(props) {
             </Grid>
 
             <Grid item xs={6}>
-            <TextField variant="outlined" label="Username" required  value={values.FirstName} onChange={set('FirstName')}  ></TextField>
+            <TextField variant="outlined" label="Username" required   ></TextField>
             </Grid>
 
             <Grid item xs={6}>
-            <TextField variant="outlined" label="Old Password" required id="LastName" value={values.LastName} onChange={set('LastName')}  ></TextField>
+            <TextField variant="outlined" label="Old Password" required id="LastName"  ></TextField>
             </Grid>
 
             <Grid item xs={6}>
-            <TextField  variant="outlined" label="New Password" required id="PassportNumber" value={values.PassportNumber} onChange={set('PassportNumber')}></TextField>
+            <TextField  variant="outlined" label="New Password" required id="PassportNumber" ></TextField>
             </Grid>
 
             <Grid item xs={6}>
-            <TextField variant="outlined" label="Confirm Password" required id="Email" value={values.Email} onChange={set('Email')}></TextField>
+            <TextField variant="outlined" label="Confirm Password" required id="Email"></TextField>
             </Grid>
 
             
