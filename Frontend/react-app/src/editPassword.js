@@ -114,10 +114,12 @@ function EditPassword(props) {
           if(response.data=="success"){
             setBackendValidationResponse('password changed successfully')
             setBackendValidationError(false)
+            setOpen1(true)
           }
           else{
             setBackendValidationResponse(response.data)
             setBackendValidationError(true)
+            setOpen2(true)
           }
           setOpen1(true)
         })
