@@ -70,6 +70,7 @@ const signUp = async (req, res) => {
 }
 async function logOutController(req, res) {
     res.cookie('jwt', '', { maxAge: -1 });
+    res.cookie('role', '', { maxAge: -1 });
     res.send();
 }
 
