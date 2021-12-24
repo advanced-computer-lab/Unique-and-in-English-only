@@ -51,26 +51,81 @@ function EditPassword(props) {
     const [buttonSuccessPopup, setButtonSuccessPopup] = useState(false);
     const [buttonFailurePopup, setButtonFailurePopup] = useState(false);
     const [flag,setFlag] =useState(true)
- 
-
-   
   
+    const [username, setUserName] = useState('')
+    const [OldPassword, setOldPassword] = useState('')
+    const [NewPassword, setNewPassword] = useState('')
+    const [confirmPassword, setConfirmPassword] = useState('')
+
+    const [UserNameError, setUserNameError] = useState(false)
+    const [OldPasswordError, setOldPasswordError] = useState(false)
+    const [NewPasswordError, setNewPasswordError] = useState(false)
+    const [ConfirmPasswordError, setConfirmPasswordError] = useState(false)
+
+    const [UserNameErrorHelper, setUserNameErrorHelper] = useState('')
+    const [OldPasswordErrorHelper, setOldPasswordErrorHelper] = useState('')
+    const [NewPasswordErrorHelper, setNewPasswordErrorHelper] = useState('')
+    const [ConfirmPasswordErrorHelper, setConfirmPasswordErrorHelper] = useState('')
+   
+    const [BackendValidationResponse, setBackendValidationResponse] = useState('')
+  const [BackendValidationError,setBackendValidationError]=useState(false)
   
 
   
     
     const onSubmit = async (event) => {
       event.preventDefault();
-      axios.put('http://localhost:150/flight/updateUser')
+      if(username==''){
+        setUserNameError(true)
+        setUserNameErrorHelper('User Name')
+      }
+      else{
+        setUserNameError(false)
+        setUserNameErrorHelper('')
+      }
+      if(OldPassword==''){
+        setOldPasswordError(true)
+        setOldPasswordErrorHelper('Old Password')
+      }
+      else{
+        setOldPasswordError(false)
+        setOldPasswordErrorHelper('')
+      }
+      if(NewPassword==''){
+        setNewPasswordError(true)
+        setNewPasswordErrorHelper('New Password')
+      }
+      else{
+        setNewPasswordError(false)
+        setNewPasswordErrorHelper('')
+      }
+      if(confirmPassword=='' || confirmPassword!=NewPassword){
+        setConfirmPasswordError(true)
+        setConfirmPasswordErrorHelper('confirm Password')
+      }
+      else{
+        setConfirmPasswordError(false)
+        setConfirmPasswordErrorHelper('')
+      }
+      if( !username=='' && !OldPassword=='' && !NewPassword=='' && !confirmPassword=='' && !(confirmPassword==NewPassword)){
+      axios.put('http://localhost:150/user/EditPassword')
         .then(function (response) {
           console.log(response);
+          if(response.data=="success"){
+            setBackendValidationResponse('password changed successfully')
+            setBackendValidationError(false)
+          }
+          else{
+            setBackendValidationResponse(response.data)
+            setBackendValidationError(true)
+          }
           setOpen1(true)
         })
         .catch(function (error) {
           console.log(error);
           setOpen2(true)
         });
-        
+      }
     }
     const Alert = React.forwardRef(function Alert(props, ref) {
     
@@ -86,19 +141,36 @@ function EditPassword(props) {
             </Grid>
 
             <Grid item xs={6}>
-            <TextField variant="outlined" label="Username" required   ></TextField>
+            <TextField 
+            variant="outlined" 
+            label="Username" 
+            required   
+            onChange={(e) => setUserName(e.target.value)}
+            helperText={UserNameErrorHelper}
+            error={UserNameError}>
+       
+            </TextField>
             </Grid>
 
             <Grid item xs={6}>
-            <TextField variant="outlined" label="Old Password" required id="LastName"  ></TextField>
+            <TextField variant="outlined" label="Old Password" required id="LastName" 
+            onChange={(e) => setOldPassword(e.target.value)}
+            helperText={OldPasswordErrorHelper}
+            error={OldPasswordError} ></TextField>
             </Grid>
 
             <Grid item xs={6}>
-            <TextField  variant="outlined" label="New Password" required id="PassportNumber" ></TextField>
+            <TextField  variant="outlined" label="New Password" required id="PassportNumber"
+            onChange={(e) => setNewPassword(e.target.value)}
+            helperText={NewPasswordErrorHelper}
+            error={NewPasswordError}></TextField>
             </Grid>
 
             <Grid item xs={6}>
-            <TextField variant="outlined" label="Confirm Password" required id="Email"></TextField>
+            <TextField variant="outlined" label="Confirm Password" required id="Email"
+            onChange={(e) => setConfirmPassword(e.target.value)}
+            helperText={ConfirmPasswordErrorHelper}
+            error={ConfirmPasswordError}></TextField>
             </Grid>
 
             

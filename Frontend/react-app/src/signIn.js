@@ -43,7 +43,7 @@ const useStyles = makeStyles({
 export default function SignIn() {
   const classes = useStyles();
   const history = useHistory();
-  const [username, setUsermame] = useState('')
+  const [username, setUsername] = useState('')
   const [password, setPassword] = useState('')
   const [usernameError, setUsermameError] = useState(false)
   const [passwordError, setPasswordError] = useState(false)
@@ -100,7 +100,7 @@ export default function SignIn() {
 
           <form noValidate autoComplete='off' onSubmit={handleSubmit}>
             <TextField
-              onChange={(e) => setUsermame(e.target.value)}
+              onChange={(e) => setUsername(e.target.value)}
               className={classes.field}
               label="Username"
               variant="outlined"

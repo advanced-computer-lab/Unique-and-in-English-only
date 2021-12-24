@@ -43,7 +43,7 @@ export default function SignUp() {
   const history = useHistory();
   const [firstname, setFirstName] = useState('')
   const [lastname, setLastName] = useState('')
-  const [username, setUsermame] = useState('')
+  const [username, setUsername] = useState('')
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   const [confirmpassword, setConfirmPassword] = useState('')
@@ -206,7 +206,7 @@ export default function SignUp() {
           <Grid item xs={6}>
               <TextField
                 className={classes.field}
-               onChange={(e) => setUsermame(e.target.value)}
+               onChange={(e) => setUsername(e.target.value)}
                helperText={usernameErrorHelper}
                error={usernameError}
                 label="Username"

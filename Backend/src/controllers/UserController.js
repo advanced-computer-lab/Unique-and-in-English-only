@@ -130,7 +130,9 @@ function authorizationForUser(decodedToken) {
 function authorizationForGuest() {
     return { role: "viewer" };
 }
-
+function EditPassword(){
+    
+}
 
 
 module.exports = {
@@ -138,5 +140,6 @@ module.exports = {
     signInController,
     logOutController,
     pay,
-    verifyUserToken
+    verifyUserToken,
+    EditPassword,
 };
