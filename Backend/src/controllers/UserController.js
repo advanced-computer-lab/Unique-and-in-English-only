@@ -8,24 +8,17 @@ var Secret_Key = 'sk_test_51K69PxHSnuUCIvbw7EuFbCCSmWkKBscPONjHcEFdcEsOO4CmMWlTd
 const stripe = require('stripe')(Secret_Key) 
 
 async function signInController(req, res) {
+    
     const { Email, Password } = req.body;
     try {
         const user = await User.login(Email, Password);
-        res.header('Access-Control-Allow-Origin', "http://localhost:3000");
-        res.header('Access-Control-Allow-Credentials', true);
-        res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE');
-        res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
         authenticateUserForSignIn(res, user);
-        res.send();
+        res.send("success");
 
     } catch (error) {
-        console.log(error);
+        //console.log(error);
         // Access - Control - Allow - Origin:
-        res.header('Access-Control-Allow-Origin', 'http://localhost:3000/');
-        res.header('Access-Control-Allow-Credentials', 'http://localhost:3000/');
-        res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE');
-        res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
-        res.send({ error });
+        res.send( "invalid username or pass" );
     }
 }
 
@@ -58,14 +51,18 @@ const signUp = async (req, res) => {
     console.log(userInfo);
     try {
         const user = await User.create(userInfo);
-        res.send();
+        res.send("success");
     }
     catch (err) {
         console.log(err.message);
-        var error = "";
+        var error = "error";
         if (err.message.includes("Email_1 dup key"))
-            error = "Duplicate Email";
-
+            error = "this email is already registered";
+        else if (err.message.includes("UserName_1 dup key"))
+            error = "This username is already registered";
+        else if(err.message.includes("PassportNumber_1 dup key"))
+         error = "Passport number already linked";
+            res.send(error)
     }
 }
 async function logOutController(req, res) {
@@ -135,7 +132,9 @@ function authorizationForUser(decodedToken) {
 function authorizationForGuest() {
     return { role: "viewer" };
 }
-
+function EditPassword(){
+    
+}
 
 
 module.exports = {
@@ -143,5 +142,6 @@ module.exports = {
     signInController,
     logOutController,
     pay,
-    verifyUserToken
+    verifyUserToken,
+    EditPassword,
 };

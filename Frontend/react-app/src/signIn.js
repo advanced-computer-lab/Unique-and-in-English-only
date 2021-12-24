@@ -43,12 +43,15 @@ const useStyles = makeStyles({
 export default function SignIn() {
   const classes = useStyles();
   const history = useHistory();
-  const [username, setUsermame] = useState('')
+  const [username, setUsername] = useState('')
   const [password, setPassword] = useState('')
   const [usernameError, setUsermameError] = useState(false)
   const [passwordError, setPasswordError] = useState(false)
   const paperStyle = { padding: 20, height: '60vh', width: 400, margin: "150px auto", minheight: '60vh' }
   const avatarStyle = { backgroundColor: '#be8b14' }
+
+  const [BackendValidationResponse, setBackendValidationResponse] = useState('')
+  const [BackendValidationError,setBackendValidationError]=useState(false)
 
   const handleSubmit = (e) => {
     e.preventDefault()
@@ -67,21 +70,22 @@ export default function SignIn() {
       console.log(username, password)
     }
 
-
+    if(username!='' && password!=''){
     axios.post('http://localhost:150/user/signIn', { Email: username, Password: password })
       .then((response) => {
-        if (response.data.error) {
-          // console.log(response.error);
-          ;
+        console.log(response.data)
+        if (response.data!="success") {
+          setBackendValidationResponse(response.data)
+          setBackendValidationError(true)
         }
         else {
           console.log(response);
           history.push("/");
         }
       }).catch((error) => {
-        console.log(error)
+        console.log( error)
       });
-  }
+  }}
   return (
 
 
@@ -96,7 +100,7 @@ export default function SignIn() {
 
           <form noValidate autoComplete='off' onSubmit={handleSubmit}>
             <TextField
-              onChange={(e) => setUsermame(e.target.value)}
+              onChange={(e) => setUsername(e.target.value)}
               className={classes.field}
               label="Username"
               variant="outlined"
@@ -135,13 +139,12 @@ export default function SignIn() {
               style={{ width: '100%', fontSize: 20, margin: '8px 0' }}
             >Sign In</Button>
 
-            <typography>
-              <Link href="">Forgot Password</Link>
-            </typography>
+              <Link to onClick={()=>{history.push('/editpassword')}}>Forgot Password</Link>
+
             <br />
-            <typography>Not a member yet?
-         <Link href=""> Sign Up!</Link>
-            </typography>
+            Not a member yet?
+            <Link to onClick={()=>{history.push('/signup')}}>Sign Up!</Link>
+
 
           </form>
         </Paper>

@@ -678,7 +678,7 @@ export default function CreateFlight() {
       
       <Snackbar open={open2} autoHideDuration={6000} onClose={handleClose2}>
         <Alert onClose={handleClose2} severity="error" sx={{ width: '100%' }}>
-          Flight not created!
+          Flight not created! 
         </Alert>
       </Snackbar>
       </Stack>
