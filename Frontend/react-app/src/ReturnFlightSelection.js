@@ -58,7 +58,7 @@ function FlightSelection() {
       <div align="center">
       <FlightLandOutlinedIcon color="primary" className="icon" style={{fontSize:"200"}}/>
       </div>
-        <h1 className="title">Choose Return Flight </h1>
+        <h1 className="title" style={{color:"#be8b14"}}>Choose Return Flight </h1>
        
 
         {flight.map((f) =>

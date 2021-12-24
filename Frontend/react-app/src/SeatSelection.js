@@ -10,8 +10,9 @@ import { useHistory } from "react-router-dom";
 import Stack from '@mui/material/Stack';
 import Snackbar from '@mui/material/Snackbar';
 import MuiAlert from '@mui/material/Alert';
-
-
+import AirplanemodeActiveOutlinedIcon from '@mui/icons-material/AirplanemodeActiveOutlined';
+import AirlineSeatReclineNormalOutlinedIcon from '@mui/icons-material/AirlineSeatReclineNormalOutlined';
+import CircleIcon from '@mui/icons-material/Circle';
 
 
 
@@ -225,7 +226,10 @@ function SeatSelection(props) {
     return (
 
         <div className="seatSelection">
-
+            <div style={{marginBottom:"10px"}}>
+            <CircleIcon  color="secondary"/>Available
+            <CircleIcon style={{marginLeft:"10px"}} color="warning"/>Occupied
+            </div>
             <SeatPicker
                 addSeatCallback={addSeatCallback}
                 removeSeatCallback={removeSeatCallback}
@@ -234,8 +238,9 @@ function SeatSelection(props) {
                 selectedByDefault
                 loading={false}
             />
-            <Button onClick={submitHandler}> Select  </Button>
-
+            <div align="center">
+            <Button endIcon={<AirlineSeatReclineNormalOutlinedIcon/>} style={{marginTop:"20px"}} variant="outlined" onClick={submitHandler}> Select  </Button>
+            </div>
             <Stack spacing={2} sx={{ width: '100%' }}>
                 <Snackbar open={open1} autoHideDuration={6000} onClose={handleClose1}>
                     <Alert onClose={handleClose1} severity="error" sx={{ width: '100%' }}>
