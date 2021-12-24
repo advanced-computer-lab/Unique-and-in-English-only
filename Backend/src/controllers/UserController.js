@@ -11,17 +11,29 @@ async function signInController(req, res) {
     const { Email, Password } = req.body;
     try {
         const user = await User.login(Email, Password);
+        res.header('Access-Control-Allow-Origin', "http://localhost:3000");
+        res.header('Access-Control-Allow-Credentials', true);
+        res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE');
+        res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
         authenticateUserForSignIn(res, user);
         res.send();
+
     } catch (error) {
         console.log(error);
+        // Access - Control - Allow - Origin:
+        res.header('Access-Control-Allow-Origin', 'http://localhost:3000/');
+        res.header('Access-Control-Allow-Credentials', 'http://localhost:3000/');
+        res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE');
+        res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
         res.send({ error });
     }
 }
 
 function authenticateUserForSignIn(res, user) {
     const token = jwt.sign({ username: user.Username, _id: user._id, admin: user.Admin }, "MyPass");
+    console.log("authenticate");
     res.cookie("jwt", token, { httpOnly: true, maxAge: 3000 * 1000 });
+    res.cookie("role", { admin: user.Admin })
 
 }
 
@@ -88,10 +100,47 @@ async function logOutController(req, res) {
     .catch(err=>console.log(err))
 }
 
+function verifyUserToken(req) {
+    const token = req.cookies.jwt;
+    if (token) {
+        const decodedToken = decodeTheToken(token)
+        return authorizationForUser(decodedToken);
+    }
+    else {
+        return authorizationForGuest();
+    }
+
+}
+
+// verifies the token and decodes it
+function decodeTheToken(token) {
+    jwt.verify(token, "MyPass", (err, decodedToken) => {
+        if (err) {
+            console.log(err.message);
+        } else {
+            return decodedToken;
+        }
+    });
+
+}
+
+function authorizationForUser(decodedToken) {
+    username = decodedToken.username;
+    _id = decodedToken._id;
+    role = decodedToken.role;
+    return { username, _id, role };
+}
+
+function authorizationForGuest() {
+    return { role: "viewer" };
+}
+
+
 
 module.exports = {
     signUp,
     signInController,
     logOutController,
     pay,
+    verifyUserToken
 };

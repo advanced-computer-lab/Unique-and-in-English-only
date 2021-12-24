@@ -17,6 +17,9 @@ import Link from '@mui/material/Link';
 import { useHistory } from 'react-router-dom'
 
 const axios = require('axios');
+axios.defaults.withCredentials = true;
+
+
 const theme = createMuiTheme({
   palette: {
     // primary:{
@@ -73,7 +76,7 @@ export default function SignIn() {
         }
         else {
           console.log(response);
-          history.push("/SignIn");
+          history.push("/");
         }
       }).catch((error) => {
         console.log(error)

@@ -4,8 +4,18 @@ const nodemailer = require('nodemailer');
 const sessions = require('express-session');
 const { mongo } = require("mongoose");
 const User = require("../Models/User");
+const userController = require("./UserController")
+const verifyUserToken = userController.verifyUserToken;
 
 const addFlight = (req, res) => {
+
+    const authObject = verifyUserToken(req);
+    console.log(authObject);
+
+    if (authObject.role != "admin") {
+        return;
+    }
+
     const flightNumber = req.body.FlightNumber;
     const departureTime = req.body.DepartureTime;
     const arrivalTime = req.body.ArrivalTime;
@@ -325,6 +335,12 @@ function looper(seats){
    return result;
  } 
 const confirmTicket = (req, res) => {
+
+    const authObject = verifyUserToken();
+    if (authObject.role == "viewer") {
+        return;
+    }
+    const userID = authObject._id;
     sessions.ticket = req.body;
     const ticket = req.body;
     const outgoingFlight = ticket.outgoingFlight;
@@ -760,6 +776,7 @@ const confirmTicket = (req, res) => {
 ]
 }
 
+
     reserveSeatsinFlight(outgoingFlight, ticket.outgoingSeats, ticket.cabin)
     reserveSeatsinFlight(returnFlight, ticket.returnSeats, ticket.cabin)
     if (sessions.cabin == 'Buisness') {
@@ -794,7 +811,7 @@ const confirmTicket = (req, res) => {
     // }).catch(err => console.log(""));
 
 
-    User.findById("61b619887e7183c56adc6b99").then((result) => {
+    User.findById(userID).then((result) => {
         console.log(result.Tickets);
         result.Tickets.push(ticket);
         console.log(result.Tickets);
