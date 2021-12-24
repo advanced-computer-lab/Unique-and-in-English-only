@@ -74,7 +74,7 @@ export default function SignUp() {
   const [HomeAddressErrorHelper, setHomeAddressErrorHelper] = useState('')
   const [CountryCodeErrorHelper, setCountryCodeErrorHelper] = useState('')
 
-  const [BackendValidationResponse, setBackendValidationResponse] = useState('')
+  const [BackendValidationResponse, setBackendValidationResponse] = useState('Invalid input')
   const [BackendValidationError,setBackendValidationError]=useState(false)
 
   const [open1, setOpen1] = React.useState(false);
@@ -226,6 +226,9 @@ export default function SignUp() {
         console.log(err);
         
       });
+    }
+    if(BackendValidationResponse=="error"){
+      setBackendValidationResponse("invalid input")
     }
     handleClick2();
   }
