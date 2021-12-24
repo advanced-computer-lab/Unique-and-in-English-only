@@ -6,6 +6,8 @@ const { mongo } = require("mongoose");
 const User = require("../Models/User");
 const userController = require("./UserController")
 const verifyUserToken = userController.verifyUserToken;
+var today = new Date();
+var date = today.getDate()+'/'+(today.getMonth()+1)+'/'+today.getFullYear();
 
 const addFlight = (req, res) => {
 
@@ -477,7 +479,7 @@ const confirmTicket = (req, res) => {
         <td style="overflow-wrap:break-word;word-break:break-word;padding:10px;font-family:arial,helvetica,sans-serif;" align="left">
           
     <div style="line-height: 140%; text-align: left; word-wrap: break-word;">
-      <p style="font-size: 14px; line-height: 140%; text-align: right;">25/1/2010</p>
+      <p style="font-size: 14px; line-height: 140%; text-align: right;">${date}</p>
     </div>
   
         </td>
@@ -1042,7 +1044,7 @@ const deleteTicket = (req, res) => {
           <td style="overflow-wrap:break-word;word-break:break-word;padding:10px;font-family:arial,helvetica,sans-serif;" align="left">
             
       <div style="line-height: 140%; text-align: left; word-wrap: break-word;">
-        <p style="font-size: 14px; line-height: 140%; text-align: right;">25/1/2010</p>
+        <p style="font-size: 14px; line-height: 140%; text-align: right;">${date}</p>
       </div>
     
           </td>
@@ -1525,7 +1527,7 @@ const sendEmailOfFlight =(req,res) => {
         <td style="overflow-wrap:break-word;word-break:break-word;padding:10px;font-family:arial,helvetica,sans-serif;" align="left">
           
     <div style="line-height: 140%; text-align: left; word-wrap: break-word;">
-      <p style="font-size: 14px; line-height: 140%; text-align: right;">25/1/2010</p>
+      <p style="font-size: 14px; line-height: 140%; text-align: right;">${date}</p>
     </div>
   
         </td>
