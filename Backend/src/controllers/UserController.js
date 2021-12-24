@@ -59,8 +59,9 @@ const signUp = async (req, res) => {
         if (err.message.includes("Email_1 dup key"))
             error = "this email is already registered";
         else if (err.message.includes("UserName_1 dup key"))
-            error = "this username is already registered";
-
+            error = "This username is already registered";
+        else if(err.message.includes("PassportNumber_1 dup key"))
+         error = "Passport number already linked";
             res.send(error)
     }
 }
