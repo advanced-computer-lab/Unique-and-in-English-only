@@ -222,6 +222,7 @@ export default function SignUp() {
         setBackendValidationError(true)
       }
       }).catch(err => {
+        
         console.log(err);
         
       });
@@ -388,7 +389,7 @@ export default function SignUp() {
       
       <Snackbar open={open1} autoHideDuration={6000} onClose={handleClose1}>
         <Alert onClose={handleClose1} severity="success" sx={{ width: '100%' }}>
-          User created!
+          z
         </Alert>
       </Snackbar>
       </Stack>
@@ -396,7 +397,7 @@ export default function SignUp() {
       
       <Snackbar open={open2} autoHideDuration={6000} onClose={handleClose2}>
         <Alert onClose={handleClose2} severity="error" sx={{ width: '100%' }}>
-          Invalid input!
+        {BackendValidationResponse}
         </Alert>
       </Snackbar>
       </Stack>
