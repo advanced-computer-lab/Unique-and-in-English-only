@@ -34,7 +34,22 @@ const userSchema = new Schema({
     Tickets: {
         type: Array,
         required: true
+    },
+    UserName:{
+        type:String,
+        required:true,
+        unique: true,
+    },
+    HomeAddress:{
+        type:String,
+    },
+    CountryCode:{
+        type:String,
+    },
+    TelephoneNumber:{
+        type:String,
     }
+    
 }, { timestamps: true });
 
 userSchema.pre("save", async function (next) {

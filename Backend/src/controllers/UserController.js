@@ -58,14 +58,17 @@ const signUp = async (req, res) => {
     console.log(userInfo);
     try {
         const user = await User.create(userInfo);
-        res.send();
+        res.send("success");
     }
     catch (err) {
         console.log(err.message);
-        var error = "";
+        var error = "error";
         if (err.message.includes("Email_1 dup key"))
-            error = "Duplicate Email";
+            error = "this email is already registered";
+        else if (err.message.includes("UserName_1 dup key"))
+            error = "this username is already registered";
 
+            res.send(error)
     }
 }
 async function logOutController(req, res) {

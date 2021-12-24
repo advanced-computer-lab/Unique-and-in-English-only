@@ -48,6 +48,9 @@ export default function SignUp() {
   const [password, setPassword] = useState('')
   const [confirmpassword, setConfirmPassword] = useState('')
   const [passport, setPasport] = useState('')
+  const [HomeAddress, setHomeAdress] = useState('')
+  const [CountryCode, setCountryCode] = useState('')
+
 
   const [firstnameError, setFirstNameError] = useState(false)
   const [lastnameError, setLastNameError] = useState(false)
@@ -56,6 +59,8 @@ export default function SignUp() {
   const [passwordError, setPasswordError] = useState(false)
   const [confirmpasswordError, setConfirmPasswordError] = useState(false)
   const [passportError, setPassportError] = useState(false)
+  const [HomeAddressError, setHomeAddressError] = useState(false)
+  const [CountryCodeError, setCountryCodeError] = useState(false)
 
   const [firstnameErrorHelper, setFirstNameErrorHelper] = useState('')
   const [lastnameErrorHelper, setLastNameErrorHelper] = useState('')
@@ -64,6 +69,12 @@ export default function SignUp() {
   const [passwordErrorHelper, setPasswordErrorHelper] = useState('')
   const [confirmpasswordErrorHelper, setConfirmPasswordErrorHelper] = useState('')
   const [passportErrorHelper, setPassportErrorHelper] = useState('')
+  const [HomeAddressErrorHelper, setHomeAddressErrorHelper] = useState('')
+  const [CountryCodeErrorHelper, setCountryCodeErrorHelper] = useState('')
+
+  const [BackendValidationResponse, setBackendValidationResponse] = useState('')
+  const [BackendValidationError,setBackendValidationError]=useState(false)
+
 
   const paperStyle = { padding: 20, height: '70vh', width: 450, margin: "150px auto", minheight: '60vh' }
   const avatarStyle = { backgroundColor: '#be8b14' }
@@ -92,38 +103,90 @@ export default function SignUp() {
       setFirstNameError(true)
       setFirstNameErrorHelper('First Name')
     }
+    else{
+      setFirstNameError(false)
+      setFirstNameErrorHelper('')
+    }
     if (lastname == '') {
       setLastNameError(true)
       setLastNameErrorHelper('Last Name')
+    }
+    else{
+      setLastNameError(false)
+      setLastNameErrorHelper('')
     }
     if (passport == '') {
       setPassportError(true)
       setPassportErrorHelper('Passport Number')
     }
+    else{
+      setPassportError(false)
+      setPassportErrorHelper('')
+    }
     if (username == '') {
       setUsermameError(true)
       setUsermameErrorHelper('Username')
+    }
+    else{
+      setUsermameError(false)
+      setUsermameErrorHelper('')
     }
     if (email == '') {
       setEmailError(true)
       setEmailErrorHelper('Email')
     }
+    else{
+      setEmailError(false)
+      setEmailErrorHelper('')
+    }
     if (password == '') {
       setPasswordError(true)
       setPasswordErrorHelper('Password')
     }
-    if (confirmpassword == '') {
+    else{
+      setPasswordError(false)
+      setPasswordErrorHelper('')
+    }
+    if (confirmpassword == '' || password!=confirmpassword) {
       setConfirmPasswordError(true)
       setConfirmPasswordErrorHelper('Confirm Pass')
     }
-
-    axios.post('http://localhost:150/user/signUp', { FirstName: firstname, LastName: lastname, Email: email, Password: password, PassportNumber: passport })
+    else{
+      setConfirmPasswordError(false)
+      setConfirmPasswordErrorHelper('')
+    }
+    if (HomeAddress == '') {
+      setHomeAddressError(true);
+      setHomeAddressErrorHelper('Home Address')
+    }
+    else{
+      setHomeAddressError(false);
+      setHomeAddressErrorHelper('')
+    }
+    if (CountryCode == '') {
+      setCountryCodeError(true)
+      setCountryCodeErrorHelper('Country Code')
+    }
+    else{
+      setCountryCodeError(false)
+      setCountryCodeErrorHelper('')
+    }
+    if(!firstnameError && !lastnameError && !usernameError && ! passwordError && !passportError && !confirmpasswordError && !HomeAddressError && !CountryCodeError && !emailError){
+    axios.post('http://localhost:150/user/signUp', { FirstName: firstname, LastName: lastname, Email: email, Password: password, PassportNumber: passport,UserName:username,HomeAddress:HomeAddress,CountryCode:CountryCode })
       .then((res) => {
+        console.log(res.data)
+        if(res.data=="success"){
+        setBackendValidationResponse('user created successfully')
         history.push("/SignIn");
+      }
+      else{
+        setBackendValidationResponse(res.data)
+      }
       }).catch(err => {
         console.log(err);
+        
       });
-
+    }
   }
   return (
 
@@ -178,19 +241,7 @@ export default function SignUp() {
                 style={{ width: '100%', margin: "8px 0" }}
               />
             </Grid>
-            <Grid item xs={6}>
-              <TextField
-                onChange={(e) => setUsermame(e.target.value)}
-                className={classes.field}
-                label="Username"
-                variant="outlined"
-                placeholder="Enter Username"
-                required S
-                error={usernameError}
-                helperText={usernameErrorHelper}
-                style={{ width: '100%', margin: "8px 0" }}
-              />
-            </Grid>
+            
             <Grid item xs={6}>
               <TextField
                 onChange={(e) => setEmail(e.target.value)}
@@ -243,9 +294,37 @@ export default function SignUp() {
                 placeholder="Enter Passport"
                 variant="outlined"
                 required
-                type='password'
+                type='text'
                 error={passportError}
                 helperText={passportErrorHelper}
+                style={{ width: '100%', margin: "8px 0" }}
+
+              />
+            </Grid>
+            <Grid item xs={6}>
+              <TextField
+                onChange={(e) => setHomeAdress(e.target.value)}
+                label="Home Address"
+                placeholder="Enter Home Address"
+                variant="outlined"
+                required
+                type='text'
+                error={HomeAddressError}
+                helperText={HomeAddressErrorHelper}
+                style={{ width: '100%', margin: "8px 0" }}
+
+              />
+            </Grid>
+            <Grid item xs={6}>
+              <TextField
+                onChange={(e) => setCountryCode(e.target.value)}
+                label="Country Code"
+                placeholder="Enter Country Code"
+                variant="outlined"
+                required
+                type='text'
+                error={CountryCodeError}
+                helperText={CountryCodeErrorHelper}
                 style={{ width: '100%', margin: "8px 0" }}
 
               />
@@ -265,6 +344,7 @@ export default function SignUp() {
       </Paper>
     </Grid>
 
+    
 
 
 
