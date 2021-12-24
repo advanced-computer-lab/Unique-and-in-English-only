@@ -214,10 +214,12 @@ export default function SignUp() {
         if(res.data=="success"){
         setBackendValidationResponse('user created successfully')
         handleClick1();
+        setBackendValidationError(false)
         history.push("/SignIn");
       }
       else{
         setBackendValidationResponse(res.data)
+        setBackendValidationError(true)
       }
       }).catch(err => {
         console.log(err);
