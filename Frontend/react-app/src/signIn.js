@@ -50,6 +50,9 @@ export default function SignIn() {
   const paperStyle = { padding: 20, height: '60vh', width: 400, margin: "150px auto", minheight: '60vh' }
   const avatarStyle = { backgroundColor: '#be8b14' }
 
+  const [BackendValidationResponse, setBackendValidationResponse] = useState('')
+  const [BackendValidationError,setBackendValidationError]=useState(false)
+
   const handleSubmit = (e) => {
     e.preventDefault()
 
@@ -67,21 +70,22 @@ export default function SignIn() {
       console.log(username, password)
     }
 
-
+    if(username!='' && password!=''){
     axios.post('http://localhost:150/user/signIn', { Email: username, Password: password })
       .then((response) => {
-        if (response.data.error) {
-          // console.log(response.error);
-          ;
+        console.log(response.data)
+        if (response.data!="success") {
+          setBackendValidationResponse(response.data)
+          setBackendValidationError(true)
         }
         else {
           console.log(response);
           history.push("/");
         }
       }).catch((error) => {
-        console.log(error)
+        console.log( error)
       });
-  }
+  }}
   return (
 
 
@@ -140,7 +144,7 @@ export default function SignIn() {
             </typography>
             <br />
             <typography>Not a member yet?
-         <Link href=""> Sign Up!</Link>
+         <Link href="http://localhost:3000/SignUp"> Sign Up!</Link>
             </typography>
 
           </form>

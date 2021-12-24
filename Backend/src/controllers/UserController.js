@@ -8,24 +8,17 @@ var Secret_Key = 'sk_test_51K69PxHSnuUCIvbw7EuFbCCSmWkKBscPONjHcEFdcEsOO4CmMWlTd
 const stripe = require('stripe')(Secret_Key) 
 
 async function signInController(req, res) {
+    
     const { Email, Password } = req.body;
     try {
         const user = await User.login(Email, Password);
-        res.header('Access-Control-Allow-Origin', "http://localhost:3000");
-        res.header('Access-Control-Allow-Credentials', true);
-        res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE');
-        res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
         authenticateUserForSignIn(res, user);
-        res.send();
+        res.send("success");
 
     } catch (error) {
-        console.log(error);
+        //console.log(error);
         // Access - Control - Allow - Origin:
-        res.header('Access-Control-Allow-Origin', 'http://localhost:3000/');
-        res.header('Access-Control-Allow-Credentials', 'http://localhost:3000/');
-        res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE');
-        res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
-        res.send({ error });
+        res.send( "invalid username or pass" );
     }
 }
 
