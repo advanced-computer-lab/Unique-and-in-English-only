@@ -71,12 +71,9 @@ function FlightSelection() {
   }
   else {
     return (
-      <Grid style={{ margin: '120px auto' }} align="center" >
+      <Grid style={{ marginTop: '120px' }} align="center" >
         <BlockOutlinedIcon color="primary" style={{ fontSize: "300" }} />
-        <br />
-        <br />
-        <br />
-        <h1>No flights match your search criteria</h1>
+        <h1 style={{color:"#bd8b13"}}> No flights match your search criteria</h1>
       </Grid>
     )
   }

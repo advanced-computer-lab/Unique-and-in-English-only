@@ -16,7 +16,9 @@ import Checkbox from '@mui/material/Checkbox';
 import Link from '@mui/material/Link';
 import PersonOutlineOutlinedIcon from '@mui/icons-material/PersonOutlineOutlined';
 import { useHistory } from "react-router-dom";
-
+import Stack from '@mui/material/Stack';
+import Snackbar from '@mui/material/Snackbar';
+import MuiAlert from '@mui/material/Alert';
 const axios = require('axios');
 const theme = createMuiTheme({
   palette: {
@@ -75,6 +77,36 @@ export default function SignUp() {
   const [BackendValidationResponse, setBackendValidationResponse] = useState('')
   const [BackendValidationError,setBackendValidationError]=useState(false)
 
+  const [open1, setOpen1] = React.useState(false);
+      const handleClick1 = () => {
+        setOpen1(true);
+      };
+    
+      const handleClose1 = (event, reason) => {
+        if (reason === 'clickaway') {
+          return;
+        }
+    
+        setOpen1(false);
+      };
+      const [open2, setOpen2] = React.useState(false);
+    
+      const handleClick2 = () => {
+        setOpen2(true);
+      };
+    
+      const handleClose2 = (event, reason) => {
+        if (reason === 'clickaway') {
+          return;
+        }
+    
+        setOpen2(false);
+      };
+      const Alert = React.forwardRef(function Alert(props, ref) {
+    
+        return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
+      });
+
 
   const paperStyle = { padding: 20, height: '70vh', width: 450, margin: "150px auto", minheight: '60vh' }
   const avatarStyle = { backgroundColor: '#be8b14' }
@@ -101,7 +133,7 @@ export default function SignUp() {
 
     if (firstname == '') {
       setFirstNameError(true)
-      setFirstNameErrorHelper('First Name')
+      setFirstNameErrorHelper('First Name is required')
     }
     else{
       setFirstNameError(false)
@@ -109,7 +141,7 @@ export default function SignUp() {
     }
     if (lastname == '') {
       setLastNameError(true)
-      setLastNameErrorHelper('Last Name')
+      setLastNameErrorHelper('Last Name is required')
     }
     else{
       setLastNameError(false)
@@ -117,7 +149,7 @@ export default function SignUp() {
     }
     if (passport == '') {
       setPassportError(true)
-      setPassportErrorHelper('Passport Number')
+      setPassportErrorHelper('Passport Number is required')
     }
     else{
       setPassportError(false)
@@ -125,7 +157,7 @@ export default function SignUp() {
     }
     if (username == '') {
       setUsermameError(true)
-      setUsermameErrorHelper('Username')
+      setUsermameErrorHelper('Username is required')
     }
     else{
       setUsermameError(false)
@@ -133,7 +165,7 @@ export default function SignUp() {
     }
     if (email == '') {
       setEmailError(true)
-      setEmailErrorHelper('Email')
+      setEmailErrorHelper('Email is required')
     }
     else{
       setEmailError(false)
@@ -141,23 +173,27 @@ export default function SignUp() {
     }
     if (password == '') {
       setPasswordError(true)
-      setPasswordErrorHelper('Password')
+      setPasswordErrorHelper('Password is required')
     }
     else{
       setPasswordError(false)
       setPasswordErrorHelper('')
     }
-    if (confirmpassword == '' || password!=confirmpassword) {
+    if (confirmpassword == '') {
       setConfirmPasswordError(true)
-      setConfirmPasswordErrorHelper('Confirm Pass')
+      setConfirmPasswordErrorHelper('Confirm Pass is required')
     }
     else{
       setConfirmPasswordError(false)
       setConfirmPasswordErrorHelper('')
     }
+    if(password!=confirmpassword){
+      setConfirmPasswordError(true)
+      setConfirmPasswordErrorHelper('Passwords must match')
+    }
     if (HomeAddress == '') {
       setHomeAddressError(true);
-      setHomeAddressErrorHelper('Home Address')
+      setHomeAddressErrorHelper('Home Address is required')
     }
     else{
       setHomeAddressError(false);
@@ -165,7 +201,7 @@ export default function SignUp() {
     }
     if (CountryCode == '') {
       setCountryCodeError(true)
-      setCountryCodeErrorHelper('Country Code')
+      setCountryCodeErrorHelper('Country Code is required')
     }
     else{
       setCountryCodeError(false)
@@ -177,6 +213,7 @@ export default function SignUp() {
         console.log(res.data)
         if(res.data=="success"){
         setBackendValidationResponse('user created successfully')
+        handleClick1();
         setBackendValidationError(false)
         history.push("/SignIn");
       }
@@ -185,10 +222,12 @@ export default function SignUp() {
         setBackendValidationError(true)
       }
       }).catch(err => {
+        
         console.log(err);
         
       });
     }
+    handleClick2();
   }
   return (
 
@@ -213,7 +252,7 @@ export default function SignUp() {
                 variant="outlined"
                 placeholder="Enter Username"
                 required
-                style={{ width: '100%', margin: "8px 0" }}
+                style={{ width: '100%', margin: "5px 0" }}
               />
             </Grid>
 
@@ -227,7 +266,7 @@ export default function SignUp() {
                 variant="outlined"
                 placeholder="Enter First Name"
                 required
-                style={{ width: '100%', margin: "8px 0" }}
+                style={{ width: '100%', margin: "5px 0" }}
               />
             </Grid>
             <Grid item xs={6}>
@@ -240,7 +279,7 @@ export default function SignUp() {
                 variant="outlined"
                 placeholder="Enter Last Name"
                 required
-                style={{ width: '100%', margin: "8px 0" }}
+                style={{ width: '100%', margin: "2px 0" }}
               />
             </Grid>
             
@@ -254,7 +293,7 @@ export default function SignUp() {
                 required S
                 error={emailError}
                 helperText={emailErrorHelper}
-                style={{ width: '100%', margin: "8px 0" }}
+                style={{ width: '100%', margin: "2px 0" }}
                 type="email"
               />
             </Grid>
@@ -269,7 +308,7 @@ export default function SignUp() {
                 required S
                 error={passwordError}
                 helperText={passwordErrorHelper}
-                style={{ width: '100%', margin: "8px 0" }}
+                style={{ width: '100%', margin: "2px 0" }}
                 type='password'
               />
             </Grid>
@@ -284,7 +323,7 @@ export default function SignUp() {
                 type='password'
                 error={confirmpasswordError}
                 helperText={confirmpasswordErrorHelper}
-                style={{ width: '100%', margin: "8px 0" }}
+                style={{ width: '100%', margin: "2px 0" }}
 
               />
             </Grid>
@@ -299,7 +338,7 @@ export default function SignUp() {
                 type='text'
                 error={passportError}
                 helperText={passportErrorHelper}
-                style={{ width: '100%', margin: "8px 0" }}
+                style={{ width: '100%', margin: "2px 0" }}
 
               />
             </Grid>
@@ -313,11 +352,11 @@ export default function SignUp() {
                 type='text'
                 error={HomeAddressError}
                 helperText={HomeAddressErrorHelper}
-                style={{ width: '100%', margin: "8px 0" }}
+                style={{ width: '100%', margin: "2px 0" }}
 
               />
             </Grid>
-            <Grid item xs={6}>
+            <Grid item xs={12}>
               <TextField
                 onChange={(e) => setCountryCode(e.target.value)}
                 label="Country Code"
@@ -327,22 +366,43 @@ export default function SignUp() {
                 type='text'
                 error={CountryCodeError}
                 helperText={CountryCodeErrorHelper}
-                style={{ width: '100%', margin: "8px 0" }}
+                style={{ width: '50%', margin: "2px 0" }}
 
               />
             </Grid>
+            <Grid item xs={6}>
+            Already a member? <Link to onClick={()=>{history.push('/signin')}}>Sign In!</Link>
+            </Grid>
+            
             <Button
               type="submit"
               color="primary"
               variant="contained"
               endIcon={<KeyboardArrowRightOutlinedIcon />}
-              style={{ width: '100%', fontSize: 20, margin: '45px 0' }}
+              style={{ width: '100%', fontSize: 20, margin: '10px 0' }}
             >Sign Up</Button>
 
 
 
           </Grid>
+          <Stack spacing={2} sx={{ width: '100%' }}>
+      
+      <Snackbar open={open1} autoHideDuration={6000} onClose={handleClose1}>
+        <Alert onClose={handleClose1} severity="success" sx={{ width: '100%' }}>
+          z
+        </Alert>
+      </Snackbar>
+      </Stack>
+      <Stack spacing={2} sx={{ width: '100%' }}>
+      
+      <Snackbar open={open2} autoHideDuration={6000} onClose={handleClose2}>
+        <Alert onClose={handleClose2} severity="error" sx={{ width: '100%' }}>
+        {BackendValidationResponse}
+        </Alert>
+      </Snackbar>
+      </Stack>
         </form>
+       
       </Paper>
     </Grid>
 
