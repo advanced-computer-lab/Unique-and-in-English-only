@@ -45,8 +45,10 @@ export default function SignIn() {
   const history = useHistory();
   const [username, setUsername] = useState('')
   const [password, setPassword] = useState('')
-  const [usernameError, setUsermameError] = useState(false)
-  const [passwordError, setPasswordError] = useState(false)
+  const [usernameError, setUsermameError] = useState('')
+  const [passwordError, setPasswordError] = useState('')
+  const [usernameErrorValidate, setUsermameErrorValidate] = useState(false)
+  const [passwordErrorValidate, setPasswordErrorValidate] = useState(false)
   const paperStyle = { padding: 20, height: '60vh', width: 400, margin: "150px auto", minheight: '60vh' }
   const avatarStyle = { backgroundColor: '#be8b14' }
 
@@ -61,9 +63,11 @@ export default function SignIn() {
 
     if (password == '') {
       setPasswordError(true)
+      setPasswordErrorValidate('password is required')
     }
     if (username == '') {
       setUsermameError(true)
+      setUsermameErrorValidate('username is required')
     }
 
     if (username && password) {
@@ -102,11 +106,12 @@ export default function SignIn() {
             <TextField
               onChange={(e) => setUsername(e.target.value)}
               className={classes.field}
-              label="Username"
+              label="Email"
               variant="outlined"
-              placeholder="Enter Username"
+              placeholder="Enter Email"
               required S
               error={usernameError}
+              helperText={usernameErrorValidate}
               style={{ width: '100%', margin: "8px 0" }}
             />
 
@@ -119,6 +124,7 @@ export default function SignIn() {
               required
               type='password'
               error={passwordError}
+              helperText={passwordErrorValidate}
               style={{ width: '100%', margin: "8px 0" }}
 
             />
