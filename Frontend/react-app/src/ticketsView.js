@@ -10,6 +10,10 @@ import "./listFlights.css";
 import TicketDetails from "./ticketDetails.js";
 import ConfirmationNumberOutlinedIcon from '@mui/icons-material/ConfirmationNumberOutlined';
 import { useHistory } from "react-router-dom";
+import BlockOutlinedIcon from '@mui/icons-material/BlockOutlined';
+import Grid from '@mui/material/Grid';
+
+
 
 //import userRouter from '../../../backEnd/routes/UserRoutes';
 
@@ -102,7 +106,8 @@ function TicketsView() {
     return (
         <div style={{ marginTop:'100px'}}>
           <div align="center">
-          <ConfirmationNumberOutlinedIcon color="primary" style={{ fontSize: "200" }} />
+          <ConfirmationNumberOutlinedIcon color="primary" style={{ fontSize: "150" }}/>
+            <h1 style={{color:"#bd8b13"}}>Tickets List</h1>
           </div>
             
         <br></br>
@@ -119,9 +124,10 @@ function TicketsView() {
   );}
   else{
     return(
-    <div style={{marginTop:'100px'}}>
-      <h1>no flights available </h1>
-    </div>
+      <Grid style={{ marginTop: '120px' }} align="center" >
+      <BlockOutlinedIcon color="primary" style={{ fontSize: "300" }} />
+      <h1 style={{color:"#bd8b13"}}> No tickets available</h1>
+    </Grid>
     )
   }
 }

@@ -135,13 +135,12 @@ export default function SignIn() {
               style={{ width: '100%', fontSize: 20, margin: '8px 0' }}
             >Sign In</Button>
 
-            <typography>
-              <Link href="">Forgot Password</Link>
-            </typography>
+              <Link to onClick={()=>{history.push('/editpassword')}}>Forgot Password</Link>
+
             <br />
-            <typography>Not a member yet?
-         <Link href=""> Sign Up!</Link>
-            </typography>
+            Not a member yet?
+            <Link to onClick={()=>{history.push('/signup')}}>Sign Up!</Link>
+
 
           </form>
         </Paper>
