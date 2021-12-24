@@ -142,15 +142,9 @@ export default function SignIn() {
               <Link to onClick={()=>{history.push('/editpassword')}}>Forgot Password</Link>
 
             <br />
-<<<<<<< HEAD
             Not a member yet?
             <Link to onClick={()=>{history.push('/signup')}}>Sign Up!</Link>
 
-=======
-            <typography>Not a member yet?
-         <Link href="http://localhost:3000/SignUp"> Sign Up!</Link>
-            </typography>
->>>>>>> b4d0a60b5f796ebe240bcfcad1abe3ce1281c462
 
           </form>
         </Paper>
