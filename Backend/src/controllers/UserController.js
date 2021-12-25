@@ -18,7 +18,7 @@ async function signInController(req, res) {
     } catch (error) {
         //console.log(error);
         // Access - Control - Allow - Origin:
-        res.send("invalid username or pass");
+        res.send("invalid email or password");
     }
 }
 
