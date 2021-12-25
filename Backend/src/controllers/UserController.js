@@ -146,8 +146,15 @@ function editPassword(req, res) {
     const oldPassword = req.body.oldPassword;
     const newPassword = req.body.newPassword;
     try {
-        User.editPassword(email, oldPassword, newPassword);
-        res.send({ message: "success" })
+        User.editPassword(email, oldPassword, newPassword)
+            .then((errMessage) => {
+                console.log("This is the error", errMessage);
+                if (errMessage == "")
+                    res.send({ message: "success" })
+                else
+                    res.send({ err: errMessage });
+            });
+
     }
     catch (err) {
         res.send({ err: err.message })

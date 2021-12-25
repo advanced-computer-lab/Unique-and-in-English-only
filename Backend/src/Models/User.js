@@ -83,24 +83,19 @@ userSchema.statics.login = async function (Email, Password) {
 userSchema.statics.editPassword = async function (Email, oldPassword, NewPassword) {
     const user = await this.findOne({ Email });
     // console.log(user);
-    try {
-        if (user) {
+    if (user) {
 
-            const auth = await bcrypt.compare(oldPassword, user.Password);
-            if (auth) {
-                user.Password = NewPassword;
-                await user.save();
-            }
-            throw Error("incorrect password");
-
-
-
+        const auth = await bcrypt.compare(oldPassword, user.Password);
+        if (auth) {
+            user.Password = NewPassword;
+            await user.save();
+            return "";
         }
-        throw Error("incorrect email");
+        return "incorrect password";
+
     }
-    catch (err) {
-        ;
-    }
+    return "incorrect Email";
+
 };
 
 const User = mongoose.model('User', userSchema);
