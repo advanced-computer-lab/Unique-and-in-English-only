@@ -352,6 +352,8 @@ const confirmTicket = (req, res) => {
   if (authObject.role == "viewer") {
     return;
   }
+
+  console.log("came here");
   const userID = authObject._id;
   const email = authObject.email;
   sessions.ticket = req.body;
@@ -363,8 +365,8 @@ const confirmTicket = (req, res) => {
     {
       service: "hotmail",
       auth: {
-        user: "aclacl_2000@outlook.com",
-        pass: "nodemailer@2000"
+        user: "aclacl_2020@outlook.com",
+        pass: "nodemailer@2020"
       }
     }
   );
@@ -755,7 +757,7 @@ const confirmTicket = (req, res) => {
   `;
 
   const options2 = {
-    from: "aclacl_2000@outlook.com",
+    from: "aclacl_2020@outlook.com",
     to: email,
     subject: "Node mailer test",
     text: "Unique airlines",
@@ -889,6 +891,9 @@ function changeSeatsReservationinFlight(flight, seatsSelected, cabin, changeTo) 
 const listReservations = (req, res) => {
   const body = req.body;
   const authObject = verifyUserToken(req);
+  console.log("came to reservation");
+  console.log(authObject);
+
   if (authObject.role == "viewer") {
     return;
   }
@@ -1331,13 +1336,13 @@ const deleteTicket = (req, res) => {
     {
       service: "hotmail",
       auth: {
-        user: "aclacl_2000@outlook.com",
-        pass: "nodemailer@2000"
+        user: "aclacl_2020@outlook.com",
+        pass: "nodemailer@2020"
       }
     }
   );
   const options = {
-    from: "aclacl_2000@outlook.com",
+    from: "aclacl_2020@outlook.com",
     to: email,
     subject: "Node mailer test",
     text: "Unique airlines",
@@ -1835,13 +1840,13 @@ const sendEmailOfFlight = (req, res) => {
     {
       service: "hotmail",
       auth: {
-        user: "aclacl_2000@outlook.com",
-        pass: "nodemailer@2000"
+        user: "aclacl_2020@outlook.com",
+        pass: "nodemailer@2020"
       }
     }
   );
   const options3 = {
-    from: "aclacl_2000@outlook.com",
+    from: "aclacl_2020@outlook.com",
     to: email,
     subject: "Node mailer test",
     text: "Unique airlines",
@@ -2026,15 +2031,23 @@ const editReturnFlightConfirmation = (req, res) => {
   // }).catch(err => console.log(""));
 
 
-  User.findById(userID).then((result) => {
-    console.log(result.Tickets);
-    result.Tickets.push(ticket);
-    console.log(result.Tickets);
-    result.save().then((res) => {
-      console.log("tickets updated");
-    });
-  });
+  // User.findById(userID).then((result) => {
+  //   console.log(result.Tickets);
+  //   result.Tickets.push(ticket);
+  //   console.log(result.Tickets);
+  //   result.save().then((res) => {
+  //     console.log("tickets updated");
+  //   });
+  // });
+  // User.findByIdAndUpdate(userID, { "$push": { "Tickets": ticket })
+  //   .then(result => {
+  //     console.log("update successfully");
+  //   })
 
+  User.findByIdAndUpdate(userID, { '$push': { "Tickets": ticket } })
+    .then((result) => {
+      console.log("Tickets updated")
+    })
 
 }
 module.exports =
