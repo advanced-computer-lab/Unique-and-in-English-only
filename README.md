@@ -3,9 +3,9 @@
  ![Image](Frontend/react-app/src/images/Logo.jpg)
 
 + Team members:
++ * Ahmed Elghobashy
   * Karim Elshaarawy
   * Mohamed Elshaarawy
-  * Ahmed Elghobashy
   * Ahmed Ramadan
   * Alfarouk Amr
 
@@ -15,7 +15,7 @@
 
 
 
-> It is a airline reservation system where Admin can add ,edit ,delete Flights the system and logged in User can search for flights,reserve seats and confirm ticket. User can also view his tickets and edit or cancel reserved flights and email himself with his itinerary, While guest can search for avaialable flights but cannot confirm ticket without signing in.  
+> It is a airline reservation system where Admin can add ,edit ,delete Flights from the system and logged in users can search for flights,reserve seats and confirm tickets and make payments with credit card. User can also view his tickets and edit or cancel reserved flights and email himself with his itinerary, While guest can search for avaialable flights but cannot confirm ticket without signing in.  
 
 ### Motivation 
 
@@ -27,7 +27,7 @@ we decided to create this project for the following reasons :
 4. Dealing with several APIs like Nodemailer and Stripe
 
 ### Build status 
-Most of the functionality of the working well with some reloading issues. The whole system needs to be tested.
+Most of the functionality of the project working well with some reloading issues. The whole system needs to be tested.
 
 ### Code style
 + we sticked to camelcase naming convention while naming variables.
@@ -78,6 +78,31 @@ In this project we used [MERN](https://www.geeksforgeeks.org/mern-stack/) stack 
 npm install express react axios nodemailer mongoose cors dotenv
 bootstrap @stripe @mui @material-ui @emotion
  ```
+
+### Code Examples
+Here are some snippets of the code
+
+- User Schema 
+
+![Image](Frontend/react-app/src/images/userSchema.png)
+
+- Flight Router
+
+![Image](Frontend/react-app/src/images/routes.png)
+
+- Flight Controller 
+
+![Image](Frontend/react-app/src/images/controller.png)
+
+- App Router
+
+![Image](Frontend/react-app/src/images/approuter.png)
+
+- Admin list all available flight
+
+
+![Image](Frontend/react-app/src/images/adminlist.png)
+
 
 
 ### API Reference
