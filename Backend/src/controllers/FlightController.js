@@ -824,14 +824,23 @@ const confirmTicket = (req, res) => {
   // }).catch(err => console.log(""));
 
 
-  User.findById(userID).then((result) => {
-    console.log(result.Tickets);
-    result.Tickets.push(ticket);
-    console.log(result.Tickets);
-    result.save().then((res) => {
-      console.log("tickets updated");
-    });
-  });
+  // User.findById(userID).then((result) => {
+  //   console.log("found user and will update tickets");
+  //   console.log(result);
+  //   console.log(result.Tickets);
+  //   result.Tickets.push(ticket);
+  //   result.FirstName = "Mohamed";
+  //   console.log(result.Tickets);
+  //   console.log(userID);
+  //   result.save().then((res) => {
+  //     console.log("tickets updated");
+  //   });
+  // });
+
+  User.findByIdAndUpdate(userID, { '$push': { "Tickets": ticket } })
+    .then((result) => {
+      console.log("Tickets updated")
+    })
 
   transporter2.sendMail(options2, function (err, info) {
     if (err) {
