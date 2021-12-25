@@ -431,7 +431,7 @@ window.setInterval(checkCookie, 100); // run every 100 ms
             <MenuItem key="Edit Profile"   onClick={()=>{goToPage(`updateUser`)}}>
               <Typography textAlign="center">Edit Profile</Typography>
             </MenuItem>
-            <MenuItem key="Account"   onClick={logOut()}>
+            <MenuItem key="Account"   onClick={()=>{logOut()}}>
             <Typography textAlign="center">Account</Typography>
           </MenuItem>
           <MenuItem key="Log Out"   onClick={()=>{}}>
