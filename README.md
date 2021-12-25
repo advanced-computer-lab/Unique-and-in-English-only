@@ -120,9 +120,9 @@ Here are some snippets of the code
 + [Mongo CRUD](https://www.youtube.com/watch?v=W1Kttu53qTg&t=7850s)
 + [MUI library](https://mui.com/)
 + [React net ninja](https://www.youtube.com/watch?v=j942wKiXFu8&list=PL4cUxeGkcC9gZD-Tvwfod2gaISzfRiP9d)
-+ [EmbeddedImages] (https://community.nodemailer.com/using-embedded-images/)
-+ [ReactBasics] (https://www.youtube.com/playlist?list=PL4cUxeGkcC9gZD-Tvwfod2gaISzfRiP9d)
-+ [StripeAPI] (https://www.youtube.com/watch?v=lbEFSP1WAv0&t=608s)
++ [EmbeddedImages](https://community.nodemailer.com/using-embedded-images/)
++ [ReactBasics](https://www.youtube.com/playlist?list=PL4cUxeGkcC9gZD-Tvwfod2gaISzfRiP9d)
++ [StripeAPI](https://www.youtube.com/watch?v=lbEFSP1WAv0&t=608s)
 
 ### Credits 
 
