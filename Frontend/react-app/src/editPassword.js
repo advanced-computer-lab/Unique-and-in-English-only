@@ -111,7 +111,7 @@ function EditPassword(props) {
     axios.post('http://localhost:150/user/editPassword', { oldPassword: OldPassword, newPassword: NewPassword })
       .then(function (response) {
         console.log(response);
-        if (response.data == "success") {
+        if (response.data.message == "success") {
           setBackendValidationResponse('password changed successfully')
           setBackendValidationError(false)
           setOpen1(true)
