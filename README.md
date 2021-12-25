@@ -3,9 +3,9 @@
  ![Image](Frontend/react-app/src/images/Logo.jpg)
 
 + Team members:
++ * Ahmed Elghobashy
   * Karim Elshaarawy
   * Mohamed Elshaarawy
-  * Ahmed Elghobashy
   * Ahmed Ramadan
   * Alfarouk Amr
 
@@ -15,7 +15,7 @@
 
 
 
-> It is a airline reservation system where Admin can add ,edit ,delete Flights the system and logged in User can search for flights,reserve seats and confirm ticket. User can also view his tickets and edit or cancel reserved flights and email himself with his itinerary, While guest can search for avaialable flights but cannot confirm ticket without signing in.  
+> It is a airline reservation system where Admin can add ,edit ,delete Flights from the system and logged in users can search for flights,reserve seats and confirm tickets and make payments with credit card. User can also view his tickets and edit or cancel reserved flights and email himself with his itinerary, While guest can search for avaialable flights but cannot confirm ticket without signing in.  
 
 ### Motivation 
 
