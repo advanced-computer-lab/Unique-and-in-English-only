@@ -12,6 +12,7 @@ import ResponsiveAppBar from "./ResponsiveAppBar";
 import { useHistory } from "react-router-dom";
 import SummarizeOutlinedIcon from '@mui/icons-material/SummarizeOutlined';
 import FlightLandOutlinedIcon from '@mui/icons-material/FlightLandOutlined';
+import Cookies from 'js-cookie';
 
 
 //import userRouter from '../../../backEnd/routes/UserRoutes';
@@ -35,22 +36,29 @@ function FlightSelection() {
     const id = flightObj._id;
     axios.post('http://localhost:150/flight/setReturnFlightID/' + id, flightObj)
       .then(
-        history.push("/OutgoingSeatSelection")
+        path()
 
-      )
-      .catch(function (error) {
+      ).catch(function (error) {
         console.log(error);
 
       });
 
   }
+  const path =()=>{
+    if (Cookies.get("role")!= undefined){
+      history.push("/OutgoingSeatSelection")}
+      else {
+        history.push("/modifiedSignIn");
+      }
+    }
+
   if (flight.length >= 1) {
     return (
       <div>
       <div align="center">
       <FlightLandOutlinedIcon color="primary" className="icon" style={{fontSize:"200"}}/>
       </div>
-        <h1 className="title">Choose Return Flight </h1>
+        <h1 className="title" style={{color:"#be8b14"}}>Choose Return Flight </h1>
        
 
         {flight.map((f) =>

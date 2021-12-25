@@ -6,6 +6,7 @@ userRouter.post("/signUp", userController.signUp);
 userRouter.post("/signIn", userController.signInController);
 userRouter.post("/pay", userController.pay);
 userRouter.post("/editPassword", userController.editPassword);
+userRouter.post("/logOut", userController.logOutController);
 
 module.exports = userRouter;
 

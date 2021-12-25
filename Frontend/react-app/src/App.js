@@ -28,13 +28,18 @@ import EditReturnFlightSeats from './editReturnFlightSeats';
 import EditReturnFlightConfirmation from './editReturnConfirmation';
 import EditDepartureFlight from './editDepartureFlight';
 import EditPassword from './editPassword';
+import ModifiedSignIn from './modifiedSignIn';
+
 const theme = createMuiTheme({
   palette: {
     primary: {
       main: '#be8b14'
     },
     secondary: {
-      main: '#000000'
+      main: '#4FC3F7'
+    },
+    warning:{
+      main:'#E0E0E0'
     }
   }
 })
@@ -114,6 +119,9 @@ function App() {
           </Route>
           < Route exact path="/editDepartureFlight">
             <EditDepartureFlight />
+          </Route>
+          < Route exact path="/modifiedSignIn">
+            <ModifiedSignIn />
           </Route>
           <Route exact path="/signUp">
             <SignUp />

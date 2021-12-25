@@ -43,17 +43,12 @@ const useStyles = makeStyles({
 export default function SignIn() {
   const classes = useStyles();
   const history = useHistory();
-  const [username, setUsername] = useState('')
+  const [username, setUsermame] = useState('')
   const [password, setPassword] = useState('')
-  const [usernameError, setUsermameError] = useState('')
-  const [passwordError, setPasswordError] = useState('')
-  const [usernameErrorValidate, setUsermameErrorValidate] = useState(false)
-  const [passwordErrorValidate, setPasswordErrorValidate] = useState(false)
+  const [usernameError, setUsermameError] = useState(false)
+  const [passwordError, setPasswordError] = useState(false)
   const paperStyle = { padding: 20, height: '60vh', width: 400, margin: "150px auto", minheight: '60vh' }
   const avatarStyle = { backgroundColor: '#be8b14' }
-
-  const [BackendValidationResponse, setBackendValidationResponse] = useState('')
-  const [BackendValidationError,setBackendValidationError]=useState(false)
 
   const handleSubmit = (e) => {
     e.preventDefault()
@@ -63,33 +58,30 @@ export default function SignIn() {
 
     if (password == '') {
       setPasswordError(true)
-      setPasswordErrorValidate('password is required')
     }
     if (username == '') {
       setUsermameError(true)
-      setUsermameErrorValidate('username is required')
     }
 
     if (username && password) {
       console.log(username, password)
     }
 
-    if(username!='' && password!=''){
+
     axios.post('http://localhost:150/user/signIn', { Email: username, Password: password })
       .then((response) => {
-        console.log(response.data)
-        if (response.data!="success") {
-          setBackendValidationResponse(response.data)
-          setBackendValidationError(true)
+        if (response.data.error) {
+          // console.log(response.error);
+          ;
         }
         else {
           console.log(response);
-          history.push("/");
+          history.push("/OutgoingSeatSelection");
         }
       }).catch((error) => {
-        console.log( error)
+        console.log(error)
       });
-  }}
+  }
   return (
 
 
@@ -104,14 +96,13 @@ export default function SignIn() {
 
           <form noValidate autoComplete='off' onSubmit={handleSubmit}>
             <TextField
-              onChange={(e) => setUsername(e.target.value)}
+              onChange={(e) => setUsermame(e.target.value)}
               className={classes.field}
-              label="Email"
+              label="Username"
               variant="outlined"
-              placeholder="Enter Email"
+              placeholder="Enter Username"
               required S
               error={usernameError}
-              helperText={usernameErrorValidate}
               style={{ width: '100%', margin: "8px 0" }}
             />
 
@@ -124,7 +115,6 @@ export default function SignIn() {
               required
               type='password'
               error={passwordError}
-              helperText={passwordErrorValidate}
               style={{ width: '100%', margin: "8px 0" }}
 
             />
@@ -144,13 +134,17 @@ export default function SignIn() {
               endIcon={<KeyboardArrowRightOutlinedIcon />}
               style={{ width: '100%', fontSize: 20, margin: '8px 0' }}
             >Sign In</Button>
-
-              <Link to onClick={()=>{history.push('/editpassword')}}>Forgot Password</Link>
-
+    <typography>
+             Please sign in to proceed
+            </typography>
             <br />
-            Not a member yet?
-            <Link to onClick={()=>{history.push('/signup')}}>Sign Up!</Link>
-
+            <typography>
+              <Link href="">Forgot Password</Link>
+            </typography>
+            <br />
+            <typography>Not a member yet?
+         <Link href=""> Sign Up!</Link>
+            </typography>
 
           </form>
         </Paper>
