@@ -112,7 +112,7 @@ Here are some snippets of the code
 + [Stripe](https://stripe.com/en-gb-us) API allows user to pay for reservation using credit card.
 
 ### Features
-* Beautiful and simple UI and UX
+* Elegant and simple UI and UX
 * Easy to learn and User friendly website
 
 
@@ -120,6 +120,9 @@ Here are some snippets of the code
 + [Mongo CRUD](https://www.youtube.com/watch?v=W1Kttu53qTg&t=7850s)
 + [MUI library](https://mui.com/)
 + [React net ninja](https://www.youtube.com/watch?v=j942wKiXFu8&list=PL4cUxeGkcC9gZD-Tvwfod2gaISzfRiP9d)
++ [EmbeddedImages] https://community.nodemailer.com/using-embedded-images/
++ [ReactBasics] https://www.youtube.com/playlist?list=PL4cUxeGkcC9gZD-Tvwfod2gaISzfRiP9d
++ [StripeAPI] https://www.youtube.com/watch?v=lbEFSP1WAv0&t=608s
 
 ### Credits 
 
@@ -145,10 +148,16 @@ mohamedelshaarawy87@gmail.com
 ahmedramadandev20@gmail.com
 [github](https://github.com/a7medma7amad)
 
++ Ahmed EL Ghobashy
+ [LinkedIn](https://www.linkedin.com/in/ahmad-elghobashy-60566b182/)
+ Email:
+ahmadsamir694@gmail.com
+[github](https://github.com/Ahmed-Elghobashy)
+
 
 ### License
 
-Copyright (c) 2022   Unique Airlines
+Copyright (c) 2022   Karim Elshaarawy , Alfarouk Amr , Mohamed Elshaarawy , Ahmed Ramadan , Ahmed EL Ghobashy
 
 Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
 
