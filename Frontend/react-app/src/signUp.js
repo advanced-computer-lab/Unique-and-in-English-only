@@ -212,14 +212,16 @@ export default function SignUp() {
       .then((res) => {
         console.log(res.data)
         if(res.data=="success"){
+          history.push("/SignIn");
         setBackendValidationResponse('user created successfully')
-        handleClick1();
         setBackendValidationError(false)
-        history.push("/SignIn");
+        
       }
       else{
         setBackendValidationResponse(res.data)
         setBackendValidationError(true)
+        handleClick2();
+        setBackendValidationResponse("invalid input")
       }
       }).catch(err => {
         
@@ -228,9 +230,10 @@ export default function SignUp() {
       });
     }
     if(BackendValidationResponse=="error"){
-      setBackendValidationResponse("invalid input")
+      
+      
     }
-    handleClick2();
+    
   }
   return (
 
