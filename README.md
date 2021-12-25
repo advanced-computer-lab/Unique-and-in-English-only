@@ -120,37 +120,37 @@ Here are some snippets of the code
 + [Mongo CRUD](https://www.youtube.com/watch?v=W1Kttu53qTg&t=7850s)
 + [MUI library](https://mui.com/)
 + [React net ninja](https://www.youtube.com/watch?v=j942wKiXFu8&list=PL4cUxeGkcC9gZD-Tvwfod2gaISzfRiP9d)
-+ [EmbeddedImages] https://community.nodemailer.com/using-embedded-images/
-+ [ReactBasics] https://www.youtube.com/playlist?list=PL4cUxeGkcC9gZD-Tvwfod2gaISzfRiP9d
-+ [StripeAPI] https://www.youtube.com/watch?v=lbEFSP1WAv0&t=608s
++ [EmbeddedImages] (https://community.nodemailer.com/using-embedded-images/)
++ [ReactBasics] (https://www.youtube.com/playlist?list=PL4cUxeGkcC9gZD-Tvwfod2gaISzfRiP9d)
++ [StripeAPI] (https://www.youtube.com/watch?v=lbEFSP1WAv0&t=608s)
 
 ### Credits 
 
 + Karim ELshaarawy
- [LinkedIn](https://www.linkedin.com/in/karim-elshaarawy/)
- Email:
+[LinkedIn](https://www.linkedin.com/in/karim-elshaarawy/)
+Email:
 karimelshaarawy2000@gmail.com
 
 + Alfarouk Amr
- [LinkedIn](https://www.linkedin.com/in/alfaroukamr/)
- Email:
+[LinkedIn](https://www.linkedin.com/in/alfaroukamr/)
+Email:
 faroukamr508@gmail.com
 [github](https://github.com/FaroukAmr)
 
 + Mohamed Elshaarawy
- [LinkedIn](https://www.linkedin.com/in/mohamed-elshaarawy-664796229/)
- Email:
+[LinkedIn](https://www.linkedin.com/in/mohamed-elshaarawy-664796229/)
+Email:
 mohamedelshaarawy87@gmail.com
 
 + Ahmed Ramadan
- [LinkedIn](www.linkedin.com/in/ahmed-ramadan-23101220b)
- Email:
+[LinkedIn](www.linkedin.com/in/ahmed-ramadan-23101220b)
+Email:
 ahmedramadandev20@gmail.com
 [github](https://github.com/a7medma7amad)
 
 + Ahmed EL Ghobashy
- [LinkedIn](https://www.linkedin.com/in/ahmad-elghobashy-60566b182/)
- Email:
+[LinkedIn](https://www.linkedin.com/in/ahmad-elghobashy-60566b182/)
+Email:
 ahmadsamir694@gmail.com
 [github](https://github.com/Ahmed-Elghobashy)
 
