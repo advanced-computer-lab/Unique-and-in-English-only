@@ -15,6 +15,9 @@ import { fontSize, typography } from '@mui/system';
 import Checkbox from '@mui/material/Checkbox';
 import Link from '@mui/material/Link';
 import { useHistory } from 'react-router-dom'
+import Stack from '@mui/material/Stack';
+import Snackbar from '@mui/material/Snackbar';
+import MuiAlert from '@mui/material/Alert';
 
 const axios = require('axios');
 axios.defaults.withCredentials = true;
@@ -41,6 +44,35 @@ const useStyles = makeStyles({
 })
 
 export default function SignIn() {
+  const [open1, setOpen1] = React.useState(false);
+      const handleClick1 = () => {
+        setOpen1(true);
+      };
+    
+      const handleClose1 = (event, reason) => {
+        if (reason === 'clickaway') {
+          return;
+        }
+    
+        setOpen1(false);
+      };
+      const [open2, setOpen2] = React.useState(false);
+    
+      const handleClick2 = () => {
+        setOpen2(true);
+      };
+    
+      const handleClose2 = (event, reason) => {
+        if (reason === 'clickaway') {
+          return;
+        }
+    
+        setOpen2(false);
+      };
+      const Alert = React.forwardRef(function Alert(props, ref) {
+    
+        return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
+      });
   const classes = useStyles();
   const history = useHistory();
   const [username, setUsername] = useState('')
@@ -57,6 +89,8 @@ export default function SignIn() {
 
   const handleSubmit = (e) => {
     e.preventDefault()
+    setPasswordErrorValidate('')
+    setUsermameErrorValidate('')
 
     setPasswordError(false)
     setUsermameError(false)
@@ -67,7 +101,7 @@ export default function SignIn() {
     }
     if (username == '') {
       setUsermameError(true)
-      setUsermameErrorValidate('username is required')
+      setUsermameErrorValidate('email is required')
     }
 
     if (username && password) {
@@ -79,6 +113,7 @@ export default function SignIn() {
       .then((response) => {
         console.log(response.data)
         if (response.data!="success") {
+          handleClick2()
           setBackendValidationResponse(response.data)
           setBackendValidationError(true)
         }
@@ -87,9 +122,15 @@ export default function SignIn() {
           history.push("/");
         }
       }).catch((error) => {
+        
         console.log( error)
+        
+        
+        
       });
-  }}
+  }
+  
+}
   return (
 
 
@@ -143,6 +184,7 @@ export default function SignIn() {
               variant="contained"
               endIcon={<KeyboardArrowRightOutlinedIcon />}
               style={{ width: '100%', fontSize: 20, margin: '8px 0' }}
+              
             >Sign In</Button>
 
               <Link to onClick={()=>{history.push('/editpassword')}}>Forgot Password</Link>
@@ -151,7 +193,22 @@ export default function SignIn() {
             Not a member yet?
             <Link to onClick={()=>{history.push('/signup')}}>Sign Up!</Link>
 
-
+            <Stack spacing={2} sx={{ width: '100%' }}>
+      
+      <Snackbar open={open1} autoHideDuration={6000} onClose={handleClose1}>
+        <Alert onClose={handleClose1} severity="success" sx={{ width: '100%' }}>
+          z
+        </Alert>
+      </Snackbar>
+      </Stack>
+      <Stack spacing={2} sx={{ width: '100%' }}>
+      
+      <Snackbar open={open2} autoHideDuration={6000} onClose={handleClose2}>
+        <Alert onClose={handleClose2} severity="error" sx={{ width: '100%' }}>
+        {BackendValidationResponse}
+        </Alert>
+      </Snackbar>
+      </Stack>
           </form>
         </Paper>
       </Grid>
