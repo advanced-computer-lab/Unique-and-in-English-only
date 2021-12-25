@@ -17,7 +17,6 @@
     "react-seatmap": "^0.1.2",
     "stripe": "^8.193.0",
     "uuid": "^8.3.2"
- 
   },
   "name": "src",
   "version": "1.0.0",
