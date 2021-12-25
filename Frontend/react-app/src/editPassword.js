@@ -111,21 +111,20 @@ function EditPassword(props) {
     axios.post('http://localhost:150/user/editPassword', { oldPassword: OldPassword, newPassword: NewPassword })
       .then(function (response) {
         console.log(response);
-        if (response.data.message == "success") {
+        if (response.data.message == "success" && OldPassword!=''&& NewPassword!='' && confirmPassword!="" && (confirmPassword==NewPassword)) {
           setBackendValidationResponse('password changed successfully')
           setBackendValidationError(false)
-          setOpen1(true)
+          handleClick1()
         }
         else {
           setBackendValidationResponse(response.data)
           setBackendValidationError(true)
-          setOpen2(true)
+          handleClick2()
         }
-        setOpen1(true)
       })
       .catch(function (error) {
         console.log(error);
-        setOpen2(true)
+        //setOpen2(true)
       });
     // }
   }
@@ -142,34 +141,25 @@ function EditPassword(props) {
             <UpdateOutlinedIcon color="primary" style={{ fontSize: "100" }} />
           </Grid>
 
-          <Grid item xs={6}>
-            <TextField
-              variant="outlined"
-              label="Username"
-              required
-              onChange={(e) => setUserName(e.target.value)}
-              helperText={UserNameErrorHelper}
-              error={UserNameError}>
-
-            </TextField>
-          </Grid>
+          
 
           <Grid item xs={6}>
-            <TextField variant="outlined" label="Old Password" required id="LastName"
+            <TextField variant="outlined" type="password" label="Old Password" required id="LastName"
               onChange={(e) => setOldPassword(e.target.value)}
               helperText={OldPasswordErrorHelper}
               error={OldPasswordError} ></TextField>
+              
           </Grid>
 
           <Grid item xs={6}>
-            <TextField variant="outlined" label="New Password" required id="PassportNumber"
+            <TextField variant="outlined" type="password" label="New Password" required id="PassportNumber"
               onChange={(e) => setNewPassword(e.target.value)}
               helperText={NewPasswordErrorHelper}
               error={NewPasswordError}></TextField>
           </Grid>
 
           <Grid item xs={6}>
-            <TextField variant="outlined" label="Confirm Password" required id="Email"
+            <TextField variant="outlined" type="password" label="Confirm Password" required id="Email"
               onChange={(e) => setConfirmPassword(e.target.value)}
               helperText={ConfirmPasswordErrorHelper}
               error={ConfirmPasswordError}></TextField>

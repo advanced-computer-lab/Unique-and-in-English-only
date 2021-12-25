@@ -9,6 +9,9 @@ import { Avatar, createMuiTheme, FormControlLabel, ThemeProvider } from '@mui/ma
 import Paper from '@mui/material/Paper';
 import Input from '@mui/material/Input';
 import AirlinesIcon from '@mui/icons-material/Airlines';
+import Stack from '@mui/material/Stack';
+import Snackbar from '@mui/material/Snackbar';
+import MuiAlert from '@mui/material/Alert';
 const theme = createMuiTheme({
   palette: {
     primary: {
@@ -34,6 +37,35 @@ const useStyles = makeStyles({
 
 
 function TicketDetails(props) {
+  const [open1, setOpen1] = React.useState(false);
+  const handleClick1 = () => {
+    setOpen1(true);
+  };
+
+  const handleClose1 = (event, reason) => {
+    if (reason === 'clickaway') {
+      return;
+    }
+
+    setOpen1(false);
+  };
+  const [open2, setOpen2] = React.useState(false);
+
+  const handleClick2 = () => {
+    setOpen2(true);
+  };
+
+  const handleClose2 = (event, reason) => {
+    if (reason === 'clickaway') {
+      return;
+    }
+
+    setOpen2(false);
+  };
+  const Alert = React.forwardRef(function Alert(props, ref) {
+    
+    return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
+  });
   const paperStyle = { padding: 20, height: '700px', width: '800px', margin: "10px auto", minheight: '400px' }
 
 const deleteHelper= async(flightObj) =>{
@@ -47,6 +79,7 @@ const editDepartureHelper= async(flightObj) =>{
 }
 const sendEmailHelper= async(flightObj) =>{
   props.sendEmailHandler(flightObj);
+  handleClick2();
 }
  function looper(seats){
   var result=[];
@@ -95,6 +128,14 @@ const sendEmailHelper= async(flightObj) =>{
         </Paper>
          </Grid>
         </Grid>
+        <Stack spacing={2} sx={{ width: '100%' }}>
+      
+      <Snackbar open={open2} autoHideDuration={6000} onClose={handleClose2}>
+        <Alert onClose={handleClose2} severity="success" sx={{ width: '100%' }}>
+          Email is sent!
+        </Alert>
+      </Snackbar>
+      </Stack>
     </Container>
   );
 }

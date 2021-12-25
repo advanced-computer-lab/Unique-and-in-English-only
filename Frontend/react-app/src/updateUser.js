@@ -82,7 +82,7 @@ function UpdateUser(props) {
     const [values, setValues] = useState({
      FirstName:startValues.FirstName,
      LastName:startValues.LastName,
-     PassportNumber:startValues.LastName,
+     PassportNumber:startValues.PassportNumber,
      Email:startValues.Email
     })
 
